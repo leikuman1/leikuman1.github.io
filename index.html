@@ -77,6 +77,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-sql50/高级查询和连接/按照分类统计薪水" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/" class="article-date">
+  <time class="dt-published" datetime="2026-04-19T04:00:00.000Z" itemprop="datePublished">2026-04-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Sql50/">Sql50</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/">按照分类统计薪水</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>三个select,然后union all在一起</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;Low Salary&#x27;</span> <span class="keyword">AS</span> category, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> accounts_count</span><br><span class="line"><span class="keyword">FROM</span> Accounts</span><br><span class="line"><span class="keyword">WHERE</span> income <span class="operator">&lt;</span> <span class="number">20000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;Average Salary&#x27;</span> <span class="keyword">AS</span> category, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> accounts_count</span><br><span class="line"><span class="keyword">FROM</span> Accounts</span><br><span class="line"><span class="keyword">WHERE</span> income <span class="keyword">BETWEEN</span> <span class="number">20000</span> <span class="keyword">AND</span> <span class="number">50000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;High Salary&#x27;</span> <span class="keyword">AS</span> category, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> accounts_count</span><br><span class="line"><span class="keyword">FROM</span> Accounts</span><br><span class="line"><span class="keyword">WHERE</span> income <span class="operator">&gt;</span> <span class="number">50000</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="所用工具函数或关键字"><a href="#所用工具函数或关键字" class="headerlink" title="所用工具函数或关键字"></a>所用工具函数或关键字</h2><ul>
+<li><code>UNION ALL</code>：合并多个查询结果，保留重复行。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://leikuman1.github.io/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/" data-id="cuidGsuNMNViauSKvCAaTyAGi" data-title="按照分类统计薪水" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hot100/图论/Trie" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/" class="article-date">
@@ -119,6 +169,75 @@
     </div>
     <footer class="article-footer">
       <a data-url="https://leikuman1.github.io/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/" data-id="cuidOocGNYJe1FfskGGn5-BkS" data-title="前缀树" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-sql50/sql常用工具" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/04/19/sql50/sql%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" class="article-date">
+  <time class="dt-published" datetime="2026-04-19T03:00:00.000Z" itemprop="datePublished">2026-04-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Sql50/">Sql50</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/04/19/sql50/sql%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">sql常用工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>写 SQL 题时，真正高频的工具不多，记住下面几个就够了。</p>
+<h2 id="1-聚合函数"><a href="#1-聚合函数" class="headerlink" title="1. 聚合函数"></a>1. 聚合函数</h2><ul>
+<li><code>COUNT(*)</code>：统计行数</li>
+<li><code>SUM(col)</code>：求和</li>
+<li><code>AVG(col)</code>：求平均</li>
+<li><code>MAX(col)</code> &#x2F; <code>MIN(col)</code>：最大值 &#x2F; 最小值</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> dept_id, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> cnt, <span class="built_in">AVG</span>(salary) <span class="keyword">AS</span> avg_salary</span><br><span class="line"><span class="keyword">FROM</span> Employee</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> dept_id;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-CASE-WHEN"><a href="#2-CASE-WHEN" class="headerlink" title="2. CASE WHEN"></a>2. <code>CASE WHEN</code></h2><p>做条件判断、分类统计时最常用。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="built_in">SUM</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> score <span class="operator">&gt;=</span> <span class="number">60</span> <span class="keyword">THEN</span> <span class="number">1</span> <span class="keyword">ELSE</span> <span class="number">0</span> <span class="keyword">END</span>) <span class="keyword">AS</span> pass_cnt</span><br><span class="line"><span class="keyword">FROM</span> Scores;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-IFNULL-COALESCE"><a href="#3-IFNULL-COALESCE" class="headerlink" title="3. IFNULL() &#x2F; COALESCE()"></a>3. <code>IFNULL()</code> &#x2F; <code>COALESCE()</code></h2><p>处理空值，避免结果是 <code>NULL</code>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, IFNULL(bonus, <span class="number">0</span>) <span class="keyword">AS</span> bonus</span><br><span class="line"><span class="keyword">FROM</span> Employee;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-ROW-NUMBER"><a href="#4-ROW-NUMBER" class="headerlink" title="4. ROW_NUMBER()"></a>4. <code>ROW_NUMBER()</code></h2><p>分组排名、取每组第一条时非常常见。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> <span class="operator">*</span>,</span><br><span class="line">           <span class="built_in">ROW_NUMBER</span>() <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> dept_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> salary <span class="keyword">DESC</span>) <span class="keyword">AS</span> rn</span><br><span class="line">    <span class="keyword">FROM</span> Employee</span><br><span class="line">) t</span><br><span class="line"><span class="keyword">WHERE</span> rn <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>刷题时先熟练这 4 个：</p>
+<ul>
+<li>聚合函数：做统计</li>
+<li><code>CASE WHEN</code>：做条件</li>
+<li><code>IFNULL()</code> &#x2F; <code>COALESCE()</code>：处理空值</li>
+<li><code>ROW_NUMBER()</code>：做分组排名</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://leikuman1.github.io/2026/04/19/sql50/sql%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" data-id="cuidv50zf-ZDYFv09Wu0q7tjb" data-title="sql常用工具" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -193,7 +312,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hot100/">Hot100</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hot100/">Hot100</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Sql50/">Sql50</a></li></ul>
     </div>
   </div>
 
@@ -235,7 +354,15 @@
       <ul>
         
           <li>
+            <a href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/">按照分类统计薪水</a>
+          </li>
+        
+          <li>
             <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/">前缀树</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/19/sql50/sql%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">sql常用工具</a>
           </li>
         
           <li>

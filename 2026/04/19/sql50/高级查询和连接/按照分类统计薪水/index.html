@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>前缀树 | Darker Than Black</title>
+  <title>按照分类统计薪水 | Darker Than Black</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="题目名：前缀树1. 题型标签字符串，前缀，字典树 2. 核心思路Trie是一种数据结构存储有大量公共前缀的字符串。每个节点维护：  son：指向下一个字符 isEnd：当前节点是否是某个单词结尾  insert(word)：逐字符往下走，不存在就创建，最后把 isEnd 设为 truesearch(word)：逐字符查找，最后还要判断 isEnd 是否为 truestartsWith(prefix">
+  <meta name="description" content="思路三个select,然后union all在一起 12345678910111213141516SELECT &#x27;Low Salary&#x27; AS category, COUNT(*) AS accounts_countFROM AccountsWHERE income &lt; 20000UNION ALLSELECT &#x27;Average Salary&#x27; AS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前缀树">
-<meta property="og:url" content="https://leikuman1.github.io/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/index.html">
+<meta property="og:title" content="按照分类统计薪水">
+<meta property="og:url" content="https://leikuman1.github.io/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/index.html">
 <meta property="og:site_name" content="Darker Than Black">
-<meta property="og:description" content="题目名：前缀树1. 题型标签字符串，前缀，字典树 2. 核心思路Trie是一种数据结构存储有大量公共前缀的字符串。每个节点维护：  son：指向下一个字符 isEnd：当前节点是否是某个单词结尾  insert(word)：逐字符往下走，不存在就创建，最后把 isEnd 设为 truesearch(word)：逐字符查找，最后还要判断 isEnd 是否为 truestartsWith(prefix">
+<meta property="og:description" content="思路三个select,然后union all在一起 12345678910111213141516SELECT &#x27;Low Salary&#x27; AS category, COUNT(*) AS accounts_countFROM AccountsWHERE income &lt; 20000UNION ALLSELECT &#x27;Average Salary&#x27; AS">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-04-19T03:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-19T03:18:53.017Z">
+<meta property="article:published_time" content="2026-04-19T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-19T08:52:28.405Z">
 <meta property="article:author" content="Yu">
 <meta property="article:tag" content="入门">
 <meta property="article:tag" content="博客">
@@ -79,14 +79,14 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-hot100/图论/Trie" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-sql50/高级查询和连接/按照分类统计薪水" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/" class="article-date">
-  <time class="dt-published" datetime="2026-04-19T03:00:00.000Z" itemprop="datePublished">2026-04-19</time>
+    <a href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/" class="article-date">
+  <time class="dt-published" datetime="2026-04-19T04:00:00.000Z" itemprop="datePublished">2026-04-19</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Hot100/">Hot100</a>
+    <a class="article-category-link" href="/categories/Sql50/">Sql50</a>
   </div>
 
   </div>
@@ -97,7 +97,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      前缀树
+      按照分类统计薪水
     </h1>
   
 
@@ -105,22 +105,17 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="题目名：前缀树"><a href="#题目名：前缀树" class="headerlink" title="题目名：前缀树"></a>题目名：前缀树</h1><h2 id="1-题型标签"><a href="#1-题型标签" class="headerlink" title="1. 题型标签"></a>1. 题型标签</h2><p>字符串，前缀，字典树</p>
-<h2 id="2-核心思路"><a href="#2-核心思路" class="headerlink" title="2. 核心思路"></a>2. 核心思路</h2><p>Trie是一种数据结构存储有大量公共前缀的字符串。<br>每个节点维护：</p>
-<ol>
-<li>son：指向下一个字符</li>
-<li>isEnd：当前节点是否是某个单词结尾</li>
-</ol>
-<p>insert(word)：逐字符往下走，不存在就创建，最后把 isEnd 设为 true<br>search(word)：逐字符查找，最后还要判断 isEnd 是否为 true<br>startsWith(prefix)：逐字符查找，只要路径存在就返回 true</p>
-<h2 id="3-触发点"><a href="#3-触发点" class="headerlink" title="3. 触发点"></a>3. 触发点</h2><p>看到“多次查询某个单词&#x2F;前缀是否存在”<br>看到“很多字符串有公共前缀”<br>看到“需要动态插入再查询”</p>
-<h2 id="4-易错点"><a href="#4-易错点" class="headerlink" title="4. 易错点"></a>4. 易错点</h2><p>忘记维护isEnd</p>
-<h2 id="5-复杂度"><a href="#5-复杂度" class="headerlink" title="5. 复杂度"></a>5. 复杂度</h2><p>时间：insert&#x2F;startWith&#x2F;search都是O(L)L是字符串长度<br>空间 O(nL) n是单词数量，L是单词最大长度</p>
-<h2 id="6-我的收获"><a href="#6-我的收获" class="headerlink" title="6. 我的收获"></a>6. 我的收获</h2><p>看到前缀查询+多次查找&#x2F;插入，想到Trie</p>
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>三个select,然后union all在一起</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;Low Salary&#x27;</span> <span class="keyword">AS</span> category, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> accounts_count</span><br><span class="line"><span class="keyword">FROM</span> Accounts</span><br><span class="line"><span class="keyword">WHERE</span> income <span class="operator">&lt;</span> <span class="number">20000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;Average Salary&#x27;</span> <span class="keyword">AS</span> category, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> accounts_count</span><br><span class="line"><span class="keyword">FROM</span> Accounts</span><br><span class="line"><span class="keyword">WHERE</span> income <span class="keyword">BETWEEN</span> <span class="number">20000</span> <span class="keyword">AND</span> <span class="number">50000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;High Salary&#x27;</span> <span class="keyword">AS</span> category, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> accounts_count</span><br><span class="line"><span class="keyword">FROM</span> Accounts</span><br><span class="line"><span class="keyword">WHERE</span> income <span class="operator">&gt;</span> <span class="number">50000</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="所用工具函数或关键字"><a href="#所用工具函数或关键字" class="headerlink" title="所用工具函数或关键字"></a>所用工具函数或关键字</h2><ul>
+<li><code>UNION ALL</code>：合并多个查询结果，保留重复行。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://leikuman1.github.io/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/" data-id="cuidOocGNYJe1FfskGGn5-BkS" data-title="前缀树" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://leikuman1.github.io/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/" data-id="cuidGsuNMNViauSKvCAaTyAGi" data-title="按照分类统计薪水" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -132,19 +127,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          按照分类统计薪水
-        
-      </div>
-    </a>
   
-  
-    <a href="/2026/04/19/sql50/sql%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">sql常用工具</div>
+      <div class="article-nav-title">前缀树</div>
     </a>
   
 </nav>

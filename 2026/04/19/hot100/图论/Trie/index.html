@@ -4,18 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>Hello World | Darker Than Black</title>
+  <title>我的第一篇文章 | Darker Than Black</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="题目名：前缀树1. 题型标签字符串，前缀，字典树 2. 核心思路Trie是一种数据结构存储有大量公共前缀的字符串。每个节点维护：  son：指向下一个字符 isEnd：当前节点是否是某个单词结尾  insert(word)：逐字符往下走，不存在就创建，最后把 isEnd 设为 truesearch(word)：逐字符查找，最后还要判断 isEnd 是否为 truestartsWith(prefix">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://leikuman1.github.io/2026/04/19/hello-world/index.html">
+<meta property="og:title" content="我的第一篇文章">
+<meta property="og:url" content="https://leikuman1.github.io/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/index.html">
 <meta property="og:site_name" content="Darker Than Black">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="题目名：前缀树1. 题型标签字符串，前缀，字典树 2. 核心思路Trie是一种数据结构存储有大量公共前缀的字符串。每个节点维护：  son：指向下一个字符 isEnd：当前节点是否是某个单词结尾  insert(word)：逐字符往下走，不存在就创建，最后把 isEnd 设为 truesearch(word)：逐字符查找，最后还要判断 isEnd 是否为 truestartsWith(prefix">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-04-19T01:46:05.755Z">
-<meta property="article:modified_time" content="2026-04-19T01:46:05.755Z">
+<meta property="article:published_time" content="2026-04-19T03:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-19T03:16:59.450Z">
 <meta property="article:author" content="Yu">
+<meta property="article:tag" content="入门">
+<meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Darker Than Black" type="application/atom+xml">
@@ -77,12 +79,16 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-hot100/图论/Trie" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2026/04/19/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2026-04-19T01:46:05.755Z" itemprop="datePublished">2026-04-19</time>
+    <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/" class="article-date">
+  <time class="dt-published" datetime="2026-04-19T03:00:00.000Z" itemprop="datePublished">2026-04-19</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hot100/">Hot100</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -91,7 +97,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      Hello World
+      我的第一篇文章
     </h1>
   
 
@@ -99,42 +105,38 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h1 id="题目名：前缀树"><a href="#题目名：前缀树" class="headerlink" title="题目名：前缀树"></a>题目名：前缀树</h1><h2 id="1-题型标签"><a href="#1-题型标签" class="headerlink" title="1. 题型标签"></a>1. 题型标签</h2><p>字符串，前缀，字典树</p>
+<h2 id="2-核心思路"><a href="#2-核心思路" class="headerlink" title="2. 核心思路"></a>2. 核心思路</h2><p>Trie是一种数据结构存储有大量公共前缀的字符串。<br>每个节点维护：</p>
+<ol>
+<li>son：指向下一个字符</li>
+<li>isEnd：当前节点是否是某个单词结尾</li>
+</ol>
+<p>insert(word)：逐字符往下走，不存在就创建，最后把 isEnd 设为 true<br>search(word)：逐字符查找，最后还要判断 isEnd 是否为 true<br>startsWith(prefix)：逐字符查找，只要路径存在就返回 true</p>
+<h2 id="3-触发点"><a href="#3-触发点" class="headerlink" title="3. 触发点"></a>3. 触发点</h2><p>看到“多次查询某个单词&#x2F;前缀是否存在”<br>看到“很多字符串有公共前缀”<br>看到“需要动态插入再查询”</p>
+<h2 id="4-易错点"><a href="#4-易错点" class="headerlink" title="4. 易错点"></a>4. 易错点</h2><p>忘记维护isEnd</p>
+<h2 id="5-复杂度"><a href="#5-复杂度" class="headerlink" title="5. 复杂度"></a>5. 复杂度</h2><p>时间：insert&#x2F;startWith&#x2F;search都是O(L)L是字符串长度<br>空间 O(nL) n是单词数量，L是单词最大长度</p>
+<h2 id="6-我的收获"><a href="#6-我的收获" class="headerlink" title="6. 我的收获"></a>6. 我的收获</h2><p>看到前缀查询+多次查找&#x2F;插入，想到Trie</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://leikuman1.github.io/2026/04/19/hello-world/" data-id="cuidWvgGprTpvcAJ-P8utSWyC" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://leikuman1.github.io/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/" data-id="cuidOocGNYJe1FfskGGn5-BkS" data-title="我的第一篇文章" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          我的第一篇文章
-        
-      </div>
-    </a>
   
+    <a href="/2026/04/19/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
 </nav>
 

@@ -4,16 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>标签: 入门 | Darker Than Black</title>
+  <title>全排列 | Darker Than Black</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Nearer to death, nearer to rebirth.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Darker Than Black">
-<meta property="og:url" content="https://leikuman1.github.io/tags/%E5%85%A5%E9%97%A8/index.html">
+  <meta name="description" content="核心思路回溯，维护visited和path，递归中保存递归层数，等于nums大小时添加到结果集中，然后遍历nums，没有被访问的就添加到path中并标记为已访问，递归下一层，递归下一层结束后标记为未访问，即回溯。 触发点全排列很容易想到回溯 易错点忘记回溯，导致结果不对做递归类题目需要确定什么时候回溯，什么时候不回溯 复杂度时间 O(n*n!) n是数组长度，n!是全排列数量，每个全排列需要O(n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全排列">
+<meta property="og:url" content="https://leikuman1.github.io/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%85%A8%E6%8E%92%E5%88%97/index.html">
 <meta property="og:site_name" content="Darker Than Black">
-<meta property="og:description" content="Nearer to death, nearer to rebirth.">
+<meta property="og:description" content="核心思路回溯，维护visited和path，递归中保存递归层数，等于nums大小时添加到结果集中，然后遍历nums，没有被访问的就添加到path中并标记为已访问，递归下一层，递归下一层结束后标记为未访问，即回溯。 触发点全排列很容易想到回溯 易错点忘记回溯，导致结果不对做递归类题目需要确定什么时候回溯，什么时候不回溯 复杂度时间 O(n*n!) n是数组长度，n!是全排列数量，每个全排列需要O(n">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-22T00:34:12.000Z">
+<meta property="article:modified_time" content="2026-04-22T02:21:14.797Z">
 <meta property="article:author" content="Yu">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="回溯">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Darker Than Black" type="application/atom+xml">
@@ -75,115 +79,72 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2026" class="archive-year">2026</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/" class="archive-article-date">
-  <time class="dt-published" datetime="2026-04-21T09:55:00.000Z" itemprop="datePublished">4月 21</time>
+        <section id="main"><article id="post-hot100/回溯/全排列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%85%A8%E6%8E%92%E5%88%97/" class="article-date">
+  <time class="dt-published" datetime="2026-04-22T00:34:12.000Z" itemprop="datePublished">2026-04-22</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hot100/">Hot100</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/">RabbitMQ新增死信队列</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      全排列
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/" class="archive-article-date">
-  <time class="dt-published" datetime="2026-04-19T04:00:00.000Z" itemprop="datePublished">4月 19</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/">按照分类统计薪水</a>
-    </h1>
-  
+        <h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>回溯，维护visited和path，递归中保存递归层数，等于nums大小时添加到结果集中，然后遍历nums，没有被访问的就添加到path中并标记为已访问，<br>递归下一层，递归下一层结束后标记为未访问，即回溯。</p>
+<h2 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h2><p>全排列很容易想到回溯</p>
+<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><p>忘记回溯，导致结果不对<br>做递归类题目需要确定什么时候回溯，什么时候不回溯</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间 O(n*n!) n是数组长度，n!是全排列数量，每个全排列需要O(n)的时间添加到结果集中<br>空间 O(n) path的长度为n，递归栈深度也是n</p>
+<h2 id="我的收获"><a href="#我的收获" class="headerlink" title="我的收获"></a>我的收获</h2><p>暂无</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2026/04/19/redis/redis%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  <time class="dt-published" datetime="2026-04-19T04:00:00.000Z" itemprop="datePublished">4月 19</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/19/redis/redis%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">常用数据结构和操作函数</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/" class="archive-article-date">
-  <time class="dt-published" datetime="2026-04-19T03:00:00.000Z" itemprop="datePublished">4月 19</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://leikuman1.github.io/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%85%A8%E6%8E%92%E5%88%97/" data-id="cuidBVYAceUtmWiOtsh9DItK5" data-title="全排列" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/">前缀树</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2026/04/19/sql50/sql%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" class="archive-article-date">
-  <time class="dt-published" datetime="2026-04-19T03:00:00.000Z" itemprop="datePublished">4月 19</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/19/sql50/sql%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">sql常用工具</a>
-    </h1>
-  
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%AD%90%E9%9B%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          子集
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">RabbitMQ新增死信队列</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>

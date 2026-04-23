@@ -4,15 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>标签: 入门 | Darker Than Black</title>
+  <title>电话号码的字母组合 | Darker Than Black</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Nearer to death, nearer to rebirth.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Darker Than Black">
-<meta property="og:url" content="https://leikuman1.github.io/tags/%E5%85%A5%E9%97%A8/index.html">
+  <meta name="description" content="核心思路跟前两道回溯题一个套路，就是用递归表示一种更高级的循环(迭代)，定义结果集ans，暂存变量path来存储答案元素，定义字母表，开头两个空串便于映射开始递归，如果当前已经走了n步，加入结果集并返回否则，遍历digits对应的数字对应的字母表，加图path中开启下一轮递归，完成后pop恢复现场 触发点看到“枚举所有组合”，想到回溯 易错点忘记恢复现场，导致结果不对这题要在主函数里判断digit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电话号码的字母组合">
+<meta property="og:url" content="https://leikuman1.github.io/2026/04/23/hot100/%E5%9B%9E%E6%BA%AF/%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/index.html">
 <meta property="og:site_name" content="Darker Than Black">
-<meta property="og:description" content="Nearer to death, nearer to rebirth.">
+<meta property="og:description" content="核心思路跟前两道回溯题一个套路，就是用递归表示一种更高级的循环(迭代)，定义结果集ans，暂存变量path来存储答案元素，定义字母表，开头两个空串便于映射开始递归，如果当前已经走了n步，加入结果集并返回否则，遍历digits对应的数字对应的字母表，加图path中开启下一轮递归，完成后pop恢复现场 触发点看到“枚举所有组合”，想到回溯 易错点忘记恢复现场，导致结果不对这题要在主函数里判断digit">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-23T01:58:40.000Z">
+<meta property="article:modified_time" content="2026-04-23T02:17:06.772Z">
 <meta property="article:author" content="Yu">
 <meta name="twitter:card" content="summary">
   
@@ -75,115 +77,61 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2026" class="archive-year">2026</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/" class="archive-article-date">
-  <time class="dt-published" datetime="2026-04-21T09:55:00.000Z" itemprop="datePublished">4月 21</time>
+        <section id="main"><article id="post-hot100/回溯/电话号码的字母组合" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/04/23/hot100/%E5%9B%9E%E6%BA%AF/%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/" class="article-date">
+  <time class="dt-published" datetime="2026-04-23T01:58:40.000Z" itemprop="datePublished">2026-04-23</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hot100/">Hot100</a>►<a class="article-category-link" href="/categories/Hot100/%E5%9B%9E%E6%BA%AF/">回溯</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/">RabbitMQ新增死信队列</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      电话号码的字母组合
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/" class="archive-article-date">
-  <time class="dt-published" datetime="2026-04-19T04:00:00.000Z" itemprop="datePublished">4月 19</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/">按照分类统计薪水</a>
-    </h1>
-  
+        <h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>跟前两道回溯题一个套路，就是用递归表示一种更高级的循环(迭代)，<br>定义结果集ans，暂存变量path来存储答案元素，定义字母表，开头两个空串便于映射<br>开始递归，如果当前已经走了n步，加入结果集并返回<br>否则，遍历digits对应的数字对应的字母表，加图path中开启下一轮递归，完成后pop恢复现场</p>
+<h2 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h2><p>看到“枚举所有组合”，想到回溯</p>
+<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><p>忘记恢复现场，导致结果不对<br>这题要在主函数里判断digits是否为空，空的话直接返回空数组</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间 O(n*4^n) n是digits长度，4^n是组合数量，每个组合需要O(n)的时间添加到结果集中<br>空间 O(n) path的长度为n，递归栈深度也是n</p>
+<h2 id="我的收获"><a href="#我的收获" class="headerlink" title="我的收获"></a>我的收获</h2><p>暂无</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2026/04/19/redis/redis%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  <time class="dt-published" datetime="2026-04-19T04:00:00.000Z" itemprop="datePublished">4月 19</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/19/redis/redis%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">常用数据结构和操作函数</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/" class="archive-article-date">
-  <time class="dt-published" datetime="2026-04-19T03:00:00.000Z" itemprop="datePublished">4月 19</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://leikuman1.github.io/2026/04/23/hot100/%E5%9B%9E%E6%BA%AF/%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/" data-id="cuidn5IQSHE9AGC6EepspUPj2" data-title="电话号码的字母组合" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/">前缀树</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2026/04/19/sql50/sql%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" class="archive-article-date">
-  <time class="dt-published" datetime="2026-04-19T03:00:00.000Z" itemprop="datePublished">4月 19</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/19/sql50/sql%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">sql常用工具</a>
-    </h1>
-  
-
-    </header>
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%AD%90%E9%9B%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">子集</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>

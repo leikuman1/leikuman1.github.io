@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>RabbitMQ新增死信队列 | Darker Than Black</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="添加一套常量123public static final String SECKILL_DLX &#x3D; &quot;seckill.order.dlx&quot;;public static final String SECKILL_DEAD_QUEUE &#x3D; &quot;seckill.order.dead.queue&quot;;public static final String SECKILL_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RabbitMQ新增死信队列">
+<meta property="og:url" content="https://leikuman1.github.io/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/index.html">
+<meta property="og:site_name" content="Darker Than Black">
+<meta property="og:description" content="添加一套常量123public static final String SECKILL_DLX &#x3D; &quot;seckill.order.dlx&quot;;public static final String SECKILL_DEAD_QUEUE &#x3D; &quot;seckill.order.dead.queue&quot;;public static final String SECKILL_">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-21T09:55:00.000Z">
+<meta property="article:modified_time" content="2026-04-21T10:17:34.214Z">
+<meta property="article:author" content="Yu">
+<meta property="article:tag" content="入门">
+<meta property="article:tag" content="博客">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Darker Than Black" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Darker Than Black</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">yu</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://leikuman1.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-java项目/新增死信队列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/" class="article-date">
+  <time class="dt-published" datetime="2026-04-21T09:55:00.000Z" itemprop="datePublished">2026-04-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      RabbitMQ新增死信队列
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="添加一套常量"><a href="#添加一套常量" class="headerlink" title="添加一套常量"></a>添加一套常量</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">SECKILL_DLX</span> <span class="operator">=</span> <span class="string">&quot;seckill.order.dlx&quot;</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">SECKILL_DEAD_QUEUE</span> <span class="operator">=</span> <span class="string">&quot;seckill.order.dead.queue&quot;</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">SECKILL_DEAD_ROUTING_KEY</span> <span class="operator">=</span> <span class="string">&quot;seckill.order.dead&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="给业务队列添加死信参数"><a href="#给业务队列添加死信参数" class="headerlink" title="给业务队列添加死信参数"></a>给业务队列添加死信参数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Queue <span class="title function_">seckillQueue</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> QueueBuilder.durable(SECKILL_QUEUE)</span><br><span class="line">            .withArgument(<span class="string">&quot;x-dead-letter-exchange&quot;</span>, SECKILL_DLX)</span><br><span class="line">            .withArgument(<span class="string">&quot;x-dead-letter-routing-key&quot;</span>, SECKILL_DEAD_ROUTING_KEY)</span><br><span class="line">            .build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里重点是withArgument，前面的字符串是固定的,表示设置死信交换机和路由key</p>
+<h2 id="新增死信交换机Bean"><a href="#新增死信交换机Bean" class="headerlink" title="新增死信交换机Bean"></a>新增死信交换机Bean</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> DirectExchange <span class="title function_">seckillDeadLetterExchange</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(SECKILL_DLX, <span class="literal">true</span>, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一个参数是交换机名字，第二个是持久化，第三个是自动删除</p>
+<h2 id="新增死信队列"><a href="#新增死信队列" class="headerlink" title="新增死信队列"></a>新增死信队列</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Queue <span class="title function_">seckillDeadLetterQueue</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> QueueBuilder.durable(SECKILL_DEAD_QUEUE).build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用queuebuilder的durable方法构造一个消息队列</p>
+<h2 id="构造队列和交换机的绑定关系"><a href="#构造队列和交换机的绑定关系" class="headerlink" title="构造队列和交换机的绑定关系"></a>构造队列和交换机的绑定关系</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">seckillDeadLetterBinding</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> BindingBuilder.bind(seckillDeadLetterQueue())</span><br><span class="line">            .to(seckillDeadLetterExchange())</span><br><span class="line">            .with(SECKILL_DEAD_ROUTING_KEY);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用BindingBuilder的bind方法链式绑定队列到交换机并设置routing key</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这可以总结出RabbitMQ新增MQ的一般方法：</p>
+<ol>
+<li>设置三个常量，分别是交换机名称，队列名称和路由key</li>
+<li>设置交换机，队列和绑定关系的构造方法</li>
+</ol>
+<p>最后，如果我们在业务队列中重试一定次数后就channel.basicReject(msg.getMessageProperties().getDeliveryTag(), false)，消息就会被丢弃到死信队列中，我们就可以在死信队列中查看失败的消息并分析原因了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://leikuman1.github.io/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/" data-id="cuidbEoZET6RcD8EhQQQPYLbx" data-title="RabbitMQ新增死信队列" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%85%A8%E6%8E%92%E5%88%97/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          全排列
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/04/21/%E9%9D%A2%E7%BB%8F/%E6%80%A7%E6%A0%BC%E7%BC%BA%E7%82%B9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">性格缺点</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hot100/">Hot100</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hot100/%E5%9B%9E%E6%BA%AF/">回溯</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Sql50/">Sql50</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E7%BB%8F/">面经</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 15px;">入门</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 20px;">博客</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/04/23/hot100/%E5%9B%9E%E6%BA%AF/%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/">电话号码的字母组合</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%AD%90%E9%9B%86/">子集</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%85%A8%E6%8E%92%E5%88%97/">全排列</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/">RabbitMQ新增死信队列</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/21/%E9%9D%A2%E7%BB%8F/%E6%80%A7%E6%A0%BC%E7%BC%BA%E7%82%B9/">性格缺点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 Yu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

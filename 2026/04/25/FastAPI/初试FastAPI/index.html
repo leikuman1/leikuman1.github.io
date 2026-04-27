@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>初试FastAPI | L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>初试FastAPI</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/25
+        </span>
+        
+        <span class="category">
+            <a href="/categories/FastAPI/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                FastAPI
+            </a>
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>路由是url地址和函数之间的映射关系<br>新建python的FastAPI项目,在main.py中添加以下内容：</p>
+<pre><code class="language-python">from fastapi import FastAPI
+//创建FastAPI应用实例
+app = FastAPI()
+
+//定义一个根路由，返回一个简单的JSON响应
+//这里的@app.get(&quot;/&quot;)是一个装饰器，表示这个函数是处理GET请求的，并且路径是&quot;/&quot;，也就是根路径。当访问这个路径时，异步函数read_root会被调用，返回一个JSON对象{&quot;Hello&quot;: &quot;World&quot;}。
+@app.get(&quot;/&quot;)
+//相当于@RequestMapping(&quot;/&quot;)，默认是GET请求
+async def read_root():
+    return {&quot;Hello&quot;: &quot;World&quot;}
+</code></pre>
+<h2 id="路由参数"><a href="#路由参数" class="headerlink" title="路由参数"></a>路由参数</h2><p>路由参数分为三种：路径参数、查询参数、请求体参数</p>
+<ul>
+<li>路径参数：直接在路径中定义参数，是url的一部分，如</li>
+</ul>
+<pre><code class="language-python">@app.get(&quot;/items/{item_id}&quot;)
+async def read_item(item_id: int):
+    return {&quot;item_id&quot;: item_id}
+</code></pre>
+<p>另外，FastAPI还有Path注解可以对路径参数进行验证和设置默认值，如：</p>
+<pre><code class="language-python">@app.get(&quot;/items/{item_id}&quot;)
+async def read_item(item_id: int = Path(..., title=&quot;The ID of the item to get&quot;, ge=1)):
+    return {&quot;item_id&quot;: item_id}
+</code></pre>
+<p>这里的Path(…)表示这个参数是必填的，title是参数的描述，ge&#x3D;1表示这个参数必须大于等于1。</p>
+<ul>
+<li>查询参数：在url中以?key&#x3D;value的形式传递参数，如</li>
+</ul>
+<pre><code class="language-python">@app.get(&quot;/items/&quot;)
+async def read_items(
+    skip: int = query(0, title=&quot;Number of items to skip&quot;, ge=0),
+    limit: int = 10):
+    return {&quot;skip&quot;: skip, &quot;limit&quot;: limit}
+</code></pre>
+<p>这里的注解query(0, title&#x3D;”Number of items to skip”, ge&#x3D;0)表示这个参数是可选的，默认值是0，title是参数的描述，ge&#x3D;0表示这个参数必须大于等于0。</p>
+<ul>
+<li>请求体参数：通过请求体传递参数，通常是POST、PUT、PATCH等请求，如<br>根据HTTP协议，一个请求分为三部分：请求行、请求头、请求体。<br>请求行：包含请求方法（GET、POST等）、请求路径和HTTP版本。<br>请求头：包含一些元信息，如Content-Type、Authorization等。<br>请求体：包含实际的数据，如JSON、表单数据等。</li>
+</ul>
+<pre><code class="language-python">from pydantic import BaseModel
+class Item(BaseModel):
+    name: str
+    description: str = None
+
+@app.post(&quot;/items/&quot;)
+async def create_item(item: Item):
+    return item
+</code></pre>
+<p>这里的Item是一个Pydantic模型，定义了请求体的结构。当发送一个POST请求到&#x2F;items&#x2F;路径时，FastAPI会自动将请求体中的JSON数据解析成一个Item对象，并传递给create_item函数。</p>
+<p>同样的，FastAPI还有Body注解可以对请求体参数进行验证和设置默认值，如：</p>
+<pre><code class="language-python">@app.post(&quot;/items/&quot;)
+async def create_item(item: Item = Body(..., title=&quot;The item to create&quot;)):
+    return item
+</code></pre>
+<p>这里的Body(…)表示这个参数是必填的，title是参数的描述。</p>
+<p>另外，pydantic中还有Field注解可以对模型字段进行验证和设置默认值，如：</p>
+<pre><code class="language-python">class Item(BaseModel):
+    name: str = Field(..., title=&quot;The name of the item&quot;, max_length=100)
+    description: str = Field(None, title=&quot;The description of the item&quot;, max_length=255)
+</code></pre>
+<p>这里的Field(…)表示这个字段是必填的，title是字段的描述，max_length是字段的最大长度。</p>
+<h2 id="响应类型"><a href="#响应类型" class="headerlink" title="响应类型"></a>响应类型</h2><p>默认情况下，FastAPI会将返回的Python对象转换成JSON格式的响应，省去了手动序列化的步骤，而且支持多种响应类型，如JSON、HTML、文件等。</p>
+<p>指定响应类型的方法有两种：</p>
+<ul>
+<li>在装饰器中指定，如HTMLResponse、FileResponse等，如</li>
+</ul>
+<pre><code class="language-python">from fastapi.responses import HTMLResponse
+@app.get(&quot;/html/&quot;, response_class=HTMLResponse)
+async def get_html():
+    html_content = &quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello, World!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;
+    return HTMLResponse(content=html_content, status_code=200)
+</code></pre>
+<ul>
+<li>在函数中返回特定的响应对象，如JSONResponse、FileResponse等，如</li>
+</ul>
+<pre><code class="language-python">from fastapi.responses import fileResponse
+@app.get(&quot;/file/&quot;)
+async def get_file():
+    file_path = &quot;path/to/your/file.txt&quot;
+    return FileResponse(path=file_path, filename=&quot;file.txt&quot;, media_type=&quot;text/plain&quot;)
+</code></pre>
+<p>这里的FileResponse会将指定路径的文件作为响应返回，filename是下载时的文件名，media_type是文件的MIME类型。</p>
+<p>这两种方法各有优缺点，第一种方法更简洁，严格，适合简单的响应类型；第二种方法更灵活，适合需要自定义响应内容或状态码的情况。</p>
+<p>还有一种方法可以自定义响应类型，就是用基于Pydantic的模型来定义响应结构，如：</p>
+<pre><code class="language-python">from pydantic import BaseModel
+class ItemResponse(BaseModel):
+    name: str
+    description: str = None
+
+@app.get(&quot;/items/{item_id}&quot;, response_model=ItemResponse)
+async def read_item(item_id: int):
+    item = get_item_from_database(item_id)
+    return ItemResponse(name=item.name, description=item.description)
+</code></pre>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>FastAPI提供了HTTPException类来处理HTTP异常，可以在路由函数中抛出这个异常来返回特定的错误响应，如：</p>
+<pre><code class="language-python">from fastapi import HTTPException
+@app.get(&quot;/items/{item_id}&quot;)
+async def read_item(item_id: int):
+    item = get_item_from_database(item_id)
+    if item is None:
+        raise HTTPException(status_code=404, detail=&quot;Item not found&quot;)
+    return item
+</code></pre>
+<p>这里的HTTPException(status_code&#x3D;404, detail&#x3D;”Item not found”)表示当item为None时，抛出一个404 Not Found的错误响应，detail是错误的详细信息.</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

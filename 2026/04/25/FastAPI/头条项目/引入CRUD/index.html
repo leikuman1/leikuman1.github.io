@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>引入CRUD | L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>引入CRUD</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/25
+        </span>
+        
+        <span class="category">
+            <a href="/categories/FastAPI/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                FastAPI
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #00a596">
+                    头条项目
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/CRUD/" style="color: #ffa2c4">
+                    CRUD
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="引入CRUD"><a href="#引入CRUD" class="headerlink" title="引入CRUD"></a>引入CRUD</h2><p>接口实现流程的四个步骤</p>
+<ol>
+<li>模块化路由-&gt;APIRouter</li>
+<li>定义模型类-&gt;数据库表</li>
+<li>在crud文件夹里创建文件，封装操作数据库的方法</li>
+<li>在路由处理函数中调用crud的方法</li>
+</ol>
+<p>下面展示具体的流程</p>
+<h2 id="模块化路由"><a href="#模块化路由" class="headerlink" title="模块化路由"></a>模块化路由</h2><p>比如说我们有个ai模块，有个接口要到ai_chat表里查询最近与ai的会话记录</p>
+<p>首先在routers文件夹里创建一个ai.py文件，定义一个APIRouter实例，并且添加路由处理函数，如</p>
+<pre><code class="language-python">from fastapi import APIRouter
+router = APIRouter(prefix=&quot;/api/ai&quot;, tags=[&quot;ai&quot;])
+@router.get(&quot;/ai&quot;)
+async def get_session(skip: int=0,limit: int=10, db: AsyncSession=Depends(get_db)):
+    result = await get_session_crud(db, skip, limit)
+    return {
+        &quot;code&quot;: 200,
+        &quot;msg&quot;: &quot;success&quot;,
+        &quot;data&quot;: result
+    }
+</code></pre>
+<p>这个就相当于controller层了，负责处理请求和响应，调用crud层的方法来操作数据库。</p>
+<h2 id="定义模型类"><a href="#定义模型类" class="headerlink" title="定义模型类"></a>定义模型类</h2><p>在models文件夹里创建一个ai.py文件，定义一个ORM模型类来映射数据库表，如</p>
+<pre><code class="language-python">from datetime import datetime
+
+from sqlalchemy import DateTime, String, Text
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+
+
+class Base(DeclarativeBase):
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.now,
+    )
+
+
+class ai(Base):
+    __tablename__ = &quot;ai_chat&quot;
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(unique=True, nullable=False, comment=&quot;用户id&quot;)
+    question: Mapped[str] = mapped_column(Text, nullable=False, comment=&quot;问题&quot;)
+    answer: Mapped[str] = mapped_column(Text, nullable=False, comment=&quot;回答&quot;)
+</code></pre>
+<p>注意如果在模型类中如果不映射所有的字段，那么ORM就会忽略没映射的字段</p>
+<h2 id="在crud文件夹里创建文件，封装操作数据库的方法"><a href="#在crud文件夹里创建文件，封装操作数据库的方法" class="headerlink" title="在crud文件夹里创建文件，封装操作数据库的方法"></a>在crud文件夹里创建文件，封装操作数据库的方法</h2><p>其实如果业务比较复杂，这里应该加上schema，Service，Repository等层来分离不同的职责，但这里为了简单起见，就直接在crud里封装了。</p>
+<pre><code class="language-python">from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+from models.ai import ai
+
+
+async def get_session_crud(db: AsyncSession, skip: int = 0, limit: int = 10):
+    stmt = select(ai).offset(skip).limit(limit)
+    result = await db.execute(stmt)
+    return result.scalars().all()
+</code></pre>
+<p>这个函数就是封装了查询数据库的方法，接收一个数据库会话和分页参数，返回查询结果。</p>
+<h2 id="在路由处理函数中调用crud的方法"><a href="#在路由处理函数中调用crud的方法" class="headerlink" title="在路由处理函数中调用crud的方法"></a>在路由处理函数中调用crud的方法</h2><p>注意include到main.py里<br>而且router里的方法要和crud里定义的方法方法名不一样，防止和路由处理函数重名了</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

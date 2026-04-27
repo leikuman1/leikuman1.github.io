@@ -1,0 +1,1060 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<script src="/js/lib/home.js"></script>
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div id="home-head">
+    <div
+        id="home-background"
+        ref="homeBackground"
+        data-images="/images/background.jpg"
+    ></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>L&#39;sBlog</h1>
+                <h3>yu</h3>
+                <h5>Nearer to death, nearer to rebirth.</h5>
+            </div>
+        </span>
+    </div>
+</div>
+<div
+    id="home-posts-wrap"
+    ref="homePostsWrap"
+    true
+>
+    <div id="home-posts">
+        
+
+<div class="post">
+    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/%E6%8E%A5%E5%8F%A3%E8%BF%9E%E6%8E%A5%E5%88%B0DB/">
+        <h2 class="post-title">接口连接到DB</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Python/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Python
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/24
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/FastAPI/" style="color: #00a596">FastAPI</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/DB/" style="color: #ffa2c4">DB</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/%E6%8E%A5%E5%8F%A3%E8%BF%9E%E6%8E%A5%E5%88%B0DB/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/python%E9%93%BE%E6%8E%A5DB/">
+        <h2 class="post-title">python链接DB</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Python/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Python
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/24
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1.引入依赖"></a>1.引入依赖</h2><p>在requirements.txt中添加以下依赖：</p>
+<pre><code class="language-txt">pymysql
+sqlalchemy
+pydantic-settings
+</code></pre>
+<p>pymysql是一个纯Python的MySQL客户端库，sqlalchemy是一个ORM（对象关系映射）工具，pydantic-settings用于管理配置,可以通过环境变量或配置文件来设置数据库连接参数。</p>
+<p>这里多一嘴，和Java，C++相比，python是动态类型语言，灵活性更高，这是python的设计哲学之一，但是在开发大型项目中，动态类型容易导致类型错误，所有有了pydantic这样的库来提供类型检查和数据验证，pydantic-settings是pydantic的一个扩展，专门用于管理应用程序的配置，可以从环境变量、配置文件等多种来源加载配置.</p>
+<h2 id="2-配置数据库连接"><a href="#2-配置数据库连接" class="headerlink" title="2.配置数据库连接"></a>2.配置数据库连接</h2><p>现在项目根目录里新建一个.env文件，添加以下内容：</p>
+<pre><code class="language-env">DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=123456
+DB_NAME=restaurant
+</code></pre>
+<p>这些环境变量将用于配置数据库连接。</p>
+<p>再创建一个config.py文件，添加以下内容：</p>
+<pre><code class="language-python">from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class Settings(BaseSettings):
+    db_host: str
+    db_port: int
+    db_user: str
+    db_password: str
+    db_name: str
+
+    model_config = SettingsConfigDict(
+        env_file=&quot;.env&quot;,
+        env_file_encoding=&quot;utf-8&quot;,
+        extra=&quot;ignore&quot;,
+    )
+
+    @property
+    def database_url(self) -&gt; str:
+        return (
+            f&quot;mysql+pymysql://{self.db_user}:{self.db_password}&quot;
+            f&quot;@{self.db_host}:{self.db_port}/{self.db_name}?charset=utf8mb4&quot;
+        )
+
+
+settings = Settings()
+</code></pre>
+<p>这个配置类会从.env文件中读取数据库连接参数，并提供一个database_url属性来生成数据库连接字符串。</p>
+<h2 id="3-创建数据库模型"><a href="#3-创建数据库模型" class="headerlink" title="3. 创建数据库模型"></a>3. 创建数据库模型</h2><p>在models&#x2F;下根据数据库表结构创建所需要的数据</p>
+<pre><code class="language-python">class Menu(Base):
+    __tablename__ = &quot;menus&quot;
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
+    category: Mapped[str] = mapped_column(String(50), nullable=False)
+    price: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False)
+    description: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    status: Mapped[int] = mapped_column(nullable=False, default=1)
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), onupdate=func.now(), nullable=False)
+</code></pre>
+<p>把表结构映射到具体的数据，有点像orm</p>
+<p>再在session.py中添加以下内容：</p>
+<pre><code class="language-python">from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, Session
+
+from app.core.config import settings
+
+
+engine = create_engine(
+    settings.database_url,
+    echo=True,
+    pool_pre_ping=True,
+)
+
+SessionLocal = sessionmaker(
+    bind=engine,
+    autoflush=False,
+    autocommit=False,
+    expire_on_commit=False,
+)
+
+
+def get_db():
+    db: Session = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+</code></pre>
+<p>这个文件创建了一个数据库引擎，并定义了一个SessionLocal类来管理数据库会话。get_db函数是一个依赖项，可以在FastAPI的路由中使用，以便在请求期间获取数据库会话。</p>
+<h2 id="4-使用数据库"><a href="#4-使用数据库" class="headerlink" title="4. 使用数据库"></a>4. 使用数据库</h2><p>在FastAPI的路由中，我们可以使用get_db依赖项来获取数据库会话，并执行数据库操作.</p>
+<p>至此，我们已经成功地将FastAPI应用程序连接到MySQL数据库，并且可以使用SQLAlchemy进行数据库操作了。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/FastAPI/" style="color: #03a9f4">FastAPI</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/DB/" style="color: #ffa2c4">DB</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/python%E9%93%BE%E6%8E%A5DB/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/24/hot100/%E5%9B%9E%E6%BA%AF/%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/">
+        <h2 class="post-title">组合总和</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Hot100/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Hot100
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/24
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>跟前三道题目一样，定义结果集，path，在递归过程中如果满足条件就<br>加入结果集，递归结束后恢复现场</p>
+<h2 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h2><p>找到所有满足条件的组合</p>
+<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><p>忘记递归中维护下标，导致出现重复答案，这题虽然一个数字可以选多次，但是也不需要每次都从头选，因为223和232是一个答案</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>O(n*2^n) n是数组长度，2^n是组合数量，每个组合需要O(n)的时间添加到结果集中<br>空间 O(n) path的长度为n，递归栈深度也是n</p>
+<h2 id="我的收获"><a href="#我的收获" class="headerlink" title="我的收获"></a>我的收获</h2><p>暂无</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #03a9f4">回溯</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/24/hot100/%E5%9B%9E%E6%BA%AF/%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/23/hot100/%E5%9B%9E%E6%BA%AF/%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/">
+        <h2 class="post-title">电话号码的字母组合</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Hot100/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Hot100
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/23
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>跟前两道回溯题一个套路，就是用递归表示一种更高级的循环(迭代)，<br>定义结果集ans，暂存变量path来存储答案元素，定义字母表，开头两个空串便于映射<br>开始递归，如果当前已经走了n步，加入结果集并返回<br>否则，遍历digits对应的数字对应的字母表，加图path中开启下一轮递归，完成后pop恢复现场</p>
+<h2 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h2><p>看到“枚举所有组合”，想到回溯</p>
+<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><p>忘记恢复现场，导致结果不对<br>这题要在主函数里判断digits是否为空，空的话直接返回空数组</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间 O(n*4^n) n是digits长度，4^n是组合数量，每个组合需要O(n)的时间添加到结果集中<br>空间 O(n) path的长度为n，递归栈深度也是n</p>
+<h2 id="我的收获"><a href="#我的收获" class="headerlink" title="我的收获"></a>我的收获</h2><p>暂无</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #00a596">回溯</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/23/hot100/%E5%9B%9E%E6%BA%AF/%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%AD%90%E9%9B%86/">
+        <h2 class="post-title">子集</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Hot100/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Hot100
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/22
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><pre><code>枚举子集的第1个数选谁，第2个数选谁……第n个数选谁，
+</code></pre>
+<p>将没选的结果直接加入结果集，再从当前位置开始枚举，枚举结束后恢复现场</p>
+<h2 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h2><p>看到“枚举所有子集”或者“需要枚举所有组合”，想到回溯</p>
+<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><p>忘记恢复现场，导致结果不对</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间 O(n*2^n) n是数组长度，2^n是子集数量，每个子集需要O(n)的时间添加到结果集中<br>空间 O(n) path的长度为n，递归栈深度也是n</p>
+<h2 id="我的收获"><a href="#我的收获" class="headerlink" title="我的收获"></a>我的收获</h2><p>是否恢复现场与当前状态是否修改共享状态有关，修改了共享状态就要恢复现场，没修改就不需要恢复现场</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #03a9f4">博客</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ffa2c4">回溯</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%AD%90%E9%9B%86/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%85%A8%E6%8E%92%E5%88%97/">
+        <h2 class="post-title">全排列</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Hot100/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Hot100
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/22
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>回溯，维护visited和path，递归中保存递归层数，等于nums大小时添加到结果集中，然后遍历nums，没有被访问的就添加到path中并标记为已访问，<br>递归下一层，递归下一层结束后标记为未访问，即回溯。</p>
+<h2 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h2><p>全排列很容易想到回溯</p>
+<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><p>忘记回溯，导致结果不对<br>做递归类题目需要确定什么时候回溯，什么时候不回溯</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间 O(n*n!) n是数组长度，n!是全排列数量，每个全排列需要O(n)的时间添加到结果集中<br>空间 O(n) path的长度为n，递归栈深度也是n</p>
+<h2 id="我的收获"><a href="#我的收获" class="headerlink" title="我的收获"></a>我的收获</h2><p>暂无</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00a596">博客</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #03a9f4">回溯</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%85%A8%E6%8E%92%E5%88%97/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/">
+        <h2 class="post-title">RabbitMQ新增死信队列</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Java/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Java
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/21
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="添加一套常量"><a href="#添加一套常量" class="headerlink" title="添加一套常量"></a>添加一套常量</h2><pre><code class="language-java">public static final String SECKILL_DLX = &quot;seckill.order.dlx&quot;;
+public static final String SECKILL_DEAD_QUEUE = &quot;seckill.order.dead.queue&quot;;
+public static final String SECKILL_DEAD_ROUTING_KEY = &quot;seckill.order.dead&quot;;
+</code></pre>
+<h2 id="给业务队列添加死信参数"><a href="#给业务队列添加死信参数" class="headerlink" title="给业务队列添加死信参数"></a>给业务队列添加死信参数</h2><pre><code class="language-java">@Bean
+public Queue seckillQueue() {
+    return QueueBuilder.durable(SECKILL_QUEUE)
+            .withArgument(&quot;x-dead-letter-exchange&quot;, SECKILL_DLX)
+            .withArgument(&quot;x-dead-letter-routing-key&quot;, SECKILL_DEAD_ROUTING_KEY)
+            .build();
+}
+</code></pre>
+<p>这里重点是withArgument，前面的字符串是固定的,表示设置死信交换机和路由key</p>
+<h2 id="新增死信交换机Bean"><a href="#新增死信交换机Bean" class="headerlink" title="新增死信交换机Bean"></a>新增死信交换机Bean</h2><pre><code class="language-java">@Bean
+public DirectExchange seckillDeadLetterExchange() {
+    return new DirectExchange(SECKILL_DLX, true, false);
+}
+</code></pre>
+<p>第一个参数是交换机名字，第二个是持久化，第三个是自动删除</p>
+<h2 id="新增死信队列"><a href="#新增死信队列" class="headerlink" title="新增死信队列"></a>新增死信队列</h2><pre><code class="language-java">@Bean
+public Queue seckillDeadLetterQueue() {
+    return QueueBuilder.durable(SECKILL_DEAD_QUEUE).build();
+}
+</code></pre>
+<p>用queuebuilder的durable方法构造一个消息队列</p>
+<h2 id="构造队列和交换机的绑定关系"><a href="#构造队列和交换机的绑定关系" class="headerlink" title="构造队列和交换机的绑定关系"></a>构造队列和交换机的绑定关系</h2><pre><code class="language-java">@Bean
+public Binding seckillDeadLetterBinding() {
+    return BindingBuilder.bind(seckillDeadLetterQueue())
+            .to(seckillDeadLetterExchange())
+            .with(SECKILL_DEAD_ROUTING_KEY);
+}
+</code></pre>
+<p>用BindingBuilder的bind方法链式绑定队列到交换机并设置routing key</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这可以总结出RabbitMQ新增MQ的一般方法：</p>
+<ol>
+<li>设置三个常量，分别是交换机名称，队列名称和路由key</li>
+<li>设置交换机，队列和绑定关系的构造方法</li>
+</ol>
+<p>最后，如果我们在业务队列中重试一定次数后就channel.basicReject(msg.getMessageProperties().getDeliveryTag(), false)，消息就会被丢弃到死信队列中，我们就可以在死信队列中查看失败的消息并分析原因了。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00bcd4">博客</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #03a9f4">入门</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/21/%E9%9D%A2%E7%BB%8F/%E6%80%A7%E6%A0%BC%E7%BC%BA%E7%82%B9/">
+        <h2 class="post-title">性格缺点</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E9%9D%A2%E7%BB%8F/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                面经
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/21
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="回答模板"><a href="#回答模板" class="headerlink" title="回答模板"></a>回答模板</h2><p>我觉得自己有一个需要提升的地方，就是刚接触新任务时会偏谨慎，前期会想把细节考虑得比较完整。比如我之前做秒杀项目时，在下单链路改造上，我一开始会先花不少时间把 Redis 校验、MQ 异步下单和数据库落库之间的关系梳理清楚，再开始动手。这样虽然返工少，但前期启动会慢一点。后来我调整成先把主链路拆小，先做最小可运行版本，再逐步补细节，同时及时同步自己的阶段性理解。这样既保证了质量，也提高了推进效率。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #03a9f4">博客</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/21/%E9%9D%A2%E7%BB%8F/%E6%80%A7%E6%A0%BC%E7%BC%BA%E7%82%B9/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/19/redis/redis%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+        <h2 class="post-title">常用数据结构和操作函数</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Redis/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Redis
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/19
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="1-String"><a href="#1-String" class="headerlink" title="1. String"></a>1. String</h2><p>最常用，适合存字符串、数字、JSON。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>SET key value</code>：设置值</li>
+<li><code>GET key</code>：取值</li>
+<li><code>MSET k1 v1 k2 v2</code>：一次设置多个值</li>
+<li><code>MGET k1 k2</code>：一次取多个值</li>
+<li><code>INCR key</code>：数字加 1</li>
+<li><code>DECR key</code>：数字减 1</li>
+<li><code>SETEX key seconds value</code>：设置值并加过期时间</li>
+<li><code>SETNX key value</code>：key 不存在才设置，常用于加锁</li>
+</ul>
+<hr>
+<h2 id="2-Hash"><a href="#2-Hash" class="headerlink" title="2. Hash"></a>2. Hash</h2><p>适合存对象、字段集合。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>HSET key field value</code>：设置字段值</li>
+<li><code>HGET key field</code>：取某个字段值</li>
+<li><code>HMGET key f1 f2</code>：取多个字段值</li>
+<li><code>HGETALL key</code>：取全部字段和值</li>
+<li><code>HDEL key field</code>：删除字段</li>
+<li><code>HINCRBY key field n</code>：字段数字加 n</li>
+</ul>
+<hr>
+<h2 id="3-List"><a href="#3-List" class="headerlink" title="3. List"></a>3. List</h2><p>双端列表，适合队列、消息流。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>LPUSH key v1 v2</code>：从左边放入</li>
+<li><code>RPUSH key v1 v2</code>：从右边放入</li>
+<li><code>LPOP key</code>：从左边取出</li>
+<li><code>RPOP key</code>：从右边取出</li>
+<li><code>LRANGE key start end</code>：查看一段数据</li>
+<li><code>LLEN key</code>：看长度</li>
+</ul>
+<hr>
+<h2 id="4-Set"><a href="#4-Set" class="headerlink" title="4. Set"></a>4. Set</h2><p>无序、元素唯一，适合去重。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>SADD key v1 v2</code>：添加元素</li>
+<li><code>SREM key v1</code>：删除元素</li>
+<li><code>SMEMBERS key</code>：查看全部元素</li>
+<li><code>SISMEMBER key v</code>：判断元素在不在</li>
+<li><code>SCARD key</code>：看元素个数</li>
+<li><code>SINTER k1 k2</code>：求交集</li>
+<li><code>SUNION k1 k2</code>：求并集</li>
+</ul>
+<hr>
+<h2 id="5-ZSet"><a href="#5-ZSet" class="headerlink" title="5. ZSet"></a>5. ZSet</h2><p>有序集合，带分数，适合排行榜。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>ZADD key score value</code>：添加元素和分数</li>
+<li><code>ZREM key value</code>：删除元素</li>
+<li><code>ZRANGE key 0 -1</code>：按分数从小到大查看</li>
+<li><code>ZREVRANGE key 0 -1</code>：按分数从大到小查看</li>
+<li><code>ZSCORE key value</code>：看元素分数</li>
+<li><code>ZRANK key value</code>：看正序排名</li>
+<li><code>ZINCRBY key n value</code>：分数加 n</li>
+</ul>
+<hr>
+<h2 id="6-Bitmap"><a href="#6-Bitmap" class="headerlink" title="6. Bitmap"></a>6. Bitmap</h2><p>按位存储，适合签到、活跃统计。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>SETBIT key offset 1</code>：设置某一位</li>
+<li><code>GETBIT key offset</code>：查看某一位</li>
+<li><code>BITCOUNT key</code>：统计 1 的个数</li>
+<li><code>BITOP op dest k1 k2</code>：做位运算</li>
+</ul>
+<hr>
+<h2 id="7-HyperLogLog"><a href="#7-HyperLogLog" class="headerlink" title="7. HyperLogLog"></a>7. HyperLogLog</h2><p>适合做去重计数、UV 统计。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>PFADD key v1 v2</code>：添加数据</li>
+<li><code>PFCOUNT key</code>：统计数量</li>
+<li><code>PFMERGE newKey k1 k2</code>：合并统计</li>
+</ul>
+<hr>
+<h2 id="8-Stream"><a href="#8-Stream" class="headerlink" title="8. Stream"></a>8. Stream</h2><p>消息流，适合消息队列、消费组。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>XADD key * field value</code>：添加消息</li>
+<li><code>XRANGE key - +</code>：查看消息范围</li>
+<li><code>XREAD STREAMS key id</code>：读取消息</li>
+<li><code>XGROUP CREATE key group 0</code>：创建消费组</li>
+<li><code>XREADGROUP GROUP g c STREAMS key &gt;</code>：按消费组读消息</li>
+<li><code>XACK key group id</code>：确认消息已消费</li>
+</ul>
+<hr>
+<h2 id="通用命令"><a href="#通用命令" class="headerlink" title="通用命令"></a>通用命令</h2><p>几乎所有类型都会用到。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>DEL key</code>：删除 key</li>
+<li><code>EXPIRE key seconds</code>：设置过期时间</li>
+<li><code>TTL key</code>：查看剩余过期时间</li>
+<li><code>EXISTS key</code>：判断 key 是否存在</li>
+<li><code>TYPE key</code>：查看 key 的类型</li>
+<li><code>SCAN 0</code>：分页查 key</li>
+</ul>
+<hr>
+<h2 id="一句话速记"><a href="#一句话速记" class="headerlink" title="一句话速记"></a>一句话速记</h2><ul>
+<li><code>String</code>：值</li>
+<li><code>Hash</code>：对象</li>
+<li><code>List</code>：队列</li>
+<li><code>Set</code>：去重集合</li>
+<li><code>ZSet</code>：排行榜</li>
+<li><code>Bitmap</code>：位统计</li>
+<li><code>HyperLogLog</code>：基数统计</li>
+<li><code>Stream</code>：消息队列</li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ff7d73">博客</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #00a596">入门</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/19/redis/redis%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/">
+        <h2 class="post-title">按照分类统计薪水</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Sql50/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Sql50
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/19
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>三个select,然后union all在一起</p>
+<pre><code class="language-sql">SELECT &#39;Low Salary&#39; AS category, COUNT(*) AS accounts_count
+FROM Accounts
+WHERE income &lt; 20000
+
+UNION ALL
+
+SELECT &#39;Average Salary&#39; AS category, COUNT(*) AS accounts_count
+FROM Accounts
+WHERE income BETWEEN 20000 AND 50000
+
+UNION ALL
+
+SELECT &#39;High Salary&#39; AS category, COUNT(*) AS accounts_count
+FROM Accounts
+WHERE income &gt; 50000;
+</code></pre>
+<h2 id="所用工具函数或关键字"><a href="#所用工具函数或关键字" class="headerlink" title="所用工具函数或关键字"></a>所用工具函数或关键字</h2><ul>
+<li><code>UNION ALL</code>：合并多个查询结果，保留重复行。</li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #03a9f4">博客</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #ffa2c4">入门</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/" class="go-post">阅读全文</a>
+</div>
+
+
+        <div class="page-current">
+    
+    <a class="page-num" href="/">
+        <i class="fa-solid fa-caret-left fa-fw"></i>
+    </a>
+    <a class="page-num" href="/">1</a>
+    <span class="page-omit">...</span>
+    
+    <span class="current">2</span>
+    
+    <a class="page-num" href="/page/3">
+        3
+    </a>
+    
+    
+    
+    
+    <a class="page-num" href="/page/3/">
+        <i class="fa-solid fa-caret-right fa-fw"></i>
+    </a>
+    
+</div>
+
+    </div>
+    
+    <div id="home-card">
+        <div id="card-style">
+    <div id="card-div">
+        <div class="avatar">
+            <img src="/images/avatar.jpg" alt="avatar" />
+        </div>
+        <div class="name">Yu</div>
+        <div class="description">
+            <p>Description<br>…</p>
+
+        </div>
+        
+        
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://github.com/leikuman1">github</a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+    </div>
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+</body>
+</html>

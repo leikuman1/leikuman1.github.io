@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>RAG基础 | L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>RAG基础</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/28
+        </span>
+        
+        <span class="category">
+            <a href="/categories/RAG/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                RAG
+            </a>
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="RAG是什么"><a href="#RAG是什么" class="headerlink" title="RAG是什么"></a>RAG是什么</h2><p>RAG（Retrieval-Augmented Generation）是一种结合了检索和生成的自然语言处理技术。</p>
+<h2 id="RAG的工作流程"><a href="#RAG的工作流程" class="headerlink" title="RAG的工作流程"></a>RAG的工作流程</h2><p>RAG主要干两件事情，离线建库和在线问答</p>
+<h3 id="离线建库-把资料变成可检索知识库"><a href="#离线建库-把资料变成可检索知识库" class="headerlink" title="离线建库: 把资料变成可检索知识库"></a>离线建库: 把资料变成可检索知识库</h3><p>原始文档<br>  ↓<br>文档清洗&#x2F;解析<br>  ↓<br>切分成 chunks<br>  ↓<br>生成向量 embeddings<br>  ↓<br>存入向量数据库&#x2F;检索索引</p>
+<p>常见步骤：</p>
+<p>收集数据<br>例如 PDF、网页、Word、数据库记录、内部文档、FAQ 等。</p>
+<p>解析和清洗<br>去掉无关内容，提取正文、标题、表格、元数据等。</p>
+<p>切分文本<br>把长文档切成较小片段，比如每段 300 到 1000 tokens。<br>切太大，检索不精准；切太小，上下文不完整。</p>
+<p>向量化<br>用 embedding 模型把每个文本片段转成向量。</p>
+<p>建立索引<br>把文本片段、向量、来源信息一起存到向量数据库，比如 FAISS、Milvus、 等。</p>
+<h3 id="在线问答：用户提问时检索相关资料塞入prompt再调用llm回答"><a href="#在线问答：用户提问时检索相关资料塞入prompt再调用llm回答" class="headerlink" title="在线问答：用户提问时检索相关资料塞入prompt再调用llm回答"></a>在线问答：用户提问时检索相关资料塞入prompt再调用llm回答</h3><p>用户问题<br>  ↓<br>问题向量化<br>  ↓<br>检索相关 chunks<br>  ↓<br>可选：重排序 rerank<br>  ↓<br>把检索结果塞进 prompt<br>  ↓<br>LLM 生成答案<br>  ↓<br>返回答案 + 引用来源</p>
+<p>常见步骤：</p>
+<p>用户输入问题</p>
+<p>对问题做 embedding<br>把问题也转成向量。</p>
+<p>相似度检索<br>在向量库里找最相近的文档片段。</p>
+<p>重排序<br>可选，用 reranker 模型把候选结果重新排序，提高相关性。</p>
+<p>构造 Prompt<br>把检索到的资料作为上下文，连同用户问题一起发给大模型。</p>
+<p>生成答案<br>大模型基于检索内容回答，而不是只靠自己记忆。</p>
+<p>返回引用<br>最好附上来源文档、页码、URL 或 chunk ID，方便用户验证。</p>
+<h2 id="RAG的作用"><a href="#RAG的作用" class="headerlink" title="RAG的作用"></a>RAG的作用</h2><p>RAG &#x3D; 先从知识库里找资料，再让大模型基于这些资料回答问题。<br>rag的核心价值是：让模型能使用外部知识、减少幻觉、支持私有数据、并且知识库可以持续更新。</p>
+<h2 id="向量与向量夹角的余弦"><a href="#向量与向量夹角的余弦" class="headerlink" title="向量与向量夹角的余弦"></a>向量与向量夹角的余弦</h2><p>上过高中应该都知道向量是什么，向量是有大小和方向的量，可以用来表示空间中的点、线、面等几何对象，也可以用来表示物理量如速度、力等。</p>
+<p>在rag里，向量可以理解为文本的语义坐标。比如两句话：</p>
+<p>苹果手机怎么截图？<br>iPhone 如何截屏？<br>字面不完全一样，但意思很接近。Embedding 模型会把它们转成一串数字，例如：</p>
+<p>[0.12, -0.03, 0.88, 0.41, …]<br>这串数字就是向量 embedding。真正的 embedding 通常有几百到几千维。</p>
+<h3 id="向量的基本概念"><a href="#向量的基本概念" class="headerlink" title="向量的基本概念"></a>向量的基本概念</h3><p>在 RAG 中，向量主要用于表示语义：</p>
+<p>文本 chunk → embedding 模型 → 向量<br>用户问题 → embedding 模型 → 向量<br>然后系统比较“问题向量”和“文档片段向量”之间的距离或相似度，找出最相关的内容。</p>
+<p>可以把向量想象成地图上的点：</p>
+<p>意思相近的文本 → 在向量空间里距离近<br>意思无关的文本 → 在向量空间里距离远<br>例如：</p>
+<p>“如何重置密码”<br>“忘记密码怎么办”<br>向量会比较接近。</p>
+<p>而：</p>
+<p>“如何重置密码”<br>“北京明天天气”<br>向量就会比较远。</p>
+<h2 id="余弦相似度"><a href="#余弦相似度" class="headerlink" title="余弦相似度"></a>余弦相似度</h2><p>余弦相似度用来衡量两个向量的“方向是否接近”。</p>
+<p>它不太关心向量有多长，更关心两个向量指向的方向是不是一致。</p>
+<p>公式是：</p>
+<p>cosine_similarity(A, B) &#x3D; (A · B) &#x2F; (||A|| × ||B||)<br>其中：</p>
+<p>A · B       表示两个向量的点积<br>||A||       表示向量 A 的长度<br>||B||       表示向量 B 的长度<br>结果通常在 -1 到 1 之间：</p>
+<p>1     表示方向完全相同，语义非常接近<br>0     表示基本无关<br>-1    表示方向完全相反</p>
+<p>这其实就是高中立体几何里向量夹角余弦公式，一般拿来求二面角或异面直线夹角<br>在很多文本 embedding 场景里，实际常见结果更多是 0 到 1 附近。</p>
+<p>举个二维小例子</p>
+<p>假设有两个向量：</p>
+<p>A &#x3D; [1, 2]<br>B &#x3D; [2, 4]<br>先算点积：</p>
+<p>A · B &#x3D; 1×2 + 2×4 &#x3D; 10<br>再算长度：</p>
+<p>||A|| &#x3D; sqrt(1² + 2²) &#x3D; sqrt(5)<br>||B|| &#x3D; sqrt(2² + 4²) &#x3D; sqrt(20)<br>代入公式：</p>
+<p>cos(A, B) &#x3D; 10 &#x2F; (sqrt(5) × sqrt(20))<br>          &#x3D; 10 &#x2F; 10<br>          &#x3D; 1<br>所以它们方向完全一致，相似度是 1。</p>
+<p>虽然 B 比 A 长，但他们是平行向量，方向一样，所以余弦相似度认为它们非常相似。<br>RAG 检索时大概是这样：</p>
+<p>用户问题：怎么修改登录密码？<br>  ↓<br>转成问题向量 Q<br>  ↓<br>拿 Q 和知识库中每个 chunk 的向量比较<br>  ↓<br>用余弦相似度排序<br>  ↓<br>取 top-k 个最相似的 chunk<br>  ↓<br>交给大模型生成答案</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>向量 &#x3D; 文本语义的数字表达<br>余弦相似度 &#x3D; 判断两个语义向量方向有多接近的方法<br>在 RAG 中，它们共同完成的事情是：把用户问题和知识库内容放到同一个语义空间里，然后找出最相关的资料。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>什么是agent | L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>什么是agent</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/5/17
+        </span>
+        
+        <span class="category">
+            <a href="/categories/agent/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                agent
+            </a>
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="agent是什么"><a href="#agent是什么" class="headerlink" title="agent是什么"></a>agent是什么</h2><p>agent本质是一个能够自主完成目标的ai系统，跟llm的区别在于自主性。</p>
+<p>传统的llm是用户问一个问题，他回答一下，每次都是独立的，被动的响应；而agent有自己独立完成任务的能力，用户给他一个复杂目标，它自己进行步骤规划，调用工具，访问记忆与感知环境来一步一步的执行，直到完成任务。</p>
+<p>总结：agent相比llm的特性是：工具调用，记忆机制，多步推理和自我纠错</p>
+<h2 id="agent的核心组件"><a href="#agent的核心组件" class="headerlink" title="agent的核心组件"></a>agent的核心组件</h2><h3 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h3><p>Agent的大脑，所有决策，工具调用等核心步骤都经过llm，主要用与判断下一步该做什么，怎么做</p>
+<h3 id="工具系统"><a href="#工具系统" class="headerlink" title="工具系统"></a>工具系统</h3><p>相当于给agent提供能力的接口，agent通过调用工具来获取外部信息。<br>Anthropic在2024年提出了MCP，全称 Model Context Protocol，是一个让 AI 应用连接外部数据和工具的开放协议标准。</p>
+<p>MCP 主要有三类角色：</p>
+<ul>
+<li>Host：承载 AI 的应用，比如 Claude Desktop、Claude Code、IDE 等</li>
+<li>Client：Host 内部负责和 MCP Server 通信的部分</li>
+<li>Server：对外提供能力的服务，比如文件系统、数据库、搜索工具、第三方平台接口</li>
+</ul>
+<p>也就是说，agent 本身不是 MCP，MCP 更像是 agent 连接外部世界的标准接口。</p>
+<p>一个 MCP Server 最常提供三类能力：</p>
+<ul>
+<li>Tools：给 agent 调用的函数，比如查数据库、读文件、发请求</li>
+<li>Resources：提供上下文数据，比如文件内容、数据库记录、接口返回结果</li>
+<li>Prompts：预定义好的提示模板，帮助组织任务流程</li>
+</ul>
+<p>其中最重要的通常是 Tools，因为它直接决定 agent 能做什么。</p>
+<h2 id="记忆系统"><a href="#记忆系统" class="headerlink" title="记忆系统"></a>记忆系统</h2><p>agent的记忆系统可以分为短期记忆和长期记忆两种：<br>短期记忆：就是这轮对话的上下文，装在context window里，llm可以直接访问，适合存储当前任务相关的信息和状态。</p>
+<p>长期记忆：通常通过向量数据库实现，把重要信息embedding后存储起来，agent可以根据需要检索相关记忆来辅助决策，适合存储跨任务、跨会话的重要信息。</p>
+<h2 id="规划模块"><a href="#规划模块" class="headerlink" title="规划模块"></a>规划模块</h2><p>规划模块的底层依赖的是LLM的推理能力，而提升推理能力有几种主要的手段。</p>
+<p>第一是链式思维（Chain of Thought），通过在提示里引导模型一步步推理，来提升复杂问题的解答能力。比如在 prompt 里加一句「Let’s think step by step」</p>
+<p>第二是思维树（Tree of Thoughts），在链式思维的基础上，允许模型在推理过程中进行分叉，探索多条推理路径，最后选择最优解。比如在 prompt 里加一句「Let’s think step by step, and explore multiple reasoning paths」</p>
+<p>有了这些推理技术打底，规划模块有两种主流模式</p>
+<h3 id="Plan-and-Execute-先规划后执行"><a href="#Plan-and-Execute-先规划后执行" class="headerlink" title="Plan-and-Execute(先规划后执行)"></a>Plan-and-Execute(先规划后执行)</h3><p>先让LLM输出一个完整的计划，然后再一步步执行这个计划。适合任务结构比较清晰，步骤明确的场景。</p>
+<h3 id="ReAct-边执行边规划"><a href="#ReAct-边执行边规划" class="headerlink" title="ReAct(边执行边规划)"></a>ReAct(边执行边规划)</h3><p>每执行一步就让LLM重新评估当前状态，决定下一步该做什么。适合任务结构不确定，需要根据环境反馈动态调整的场景。</p>
+<p>答好这道题，能把四个组件和类比（LLM 是老板、工具是技术团队、记忆是档案室、规划是项目经理）结合起来说，会非常加分。</p>
+<h3 id="和workflow，tool的区别"><a href="#和workflow，tool的区别" class="headerlink" title="和workflow，tool的区别"></a>和workflow，tool的区别</h3><p>agent、workflow和tool是三个不同层次的概念。</p>
+<ul>
+<li>tool：是一个具体的功能接口，比如一个搜索工具、一个数据库查询工具，提供特定的能力给agent调用。</li>
+<li>workflow：是一个预定义的流程，规定了完成某个任务需要哪些步骤，步骤之间的顺序和条件。它更像是一个固定的剧本，agent按照这个剧本来执行。</li>
+<li>agent：是一个具有自主决策能力的系统，能够根据目标和环境动态规划和执行任务。它可以调用工具，也可以按照workflow执行，但它不受限于固定的流程，可以根据实际情况灵活调整。</li>
+</ul>
+<p>Anthropic 在他们的 Agent 工程实践中总结了几种常见的 Workflow 编排模式，值得了解一下。<br>第一种叫「Prompt Chaining」（提示链），就是把一个大任务拆成多个小步骤，前一步的输出作为后一步的输入，像流水线一样串起来。<br>第二种叫「Routing」（路由），先用一个 LLM 做分类判断，然后根据分类结果把请求分发到不同的处理分支，前面客服系统的例子就是典型的路由模式。<br>第三种叫「Parallelization」（并行化），把可以同时进行的子任务并行执行，最后汇总结果，这在需要多维度分析的场景下特别有用，比如同时从多个数据源检索信息。<br>第四种叫「Orchestrator-Workers」（编排者-工人），一个中央编排者负责分配任务，多个 Worker 各自完成子任务，适合任务可以分解但子任务之间相互独立的场景。</p>
+<p>总的来说，agent和workflow不是互斥的，在生产中agent太难控制，workflow又太死板，所以最好用workflow固定主流程框架，在需要灵活判断的节点嵌入agent做决策。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

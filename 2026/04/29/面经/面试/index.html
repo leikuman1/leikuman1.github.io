@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>面试 | L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>面试</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/29
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>面试官您好，我这个项目是一个基于 Spring Boot、Redis、RabbitMQ 和 MySQL 实现的高并发秒杀下单项目，主要模拟优惠券秒杀这种瞬时高并发场景。我主要负责的是下单链路这一块的设计和优化，重点解决高并发下的超卖、重复下单、数据库写入压力过大，以及异步链路下的数据一致性问题。</p>
+<p>在实现上，我先用 Redis + Lua 做秒杀资格的原子校验，把库存判断、一人一单和库存预扣放到一个脚本里执行；然后在入口前增加了基于 Redis ZSet + Lua 的滑动窗口限流，控制单用户请求频率；通过 RabbitMQ 把下单请求异步化，削峰解耦，减轻数据库并发压力；另外我还补了死信队列和补偿逻辑，对下单失败的消息做重试、回滚 Redis 预占和人工介入标记，尽量保证最终一致性。除此之外，我还做了售罄快速失败和 JVM 调优，用来减少无效请求开销并提升压测下的稳定性。</p>
+<p>这个 Lua 脚本主要做四件事。<br>第一，先根据 voucherId 组装 Redis key，一个是库存 key，一个是下单记录 key。<br>第二，读取库存，如果库存小于等于 0，就直接返回失败，表示库存不足。<br>第三，检查当前用户是否已经在这个券对应的下单用户集合里，如果已经存在，就返回失败，表示重复下单。<br>第四，如果前两步都通过，就在 Redis 里先执行库存预扣减，再把 userId 写入这个券对应的下单用户集合里，表示这个用户已经占到了购买资格。整个过程放在 Lua 里执行，是为了保证这几步操作的原子性，避免高并发下出现超卖或者一人多单。</p>
+<p>“正常消费者第一次消费失败时，我会先 NACK + requeue&#x3D;true，允许消息再消费一次。<br>如果第二次还是失败，就先记录一条 PENDING 状态的死信日志，然后 basicReject(requeue&#x3D;false)，让消息自动进入死信队列。</p>
+<p>死信消费者收到消息后，会先查这笔订单是否其实已经落库成功了，如果已经成功，就直接把死信日志标记成 SUCCESS。<br>如果还没成功，就再尝试补单一次，也就是重新走数据库侧的下单逻辑；如果这次补单成功，就标记成 RETRIED_SUCCESS。<br>如果补单还是失败，就继续执行 Redis 预占回滚，把之前 Lua 里预扣的库存和用户资格释放掉；如果回滚成功，就标记成 ROLLED_BACK。<br>如果连回滚也失败，说明这条消息已经不能自动恢复了，就把它标记成 MANUAL_REVIEW，后续交给人工介入处理。<br>所以这条死信链路的核心目标是让失败消息具备可追踪、可补偿、可兜底的闭环能力。”</p>
+<p>如果只看单个用户的 ZSet，在我的场景里窗口很小，而且限制是每秒最多 1 次请求，所以正常情况下一个用户在窗口内只会留下很少几条记录，很多时候甚至只有 1 条，因此单个 ZSet 的数据量其实不大。</p>
+<p>但如果从整体看，用户规模很大时，还是会有比较多的 key 和对象元数据开销，所以不能说完全没有内存成本。<br>因此我的处理思路是：一方面通过 ZREMRANGEBYSCORE 及时清理窗口外请求，另一方面给这个限流 key 设置一个略大于窗口时间的过期时间，让不活跃用户的 ZSet 自动过期回收。这样就能把内存占用控制在一个比较可接受的范围内。</p>
+<p>所以结论不是 ZSet 完全不占内存，而是对于我这个‘小窗口、低阈值、及时清理、带过期时间’的限流场景，它的内存开销是可控的。” </p>
+<p>“因为这个限流主要是为了拦截单个用户在极短时间内的重复请求，所以我按用户维度做限流，而不是做全局限流。<br>如果只做全局限流，那高峰期可能会因为少数用户的高频请求把整个接口限住，反而影响其他正常用户的秒杀体验；而按用户维度限流，可以更精准地约束异常频繁点击、脚本刷接口或者网络抖动下的重复提交。</p>
+<p>另外，这个项目本身还有‘一人一单’的业务约束，但那是资格校验层解决的问题，是通过 Redis + Lua 和数据库幂等兜底来保证的。<br>限流和一人一单虽然都和用户有关，但本质上是两层不同的控制：<br>前者是流量保护，后者是业务约束</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

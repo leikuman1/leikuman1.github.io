@@ -181,6 +181,595 @@
         
 
 <div class="post">
+    <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E7%BB%9F%E4%B8%80%E6%9E%84%E5%BB%BArouter/">
+        <h2 class="post-title">统一构建router</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/FastAPI/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                FastAPI
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="统一构建router"><a href="#统一构建router" class="headerlink" title="统一构建router"></a>统一构建router</h2><p>在FastAPI中，我们可以通过APIRouter来统一构建路由，这样可以将不同的路由分组，方便管理和维护。</p>
+<p>比如</p>
+<pre><code class="language-python">from fastapi import APIRouter
+router = APIRouter(prefix=&quot;/api/news&quot;, tags=[&quot;news&quot;])
+@router.get(&quot;/categories&quot;)
+async def get_categories():
+    return {&quot;msg&quot;: &quot;success&quot;}
+</code></pre>
+<p>这里前缀&#x2F;api&#x2F;news表示这个路由的公共前缀，tags&#x3D;[“news”]表示这个路由的标签，可以在文档中进行分类展示。<br>然后在主应用中引入这个router，如</p>
+<pre><code class="language-python">app.include_router(news.router)
+</code></pre>
+<p>这样就可以将这个router中的所有路由都包含到主应用中，并且自动添加前缀&#x2F;api&#x2F;news。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #00a596">头条项目</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E7%BB%9F%E4%B8%80%E6%9E%84%E5%BB%BArouter/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/25/FastAPI/SqlAIchemy%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9/">
+        <h2 class="post-title">SqlAIchemy的增删改</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/FastAPI/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                FastAPI
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h2><p>先新建一个DTO类来接收请求体参数：</p>
+<pre><code class="language-python">from pydantic import BaseModel
+class ItemCreate(BaseModel):
+    name: str
+    description: str
+    price: float
+</code></pre>
+<p>然后在路由函数中使用这个DTO类来接收请求体参数，并把它转换为ORM模型对象来进行数据库操作：</p>
+<pre><code class="language-python">@app.post(&quot;/items/&quot;)
+async def create_item(item: ItemCreate, db: AsyncSession = Depends(get_db)):
+    item_obj = Item(**item.dict())
+    db.add(item_obj)
+    await db.commit()
+    await db.refresh(item_obj)
+    return item_obj
+</code></pre>
+<p>这里的item: ItemCreate表示这个参数是一个请求体参数，FastAPI会自动将请求体中的JSON数据解析成一个ItemCreate对象，并传递给create_item函数。然后我们通过item.dict()方法将DTO对象转换为一个字典，再通过**操作符将字典解包成关键字参数来创建一个ORM模型对象item_obj。最后我们将这个对象添加到数据库会话中，提交事务，并刷新对象以获取数据库生成的ID等字段，最后返回这个对象。</p>
+<p>注意还要先定义好ORM模型类Item，并且在数据库中创建好对应的表。就是那个类定义里有__tablename__ &#x3D; “items”的那个类。</p>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>先查再改</p>
+<pre><code class="language-python">@app.delete(&quot;/items/{item_id}&quot;)
+async def delete_item(item_id: int, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Item).where(Item.id == item_id))
+    item = result.scalar_one_or_none()
+    if item is None:
+        raise HTTPException(status_code=404, detail=&quot;Item not found&quot;)
+    await db.delete(item)
+    await db.commit()
+    return {&quot;message&quot;: &quot;Item deleted&quot;}
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/SQLAlchemy/" style="color: #ff7d73">SQLAlchemy</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/25/FastAPI/SqlAIchemy%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/25/FastAPI/SqlAIchemy%E7%9A%84%E6%9F%A5/">
+        <h2 class="post-title">SqlAIchemy的查</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/FastAPI/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                FastAPI
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><p>先来看看简单的查询方式</p>
+<pre><code class="language-python">from sqlalchemy import select
+@app.get(&quot;/items/&quot;)
+async def read_items(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Item)).where(Item.name == &quot;item1&quot;)
+    items = result.scalars().all()
+    return items
+</code></pre>
+<p>这里可以总结一下查询的一般方式：await db.execute(select(模型).where(条件))，然后通过scalars()方法把结果转换为指定对象列表，最后通过all()方法获取所有结果。</p>
+<h3 id="模糊查询和多条件查询"><a href="#模糊查询和多条件查询" class="headerlink" title="模糊查询和多条件查询"></a>模糊查询和多条件查询</h3><pre><code class="language-python">@app.get(&quot;/items/&quot;)
+async def read_items(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Item).where(Item.name.like(&quot;%item%&quot;)|Item.price &gt; 10))
+    items = result.scalars().all()
+    return items
+</code></pre>
+<p>跟mysql里一样，like表示模糊查询，%表示任意字符，|表示或，&amp;表示且。</p>
+<h3 id="聚合和分页"><a href="#聚合和分页" class="headerlink" title="聚合和分页"></a>聚合和分页</h3><pre><code class="language-python">@app.get(&quot;/items/&quot;)
+async def read_items(db: AsyncSession = Depends(get_db), page: int = 0, page_size: int = 10):
+    result = await db.execute(select(func.count(Item.id)))
+    total = result.scalar()
+    skip = (page - 1) * page_size
+    result = await db.execute(select(Item).offset(skip).limit(page_size))
+    items = result.scalars().all()
+    return {&quot;total&quot;: total, &quot;items&quot;: items}
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/SQLAlchemy/" style="color: #ffa2c4">SQLAlchemy</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/25/FastAPI/SqlAIchemy%E7%9A%84%E6%9F%A5/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/25/FastAPI/%E5%9C%A8%E8%B7%AF%E7%94%B1%E4%B8%AD%E4%BD%BF%E7%94%A8ORM/">
+        <h2 class="post-title">在路由中使用ORM</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/FastAPI/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                FastAPI
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="yield-and-await"><a href="#yield-and-await" class="headerlink" title="yield and await"></a>yield and await</h2><p>yield 是一个生成器函数的关键字，它可以暂停函数的执行，并返回一个值给调用者。当函数再次被调用时，它会从上次暂停的地方继续执行，而不是从头开始执行。可以用来惰性求值，慢慢处理大量数据，防止内存溢出。</p>
+<p>await 是一个异步函数的关键字，它可以暂停函数的执行，等待一个异步操作完成。当异步操作完成后，函数会继续执行，而不会阻塞其他代码的执行。可以用来处理IO密集型任务，提高程序的性能。<br>如果调用一个异步函数不使用await，那么这个函数会返回一个协程对象，而<br>函数结果不一定执行完成，所以在使用异步函数时，必须使用await来等待它的结果。</p>
+<p>**总结一下就是调用异步函数必须使用await来等待它的结果，而yield是生成器函数的关键字，可以暂停函数的执行，并返回一个值给调用者。</p>
+<h2 id="在路由中使用ORM"><a href="#在路由中使用ORM" class="headerlink" title="在路由中使用ORM"></a>在路由中使用ORM</h2><p>先创建一个会话工厂</p>
+<pre><code class="language-python">from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+DATABASE_URL = &quot;mysql+aiomysql://user:password@localhost/dbname&quot;
+engine = create_engine(DATABASE_URL)
+Async_SessionLocal = async_sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+async def get_db():
+    async with Async_SessionLocal() as session:
+        try:
+            yield session
+            await session.commit()
+        except Exception as e:
+            await session.rollback()
+            raise e
+        finally:
+            await session.close()
+</code></pre>
+<p>这个函数会创建一个数据库会话，并在使用完后自动提交事务或回滚事务，并关闭会话。</p>
+<p>在路由中使用这个函数来获取数据库会话：</p>
+<pre><code class="language-python">from fastapi import Depends
+@app.get(&quot;/items/&quot;)
+async def read_items(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Item))
+    items = result.scalars().all()
+    return items
+</code></pre>
+<p>这里的Depends(get_db)表示这个参数是一个依赖项，FastAPI会自动调用get_db函数来获取数据库会话，并将其作为参数传递给read_items函数。这样我们就可以在路由中使用ORM来操作数据库了。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ORM/" style="color: #03a9f4">ORM</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/25/FastAPI/%E5%9C%A8%E8%B7%AF%E7%94%B1%E4%B8%AD%E4%BD%BF%E7%94%A8ORM/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/25/FastAPI/ORM%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
+        <h2 class="post-title">ORM基本操作</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/FastAPI/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                FastAPI
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p>本项目使用SQLAlchemy作为ORM工具，安装依赖：</p>
+<pre><code class="language-txt">sqlalchemy[asyncio]
+aiomysql
+</code></pre>
+<h2 id="创建数据库模型"><a href="#创建数据库模型" class="headerlink" title="创建数据库模型"></a>创建数据库模型</h2><p>先创建异步数据库引擎和会话：</p>
+<pre><code class="language-python">from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker
+DATABASE_URL = &quot;mysql+aiomysql://user:password@localhost/dbname&quot;
+engine = create_async_engine(DATABASE_URL, 
+echo=True ##日志输出SQL语句
+pool_size=10, ##连接池大小
+max_overflow=20, ##连接池最大溢出数量
+)
+</code></pre>
+<h3 id="定义模型类"><a href="#定义模型类" class="headerlink" title="定义模型类"></a>定义模型类</h3><p>定义基类和模型类：</p>
+<pre><code class="language-python">from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String
+class Base:
+    create_time = Column(Integer)
+    update_time = Column(Integer)
+class User(Base):
+    __tablename__ = &quot;users&quot;
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(50), unique=True, index=True)
+    email = Column(String(50), unique=True, index=True)
+</code></pre>
+<h3 id="定义函数建表"><a href="#定义函数建表" class="headerlink" title="定义函数建表"></a>定义函数建表</h3><pre><code class="language-python">async def init_db():
+    async with async_engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+</code></pre>
+<p>再搞一个启动时调用的函数：</p>
+<pre><code class="language-python">@app.on_event(&quot;startup&quot;)
+async def on_startup():
+    await init_db()
+</code></pre>
+<p>这样就可以在应用启动时自动创建数据库表了。</p>
+<p>总结一下，有三步：</p>
+<ol>
+<li>创建数据库引擎和会话</li>
+<li>定义模型类</li>
+<li>定义函数建表并在应用启动时调用</li>
+</ol>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ORM/" style="color: #ffa2c4">ORM</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/25/FastAPI/ORM%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/25/FastAPI/%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">
+        <h2 class="post-title">中间件和依赖注入</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/FastAPI/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                FastAPI
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p>中间件是一个函数，它可以在请求被处理之前或之后执行一些操作。中间件可以用于处理跨域请求、日志记录、身份验证等。类似于Spring中的AOP思想。</p>
+<p>可以通过middleware装饰器来定义一个中间件函数，如：</p>
+<pre><code class="language-python">from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+app = FastAPI()
+@app.middleware(&quot;http&quot;)
+async def add_process_time_header(request: Request, call_next):
+    response = await call_next(request)
+    response.headers[&quot;X-Process-Time&quot;] = &quot;0.1s&quot;
+    return response
+</code></pre>
+<p>这里的add_process_time_header函数是一个中间件函数，它在请求被处理之前执行，调用call_next(request)来继续处理请求，并在响应中添加一个自定义的头部X-Process-Time。</p>
+<p>这里还需要注意，如果有多个中间件，执行顺序是按照定义的顺序执行的。<br>而且执行方式类似于递归调用，先执行第一个中间件，调用call_next(request)来继续处理请求，进入下一个中间件，直到最后一个中间件处理完请求后返回响应，然后依次返回到上一个中间件，最后返回给客户端。<br>所以定义越早的中间件越先执行，定义越晚的中间件越后执行，但是返回响应的顺序是相反的，定义越早的中间件越后返回，定义越晚的中间件越先返回。</p>
+<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><p>依赖注入是一种设计模式，它允许我们将一个对象的依赖关系从对象本身中分离出来，使得代码更加模块化和可测试。在FastAPI中，依赖注入是通过Depends函数来实现的。说人话就是复用相同的代码。</p>
+<p>例如，我们有一个函数get_db()来获取数据库连接，我们可以将这个函数作为一个依赖注入到其他函数中，如：</p>
+<pre><code class="language-python">from fastapi import Depends
+def get_db():
+    db = &quot;数据库连接&quot;
+    try:
+        yield db
+    finally:
+        print(&quot;关闭数据库连接&quot;)
+@app.get(&quot;/items/&quot;)
+async def read_items(db: str = Depends(get_db)):
+    return {&quot;db&quot;: db}
+</code></pre>
+<p>这里的get_db函数是一个依赖函数，它返回一个数据库连接。在read_items函数中，我们使用Depends(get_db)来注入这个依赖，这样当我们调用read_items函数时，FastAPI会自动调用get_db函数来获取数据库连接，并将其作为参数传递给read_items函数。</p>
+<p>依赖注入的好处是可以将公共的代码抽离出来，避免重复代码，提高代码的可维护性和可测试性。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2026/04/25/FastAPI/%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/25/FastAPI/%E5%88%9D%E8%AF%95FastAPI/">
+        <h2 class="post-title">初试FastAPI</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/FastAPI/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                FastAPI
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>路由是url地址和函数之间的映射关系<br>新建python的FastAPI项目,在main.py中添加以下内容：</p>
+<pre><code class="language-python">from fastapi import FastAPI
+//创建FastAPI应用实例
+app = FastAPI()
+
+//定义一个根路由，返回一个简单的JSON响应
+//这里的@app.get(&quot;/&quot;)是一个装饰器，表示这个函数是处理GET请求的，并且路径是&quot;/&quot;，也就是根路径。当访问这个路径时，异步函数read_root会被调用，返回一个JSON对象{&quot;Hello&quot;: &quot;World&quot;}。
+@app.get(&quot;/&quot;)
+//相当于@RequestMapping(&quot;/&quot;)，默认是GET请求
+async def read_root():
+    return {&quot;Hello&quot;: &quot;World&quot;}
+</code></pre>
+<h2 id="路由参数"><a href="#路由参数" class="headerlink" title="路由参数"></a>路由参数</h2><p>路由参数分为三种：路径参数、查询参数、请求体参数</p>
+<ul>
+<li>路径参数：直接在路径中定义参数，是url的一部分，如</li>
+</ul>
+<pre><code class="language-python">@app.get(&quot;/items/{item_id}&quot;)
+async def read_item(item_id: int):
+    return {&quot;item_id&quot;: item_id}
+</code></pre>
+<p>另外，FastAPI还有Path注解可以对路径参数进行验证和设置默认值，如：</p>
+<pre><code class="language-python">@app.get(&quot;/items/{item_id}&quot;)
+async def read_item(item_id: int = Path(..., title=&quot;The ID of the item to get&quot;, ge=1)):
+    return {&quot;item_id&quot;: item_id}
+</code></pre>
+<p>这里的Path(…)表示这个参数是必填的，title是参数的描述，ge&#x3D;1表示这个参数必须大于等于1。</p>
+<ul>
+<li>查询参数：在url中以?key&#x3D;value的形式传递参数，如</li>
+</ul>
+<pre><code class="language-python">@app.get(&quot;/items/&quot;)
+async def read_items(
+    skip: int = query(0, title=&quot;Number of items to skip&quot;, ge=0),
+    limit: int = 10):
+    return {&quot;skip&quot;: skip, &quot;limit&quot;: limit}
+</code></pre>
+<p>这里的注解query(0, title&#x3D;”Number of items to skip”, ge&#x3D;0)表示这个参数是可选的，默认值是0，title是参数的描述，ge&#x3D;0表示这个参数必须大于等于0。</p>
+<ul>
+<li>请求体参数：通过请求体传递参数，通常是POST、PUT、PATCH等请求，如<br>根据HTTP协议，一个请求分为三部分：请求行、请求头、请求体。<br>请求行：包含请求方法（GET、POST等）、请求路径和HTTP版本。<br>请求头：包含一些元信息，如Content-Type、Authorization等。<br>请求体：包含实际的数据，如JSON、表单数据等。</li>
+</ul>
+<pre><code class="language-python">from pydantic import BaseModel
+class Item(BaseModel):
+    name: str
+    description: str = None
+
+@app.post(&quot;/items/&quot;)
+async def create_item(item: Item):
+    return item
+</code></pre>
+<p>这里的Item是一个Pydantic模型，定义了请求体的结构。当发送一个POST请求到&#x2F;items&#x2F;路径时，FastAPI会自动将请求体中的JSON数据解析成一个Item对象，并传递给create_item函数。</p>
+<p>同样的，FastAPI还有Body注解可以对请求体参数进行验证和设置默认值，如：</p>
+<pre><code class="language-python">@app.post(&quot;/items/&quot;)
+async def create_item(item: Item = Body(..., title=&quot;The item to create&quot;)):
+    return item
+</code></pre>
+<p>这里的Body(…)表示这个参数是必填的，title是参数的描述。</p>
+<p>另外，pydantic中还有Field注解可以对模型字段进行验证和设置默认值，如：</p>
+<pre><code class="language-python">class Item(BaseModel):
+    name: str = Field(..., title=&quot;The name of the item&quot;, max_length=100)
+    description: str = Field(None, title=&quot;The description of the item&quot;, max_length=255)
+</code></pre>
+<p>这里的Field(…)表示这个字段是必填的，title是字段的描述，max_length是字段的最大长度。</p>
+<h2 id="响应类型"><a href="#响应类型" class="headerlink" title="响应类型"></a>响应类型</h2><p>默认情况下，FastAPI会将返回的Python对象转换成JSON格式的响应，省去了手动序列化的步骤，而且支持多种响应类型，如JSON、HTML、文件等。</p>
+<p>指定响应类型的方法有两种：</p>
+<ul>
+<li>在装饰器中指定，如HTMLResponse、FileResponse等，如</li>
+</ul>
+<pre><code class="language-python">from fastapi.responses import HTMLResponse
+@app.get(&quot;/html/&quot;, response_class=HTMLResponse)
+async def get_html():
+    html_content = &quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello, World!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;
+    return HTMLResponse(content=html_content, status_code=200)
+</code></pre>
+<ul>
+<li>在函数中返回特定的响应对象，如JSONResponse、FileResponse等，如</li>
+</ul>
+<pre><code class="language-python">from fastapi.responses import fileResponse
+@app.get(&quot;/file/&quot;)
+async def get_file():
+    file_path = &quot;path/to/your/file.txt&quot;
+    return FileResponse(path=file_path, filename=&quot;file.txt&quot;, media_type=&quot;text/plain&quot;)
+</code></pre>
+<p>这里的FileResponse会将指定路径的文件作为响应返回，filename是下载时的文件名，media_type是文件的MIME类型。</p>
+<p>这两种方法各有优缺点，第一种方法更简洁，严格，适合简单的响应类型；第二种方法更灵活，适合需要自定义响应内容或状态码的情况。</p>
+<p>还有一种方法可以自定义响应类型，就是用基于Pydantic的模型来定义响应结构，如：</p>
+<pre><code class="language-python">from pydantic import BaseModel
+class ItemResponse(BaseModel):
+    name: str
+    description: str = None
+
+@app.get(&quot;/items/{item_id}&quot;, response_model=ItemResponse)
+async def read_item(item_id: int):
+    item = get_item_from_database(item_id)
+    return ItemResponse(name=item.name, description=item.description)
+</code></pre>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>FastAPI提供了HTTPException类来处理HTTP异常，可以在路由函数中抛出这个异常来返回特定的错误响应，如：</p>
+<pre><code class="language-python">from fastapi import HTTPException
+@app.get(&quot;/items/{item_id}&quot;)
+async def read_item(item_id: int):
+    item = get_item_from_database(item_id)
+    if item is None:
+        raise HTTPException(status_code=404, detail=&quot;Item not found&quot;)
+    return item
+</code></pre>
+<p>这里的HTTPException(status_code&#x3D;404, detail&#x3D;”Item not found”)表示当item为None时，抛出一个404 Not Found的错误响应，detail是错误的详细信息.</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2026/04/25/FastAPI/%E5%88%9D%E8%AF%95FastAPI/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/%E6%8E%A5%E5%8F%A3%E8%BF%9E%E6%8E%A5%E5%88%B0DB/">
         <h2 class="post-title">接口连接到DB</h2>
     </a>
@@ -221,7 +810,7 @@
         
         <span class="tag">
             
-            <a href="/tags/FastAPI/" style="color: #00a596">FastAPI</a>
+            <a href="/tags/FastAPI/" style="color: #00bcd4">FastAPI</a>
         </span>
         
         <span class="tag">
@@ -367,7 +956,7 @@ def get_db():
         
         <span class="tag">
             
-            <a href="/tags/DB/" style="color: #ff7d73">DB</a>
+            <a href="/tags/DB/" style="color: #00a596">DB</a>
         </span>
         
     </div>
@@ -420,557 +1009,11 @@ def get_db():
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ff7d73">回溯</a>
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #03a9f4">回溯</a>
         </span>
         
     </div>
     <a href="/2026/04/24/hot100/%E5%9B%9E%E6%BA%AF/%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/23/hot100/%E5%9B%9E%E6%BA%AF/%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/">
-        <h2 class="post-title">电话号码的字母组合</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Hot100/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Hot100
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/23
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>跟前两道回溯题一个套路，就是用递归表示一种更高级的循环(迭代)，<br>定义结果集ans，暂存变量path来存储答案元素，定义字母表，开头两个空串便于映射<br>开始递归，如果当前已经走了n步，加入结果集并返回<br>否则，遍历digits对应的数字对应的字母表，加图path中开启下一轮递归，完成后pop恢复现场</p>
-<h2 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h2><p>看到“枚举所有组合”，想到回溯</p>
-<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><p>忘记恢复现场，导致结果不对<br>这题要在主函数里判断digits是否为空，空的话直接返回空数组</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间 O(n*4^n) n是digits长度，4^n是组合数量，每个组合需要O(n)的时间添加到结果集中<br>空间 O(n) path的长度为n，递归栈深度也是n</p>
-<h2 id="我的收获"><a href="#我的收获" class="headerlink" title="我的收获"></a>我的收获</h2><p>暂无</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ffa2c4">回溯</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/23/hot100/%E5%9B%9E%E6%BA%AF/%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%AD%90%E9%9B%86/">
-        <h2 class="post-title">子集</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Hot100/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Hot100
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/22
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><pre><code>枚举子集的第1个数选谁，第2个数选谁……第n个数选谁，
-</code></pre>
-<p>将没选的结果直接加入结果集，再从当前位置开始枚举，枚举结束后恢复现场</p>
-<h2 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h2><p>看到“枚举所有子集”或者“需要枚举所有组合”，想到回溯</p>
-<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><p>忘记恢复现场，导致结果不对</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间 O(n*2^n) n是数组长度，2^n是子集数量，每个子集需要O(n)的时间添加到结果集中<br>空间 O(n) path的长度为n，递归栈深度也是n</p>
-<h2 id="我的收获"><a href="#我的收获" class="headerlink" title="我的收获"></a>我的收获</h2><p>是否恢复现场与当前状态是否修改共享状态有关，修改了共享状态就要恢复现场，没修改就不需要恢复现场</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00a596">博客</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #03a9f4">回溯</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%AD%90%E9%9B%86/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%85%A8%E6%8E%92%E5%88%97/">
-        <h2 class="post-title">全排列</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Hot100/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Hot100
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/22
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>回溯，维护visited和path，递归中保存递归层数，等于nums大小时添加到结果集中，然后遍历nums，没有被访问的就添加到path中并标记为已访问，<br>递归下一层，递归下一层结束后标记为未访问，即回溯。</p>
-<h2 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h2><p>全排列很容易想到回溯</p>
-<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><p>忘记回溯，导致结果不对<br>做递归类题目需要确定什么时候回溯，什么时候不回溯</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间 O(n*n!) n是数组长度，n!是全排列数量，每个全排列需要O(n)的时间添加到结果集中<br>空间 O(n) path的长度为n，递归栈深度也是n</p>
-<h2 id="我的收获"><a href="#我的收获" class="headerlink" title="我的收获"></a>我的收获</h2><p>暂无</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ff7d73">博客</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #03a9f4">回溯</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/22/hot100/%E5%9B%9E%E6%BA%AF/%E5%85%A8%E6%8E%92%E5%88%97/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/">
-        <h2 class="post-title">RabbitMQ新增死信队列</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Java/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Java
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/21
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="添加一套常量"><a href="#添加一套常量" class="headerlink" title="添加一套常量"></a>添加一套常量</h2><pre><code class="language-java">public static final String SECKILL_DLX = &quot;seckill.order.dlx&quot;;
-public static final String SECKILL_DEAD_QUEUE = &quot;seckill.order.dead.queue&quot;;
-public static final String SECKILL_DEAD_ROUTING_KEY = &quot;seckill.order.dead&quot;;
-</code></pre>
-<h2 id="给业务队列添加死信参数"><a href="#给业务队列添加死信参数" class="headerlink" title="给业务队列添加死信参数"></a>给业务队列添加死信参数</h2><pre><code class="language-java">@Bean
-public Queue seckillQueue() {
-    return QueueBuilder.durable(SECKILL_QUEUE)
-            .withArgument(&quot;x-dead-letter-exchange&quot;, SECKILL_DLX)
-            .withArgument(&quot;x-dead-letter-routing-key&quot;, SECKILL_DEAD_ROUTING_KEY)
-            .build();
-}
-</code></pre>
-<p>这里重点是withArgument，前面的字符串是固定的,表示设置死信交换机和路由key</p>
-<h2 id="新增死信交换机Bean"><a href="#新增死信交换机Bean" class="headerlink" title="新增死信交换机Bean"></a>新增死信交换机Bean</h2><pre><code class="language-java">@Bean
-public DirectExchange seckillDeadLetterExchange() {
-    return new DirectExchange(SECKILL_DLX, true, false);
-}
-</code></pre>
-<p>第一个参数是交换机名字，第二个是持久化，第三个是自动删除</p>
-<h2 id="新增死信队列"><a href="#新增死信队列" class="headerlink" title="新增死信队列"></a>新增死信队列</h2><pre><code class="language-java">@Bean
-public Queue seckillDeadLetterQueue() {
-    return QueueBuilder.durable(SECKILL_DEAD_QUEUE).build();
-}
-</code></pre>
-<p>用queuebuilder的durable方法构造一个消息队列</p>
-<h2 id="构造队列和交换机的绑定关系"><a href="#构造队列和交换机的绑定关系" class="headerlink" title="构造队列和交换机的绑定关系"></a>构造队列和交换机的绑定关系</h2><pre><code class="language-java">@Bean
-public Binding seckillDeadLetterBinding() {
-    return BindingBuilder.bind(seckillDeadLetterQueue())
-            .to(seckillDeadLetterExchange())
-            .with(SECKILL_DEAD_ROUTING_KEY);
-}
-</code></pre>
-<p>用BindingBuilder的bind方法链式绑定队列到交换机并设置routing key</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这可以总结出RabbitMQ新增MQ的一般方法：</p>
-<ol>
-<li>设置三个常量，分别是交换机名称，队列名称和路由key</li>
-<li>设置交换机，队列和绑定关系的构造方法</li>
-</ol>
-<p>最后，如果我们在业务队列中重试一定次数后就channel.basicReject(msg.getMessageProperties().getDeliveryTag(), false)，消息就会被丢弃到死信队列中，我们就可以在死信队列中查看失败的消息并分析原因了。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">博客</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #00bcd4">入门</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/21/%E9%9D%A2%E7%BB%8F/%E6%80%A7%E6%A0%BC%E7%BC%BA%E7%82%B9/">
-        <h2 class="post-title">性格缺点</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E9%9D%A2%E7%BB%8F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                面经
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/21
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="回答模板"><a href="#回答模板" class="headerlink" title="回答模板"></a>回答模板</h2><p>我觉得自己有一个需要提升的地方，就是刚接触新任务时会偏谨慎，前期会想把细节考虑得比较完整。比如我之前做秒杀项目时，在下单链路改造上，我一开始会先花不少时间把 Redis 校验、MQ 异步下单和数据库落库之间的关系梳理清楚，再开始动手。这样虽然返工少，但前期启动会慢一点。后来我调整成先把主链路拆小，先做最小可运行版本，再逐步补细节，同时及时同步自己的阶段性理解。这样既保证了质量，也提高了推进效率。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00a596">博客</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/21/%E9%9D%A2%E7%BB%8F/%E6%80%A7%E6%A0%BC%E7%BC%BA%E7%82%B9/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/19/redis/redis%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-        <h2 class="post-title">常用数据结构和操作函数</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Redis/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Redis
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/19
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="1-String"><a href="#1-String" class="headerlink" title="1. String"></a>1. String</h2><p>最常用，适合存字符串、数字、JSON。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>SET key value</code>：设置值</li>
-<li><code>GET key</code>：取值</li>
-<li><code>MSET k1 v1 k2 v2</code>：一次设置多个值</li>
-<li><code>MGET k1 k2</code>：一次取多个值</li>
-<li><code>INCR key</code>：数字加 1</li>
-<li><code>DECR key</code>：数字减 1</li>
-<li><code>SETEX key seconds value</code>：设置值并加过期时间</li>
-<li><code>SETNX key value</code>：key 不存在才设置，常用于加锁</li>
-</ul>
-<hr>
-<h2 id="2-Hash"><a href="#2-Hash" class="headerlink" title="2. Hash"></a>2. Hash</h2><p>适合存对象、字段集合。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>HSET key field value</code>：设置字段值</li>
-<li><code>HGET key field</code>：取某个字段值</li>
-<li><code>HMGET key f1 f2</code>：取多个字段值</li>
-<li><code>HGETALL key</code>：取全部字段和值</li>
-<li><code>HDEL key field</code>：删除字段</li>
-<li><code>HINCRBY key field n</code>：字段数字加 n</li>
-</ul>
-<hr>
-<h2 id="3-List"><a href="#3-List" class="headerlink" title="3. List"></a>3. List</h2><p>双端列表，适合队列、消息流。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>LPUSH key v1 v2</code>：从左边放入</li>
-<li><code>RPUSH key v1 v2</code>：从右边放入</li>
-<li><code>LPOP key</code>：从左边取出</li>
-<li><code>RPOP key</code>：从右边取出</li>
-<li><code>LRANGE key start end</code>：查看一段数据</li>
-<li><code>LLEN key</code>：看长度</li>
-</ul>
-<hr>
-<h2 id="4-Set"><a href="#4-Set" class="headerlink" title="4. Set"></a>4. Set</h2><p>无序、元素唯一，适合去重。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>SADD key v1 v2</code>：添加元素</li>
-<li><code>SREM key v1</code>：删除元素</li>
-<li><code>SMEMBERS key</code>：查看全部元素</li>
-<li><code>SISMEMBER key v</code>：判断元素在不在</li>
-<li><code>SCARD key</code>：看元素个数</li>
-<li><code>SINTER k1 k2</code>：求交集</li>
-<li><code>SUNION k1 k2</code>：求并集</li>
-</ul>
-<hr>
-<h2 id="5-ZSet"><a href="#5-ZSet" class="headerlink" title="5. ZSet"></a>5. ZSet</h2><p>有序集合，带分数，适合排行榜。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>ZADD key score value</code>：添加元素和分数</li>
-<li><code>ZREM key value</code>：删除元素</li>
-<li><code>ZRANGE key 0 -1</code>：按分数从小到大查看</li>
-<li><code>ZREVRANGE key 0 -1</code>：按分数从大到小查看</li>
-<li><code>ZSCORE key value</code>：看元素分数</li>
-<li><code>ZRANK key value</code>：看正序排名</li>
-<li><code>ZINCRBY key n value</code>：分数加 n</li>
-</ul>
-<hr>
-<h2 id="6-Bitmap"><a href="#6-Bitmap" class="headerlink" title="6. Bitmap"></a>6. Bitmap</h2><p>按位存储，适合签到、活跃统计。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>SETBIT key offset 1</code>：设置某一位</li>
-<li><code>GETBIT key offset</code>：查看某一位</li>
-<li><code>BITCOUNT key</code>：统计 1 的个数</li>
-<li><code>BITOP op dest k1 k2</code>：做位运算</li>
-</ul>
-<hr>
-<h2 id="7-HyperLogLog"><a href="#7-HyperLogLog" class="headerlink" title="7. HyperLogLog"></a>7. HyperLogLog</h2><p>适合做去重计数、UV 统计。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>PFADD key v1 v2</code>：添加数据</li>
-<li><code>PFCOUNT key</code>：统计数量</li>
-<li><code>PFMERGE newKey k1 k2</code>：合并统计</li>
-</ul>
-<hr>
-<h2 id="8-Stream"><a href="#8-Stream" class="headerlink" title="8. Stream"></a>8. Stream</h2><p>消息流，适合消息队列、消费组。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>XADD key * field value</code>：添加消息</li>
-<li><code>XRANGE key - +</code>：查看消息范围</li>
-<li><code>XREAD STREAMS key id</code>：读取消息</li>
-<li><code>XGROUP CREATE key group 0</code>：创建消费组</li>
-<li><code>XREADGROUP GROUP g c STREAMS key &gt;</code>：按消费组读消息</li>
-<li><code>XACK key group id</code>：确认消息已消费</li>
-</ul>
-<hr>
-<h2 id="通用命令"><a href="#通用命令" class="headerlink" title="通用命令"></a>通用命令</h2><p>几乎所有类型都会用到。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>DEL key</code>：删除 key</li>
-<li><code>EXPIRE key seconds</code>：设置过期时间</li>
-<li><code>TTL key</code>：查看剩余过期时间</li>
-<li><code>EXISTS key</code>：判断 key 是否存在</li>
-<li><code>TYPE key</code>：查看 key 的类型</li>
-<li><code>SCAN 0</code>：分页查 key</li>
-</ul>
-<hr>
-<h2 id="一句话速记"><a href="#一句话速记" class="headerlink" title="一句话速记"></a>一句话速记</h2><ul>
-<li><code>String</code>：值</li>
-<li><code>Hash</code>：对象</li>
-<li><code>List</code>：队列</li>
-<li><code>Set</code>：去重集合</li>
-<li><code>ZSet</code>：排行榜</li>
-<li><code>Bitmap</code>：位统计</li>
-<li><code>HyperLogLog</code>：基数统计</li>
-<li><code>Stream</code>：消息队列</li>
-</ul>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">博客</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #00a596">入门</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/19/redis/redis%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/">
-        <h2 class="post-title">按照分类统计薪水</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Sql50/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Sql50
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/19
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>三个select,然后union all在一起</p>
-<pre><code class="language-sql">SELECT &#39;Low Salary&#39; AS category, COUNT(*) AS accounts_count
-FROM Accounts
-WHERE income &lt; 20000
-
-UNION ALL
-
-SELECT &#39;Average Salary&#39; AS category, COUNT(*) AS accounts_count
-FROM Accounts
-WHERE income BETWEEN 20000 AND 50000
-
-UNION ALL
-
-SELECT &#39;High Salary&#39; AS category, COUNT(*) AS accounts_count
-FROM Accounts
-WHERE income &gt; 50000;
-</code></pre>
-<h2 id="所用工具函数或关键字"><a href="#所用工具函数或关键字" class="headerlink" title="所用工具函数或关键字"></a>所用工具函数或关键字</h2><ul>
-<li><code>UNION ALL</code>：合并多个查询结果，保留重复行。</li>
-</ul>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">博客</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #03a9f4">入门</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/" class="go-post">阅读全文</a>
 </div>
 
 

@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>SqlAIchemy的增删改 | L&#39;sBlog</title>
+    <title>Categories: Git | L&#39;sBlog</title>
     <meta name="author" content="Yu" />
     <meta name="description" content="Nearer to death, nearer to rebirth." />
     <meta name="keywords" content="" />
@@ -37,10 +37,6 @@
 
 
 <script src="/js/lib/preview.js"></script>
-
-
-
-
 
 
 
@@ -154,20 +150,14 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>SqlAIchemy的增删改</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/25
-        </span>
+            <div id="archives">
+    
+    <div class="categories-tags">
         
-        <span class="category">
-            <a href="/categories/FastAPI/">
+        
+        
+        <span>
+            <a href="/categories/FastAPI/" style="background: #ffa2c4">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -176,61 +166,154 @@
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/SQLAlchemy/" style="color: #03a9f4">
-                    SQLAlchemy
-                </a>
-            </span>
-            
+        
+        <span>
+            <a href="/categories/Git/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Git
+            </a>
         </span>
+        
+        
+        
+        
+        
+        <span>
+            <a href="/categories/agent/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                agent
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/Python/" style="background: #00a596">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Python
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/RAG/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                RAG
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/Java/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Java
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/Redis/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Redis
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/%E9%9D%A2%E7%BB%8F/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                面经
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/Sql50/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Sql50
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/Hot100/" style="background: #00a596">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Hot100
+            </a>
+        </span>
+        
         
     </div>
     
-    <div class="content" v-pre>
-        <h2 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h2><p>先新建一个DTO类来接收请求体参数：</p>
-<pre><code class="language-python">from pydantic import BaseModel
-class ItemCreate(BaseModel):
-    name: str
-    description: str
-    price: float
-</code></pre>
-<p>然后在路由函数中使用这个DTO类来接收请求体参数，并把它转换为ORM模型对象来进行数据库操作：</p>
-<pre><code class="language-python">@app.post(&quot;/items/&quot;)
-async def create_item(item: ItemCreate, db: AsyncSession = Depends(get_db)):
-    item_obj = Item(**item.dict())
-    db.add(item_obj)
-    await db.commit()
-    await db.refresh(item_obj)
-    return item_obj
-</code></pre>
-<p>这里的item: ItemCreate表示这个参数是一个请求体参数，FastAPI会自动将请求体中的JSON数据解析成一个ItemCreate对象，并传递给create_item函数。然后我们通过item.dict()方法将DTO对象转换为一个字典，再通过**操作符将字典解包成关键字参数来创建一个ORM模型对象item_obj。最后我们将这个对象添加到数据库会话中，提交事务，并刷新对象以获取数据库生成的ID等字段，最后返回这个对象。</p>
-<p>注意还要先定义好ORM模型类Item，并且在数据库中创建好对应的表。就是那个类定义里有__tablename__ &#x3D; “items”的那个类。</p>
-<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>先查再改</p>
-<pre><code class="language-python">@app.delete(&quot;/items/{item_id}&quot;)
-async def delete_item(item_id: int, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Item).where(Item.id == item_id))
-    item = result.scalar_one_or_none()
-    if item is None:
-        raise HTTPException(status_code=404, detail=&quot;Item not found&quot;)
-    await db.delete(item)
-    await db.commit()
-    return {&quot;message&quot;: &quot;Item deleted&quot;}
-</code></pre>
-
+    <div class="timeline">
+        <div class="timeline-tail"></div>
+        <div class="timeline-content">
+            <div class="item-time">2026/5/21</div>
+            <a href="/2026/05/21/Git/Git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
+                <h3>Git基本操作</h3>
+            </a>
+            <div class="info">
+                
+                <span class="category">
+                    <a href="/categories/Git/">
+                        <span class="icon">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </span>
+                        Git
+                    </a>
+                </span>
+                
+                
+            </div>
+        </div>
     </div>
     
-    
-    
-    
-    
-    
+    <div class="timeline">
+        <div class="timeline-tail"></div>
+        <div class="timeline-content">
+            <div class="item-time">2026/5/20</div>
+            <a href="/2026/05/20/Git/%E7%AE%A1%E7%90%86%E5%B0%8F%E5%AD%A6%E6%9C%9F5%E4%BA%BA%E5%9B%A2%E9%98%9F1/">
+                <h3>管理小学期5人团队1</h3>
+            </a>
+            <div class="info">
+                
+                <span class="category">
+                    <a href="/categories/Git/">
+                        <span class="icon">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </span>
+                        Git
+                    </a>
+                </span>
+                
+                
+            </div>
+        </div>
+    </div>
     
 </div>
 
@@ -262,12 +345,6 @@ async def delete_item(item_id: int, db: AsyncSession = Depends(get_db)):
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-
-
-
     
 </body>
 </html>

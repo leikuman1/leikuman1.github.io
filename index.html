@@ -181,6 +181,95 @@
         
 
 <div class="post">
+    <a href="/2026/05/21/Git/Git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
+        <h2 class="post-title">Git基本操作</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Git/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Git
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/5/21
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="commit-and-checkout"><a href="#commit-and-checkout" class="headerlink" title="commit and checkout"></a>commit and checkout</h2><p>commit是提交代码,产生一次commit指向父commit，checkout是切换分支</p>
+<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><pre><code class="language-bash">git merge &lt;branch&gt; # 将branch分支合并到当前分支
+</code></pre>
+<p>merge会产生一次新的commit，指向两个父commit</p>
+<p><img src="/img/git-merge-main.png" alt="在fixBug上merge main"></p>
+<p><img src="/img/git-merge-bugFix.png" alt="在main上merge fixBug"></p>
+<p>merge的优势在于保留了每个merge的完整历史记录，缺点是每次merge都会多产生一个commit，如果分支较多，历史记录会变得很复杂<br>一般在main分支上merge dev</p>
+<h2 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h2><pre><code class="language-bash">git rebase &lt;branch&gt; # 将当前分支的commit移到branch分支的最新commit之后
+</code></pre>
+<p>一般在dev分支上rebase main</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2026/05/21/Git/Git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/05/20/Git/%E7%AE%A1%E7%90%86%E5%B0%8F%E5%AD%A6%E6%9C%9F5%E4%BA%BA%E5%9B%A2%E9%98%9F1/">
+        <h2 class="post-title">管理小学期5人团队1</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Git/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Git
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/5/20
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>由我(组长)管理主分支(main)，各组员管理自己的分支，组员完成任务后提交pull request，由我审核后合并到主分支。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2026/05/20/Git/%E7%AE%A1%E7%90%86%E5%B0%8F%E5%AD%A6%E6%9C%9F5%E4%BA%BA%E5%9B%A2%E9%98%9F1/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2026/05/19/agent/agent%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F/">
         <h2 class="post-title">agent设计范式</h2>
     </a>
@@ -598,219 +687,6 @@
     <a href="/2026/04/27/hot100/%E5%9B%9E%E6%BA%AF/%E4%BA%A7%E7%94%9F%E6%8B%AC%E5%8F%B7/" class="go-post">阅读全文</a>
 </div>
 
-<div class="post">
-    <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E5%BC%95%E5%85%A5CRUD/">
-        <h2 class="post-title">引入CRUD</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/FastAPI/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                FastAPI
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="引入CRUD"><a href="#引入CRUD" class="headerlink" title="引入CRUD"></a>引入CRUD</h2><p>接口实现流程的四个步骤</p>
-<ol>
-<li>模块化路由-&gt;APIRouter</li>
-<li>定义模型类-&gt;数据库表</li>
-<li>在crud文件夹里创建文件，封装操作数据库的方法</li>
-<li>在路由处理函数中调用crud的方法</li>
-</ol>
-<p>下面展示具体的流程</p>
-<h2 id="模块化路由"><a href="#模块化路由" class="headerlink" title="模块化路由"></a>模块化路由</h2><p>比如说我们有个ai模块，有个接口要到ai_chat表里查询最近与ai的会话记录</p>
-<p>首先在routers文件夹里创建一个ai.py文件，定义一个APIRouter实例，并且添加路由处理函数，如</p>
-<pre><code class="language-python">from fastapi import APIRouter
-router = APIRouter(prefix=&quot;/api/ai&quot;, tags=[&quot;ai&quot;])
-@router.get(&quot;/ai&quot;)
-async def get_session(skip: int=0,limit: int=10, db: AsyncSession=Depends(get_db)):
-    result = await get_session_crud(db, skip, limit)
-    return {
-        &quot;code&quot;: 200,
-        &quot;msg&quot;: &quot;success&quot;,
-        &quot;data&quot;: result
-    }
-</code></pre>
-<p>这个就相当于controller层了，负责处理请求和响应，调用crud层的方法来操作数据库。</p>
-<h2 id="定义模型类"><a href="#定义模型类" class="headerlink" title="定义模型类"></a>定义模型类</h2><p>在models文件夹里创建一个ai.py文件，定义一个ORM模型类来映射数据库表，如</p>
-<pre><code class="language-python">from datetime import datetime
-
-from sqlalchemy import DateTime, String, Text
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-
-
-class Base(DeclarativeBase):
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime,
-        default=datetime.now,
-    )
-
-
-class ai(Base):
-    __tablename__ = &quot;ai_chat&quot;
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(unique=True, nullable=False, comment=&quot;用户id&quot;)
-    question: Mapped[str] = mapped_column(Text, nullable=False, comment=&quot;问题&quot;)
-    answer: Mapped[str] = mapped_column(Text, nullable=False, comment=&quot;回答&quot;)
-</code></pre>
-<p>注意如果在模型类中如果不映射所有的字段，那么ORM就会忽略没映射的字段</p>
-<h2 id="在crud文件夹里创建文件，封装操作数据库的方法"><a href="#在crud文件夹里创建文件，封装操作数据库的方法" class="headerlink" title="在crud文件夹里创建文件，封装操作数据库的方法"></a>在crud文件夹里创建文件，封装操作数据库的方法</h2><p>其实如果业务比较复杂，这里应该加上schema，Service，Repository等层来分离不同的职责，但这里为了简单起见，就直接在crud里封装了。</p>
-<pre><code class="language-python">from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
-from models.ai import ai
-
-
-async def get_session_crud(db: AsyncSession, skip: int = 0, limit: int = 10):
-    stmt = select(ai).offset(skip).limit(limit)
-    result = await db.execute(stmt)
-    return result.scalars().all()
-</code></pre>
-<p>这个函数就是封装了查询数据库的方法，接收一个数据库会话和分页参数，返回查询结果。</p>
-<h2 id="在路由处理函数中调用crud的方法"><a href="#在路由处理函数中调用crud的方法" class="headerlink" title="在路由处理函数中调用crud的方法"></a>在路由处理函数中调用crud的方法</h2><p>注意include到main.py里<br>而且router里的方法要和crud里定义的方法方法名不一样，防止和路由处理函数重名了</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #00bcd4">头条项目</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/CRUD/" style="color: #ffa2c4">CRUD</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E5%BC%95%E5%85%A5CRUD/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E6%8E%A5%E5%85%A5ORM/">
-        <h2 class="post-title">接入ORM</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/FastAPI/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                FastAPI
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>在FastAPI中接入ORM可以让我们更方便地操作数据库，下面是一个简单的示例，使用SQLAlchemy作为ORM工具。<br>需要注意，SQLAlchemy包已经包含了异步模块，但是需要安装aiomysql或asyncpg等异步数据库驱动来支持异步操作。</p>
-<p>首先安装必要的包：</p>
-<pre><code class="language-bash">pip install sqlalchemy[asyncio] aiomysql
-</code></pre>
-<p>然后配置数据库连接和会话：</p>
-<pre><code class="language-python">from collections.abc import AsyncGenerator
-
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-ASYNC_DATABASE_URL = &quot;mysql+aiomysql://root:123456@localhost:3306/news_app?charset=utf8mb4&quot;
-
-# 创建异步引擎
-async_engine = create_async_engine(
-    ASYNC_DATABASE_URL,
-    echo=True,
-    pool_pre_ping=True,
-)
-
-# 创建异步会话工厂
-AsyncSessionLocal = async_sessionmaker(
-    bind=async_engine,
-    class_=AsyncSession,
-    expire_on_commit=False,
-    autoflush=False,
-    autocommit=False,
-)
-
-
-# 依赖项，用于获取数据库会话
-async def get_db() -&gt; AsyncGenerator[AsyncSession, None]:
-    async with AsyncSessionLocal() as session:
-        try:
-            yield session
-            await session.commit()
-        except Exception:
-            await session.rollback()
-        finally:
-            await session.close()
-</code></pre>
-<p>在这个示例中，我们创建了一个异步数据库引擎，并定义了一个异步会话工厂。get_db函数是一个依赖项，可以在FastAPI的路由中使用，以便在请求期间获取数据库会话。</p>
-<p>接下来，我们可以在路由中使用这个依赖项来操作数据库：</p>
-<pre><code class="language-python">from fastapi import Depends
-from sqlalchemy import select
-@app.get(&quot;/items/&quot;)
-async def read_items(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Item))
-    items = result.scalars().all()
-    return items
-</code></pre>
-<p>在这个路由中，我们使用Depends(get_db)来获取数据库会话，并执行一个简单的查询来获取所有的Item对象。通过await db.execute()来执行查询，并使用scalars().all()来获取结果列表。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/ORM/" style="color: #ffa2c4">ORM</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #00a596">头条项目</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E6%8E%A5%E5%85%A5ORM/" class="go-post">阅读全文</a>
-</div>
-
 
         <div class="page-current">
     
@@ -825,6 +701,9 @@ async def read_items(db: AsyncSession = Depends(get_db)):
         3
     </a>
     
+    
+    <span class="page-omit">...</span>
+    <a class="page-num" href="/page/4">4</a>
     
     
     <a class="page-num" href="/page/2/">

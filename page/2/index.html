@@ -181,6 +181,219 @@
         
 
 <div class="post">
+    <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E5%BC%95%E5%85%A5CRUD/">
+        <h2 class="post-title">引入CRUD</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/FastAPI/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                FastAPI
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="引入CRUD"><a href="#引入CRUD" class="headerlink" title="引入CRUD"></a>引入CRUD</h2><p>接口实现流程的四个步骤</p>
+<ol>
+<li>模块化路由-&gt;APIRouter</li>
+<li>定义模型类-&gt;数据库表</li>
+<li>在crud文件夹里创建文件，封装操作数据库的方法</li>
+<li>在路由处理函数中调用crud的方法</li>
+</ol>
+<p>下面展示具体的流程</p>
+<h2 id="模块化路由"><a href="#模块化路由" class="headerlink" title="模块化路由"></a>模块化路由</h2><p>比如说我们有个ai模块，有个接口要到ai_chat表里查询最近与ai的会话记录</p>
+<p>首先在routers文件夹里创建一个ai.py文件，定义一个APIRouter实例，并且添加路由处理函数，如</p>
+<pre><code class="language-python">from fastapi import APIRouter
+router = APIRouter(prefix=&quot;/api/ai&quot;, tags=[&quot;ai&quot;])
+@router.get(&quot;/ai&quot;)
+async def get_session(skip: int=0,limit: int=10, db: AsyncSession=Depends(get_db)):
+    result = await get_session_crud(db, skip, limit)
+    return {
+        &quot;code&quot;: 200,
+        &quot;msg&quot;: &quot;success&quot;,
+        &quot;data&quot;: result
+    }
+</code></pre>
+<p>这个就相当于controller层了，负责处理请求和响应，调用crud层的方法来操作数据库。</p>
+<h2 id="定义模型类"><a href="#定义模型类" class="headerlink" title="定义模型类"></a>定义模型类</h2><p>在models文件夹里创建一个ai.py文件，定义一个ORM模型类来映射数据库表，如</p>
+<pre><code class="language-python">from datetime import datetime
+
+from sqlalchemy import DateTime, String, Text
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+
+
+class Base(DeclarativeBase):
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.now,
+    )
+
+
+class ai(Base):
+    __tablename__ = &quot;ai_chat&quot;
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(unique=True, nullable=False, comment=&quot;用户id&quot;)
+    question: Mapped[str] = mapped_column(Text, nullable=False, comment=&quot;问题&quot;)
+    answer: Mapped[str] = mapped_column(Text, nullable=False, comment=&quot;回答&quot;)
+</code></pre>
+<p>注意如果在模型类中如果不映射所有的字段，那么ORM就会忽略没映射的字段</p>
+<h2 id="在crud文件夹里创建文件，封装操作数据库的方法"><a href="#在crud文件夹里创建文件，封装操作数据库的方法" class="headerlink" title="在crud文件夹里创建文件，封装操作数据库的方法"></a>在crud文件夹里创建文件，封装操作数据库的方法</h2><p>其实如果业务比较复杂，这里应该加上schema，Service，Repository等层来分离不同的职责，但这里为了简单起见，就直接在crud里封装了。</p>
+<pre><code class="language-python">from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+from models.ai import ai
+
+
+async def get_session_crud(db: AsyncSession, skip: int = 0, limit: int = 10):
+    stmt = select(ai).offset(skip).limit(limit)
+    result = await db.execute(stmt)
+    return result.scalars().all()
+</code></pre>
+<p>这个函数就是封装了查询数据库的方法，接收一个数据库会话和分页参数，返回查询结果。</p>
+<h2 id="在路由处理函数中调用crud的方法"><a href="#在路由处理函数中调用crud的方法" class="headerlink" title="在路由处理函数中调用crud的方法"></a>在路由处理函数中调用crud的方法</h2><p>注意include到main.py里<br>而且router里的方法要和crud里定义的方法方法名不一样，防止和路由处理函数重名了</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #00a596">头条项目</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/CRUD/" style="color: #00bcd4">CRUD</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E5%BC%95%E5%85%A5CRUD/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E6%8E%A5%E5%85%A5ORM/">
+        <h2 class="post-title">接入ORM</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/FastAPI/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                FastAPI
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>在FastAPI中接入ORM可以让我们更方便地操作数据库，下面是一个简单的示例，使用SQLAlchemy作为ORM工具。<br>需要注意，SQLAlchemy包已经包含了异步模块，但是需要安装aiomysql或asyncpg等异步数据库驱动来支持异步操作。</p>
+<p>首先安装必要的包：</p>
+<pre><code class="language-bash">pip install sqlalchemy[asyncio] aiomysql
+</code></pre>
+<p>然后配置数据库连接和会话：</p>
+<pre><code class="language-python">from collections.abc import AsyncGenerator
+
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+
+ASYNC_DATABASE_URL = &quot;mysql+aiomysql://root:123456@localhost:3306/news_app?charset=utf8mb4&quot;
+
+# 创建异步引擎
+async_engine = create_async_engine(
+    ASYNC_DATABASE_URL,
+    echo=True,
+    pool_pre_ping=True,
+)
+
+# 创建异步会话工厂
+AsyncSessionLocal = async_sessionmaker(
+    bind=async_engine,
+    class_=AsyncSession,
+    expire_on_commit=False,
+    autoflush=False,
+    autocommit=False,
+)
+
+
+# 依赖项，用于获取数据库会话
+async def get_db() -&gt; AsyncGenerator[AsyncSession, None]:
+    async with AsyncSessionLocal() as session:
+        try:
+            yield session
+            await session.commit()
+        except Exception:
+            await session.rollback()
+        finally:
+            await session.close()
+</code></pre>
+<p>在这个示例中，我们创建了一个异步数据库引擎，并定义了一个异步会话工厂。get_db函数是一个依赖项，可以在FastAPI的路由中使用，以便在请求期间获取数据库会话。</p>
+<p>接下来，我们可以在路由中使用这个依赖项来操作数据库：</p>
+<pre><code class="language-python">from fastapi import Depends
+from sqlalchemy import select
+@app.get(&quot;/items/&quot;)
+async def read_items(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Item))
+    items = result.scalars().all()
+    return items
+</code></pre>
+<p>在这个路由中，我们使用Depends(get_db)来获取数据库会话，并执行一个简单的查询来获取所有的Item对象。通过await db.execute()来执行查询，并使用scalars().all()来获取结果列表。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ORM/" style="color: #03a9f4">ORM</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #ffa2c4">头条项目</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E6%8E%A5%E5%85%A5ORM/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E7%BB%9F%E4%B8%80%E6%9E%84%E5%BB%BArouter/">
         <h2 class="post-title">统一构建router</h2>
     </a>
@@ -233,7 +446,7 @@ async def get_categories():
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #00bcd4">头条项目</a>
+            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #ff7d73">头条项目</a>
         </span>
         
     </div>
@@ -310,7 +523,7 @@ async def delete_item(item_id: int, db: AsyncSession = Depends(get_db)):
         
         <span class="tag">
             
-            <a href="/tags/SQLAlchemy/" style="color: #00a596">SQLAlchemy</a>
+            <a href="/tags/SQLAlchemy/" style="color: #ffa2c4">SQLAlchemy</a>
         </span>
         
     </div>
@@ -462,7 +675,7 @@ async def read_items(db: AsyncSession = Depends(get_db)):
         
         <span class="tag">
             
-            <a href="/tags/ORM/" style="color: #03a9f4">ORM</a>
+            <a href="/tags/ORM/" style="color: #ffa2c4">ORM</a>
         </span>
         
     </div>
@@ -552,7 +765,7 @@ async def on_startup():
         
         <span class="tag">
             
-            <a href="/tags/ORM/" style="color: #00bcd4">ORM</a>
+            <a href="/tags/ORM/" style="color: #03a9f4">ORM</a>
         </span>
         
     </div>
@@ -822,200 +1035,6 @@ async def read_item(item_id: int):
     <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/%E6%8E%A5%E5%8F%A3%E8%BF%9E%E6%8E%A5%E5%88%B0DB/" class="go-post">阅读全文</a>
 </div>
 
-<div class="post">
-    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/python%E9%93%BE%E6%8E%A5DB/">
-        <h2 class="post-title">python链接DB</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Python/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Python
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/24
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1.引入依赖"></a>1.引入依赖</h2><p>在requirements.txt中添加以下依赖：</p>
-<pre><code class="language-txt">pymysql
-sqlalchemy
-pydantic-settings
-</code></pre>
-<p>pymysql是一个纯Python的MySQL客户端库，sqlalchemy是一个ORM（对象关系映射）工具，pydantic-settings用于管理配置,可以通过环境变量或配置文件来设置数据库连接参数。</p>
-<p>这里多一嘴，和Java，C++相比，python是动态类型语言，灵活性更高，这是python的设计哲学之一，但是在开发大型项目中，动态类型容易导致类型错误，所有有了pydantic这样的库来提供类型检查和数据验证，pydantic-settings是pydantic的一个扩展，专门用于管理应用程序的配置，可以从环境变量、配置文件等多种来源加载配置.</p>
-<h2 id="2-配置数据库连接"><a href="#2-配置数据库连接" class="headerlink" title="2.配置数据库连接"></a>2.配置数据库连接</h2><p>现在项目根目录里新建一个.env文件，添加以下内容：</p>
-<pre><code class="language-env">DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=123456
-DB_NAME=restaurant
-</code></pre>
-<p>这些环境变量将用于配置数据库连接。</p>
-<p>再创建一个config.py文件，添加以下内容：</p>
-<pre><code class="language-python">from pydantic_settings import BaseSettings, SettingsConfigDict
-
-
-class Settings(BaseSettings):
-    db_host: str
-    db_port: int
-    db_user: str
-    db_password: str
-    db_name: str
-
-    model_config = SettingsConfigDict(
-        env_file=&quot;.env&quot;,
-        env_file_encoding=&quot;utf-8&quot;,
-        extra=&quot;ignore&quot;,
-    )
-
-    @property
-    def database_url(self) -&gt; str:
-        return (
-            f&quot;mysql+pymysql://{self.db_user}:{self.db_password}&quot;
-            f&quot;@{self.db_host}:{self.db_port}/{self.db_name}?charset=utf8mb4&quot;
-        )
-
-
-settings = Settings()
-</code></pre>
-<p>这个配置类会从.env文件中读取数据库连接参数，并提供一个database_url属性来生成数据库连接字符串。</p>
-<h2 id="3-创建数据库模型"><a href="#3-创建数据库模型" class="headerlink" title="3. 创建数据库模型"></a>3. 创建数据库模型</h2><p>在models&#x2F;下根据数据库表结构创建所需要的数据</p>
-<pre><code class="language-python">class Menu(Base):
-    __tablename__ = &quot;menus&quot;
-
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
-    category: Mapped[str] = mapped_column(String(50), nullable=False)
-    price: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False)
-    description: Mapped[str | None] = mapped_column(String(255), nullable=True)
-    status: Mapped[int] = mapped_column(nullable=False, default=1)
-    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
-    updated_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), onupdate=func.now(), nullable=False)
-</code></pre>
-<p>把表结构映射到具体的数据，有点像orm</p>
-<p>再在session.py中添加以下内容：</p>
-<pre><code class="language-python">from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
-
-from app.core.config import settings
-
-
-engine = create_engine(
-    settings.database_url,
-    echo=True,
-    pool_pre_ping=True,
-)
-
-SessionLocal = sessionmaker(
-    bind=engine,
-    autoflush=False,
-    autocommit=False,
-    expire_on_commit=False,
-)
-
-
-def get_db():
-    db: Session = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-</code></pre>
-<p>这个文件创建了一个数据库引擎，并定义了一个SessionLocal类来管理数据库会话。get_db函数是一个依赖项，可以在FastAPI的路由中使用，以便在请求期间获取数据库会话。</p>
-<h2 id="4-使用数据库"><a href="#4-使用数据库" class="headerlink" title="4. 使用数据库"></a>4. 使用数据库</h2><p>在FastAPI的路由中，我们可以使用get_db依赖项来获取数据库会话，并执行数据库操作.</p>
-<p>至此，我们已经成功地将FastAPI应用程序连接到MySQL数据库，并且可以使用SQLAlchemy进行数据库操作了。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/FastAPI/" style="color: #ffa2c4">FastAPI</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/DB/" style="color: #00bcd4">DB</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/python%E9%93%BE%E6%8E%A5DB/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/24/hot100/%E5%9B%9E%E6%BA%AF/%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/">
-        <h2 class="post-title">组合总和</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Hot100/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Hot100
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/24
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>跟前三道题目一样，定义结果集，path，在递归过程中如果满足条件就<br>加入结果集，递归结束后恢复现场</p>
-<h2 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h2><p>找到所有满足条件的组合</p>
-<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><p>忘记递归中维护下标，导致出现重复答案，这题虽然一个数字可以选多次，但是也不需要每次都从头选，因为223和232是一个答案</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>O(n*2^n) n是数组长度，2^n是组合数量，每个组合需要O(n)的时间添加到结果集中<br>空间 O(n) path的长度为n，递归栈深度也是n</p>
-<h2 id="我的收获"><a href="#我的收获" class="headerlink" title="我的收获"></a>我的收获</h2><p>暂无</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ff7d73">回溯</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/24/hot100/%E5%9B%9E%E6%BA%AF/%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/" class="go-post">阅读全文</a>
-</div>
-
 
         <div class="page-current">
     
@@ -1031,6 +1050,10 @@ def get_db():
         3
     </a>
     
+    
+    <a class="page-num" href="/page/4">
+        4
+    </a>
     
     
     

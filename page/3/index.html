@@ -181,6 +181,200 @@
         
 
 <div class="post">
+    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/python%E9%93%BE%E6%8E%A5DB/">
+        <h2 class="post-title">python链接DB</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Python/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Python
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/24
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1.引入依赖"></a>1.引入依赖</h2><p>在requirements.txt中添加以下依赖：</p>
+<pre><code class="language-txt">pymysql
+sqlalchemy
+pydantic-settings
+</code></pre>
+<p>pymysql是一个纯Python的MySQL客户端库，sqlalchemy是一个ORM（对象关系映射）工具，pydantic-settings用于管理配置,可以通过环境变量或配置文件来设置数据库连接参数。</p>
+<p>这里多一嘴，和Java，C++相比，python是动态类型语言，灵活性更高，这是python的设计哲学之一，但是在开发大型项目中，动态类型容易导致类型错误，所有有了pydantic这样的库来提供类型检查和数据验证，pydantic-settings是pydantic的一个扩展，专门用于管理应用程序的配置，可以从环境变量、配置文件等多种来源加载配置.</p>
+<h2 id="2-配置数据库连接"><a href="#2-配置数据库连接" class="headerlink" title="2.配置数据库连接"></a>2.配置数据库连接</h2><p>现在项目根目录里新建一个.env文件，添加以下内容：</p>
+<pre><code class="language-env">DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=123456
+DB_NAME=restaurant
+</code></pre>
+<p>这些环境变量将用于配置数据库连接。</p>
+<p>再创建一个config.py文件，添加以下内容：</p>
+<pre><code class="language-python">from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class Settings(BaseSettings):
+    db_host: str
+    db_port: int
+    db_user: str
+    db_password: str
+    db_name: str
+
+    model_config = SettingsConfigDict(
+        env_file=&quot;.env&quot;,
+        env_file_encoding=&quot;utf-8&quot;,
+        extra=&quot;ignore&quot;,
+    )
+
+    @property
+    def database_url(self) -&gt; str:
+        return (
+            f&quot;mysql+pymysql://{self.db_user}:{self.db_password}&quot;
+            f&quot;@{self.db_host}:{self.db_port}/{self.db_name}?charset=utf8mb4&quot;
+        )
+
+
+settings = Settings()
+</code></pre>
+<p>这个配置类会从.env文件中读取数据库连接参数，并提供一个database_url属性来生成数据库连接字符串。</p>
+<h2 id="3-创建数据库模型"><a href="#3-创建数据库模型" class="headerlink" title="3. 创建数据库模型"></a>3. 创建数据库模型</h2><p>在models&#x2F;下根据数据库表结构创建所需要的数据</p>
+<pre><code class="language-python">class Menu(Base):
+    __tablename__ = &quot;menus&quot;
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
+    category: Mapped[str] = mapped_column(String(50), nullable=False)
+    price: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False)
+    description: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    status: Mapped[int] = mapped_column(nullable=False, default=1)
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), onupdate=func.now(), nullable=False)
+</code></pre>
+<p>把表结构映射到具体的数据，有点像orm</p>
+<p>再在session.py中添加以下内容：</p>
+<pre><code class="language-python">from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, Session
+
+from app.core.config import settings
+
+
+engine = create_engine(
+    settings.database_url,
+    echo=True,
+    pool_pre_ping=True,
+)
+
+SessionLocal = sessionmaker(
+    bind=engine,
+    autoflush=False,
+    autocommit=False,
+    expire_on_commit=False,
+)
+
+
+def get_db():
+    db: Session = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+</code></pre>
+<p>这个文件创建了一个数据库引擎，并定义了一个SessionLocal类来管理数据库会话。get_db函数是一个依赖项，可以在FastAPI的路由中使用，以便在请求期间获取数据库会话。</p>
+<h2 id="4-使用数据库"><a href="#4-使用数据库" class="headerlink" title="4. 使用数据库"></a>4. 使用数据库</h2><p>在FastAPI的路由中，我们可以使用get_db依赖项来获取数据库会话，并执行数据库操作.</p>
+<p>至此，我们已经成功地将FastAPI应用程序连接到MySQL数据库，并且可以使用SQLAlchemy进行数据库操作了。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/FastAPI/" style="color: #00bcd4">FastAPI</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/DB/" style="color: #00a596">DB</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/python%E9%93%BE%E6%8E%A5DB/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/24/hot100/%E5%9B%9E%E6%BA%AF/%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/">
+        <h2 class="post-title">组合总和</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Hot100/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Hot100
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/24
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>跟前三道题目一样，定义结果集，path，在递归过程中如果满足条件就<br>加入结果集，递归结束后恢复现场</p>
+<h2 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h2><p>找到所有满足条件的组合</p>
+<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><p>忘记递归中维护下标，导致出现重复答案，这题虽然一个数字可以选多次，但是也不需要每次都从头选，因为223和232是一个答案</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>O(n*2^n) n是数组长度，2^n是组合数量，每个组合需要O(n)的时间添加到结果集中<br>空间 O(n) path的长度为n，递归栈深度也是n</p>
+<h2 id="我的收获"><a href="#我的收获" class="headerlink" title="我的收获"></a>我的收获</h2><p>暂无</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ff7d73">回溯</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/24/hot100/%E5%9B%9E%E6%BA%AF/%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2026/04/23/hot100/%E5%9B%9E%E6%BA%AF/%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/">
         <h2 class="post-title">电话号码的字母组合</h2>
     </a>
@@ -226,7 +420,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #00a596">回溯</a>
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ff7d73">回溯</a>
         </span>
         
     </div>
@@ -281,12 +475,12 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00bcd4">博客</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #00bcd4">回溯</a>
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #03a9f4">回溯</a>
         </span>
         
     </div>
@@ -339,12 +533,12 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ff7d73">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">博客</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #00a596">回溯</a>
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #00bcd4">回溯</a>
         </span>
         
     </div>
@@ -431,7 +625,7 @@ public Binding seckillDeadLetterBinding() {
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00a596">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">博客</a>
         </span>
         
         <span class="tag">
@@ -485,7 +679,7 @@ public Binding seckillDeadLetterBinding() {
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00a596">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">博客</a>
         </span>
         
     </div>
@@ -646,7 +840,7 @@ public Binding seckillDeadLetterBinding() {
         
         <span class="tag">
             
-            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #00a596">入门</a>
+            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #ffa2c4">入门</a>
         </span>
         
     </div>
@@ -803,123 +997,16 @@ WHERE rn = 1;
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ff7d73">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">博客</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #00a596">入门</a>
+            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #00bcd4">入门</a>
         </span>
         
     </div>
     <a href="/2026/04/19/sql50/sql%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/">
-        <h2 class="post-title">前缀树</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Hot100/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Hot100
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/19
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="题目名：前缀树"><a href="#题目名：前缀树" class="headerlink" title="题目名：前缀树"></a>题目名：前缀树</h1><h2 id="1-题型标签"><a href="#1-题型标签" class="headerlink" title="1. 题型标签"></a>1. 题型标签</h2><p>字符串，前缀，字典树</p>
-<h2 id="2-核心思路"><a href="#2-核心思路" class="headerlink" title="2. 核心思路"></a>2. 核心思路</h2><p>Trie是一种数据结构存储有大量公共前缀的字符串。<br>每个节点维护：</p>
-<ol>
-<li>son：指向下一个字符</li>
-<li>isEnd：当前节点是否是某个单词结尾</li>
-</ol>
-<p>insert(word)：逐字符往下走，不存在就创建，最后把 isEnd 设为 true<br>search(word)：逐字符查找，最后还要判断 isEnd 是否为 true<br>startsWith(prefix)：逐字符查找，只要路径存在就返回 true</p>
-<h2 id="3-触发点"><a href="#3-触发点" class="headerlink" title="3. 触发点"></a>3. 触发点</h2><p>看到“多次查询某个单词&#x2F;前缀是否存在”<br>看到“很多字符串有公共前缀”<br>看到“需要动态插入再查询”</p>
-<h2 id="4-易错点"><a href="#4-易错点" class="headerlink" title="4. 易错点"></a>4. 易错点</h2><p>忘记维护isEnd</p>
-<h2 id="5-复杂度"><a href="#5-复杂度" class="headerlink" title="5. 复杂度"></a>5. 复杂度</h2><p>时间：insert&#x2F;startWith&#x2F;search都是O(L)L是字符串长度<br>空间 O(nL) n是单词数量，L是单词最大长度</p>
-<h2 id="6-我的收获"><a href="#6-我的收获" class="headerlink" title="6. 我的收获"></a>6. 我的收获</h2><p>看到前缀查询+多次查找&#x2F;插入，想到Trie</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00bcd4">博客</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #03a9f4">入门</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/19/hello-world/">
-        <h2 class="post-title">Hello World</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/19
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="language-bash">$ hexo new &quot;My New Post&quot;
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="language-bash">$ hexo server
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="language-bash">$ hexo generate
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="language-bash">$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2026/04/19/hello-world/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -933,8 +1020,16 @@ WHERE rn = 1;
     
     <span class="current">3</span>
     
+    <a class="page-num" href="/page/4">
+        4
+    </a>
     
     
+    
+    
+    <a class="page-num" href="/page/4/">
+        <i class="fa-solid fa-caret-right fa-fw"></i>
+    </a>
     
 </div>
 

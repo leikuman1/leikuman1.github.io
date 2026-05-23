@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>SqlAIchemy的增删改 | L&#39;sBlog</title>
+    <title>Git基本操作 | L&#39;sBlog</title>
     <meta name="author" content="Yu" />
     <meta name="description" content="Nearer to death, nearer to rebirth." />
     <meta name="keywords" content="" />
@@ -156,73 +156,39 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>SqlAIchemy的增删改</h1>
+        <h1>Git基本操作</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/4/25
+            2026/5/21
         </span>
         
         <span class="category">
-            <a href="/categories/FastAPI/">
+            <a href="/categories/Git/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                FastAPI
+                Git
             </a>
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/SQLAlchemy/" style="color: #03a9f4">
-                    SQLAlchemy
-                </a>
-            </span>
-            
-        </span>
-        
     </div>
     
     <div class="content" v-pre>
-        <h2 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h2><p>先新建一个DTO类来接收请求体参数：</p>
-<pre><code class="language-python">from pydantic import BaseModel
-class ItemCreate(BaseModel):
-    name: str
-    description: str
-    price: float
+        <h2 id="commit-and-checkout"><a href="#commit-and-checkout" class="headerlink" title="commit and checkout"></a>commit and checkout</h2><p>commit是提交代码,产生一次commit指向父commit，checkout是切换分支</p>
+<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><pre><code class="language-bash">git merge &lt;branch&gt; # 将branch分支合并到当前分支
 </code></pre>
-<p>然后在路由函数中使用这个DTO类来接收请求体参数，并把它转换为ORM模型对象来进行数据库操作：</p>
-<pre><code class="language-python">@app.post(&quot;/items/&quot;)
-async def create_item(item: ItemCreate, db: AsyncSession = Depends(get_db)):
-    item_obj = Item(**item.dict())
-    db.add(item_obj)
-    await db.commit()
-    await db.refresh(item_obj)
-    return item_obj
+<p>merge会产生一次新的commit，指向两个父commit</p>
+<p><img src="/img/git-merge-main.png" alt="在fixBug上merge main"></p>
+<p><img src="/img/git-merge-bugFix.png" alt="在main上merge fixBug"></p>
+<p>merge的优势在于保留了每个merge的完整历史记录，缺点是每次merge都会多产生一个commit，如果分支较多，历史记录会变得很复杂<br>一般在main分支上merge dev</p>
+<h2 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h2><pre><code class="language-bash">git rebase &lt;branch&gt; # 将当前分支的commit移到branch分支的最新commit之后
 </code></pre>
-<p>这里的item: ItemCreate表示这个参数是一个请求体参数，FastAPI会自动将请求体中的JSON数据解析成一个ItemCreate对象，并传递给create_item函数。然后我们通过item.dict()方法将DTO对象转换为一个字典，再通过**操作符将字典解包成关键字参数来创建一个ORM模型对象item_obj。最后我们将这个对象添加到数据库会话中，提交事务，并刷新对象以获取数据库生成的ID等字段，最后返回这个对象。</p>
-<p>注意还要先定义好ORM模型类Item，并且在数据库中创建好对应的表。就是那个类定义里有__tablename__ &#x3D; “items”的那个类。</p>
-<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>先查再改</p>
-<pre><code class="language-python">@app.delete(&quot;/items/{item_id}&quot;)
-async def delete_item(item_id: int, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Item).where(Item.id == item_id))
-    item = result.scalar_one_or_none()
-    if item is None:
-        raise HTTPException(status_code=404, detail=&quot;Item not found&quot;)
-    await db.delete(item)
-    await db.commit()
-    return {&quot;message&quot;: &quot;Item deleted&quot;}
-</code></pre>
+<p>一般在dev分支上rebase main</p>
 
     </div>
     

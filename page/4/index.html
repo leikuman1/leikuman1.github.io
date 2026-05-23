@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>SqlAIchemy的增删改 | L&#39;sBlog</title>
+    <title>L&#39;sBlog</title>
     <meta name="author" content="Yu" />
     <meta name="description" content="Nearer to death, nearer to rebirth." />
     <meta name="keywords" content="" />
@@ -42,9 +42,7 @@
 
 
 
-
-
-
+<script src="/js/lib/home.js"></script>
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -154,83 +152,184 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>SqlAIchemy的增删改</h1>
+            <div id="home-head">
+    <div
+        id="home-background"
+        ref="homeBackground"
+        data-images="/images/background.jpg"
+    ></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>L&#39;sBlog</h1>
+                <h3>yu</h3>
+                <h5>Nearer to death, nearer to rebirth.</h5>
+            </div>
+        </span>
     </div>
-    <div class="info">
+</div>
+<div
+    id="home-posts-wrap"
+    ref="homePostsWrap"
+    true
+>
+    <div id="home-posts">
+        
+
+<div class="post">
+    <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/">
+        <h2 class="post-title">前缀树</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Hot100/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Hot100
+            </a>
+        </span>
+        
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/4/25
-        </span>
-        
-        <span class="category">
-            <a href="/categories/FastAPI/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                FastAPI
-            </a>
+            2026/4/19
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
             
+            <h1 id="题目名：前缀树"><a href="#题目名：前缀树" class="headerlink" title="题目名：前缀树"></a>题目名：前缀树</h1><h2 id="1-题型标签"><a href="#1-题型标签" class="headerlink" title="1. 题型标签"></a>1. 题型标签</h2><p>字符串，前缀，字典树</p>
+<h2 id="2-核心思路"><a href="#2-核心思路" class="headerlink" title="2. 核心思路"></a>2. 核心思路</h2><p>Trie是一种数据结构存储有大量公共前缀的字符串。<br>每个节点维护：</p>
+<ol>
+<li>son：指向下一个字符</li>
+<li>isEnd：当前节点是否是某个单词结尾</li>
+</ol>
+<p>insert(word)：逐字符往下走，不存在就创建，最后把 isEnd 设为 true<br>search(word)：逐字符查找，最后还要判断 isEnd 是否为 true<br>startsWith(prefix)：逐字符查找，只要路径存在就返回 true</p>
+<h2 id="3-触发点"><a href="#3-触发点" class="headerlink" title="3. 触发点"></a>3. 触发点</h2><p>看到“多次查询某个单词&#x2F;前缀是否存在”<br>看到“很多字符串有公共前缀”<br>看到“需要动态插入再查询”</p>
+<h2 id="4-易错点"><a href="#4-易错点" class="headerlink" title="4. 易错点"></a>4. 易错点</h2><p>忘记维护isEnd</p>
+<h2 id="5-复杂度"><a href="#5-复杂度" class="headerlink" title="5. 复杂度"></a>5. 复杂度</h2><p>时间：insert&#x2F;startWith&#x2F;search都是O(L)L是字符串长度<br>空间 O(nL) n是单词数量，L是单词最大长度</p>
+<h2 id="6-我的收获"><a href="#6-我的收获" class="headerlink" title="6. 我的收获"></a>6. 我的收获</h2><p>看到前缀查询+多次查找&#x2F;插入，想到Trie</p>
+
             
-            <span class="tag">
-                
-                <a href="/tags/SQLAlchemy/" style="color: #03a9f4">
-                    SQLAlchemy
-                </a>
-            </span>
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
             
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #03a9f4">博客</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #00a596">入门</a>
         </span>
         
     </div>
+    <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/19/hello-world/">
+        <h2 class="post-title">Hello World</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/19
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="language-bash">$ hexo new &quot;My New Post&quot;
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="language-bash">$ hexo server
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="language-bash">$ hexo generate
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="language-bash">$ hexo deploy
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2026/04/19/hello-world/" class="go-post">阅读全文</a>
+</div>
+
+
+        <div class="page-current">
     
-    <div class="content" v-pre>
-        <h2 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h2><p>先新建一个DTO类来接收请求体参数：</p>
-<pre><code class="language-python">from pydantic import BaseModel
-class ItemCreate(BaseModel):
-    name: str
-    description: str
-    price: float
-</code></pre>
-<p>然后在路由函数中使用这个DTO类来接收请求体参数，并把它转换为ORM模型对象来进行数据库操作：</p>
-<pre><code class="language-python">@app.post(&quot;/items/&quot;)
-async def create_item(item: ItemCreate, db: AsyncSession = Depends(get_db)):
-    item_obj = Item(**item.dict())
-    db.add(item_obj)
-    await db.commit()
-    await db.refresh(item_obj)
-    return item_obj
-</code></pre>
-<p>这里的item: ItemCreate表示这个参数是一个请求体参数，FastAPI会自动将请求体中的JSON数据解析成一个ItemCreate对象，并传递给create_item函数。然后我们通过item.dict()方法将DTO对象转换为一个字典，再通过**操作符将字典解包成关键字参数来创建一个ORM模型对象item_obj。最后我们将这个对象添加到数据库会话中，提交事务，并刷新对象以获取数据库生成的ID等字段，最后返回这个对象。</p>
-<p>注意还要先定义好ORM模型类Item，并且在数据库中创建好对应的表。就是那个类定义里有__tablename__ &#x3D; “items”的那个类。</p>
-<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>先查再改</p>
-<pre><code class="language-python">@app.delete(&quot;/items/{item_id}&quot;)
-async def delete_item(item_id: int, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Item).where(Item.id == item_id))
-    item = result.scalar_one_or_none()
-    if item is None:
-        raise HTTPException(status_code=404, detail=&quot;Item not found&quot;)
-    await db.delete(item)
-    await db.commit()
-    return {&quot;message&quot;: &quot;Item deleted&quot;}
-</code></pre>
+    <a class="page-num" href="/page/3/">
+        <i class="fa-solid fa-caret-left fa-fw"></i>
+    </a>
+    <a class="page-num" href="/">1</a>
+    <span class="page-omit">...</span>
+    
+    <span class="current">4</span>
+    
+    
+    
+    
+</div>
 
     </div>
     
-    
-    
-    
-    
-    
+    <div id="home-card">
+        <div id="card-style">
+    <div id="card-div">
+        <div class="avatar">
+            <img src="/images/avatar.jpg" alt="avatar" />
+        </div>
+        <div class="name">Yu</div>
+        <div class="description">
+            <p>Description<br>…</p>
+
+        </div>
+        
+        
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://github.com/leikuman1">github</a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+    </div>
     
 </div>
 
@@ -262,12 +361,6 @@ async def delete_item(item_id: int, db: AsyncSession = Depends(get_db)):
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-
-
-
     
 </body>
 </html>

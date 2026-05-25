@@ -181,6 +181,73 @@
         
 
 <div class="post">
+    <a href="/2026/04/25/FastAPI/%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">
+        <h2 class="post-title">中间件和依赖注入</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/FastAPI/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                FastAPI
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p>中间件是一个函数，它可以在请求被处理之前或之后执行一些操作。中间件可以用于处理跨域请求、日志记录、身份验证等。类似于Spring中的AOP思想。</p>
+<p>可以通过middleware装饰器来定义一个中间件函数，如：</p>
+<pre><code class="language-python">from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+app = FastAPI()
+@app.middleware(&quot;http&quot;)
+async def add_process_time_header(request: Request, call_next):
+    response = await call_next(request)
+    response.headers[&quot;X-Process-Time&quot;] = &quot;0.1s&quot;
+    return response
+</code></pre>
+<p>这里的add_process_time_header函数是一个中间件函数，它在请求被处理之前执行，调用call_next(request)来继续处理请求，并在响应中添加一个自定义的头部X-Process-Time。</p>
+<p>这里还需要注意，如果有多个中间件，执行顺序是按照定义的顺序执行的。<br>而且执行方式类似于递归调用，先执行第一个中间件，调用call_next(request)来继续处理请求，进入下一个中间件，直到最后一个中间件处理完请求后返回响应，然后依次返回到上一个中间件，最后返回给客户端。<br>所以定义越早的中间件越先执行，定义越晚的中间件越后执行，但是返回响应的顺序是相反的，定义越早的中间件越后返回，定义越晚的中间件越先返回。</p>
+<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><p>依赖注入是一种设计模式，它允许我们将一个对象的依赖关系从对象本身中分离出来，使得代码更加模块化和可测试。在FastAPI中，依赖注入是通过Depends函数来实现的。说人话就是复用相同的代码。</p>
+<p>例如，我们有一个函数get_db()来获取数据库连接，我们可以将这个函数作为一个依赖注入到其他函数中，如：</p>
+<pre><code class="language-python">from fastapi import Depends
+def get_db():
+    db = &quot;数据库连接&quot;
+    try:
+        yield db
+    finally:
+        print(&quot;关闭数据库连接&quot;)
+@app.get(&quot;/items/&quot;)
+async def read_items(db: str = Depends(get_db)):
+    return {&quot;db&quot;: db}
+</code></pre>
+<p>这里的get_db函数是一个依赖函数，它返回一个数据库连接。在read_items函数中，我们使用Depends(get_db)来注入这个依赖，这样当我们调用read_items函数时，FastAPI会自动调用get_db函数来获取数据库连接，并将其作为参数传递给read_items函数。</p>
+<p>依赖注入的好处是可以将公共的代码抽离出来，避免重复代码，提高代码的可维护性和可测试性。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2026/04/25/FastAPI/%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2026/04/25/FastAPI/%E5%88%9D%E8%AF%95FastAPI/">
         <h2 class="post-title">初试FastAPI</h2>
     </a>
@@ -364,7 +431,7 @@ async def read_item(item_id: int):
         
         <span class="tag">
             
-            <a href="/tags/FastAPI/" style="color: #03a9f4">FastAPI</a>
+            <a href="/tags/FastAPI/" style="color: #ff7d73">FastAPI</a>
         </span>
         
         <span class="tag">
@@ -505,12 +572,12 @@ def get_db():
         
         <span class="tag">
             
-            <a href="/tags/FastAPI/" style="color: #ff7d73">FastAPI</a>
+            <a href="/tags/FastAPI/" style="color: #00a596">FastAPI</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/DB/" style="color: #ffa2c4">DB</a>
+            <a href="/tags/DB/" style="color: #03a9f4">DB</a>
         </span>
         
     </div>
@@ -563,7 +630,7 @@ def get_db():
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #00a596">回溯</a>
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ffa2c4">回溯</a>
         </span>
         
     </div>
@@ -616,7 +683,7 @@ def get_db():
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #00bcd4">回溯</a>
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #00a596">回溯</a>
         </span>
         
     </div>
@@ -671,12 +738,12 @@ def get_db():
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ff7d73">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">博客</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #00bcd4">回溯</a>
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ff7d73">回溯</a>
         </span>
         
     </div>
@@ -729,12 +796,12 @@ def get_db():
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ff7d73">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00a596">博客</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #03a9f4">回溯</a>
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ffa2c4">回溯</a>
         </span>
         
     </div>
@@ -821,12 +888,12 @@ public Binding seckillDeadLetterBinding() {
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00a596">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00bcd4">博客</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #03a9f4">入门</a>
+            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #ffa2c4">入门</a>
         </span>
         
     </div>
@@ -875,172 +942,11 @@ public Binding seckillDeadLetterBinding() {
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00bcd4">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ff7d73">博客</a>
         </span>
         
     </div>
     <a href="/2026/04/21/%E9%9D%A2%E7%BB%8F/%E6%80%A7%E6%A0%BC%E7%BC%BA%E7%82%B9/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/19/redis/redis%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-        <h2 class="post-title">常用数据结构和操作函数</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Redis/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Redis
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/19
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="1-String"><a href="#1-String" class="headerlink" title="1. String"></a>1. String</h2><p>最常用，适合存字符串、数字、JSON。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>SET key value</code>：设置值</li>
-<li><code>GET key</code>：取值</li>
-<li><code>MSET k1 v1 k2 v2</code>：一次设置多个值</li>
-<li><code>MGET k1 k2</code>：一次取多个值</li>
-<li><code>INCR key</code>：数字加 1</li>
-<li><code>DECR key</code>：数字减 1</li>
-<li><code>SETEX key seconds value</code>：设置值并加过期时间</li>
-<li><code>SETNX key value</code>：key 不存在才设置，常用于加锁</li>
-</ul>
-<hr>
-<h2 id="2-Hash"><a href="#2-Hash" class="headerlink" title="2. Hash"></a>2. Hash</h2><p>适合存对象、字段集合。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>HSET key field value</code>：设置字段值</li>
-<li><code>HGET key field</code>：取某个字段值</li>
-<li><code>HMGET key f1 f2</code>：取多个字段值</li>
-<li><code>HGETALL key</code>：取全部字段和值</li>
-<li><code>HDEL key field</code>：删除字段</li>
-<li><code>HINCRBY key field n</code>：字段数字加 n</li>
-</ul>
-<hr>
-<h2 id="3-List"><a href="#3-List" class="headerlink" title="3. List"></a>3. List</h2><p>双端列表，适合队列、消息流。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>LPUSH key v1 v2</code>：从左边放入</li>
-<li><code>RPUSH key v1 v2</code>：从右边放入</li>
-<li><code>LPOP key</code>：从左边取出</li>
-<li><code>RPOP key</code>：从右边取出</li>
-<li><code>LRANGE key start end</code>：查看一段数据</li>
-<li><code>LLEN key</code>：看长度</li>
-</ul>
-<hr>
-<h2 id="4-Set"><a href="#4-Set" class="headerlink" title="4. Set"></a>4. Set</h2><p>无序、元素唯一，适合去重。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>SADD key v1 v2</code>：添加元素</li>
-<li><code>SREM key v1</code>：删除元素</li>
-<li><code>SMEMBERS key</code>：查看全部元素</li>
-<li><code>SISMEMBER key v</code>：判断元素在不在</li>
-<li><code>SCARD key</code>：看元素个数</li>
-<li><code>SINTER k1 k2</code>：求交集</li>
-<li><code>SUNION k1 k2</code>：求并集</li>
-</ul>
-<hr>
-<h2 id="5-ZSet"><a href="#5-ZSet" class="headerlink" title="5. ZSet"></a>5. ZSet</h2><p>有序集合，带分数，适合排行榜。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>ZADD key score value</code>：添加元素和分数</li>
-<li><code>ZREM key value</code>：删除元素</li>
-<li><code>ZRANGE key 0 -1</code>：按分数从小到大查看</li>
-<li><code>ZREVRANGE key 0 -1</code>：按分数从大到小查看</li>
-<li><code>ZSCORE key value</code>：看元素分数</li>
-<li><code>ZRANK key value</code>：看正序排名</li>
-<li><code>ZINCRBY key n value</code>：分数加 n</li>
-</ul>
-<hr>
-<h2 id="6-Bitmap"><a href="#6-Bitmap" class="headerlink" title="6. Bitmap"></a>6. Bitmap</h2><p>按位存储，适合签到、活跃统计。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>SETBIT key offset 1</code>：设置某一位</li>
-<li><code>GETBIT key offset</code>：查看某一位</li>
-<li><code>BITCOUNT key</code>：统计 1 的个数</li>
-<li><code>BITOP op dest k1 k2</code>：做位运算</li>
-</ul>
-<hr>
-<h2 id="7-HyperLogLog"><a href="#7-HyperLogLog" class="headerlink" title="7. HyperLogLog"></a>7. HyperLogLog</h2><p>适合做去重计数、UV 统计。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>PFADD key v1 v2</code>：添加数据</li>
-<li><code>PFCOUNT key</code>：统计数量</li>
-<li><code>PFMERGE newKey k1 k2</code>：合并统计</li>
-</ul>
-<hr>
-<h2 id="8-Stream"><a href="#8-Stream" class="headerlink" title="8. Stream"></a>8. Stream</h2><p>消息流，适合消息队列、消费组。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>XADD key * field value</code>：添加消息</li>
-<li><code>XRANGE key - +</code>：查看消息范围</li>
-<li><code>XREAD STREAMS key id</code>：读取消息</li>
-<li><code>XGROUP CREATE key group 0</code>：创建消费组</li>
-<li><code>XREADGROUP GROUP g c STREAMS key &gt;</code>：按消费组读消息</li>
-<li><code>XACK key group id</code>：确认消息已消费</li>
-</ul>
-<hr>
-<h2 id="通用命令"><a href="#通用命令" class="headerlink" title="通用命令"></a>通用命令</h2><p>几乎所有类型都会用到。</p>
-<p>常用命令：</p>
-<ul>
-<li><code>DEL key</code>：删除 key</li>
-<li><code>EXPIRE key seconds</code>：设置过期时间</li>
-<li><code>TTL key</code>：查看剩余过期时间</li>
-<li><code>EXISTS key</code>：判断 key 是否存在</li>
-<li><code>TYPE key</code>：查看 key 的类型</li>
-<li><code>SCAN 0</code>：分页查 key</li>
-</ul>
-<hr>
-<h2 id="一句话速记"><a href="#一句话速记" class="headerlink" title="一句话速记"></a>一句话速记</h2><ul>
-<li><code>String</code>：值</li>
-<li><code>Hash</code>：对象</li>
-<li><code>List</code>：队列</li>
-<li><code>Set</code>：去重集合</li>
-<li><code>ZSet</code>：排行榜</li>
-<li><code>Bitmap</code>：位统计</li>
-<li><code>HyperLogLog</code>：基数统计</li>
-<li><code>Stream</code>：消息队列</li>
-</ul>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00bcd4">博客</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #ff7d73">入门</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/19/redis/redis%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="go-post">阅读全文</a>
 </div>
 
 

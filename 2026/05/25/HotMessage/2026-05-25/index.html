@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>2026-05-25 每日热点 | L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>2026-05-25 每日热点</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/5/25
+        </span>
+        
+        <span class="category">
+            <a href="/categories/HotMessage/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                HotMessage
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #00a596">
+                    AI与大模型
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #ffa2c4">
+                    金融
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #00a596">
+                    政治
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #03a9f4">
+                    科技
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="今日摘要"><a href="#今日摘要" class="headerlink" title="今日摘要"></a>今日摘要</h2><p>5 月 25 日回看本周热点，AI 领域最值得注意的是头部厂商开始把竞争重点从单一模型能力，转向代理化产品、企业部署与内容可信度体系三条线同时推进。金融层面，美国监管口径继续围绕金融科技松绑与市场规则简化展开，而美联储纪要和 Nvidia 财报仍是全球风险偏好与 AI 资本开支预期的核心锚点。政治上，欧美与拉美合作升温、中美贸易与供应链安排继续释放细节，显示经贸与地缘议题仍在重新绑定。科技行业则延续 Google I&#x2F;O 2026 所展示的主线，即 AI 搜索、AI 眼镜与生成式界面开始从概念演示走向明确的产品化节奏。</p>
+<h2 id="AI-与大模型"><a href="#AI-与大模型" class="headerlink" title="AI 与大模型"></a>AI 与大模型</h2><h3 id="1-OpenAI-推进-AI-内容溯源与公开验证工具"><a href="#1-OpenAI-推进-AI-内容溯源与公开验证工具" class="headerlink" title="1. OpenAI 推进 AI 内容溯源与公开验证工具"></a>1. OpenAI 推进 AI 内容溯源与公开验证工具</h3><ul>
+<li>摘要：OpenAI 于 2026 年 5 月 19 日宣布强化内容溯源方案，推动 C2PA 一致性、为图像加入跨平台 SynthID 水印，并预览面向公众的图像来源验证工具。</li>
+<li>重要性：这意味着头部模型公司开始把“生成能力”与“可验证性”一并产品化，AI 媒体可信度正在从行业倡议转向实际基础设施。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/advancing-content-provenance/">OpenAI：Advancing content provenance for a safer, more transparent AI ecosystem</a></li>
+</ul>
+<h3 id="2-Google-将-Gemini-app-推向更强的代理化形态"><a href="#2-Google-将-Gemini-app-推向更强的代理化形态" class="headerlink" title="2. Google 将 Gemini app 推向更强的代理化形态"></a>2. Google 将 Gemini app 推向更强的代理化形态</h3><ul>
+<li>摘要：Google 于 2026 年 5 月 19 日发布 Gemini app 更新，推出 Gemini 3.5 Flash、Gemini Omni、Daily Brief 与 Gemini Spark，并披露 Gemini 月活已超过 9 亿。</li>
+<li>重要性：这说明大模型竞争正在从聊天入口转向“全天候代理 + 多模态生成 + 个性化工作流”的完整产品栈竞争。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app/">Google：The Gemini app becomes more agentic, delivering proactive, 24&#x2F;7 help</a></li>
+</ul>
+<h3 id="3-OpenAI-成立-Deployment-Company-强化企业落地"><a href="#3-OpenAI-成立-Deployment-Company-强化企业落地" class="headerlink" title="3. OpenAI 成立 Deployment Company 强化企业落地"></a>3. OpenAI 成立 Deployment Company 强化企业落地</h3><ul>
+<li>摘要：OpenAI 于 2026 年 5 月 11 日宣布成立 OpenAI Deployment Company，并计划收购 Tomoro，把前置部署工程、企业集成与流程改造能力做成独立业务单元。</li>
+<li>重要性：企业 AI 的下一阶段瓶颈已不只是模型能力，而是把模型稳定接入数据、工具、权限与业务流程的交付能力。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/openai-launches-the-deployment-company/">OpenAI：OpenAI launches the OpenAI Deployment Company to help businesses build around intelligence</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openai.com/index/advancing-content-provenance/">OpenAI 内容溯源公告</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app/">Google Gemini app 更新</a></li>
+<li><a target="_blank" rel="noopener" href="https://openai.com/index/openai-launches-the-deployment-company/">OpenAI Deployment Company 公告</a></li>
+</ul>
+<h2 id="金融"><a href="#金融" class="headerlink" title="金融"></a>金融</h2><h3 id="1-白宫推动金融科技监管框架调整"><a href="#1-白宫推动金融科技监管框架调整" class="headerlink" title="1. 白宫推动金融科技监管框架调整"></a>1. 白宫推动金融科技监管框架调整</h3><ul>
+<li>摘要：白宫于 2026 年 5 月 19 日发布行政令配套事实清单，要求精简对金融科技创新的监管障碍，并推动金融科技公司、联邦监管机构与持牌金融机构之间更顺畅的协作。</li>
+<li>重要性：这将直接影响美国支付、数字金融和非银机构接入传统金融基础设施的节奏，也会影响后续金融科技估值与合规预期。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.whitehouse.gov/fact-sheets/2026/05/fact-sheet-president-donald-j-trump-integrates-financial-technology-innovation-into-regulatory-frameworks/">白宫事实清单</a> <a target="_blank" rel="noopener" href="https://www.whitehouse.gov/presidential-actions/2026/05/integrating-financial-technology-innovation-into-regulatory-frameworks/">白宫行政令</a></li>
+</ul>
+<h3 id="2-美联储公布-4-月-28-29-日-FOMC-会议纪要"><a href="#2-美联储公布-4-月-28-29-日-FOMC-会议纪要" class="headerlink" title="2. 美联储公布 4 月 28-29 日 FOMC 会议纪要"></a>2. 美联储公布 4 月 28-29 日 FOMC 会议纪要</h3><ul>
+<li>摘要：美联储于 2026 年 5 月 20 日公布 4 月底议息会议纪要，市场继续据此评估美国通胀路径、经济增长与年内利率调整空间。</li>
+<li>重要性：在美债收益率和全球风险资产仍高度敏感的背景下，会议纪要仍是判断联储政策节奏的公开基准。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260520a.htm">Federal Reserve：Minutes of the Federal Open Market Committee, April 28-29, 2026</a> <a target="_blank" rel="noopener" href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260429.htm">FOMC Minutes HTML</a></li>
+</ul>
+<h3 id="3-Nvidia-财报继续强化-AI-资本开支主线"><a href="#3-Nvidia-财报继续强化-AI-资本开支主线" class="headerlink" title="3. Nvidia 财报继续强化 AI 资本开支主线"></a>3. Nvidia 财报继续强化 AI 资本开支主线</h3><ul>
+<li>摘要：Nvidia 于 2026 年 5 月 20 日公布 2027 财年一季度营收 816 亿美元、同比增长 85%，并新增 800 亿美元回购授权，给出下一季度约 910 亿美元营收指引。</li>
+<li>重要性：这不仅继续支撑 AI 基建板块估值，也强化了市场对算力投资周期尚未见顶的判断。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx">NVIDIA Announces Financial Results for First Quarter Fiscal 2027</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.whitehouse.gov/fact-sheets/2026/05/fact-sheet-president-donald-j-trump-integrates-financial-technology-innovation-into-regulatory-frameworks/">白宫金融科技事实清单</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.whitehouse.gov/presidential-actions/2026/05/integrating-financial-technology-innovation-into-regulatory-frameworks/">白宫金融科技行政令</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260520a.htm">Federal Reserve 会议纪要公告</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260429.htm">FOMC Minutes HTML</a></li>
+<li><a target="_blank" rel="noopener" href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx">NVIDIA 2027 财年一季度财报</a></li>
+</ul>
+<h2 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h2><h3 id="1-欧盟与墨西哥峰会签署新阶段合作安排"><a href="#1-欧盟与墨西哥峰会签署新阶段合作安排" class="headerlink" title="1. 欧盟与墨西哥峰会签署新阶段合作安排"></a>1. 欧盟与墨西哥峰会签署新阶段合作安排</h3><ul>
+<li>摘要：欧盟理事会于 2026 年 5 月 22 日发布第八次欧盟-墨西哥峰会联合声明，确认双方签署现代化全球协议（MGA）与临时贸易协议（ITA），并把气候、能源、安全、数字化和科研列为合作重点。</li>
+<li>重要性：这表明欧盟正把贸易协定、供应链与地缘合作重新打包推进，拉美在欧洲全球布局中的权重继续上升。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/05/22/joint-statement-of-the-8th-eu-mexico-summit-22-may-2026/">Consilium：Joint statement of the 8th EU-Mexico summit, 22 May 2026</a> <a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/meetings/international-summit/2026/05/22/">Consilium：EU-Mexico summit meeting page</a></li>
+</ul>
+<h3 id="2-白宫继续释放中美经贸安排细节"><a href="#2-白宫继续释放中美经贸安排细节" class="headerlink" title="2. 白宫继续释放中美经贸安排细节"></a>2. 白宫继续释放中美经贸安排细节</h3><ul>
+<li>摘要：白宫于 2026 年 5 月 17 日发布事实清单，称中美将设立贸易与投资委员会，并就农产品、波音飞机、牛肉、禽类以及稀土与关键矿产供应问题达成具体安排。</li>
+<li>重要性：这说明短期中美关系仍以“用经贸细则换取关系稳定”为主线，供应链与资源安全将继续成为谈判核心。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.whitehouse.gov/fact-sheets/2026/05/fact-sheet-president-donald-j-trump-secures-historic-deals-with-china-delivering-for-american-workers-farmers-and-industry/">白宫事实清单：President Trump Secures Historic Deals with China</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/05/22/joint-statement-of-the-8th-eu-mexico-summit-22-may-2026/">欧盟-墨西哥峰会联合声明</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/meetings/international-summit/2026/05/22/">欧盟-墨西哥峰会页面</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.whitehouse.gov/fact-sheets/2026/05/fact-sheet-president-donald-j-trump-secures-historic-deals-with-china-delivering-for-american-workers-farmers-and-industry/">白宫中美经贸事实清单</a></li>
+</ul>
+<h2 id="科技"><a href="#科技" class="headerlink" title="科技"></a>科技</h2><h3 id="1-Google-预告-Gemini-智能眼镜今秋先推音频款"><a href="#1-Google-预告-Gemini-智能眼镜今秋先推音频款" class="headerlink" title="1. Google 预告 Gemini 智能眼镜今秋先推音频款"></a>1. Google 预告 Gemini 智能眼镜今秋先推音频款</h3><ul>
+<li>摘要：Google 于 2026 年 5 月 19 日宣布 Android XR 智能眼镜将于今年秋季先推出音频眼镜，合作方包括 Samsung、Gentle Monster 和 Warby Parker，支持导航、消息、拍照等 Gemini 驱动功能。</li>
+<li>重要性：AI 终端竞争正在从手机与 PC 延伸到全天候可穿戴入口，眼镜有望成为下一轮多模态交互的重要硬件形态。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://blog.google/products-and-platforms/platforms/android/android-xr-io-2026/">Google：Intelligent eyewear is coming this fall</a></li>
+</ul>
+<h3 id="2-Google-Search-宣布进入更强的-AI-搜索阶段"><a href="#2-Google-Search-宣布进入更强的-AI-搜索阶段" class="headerlink" title="2. Google Search 宣布进入更强的 AI 搜索阶段"></a>2. Google Search 宣布进入更强的 AI 搜索阶段</h3><ul>
+<li>摘要：Google 于 2026 年 5 月 19 日宣布 Search 引入新的 AI 驱动搜索框、搜索代理、可生成交互式界面的 generative UI，并把 Personal Intelligence 扩展到更多国家和语言。</li>
+<li>重要性：搜索正从关键词入口转向任务代理与即时生成界面，这会持续重塑流量分发、内容消费和产品交互模式。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://blog.google/products-and-platforms/products/search/search-io-2026/">Google：A new era for AI Search</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.google/products-and-platforms/platforms/android/android-xr-io-2026/">Google 智能眼镜公告</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.google/products-and-platforms/products/search/search-io-2026/">Google Search AI 更新</a></li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

@@ -181,6 +181,167 @@
         
 
 <div class="post">
+    <a href="/2026/04/19/redis/redis%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+        <h2 class="post-title">常用数据结构和操作函数</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Redis/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Redis
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/19
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="1-String"><a href="#1-String" class="headerlink" title="1. String"></a>1. String</h2><p>最常用，适合存字符串、数字、JSON。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>SET key value</code>：设置值</li>
+<li><code>GET key</code>：取值</li>
+<li><code>MSET k1 v1 k2 v2</code>：一次设置多个值</li>
+<li><code>MGET k1 k2</code>：一次取多个值</li>
+<li><code>INCR key</code>：数字加 1</li>
+<li><code>DECR key</code>：数字减 1</li>
+<li><code>SETEX key seconds value</code>：设置值并加过期时间</li>
+<li><code>SETNX key value</code>：key 不存在才设置，常用于加锁</li>
+</ul>
+<hr>
+<h2 id="2-Hash"><a href="#2-Hash" class="headerlink" title="2. Hash"></a>2. Hash</h2><p>适合存对象、字段集合。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>HSET key field value</code>：设置字段值</li>
+<li><code>HGET key field</code>：取某个字段值</li>
+<li><code>HMGET key f1 f2</code>：取多个字段值</li>
+<li><code>HGETALL key</code>：取全部字段和值</li>
+<li><code>HDEL key field</code>：删除字段</li>
+<li><code>HINCRBY key field n</code>：字段数字加 n</li>
+</ul>
+<hr>
+<h2 id="3-List"><a href="#3-List" class="headerlink" title="3. List"></a>3. List</h2><p>双端列表，适合队列、消息流。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>LPUSH key v1 v2</code>：从左边放入</li>
+<li><code>RPUSH key v1 v2</code>：从右边放入</li>
+<li><code>LPOP key</code>：从左边取出</li>
+<li><code>RPOP key</code>：从右边取出</li>
+<li><code>LRANGE key start end</code>：查看一段数据</li>
+<li><code>LLEN key</code>：看长度</li>
+</ul>
+<hr>
+<h2 id="4-Set"><a href="#4-Set" class="headerlink" title="4. Set"></a>4. Set</h2><p>无序、元素唯一，适合去重。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>SADD key v1 v2</code>：添加元素</li>
+<li><code>SREM key v1</code>：删除元素</li>
+<li><code>SMEMBERS key</code>：查看全部元素</li>
+<li><code>SISMEMBER key v</code>：判断元素在不在</li>
+<li><code>SCARD key</code>：看元素个数</li>
+<li><code>SINTER k1 k2</code>：求交集</li>
+<li><code>SUNION k1 k2</code>：求并集</li>
+</ul>
+<hr>
+<h2 id="5-ZSet"><a href="#5-ZSet" class="headerlink" title="5. ZSet"></a>5. ZSet</h2><p>有序集合，带分数，适合排行榜。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>ZADD key score value</code>：添加元素和分数</li>
+<li><code>ZREM key value</code>：删除元素</li>
+<li><code>ZRANGE key 0 -1</code>：按分数从小到大查看</li>
+<li><code>ZREVRANGE key 0 -1</code>：按分数从大到小查看</li>
+<li><code>ZSCORE key value</code>：看元素分数</li>
+<li><code>ZRANK key value</code>：看正序排名</li>
+<li><code>ZINCRBY key n value</code>：分数加 n</li>
+</ul>
+<hr>
+<h2 id="6-Bitmap"><a href="#6-Bitmap" class="headerlink" title="6. Bitmap"></a>6. Bitmap</h2><p>按位存储，适合签到、活跃统计。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>SETBIT key offset 1</code>：设置某一位</li>
+<li><code>GETBIT key offset</code>：查看某一位</li>
+<li><code>BITCOUNT key</code>：统计 1 的个数</li>
+<li><code>BITOP op dest k1 k2</code>：做位运算</li>
+</ul>
+<hr>
+<h2 id="7-HyperLogLog"><a href="#7-HyperLogLog" class="headerlink" title="7. HyperLogLog"></a>7. HyperLogLog</h2><p>适合做去重计数、UV 统计。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>PFADD key v1 v2</code>：添加数据</li>
+<li><code>PFCOUNT key</code>：统计数量</li>
+<li><code>PFMERGE newKey k1 k2</code>：合并统计</li>
+</ul>
+<hr>
+<h2 id="8-Stream"><a href="#8-Stream" class="headerlink" title="8. Stream"></a>8. Stream</h2><p>消息流，适合消息队列、消费组。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>XADD key * field value</code>：添加消息</li>
+<li><code>XRANGE key - +</code>：查看消息范围</li>
+<li><code>XREAD STREAMS key id</code>：读取消息</li>
+<li><code>XGROUP CREATE key group 0</code>：创建消费组</li>
+<li><code>XREADGROUP GROUP g c STREAMS key &gt;</code>：按消费组读消息</li>
+<li><code>XACK key group id</code>：确认消息已消费</li>
+</ul>
+<hr>
+<h2 id="通用命令"><a href="#通用命令" class="headerlink" title="通用命令"></a>通用命令</h2><p>几乎所有类型都会用到。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>DEL key</code>：删除 key</li>
+<li><code>EXPIRE key seconds</code>：设置过期时间</li>
+<li><code>TTL key</code>：查看剩余过期时间</li>
+<li><code>EXISTS key</code>：判断 key 是否存在</li>
+<li><code>TYPE key</code>：查看 key 的类型</li>
+<li><code>SCAN 0</code>：分页查 key</li>
+</ul>
+<hr>
+<h2 id="一句话速记"><a href="#一句话速记" class="headerlink" title="一句话速记"></a>一句话速记</h2><ul>
+<li><code>String</code>：值</li>
+<li><code>Hash</code>：对象</li>
+<li><code>List</code>：队列</li>
+<li><code>Set</code>：去重集合</li>
+<li><code>ZSet</code>：排行榜</li>
+<li><code>Bitmap</code>：位统计</li>
+<li><code>HyperLogLog</code>：基数统计</li>
+<li><code>Stream</code>：消息队列</li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ff7d73">博客</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #ffa2c4">入门</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/19/redis/redis%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/">
         <h2 class="post-title">按照分类统计薪水</h2>
     </a>
@@ -241,12 +402,12 @@ WHERE income &gt; 50000;
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #03a9f4">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00a596">博客</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #00bcd4">入门</a>
+            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #ff7d73">入门</a>
         </span>
         
     </div>
@@ -330,7 +491,7 @@ WHERE rn = 1;
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ff7d73">博客</a>
         </span>
         
         <span class="tag">
@@ -394,7 +555,7 @@ WHERE rn = 1;
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00bcd4">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ff7d73">博客</a>
         </span>
         
         <span class="tag">

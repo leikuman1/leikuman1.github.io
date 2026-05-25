@@ -181,6 +181,168 @@
         
 
 <div class="post">
+    <a href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/">
+        <h2 class="post-title">按照分类统计薪水</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Sql50/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Sql50
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/19
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>三个select,然后union all在一起</p>
+<pre><code class="language-sql">SELECT &#39;Low Salary&#39; AS category, COUNT(*) AS accounts_count
+FROM Accounts
+WHERE income &lt; 20000
+
+UNION ALL
+
+SELECT &#39;Average Salary&#39; AS category, COUNT(*) AS accounts_count
+FROM Accounts
+WHERE income BETWEEN 20000 AND 50000
+
+UNION ALL
+
+SELECT &#39;High Salary&#39; AS category, COUNT(*) AS accounts_count
+FROM Accounts
+WHERE income &gt; 50000;
+</code></pre>
+<h2 id="所用工具函数或关键字"><a href="#所用工具函数或关键字" class="headerlink" title="所用工具函数或关键字"></a>所用工具函数或关键字</h2><ul>
+<li><code>UNION ALL</code>：合并多个查询结果，保留重复行。</li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #03a9f4">博客</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #00bcd4">入门</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/19/sql50/%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%BF%9E%E6%8E%A5/%E6%8C%89%E7%85%A7%E5%88%86%E7%B1%BB%E7%BB%9F%E8%AE%A1%E8%96%AA%E6%B0%B4/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/19/sql50/sql%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">
+        <h2 class="post-title">sql常用工具</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Sql50/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Sql50
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/19
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>写 SQL 题时，真正高频的工具不多，记住下面几个就够了。</p>
+<h2 id="1-聚合函数"><a href="#1-聚合函数" class="headerlink" title="1. 聚合函数"></a>1. 聚合函数</h2><ul>
+<li><code>COUNT(*)</code>：统计行数</li>
+<li><code>SUM(col)</code>：求和</li>
+<li><code>AVG(col)</code>：求平均</li>
+<li><code>MAX(col)</code> &#x2F; <code>MIN(col)</code>：最大值 &#x2F; 最小值</li>
+</ul>
+<pre><code class="language-sql">SELECT dept_id, COUNT(*) AS cnt, AVG(salary) AS avg_salary
+FROM Employee
+GROUP BY dept_id;
+</code></pre>
+<h2 id="2-CASE-WHEN"><a href="#2-CASE-WHEN" class="headerlink" title="2. CASE WHEN"></a>2. <code>CASE WHEN</code></h2><p>做条件判断、分类统计时最常用。</p>
+<pre><code class="language-sql">SELECT
+    SUM(CASE WHEN score &gt;= 60 THEN 1 ELSE 0 END) AS pass_cnt
+FROM Scores;
+</code></pre>
+<h2 id="3-IFNULL-COALESCE"><a href="#3-IFNULL-COALESCE" class="headerlink" title="3. IFNULL() &#x2F; COALESCE()"></a>3. <code>IFNULL()</code> &#x2F; <code>COALESCE()</code></h2><p>处理空值，避免结果是 <code>NULL</code>。</p>
+<pre><code class="language-sql">SELECT name, IFNULL(bonus, 0) AS bonus
+FROM Employee;
+</code></pre>
+<h2 id="4-ROW-NUMBER"><a href="#4-ROW-NUMBER" class="headerlink" title="4. ROW_NUMBER()"></a>4. <code>ROW_NUMBER()</code></h2><p>分组排名、取每组第一条时非常常见。</p>
+<pre><code class="language-sql">SELECT *
+FROM (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY dept_id ORDER BY salary DESC) AS rn
+    FROM Employee
+) t
+WHERE rn = 1;
+</code></pre>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>刷题时先熟练这 4 个：</p>
+<ul>
+<li>聚合函数：做统计</li>
+<li><code>CASE WHEN</code>：做条件</li>
+<li><code>IFNULL()</code> &#x2F; <code>COALESCE()</code>：处理空值</li>
+<li><code>ROW_NUMBER()</code>：做分组排名</li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">博客</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #00a596">入门</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/19/sql50/sql%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/">
         <h2 class="post-title">前缀树</h2>
     </a>
@@ -232,12 +394,12 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #03a9f4">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00bcd4">博客</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #00a596">入门</a>
+            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #03a9f4">入门</a>
         </span>
         
     </div>

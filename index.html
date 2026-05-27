@@ -309,22 +309,22 @@
         
         <span class="tag">
             
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #00bcd4">AI与大模型</a>
+            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ffa2c4">AI与大模型</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00a596">金融</a>
+            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00bcd4">金融</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ffa2c4">政治</a>
+            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #00a596">政治</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00bcd4">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #ff7d73">科技</a>
         </span>
         
     </div>
@@ -448,12 +448,12 @@
         
         <span class="tag">
             
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ffa2c4">AI与大模型</a>
+            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #00a596">AI与大模型</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00a596">金融</a>
+            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #03a9f4">金融</a>
         </span>
         
         <span class="tag">
@@ -463,7 +463,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00a596">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #ff7d73">科技</a>
         </span>
         
     </div>
@@ -604,7 +604,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00bcd4">金融</a>
+            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #ff7d73">金融</a>
         </span>
         
         <span class="tag">
@@ -614,7 +614,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #ff7d73">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #03a9f4">科技</a>
         </span>
         
     </div>
@@ -753,12 +753,12 @@
         
         <span class="tag">
             
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ff7d73">AI与大模型</a>
+            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ffa2c4">AI与大模型</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00a596">金融</a>
+            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #ff7d73">金融</a>
         </span>
         
         <span class="tag">
@@ -768,7 +768,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00a596">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00bcd4">科技</a>
         </span>
         
     </div>
@@ -810,24 +810,55 @@
 <h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><pre><code class="language-bash">git merge &lt;branch&gt; # 将branch分支合并到当前分支
 </code></pre>
 <p>那这里是什么意思呢，举个例子，日常开发中不都是在自己的分支上merge main分支吗，就是把 main 分支上的最新代码合并进你自己的分支，但不会修改 main。比如当前在member1分支执行git merge main<br>假如开始时候是这样：</p>
-<p>A — B — C        main<br>      <br>       D — E      member1</p>
+<pre><code class="language-text">A --- B --- C        main
+      \
+       D --- E      member1
+</code></pre>
 <p>执行git merge main之后(在member1分支执行)</p>
-<p>A — B — C        main<br>      \       <br>       D — E — M member1</p>
+<pre><code class="language-text">A --- B --- C        main
+      \       \
+       D --- E --- M member1
+</code></pre>
 <p>那如果这时候交了个合并member1到main的pr呢</p>
-<p>A — B — C  —— G      main<br>      \       \      &#x2F;<br>       D — E — M member1</p>
+<pre><code class="language-text">A --- B --- C  ------ G      main
+      \       \      /
+       D --- E --- M member1
+</code></pre>
 <p>就会变成这样，所以明白了吗，在两个分支已经分叉的情况下，merge就是将另一个分支有的，当前分支没有的提交合并到当前分支并且产生一个新的提交，并且指向两个父提交。</p>
-<p><img src="/img/git-merge-main.png" alt="在fixBug上merge main"><br><strong>在fixBug上merge   main</strong></p>
-<p>这里有一种特殊情况，假如当前分支相对于main什么都没有修改，那merge main会怎么样呢<br>对于下图情况，在member1分支执行merge main会怎么样？<br>main:    A — B — C — D<br>              ^<br>member1:      B</p>
-<p>也可以画成<br>A — B — C — D    main<br>      ^<br>      member1<br>因为每个分支都有一个头指针指向当前分支的head</p>
+<p><img src="/images/git/git-merge-main.png" alt="在fixBug上merge main"><br><strong>在fixBug上merge   main</strong></p>
+<p>这里有一种特殊情况，假如当前分支相对于main什么都没有修改，那merge main会怎么样呢<br>对于下图情况，在member1分支执行merge main会怎么样？</p>
+<pre><code class="language-text">main:    A --- B --- C --- D
+              ^
+member1:      B
+</code></pre>
+<p>也可以画成</p>
+<pre><code class="language-text">A --- B --- C --- D    main
+      ^
+      member1
+</code></pre>
+<p>因为每个分支都有一个头指针指向当前分支的head</p>
 <p>答案是直接将member1的头指针指向D</p>
-<p>A — B — C — D    main<br>                  ^<br>                  member1<br>这个就叫快速合并(fast-forward merge),很符合直觉，毕竟自己什么都没改，要合并别人新的修改直接用别人的最新版不就行了。<br>这个就是我们小学期小组合作的逻辑，你提交之后再拉取main，由于期间没有任何修改，你的分支的指针会直接指向main的head，你再修改再提交再合并到main在图上就是一个闭环。</p>
+<pre><code class="language-text">A --- B --- C --- D    main
+                  ^
+                  member1
+</code></pre>
+<p>这个就叫快速合并(fast-forward merge),很符合直觉，毕竟自己什么都没改，要合并别人新的修改直接用别人的最新版不就行了。<br>这个就是我们小学期小组合作的逻辑，你提交之后再拉取main，由于期间没有任何修改，你的分支的指针会直接指向main的head，你再修改再提交再合并到main在图上就是一个闭环。</p>
 <p>merge的优势在于保留了每个merge的完整历史记录，缺点是大部分情况下merge都会多产生一个commit，如果分支较多，历史记录会变得很复杂</p>
 <h2 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h2><p>merge是一种会保留修改记录的合并，在多人协同开发的项目中可能会变乱，那么有没有一种不保留分叉记录的合并，使得main分支就好像是按顺序开发的一样呢？<br>当然是有的，那就是rebase。</p>
 <pre><code class="language-bash">git rebase &lt;branch&gt; # 将当前分支的commit移到branch分支的最新commit之后
 </code></pre>
 <p>rebase 可以理解成：<br>把你当前分支上的提交“挪到”另一个分支的最新提交后面重新排一遍。</p>
-<p>还是刚才的例子，<br>git checkout member1<br>git rebase main<br>意思是把 member1 上自己新增的提交，重新接到 main 最新提交后面。<br>一开始是这样：<br>A — B — C        main<br>      <br>       D — E      member1</p>
-<p>如果在member1上执行git rebase main<br>结果是<br>A — B — C        main<br>             <br>              D’ — E’   member1<br>注意这里是 D’、E’，不是原来的 D、E。</p>
+<p>还是刚才的例子，<br>git checkout member1<br>git rebase main<br>意思是把 member1 上自己新增的提交，重新接到 main 最新提交后面。<br>一开始是这样：</p>
+<pre><code class="language-text">A --- B --- C        main
+      \
+       D --- E      member1
+</code></pre>
+<p>如果在member1上执行git rebase main<br>结果是</p>
+<pre><code class="language-text">A --- B --- C        main
+             \
+              D&#39; --- E&#39;   member1
+</code></pre>
+<p>注意这里是 D’、E’，不是原来的 D、E。</p>
 <p>因为 rebase 不是简单合并，而是：</p>
 <ol>
 <li>先把 member1 上独有的提交 D、E 暂时拿下来；</li>
@@ -835,7 +866,12 @@
 <li>再把 D、E 的改动重新应用一遍；</li>
 <li>生成新的提交 D’、E’。</li>
 </ol>
-<p>所以rebase后相当于<br>A — B — C — D’ — E’   member1<br>            ^<br>            main<br>结果就是历史变成一条直线，看起来像你是在 main 最新代码基础上开发的。</p>
+<p>所以rebase后相当于</p>
+<pre><code class="language-text">A --- B --- C --- D&#39; --- E&#39;   member1
+            ^
+            main
+</code></pre>
+<p>结果就是历史变成一条直线，看起来像你是在 main 最新代码基础上开发的。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>merge：保留分叉，把两条线合到一起，安全但历史可能乱。</p>
 <p>rebase：把自己的提交重新放到 main 后面，历史干净但会改写提交。</p>
 <p>merge：适合保留真实分支合并历史，常用于把功能分支合入 main，也可以用于把 main 同步到个人分支。</p>

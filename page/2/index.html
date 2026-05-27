@@ -181,6 +181,46 @@
         
 
 <div class="post">
+    <a href="/2026/04/29/%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E8%AF%95/">
+        <h2 class="post-title">面试</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/29
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>面试官您好，我这个项目是一个基于 Spring Boot、Redis、RabbitMQ 和 MySQL 实现的高并发秒杀下单项目，主要模拟优惠券秒杀这种瞬时高并发场景。我主要负责的是下单链路这一块的设计和优化，重点解决高并发下的超卖、重复下单、数据库写入压力过大，以及异步链路下的数据一致性问题。</p>
+<p>在实现上，我先用 Redis + Lua 做秒杀资格的原子校验，把库存判断、一人一单和库存预扣放到一个脚本里执行；然后在入口前增加了基于 Redis ZSet + Lua 的滑动窗口限流，控制单用户请求频率；通过 RabbitMQ 把下单请求异步化，削峰解耦，减轻数据库并发压力；另外我还补了死信队列和补偿逻辑，对下单失败的消息做重试、回滚 Redis 预占和人工介入标记，尽量保证最终一致性。除此之外，我还做了售罄快速失败和 JVM 调优，用来减少无效请求开销并提升压测下的稳定性。</p>
+<p>这个 Lua 脚本主要做四件事。<br>第一，先根据 voucherId 组装 Redis key，一个是库存 key，一个是下单记录 key。<br>第二，读取库存，如果库存小于等于 0，就直接返回失败，表示库存不足。<br>第三，检查当前用户是否已经在这个券对应的下单用户集合里，如果已经存在，就返回失败，表示重复下单。<br>第四，如果前两步都通过，就在 Redis 里先执行库存预扣减，再把 userId 写入这个券对应的下单用户集合里，表示这个用户已经占到了购买资格。整个过程放在 Lua 里执行，是为了保证这几步操作的原子性，避免高并发下出现超卖或者一人多单。</p>
+<p>“正常消费者第一次消费失败时，我会先 NACK + requeue&#x3D;true，允许消息再消费一次。<br>如果第二次还是失败，就先记录一条 PENDING 状态的死信日志，然后 basicReject(requeue&#x3D;false)，让消息自动进入死信队列。</p>
+<p>死信消费者收到消息后，会先查这笔订单是否其实已经落库成功了，如果已经成功，就直接把死信日志标记成 SUCCESS。<br>如果还没成功，就再尝试补单一次，也就是重新走数据库侧的下单逻辑；如果这次补单成功，就标记成 RETRIED_SUCCESS。<br>如果补单还是失败，就继续执行 Redis 预占回滚，把之前 Lua 里预扣的库存和用户资格释放掉；如果回滚成功，就标记成 ROLLED_BACK。<br>如果连回滚也失败，说明这条消息已经不能自动恢复了，就把它标记成 MANUAL_REVIEW，后续交给人工介入处理。<br>所以这条死信链路的核心目标是让失败消息具备可追踪、可补偿、可兜底的闭环能力。”</p>
+<p>如果只看单个用户的 ZSet，在我的场景里窗口很小，而且限制是每秒最多 1 次请求，所以正常情况下一个用户在窗口内只会留下很少几条记录，很多时候甚至只有 1 条，因此单个 ZSet 的数据量其实不大。</p>
+<p>但如果从整体看，用户规模很大时，还是会有比较多的 key 和对象元数据开销，所以不能说完全没有内存成本。<br>因此我的处理思路是：一方面通过 ZREMRANGEBYSCORE 及时清理窗口外请求，另一方面给这个限流 key 设置一个略大于窗口时间的过期时间，让不活跃用户的 ZSet 自动过期回收。这样就能把内存占用控制在一个比较可接受的范围内。</p>
+<p>所以结论不是 ZSet 完全不占内存，而是对于我这个‘小窗口、低阈值、及时清理、带过期时间’的限流场景，它的内存开销是可控的。” </p>
+<p>“因为这个限流主要是为了拦截单个用户在极短时间内的重复请求，所以我按用户维度做限流，而不是做全局限流。<br>如果只做全局限流，那高峰期可能会因为少数用户的高频请求把整个接口限住，反而影响其他正常用户的秒杀体验；而按用户维度限流，可以更精准地约束异常频繁点击、脚本刷接口或者网络抖动下的重复提交。</p>
+<p>另外，这个项目本身还有‘一人一单’的业务约束，但那是资格校验层解决的问题，是通过 Redis + Lua 和数据库幂等兜底来保证的。<br>限流和一人一单虽然都和用户有关，但本质上是两层不同的控制：<br>前者是流量保护，后者是业务约束</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2026/04/29/%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E8%AF%95/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2026/04/28/RAG/RAG%E5%9F%BA%E7%A1%80/">
         <h2 class="post-title">RAG基础</h2>
     </a>
@@ -353,7 +393,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #00a596">回溯</a>
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ffa2c4">回溯</a>
         </span>
         
     </div>
@@ -458,12 +498,12 @@ async def get_session_crud(db: AsyncSession, skip: int = 0, limit: int = 10):
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #ff7d73">头条项目</a>
+            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #00bcd4">头条项目</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/CRUD/" style="color: #ffa2c4">CRUD</a>
+            <a href="/tags/CRUD/" style="color: #ff7d73">CRUD</a>
         </span>
         
     </div>
@@ -561,12 +601,12 @@ async def read_items(db: AsyncSession = Depends(get_db)):
         
         <span class="tag">
             
-            <a href="/tags/ORM/" style="color: #00bcd4">ORM</a>
+            <a href="/tags/ORM/" style="color: #ff7d73">ORM</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #00a596">头条项目</a>
+            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #ffa2c4">头条项目</a>
         </span>
         
     </div>
@@ -626,7 +666,7 @@ async def get_categories():
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #ffa2c4">头条项目</a>
+            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #03a9f4">头条项目</a>
         </span>
         
     </div>
@@ -776,7 +816,7 @@ async def read_items(db: AsyncSession = Depends(get_db), page: int = 0, page_siz
         
         <span class="tag">
             
-            <a href="/tags/SQLAlchemy/" style="color: #ff7d73">SQLAlchemy</a>
+            <a href="/tags/SQLAlchemy/" style="color: #00a596">SQLAlchemy</a>
         </span>
         
     </div>
@@ -855,101 +895,11 @@ async def read_items(db: AsyncSession = Depends(get_db)):
         
         <span class="tag">
             
-            <a href="/tags/ORM/" style="color: #ffa2c4">ORM</a>
+            <a href="/tags/ORM/" style="color: #00bcd4">ORM</a>
         </span>
         
     </div>
     <a href="/2026/04/25/FastAPI/%E5%9C%A8%E8%B7%AF%E7%94%B1%E4%B8%AD%E4%BD%BF%E7%94%A8ORM/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/25/FastAPI/ORM%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
-        <h2 class="post-title">ORM基本操作</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/FastAPI/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                FastAPI
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p>本项目使用SQLAlchemy作为ORM工具，安装依赖：</p>
-<pre><code class="language-txt">sqlalchemy[asyncio]
-aiomysql
-</code></pre>
-<h2 id="创建数据库模型"><a href="#创建数据库模型" class="headerlink" title="创建数据库模型"></a>创建数据库模型</h2><p>先创建异步数据库引擎和会话：</p>
-<pre><code class="language-python">from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker
-DATABASE_URL = &quot;mysql+aiomysql://user:password@localhost/dbname&quot;
-engine = create_async_engine(DATABASE_URL, 
-echo=True ##日志输出SQL语句
-pool_size=10, ##连接池大小
-max_overflow=20, ##连接池最大溢出数量
-)
-</code></pre>
-<h3 id="定义模型类"><a href="#定义模型类" class="headerlink" title="定义模型类"></a>定义模型类</h3><p>定义基类和模型类：</p>
-<pre><code class="language-python">from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
-class Base:
-    create_time = Column(Integer)
-    update_time = Column(Integer)
-class User(Base):
-    __tablename__ = &quot;users&quot;
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(50), unique=True, index=True)
-    email = Column(String(50), unique=True, index=True)
-</code></pre>
-<h3 id="定义函数建表"><a href="#定义函数建表" class="headerlink" title="定义函数建表"></a>定义函数建表</h3><pre><code class="language-python">async def init_db():
-    async with async_engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-</code></pre>
-<p>再搞一个启动时调用的函数：</p>
-<pre><code class="language-python">@app.on_event(&quot;startup&quot;)
-async def on_startup():
-    await init_db()
-</code></pre>
-<p>这样就可以在应用启动时自动创建数据库表了。</p>
-<p>总结一下，有三步：</p>
-<ol>
-<li>创建数据库引擎和会话</li>
-<li>定义模型类</li>
-<li>定义函数建表并在应用启动时调用</li>
-</ol>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/ORM/" style="color: #03a9f4">ORM</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/25/FastAPI/ORM%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="go-post">阅读全文</a>
 </div>
 
 

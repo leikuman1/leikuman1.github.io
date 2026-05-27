@@ -181,6 +181,96 @@
         
 
 <div class="post">
+    <a href="/2026/04/25/FastAPI/ORM%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
+        <h2 class="post-title">ORM基本操作</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/FastAPI/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                FastAPI
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p>本项目使用SQLAlchemy作为ORM工具，安装依赖：</p>
+<pre><code class="language-txt">sqlalchemy[asyncio]
+aiomysql
+</code></pre>
+<h2 id="创建数据库模型"><a href="#创建数据库模型" class="headerlink" title="创建数据库模型"></a>创建数据库模型</h2><p>先创建异步数据库引擎和会话：</p>
+<pre><code class="language-python">from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker
+DATABASE_URL = &quot;mysql+aiomysql://user:password@localhost/dbname&quot;
+engine = create_async_engine(DATABASE_URL, 
+echo=True ##日志输出SQL语句
+pool_size=10, ##连接池大小
+max_overflow=20, ##连接池最大溢出数量
+)
+</code></pre>
+<h3 id="定义模型类"><a href="#定义模型类" class="headerlink" title="定义模型类"></a>定义模型类</h3><p>定义基类和模型类：</p>
+<pre><code class="language-python">from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String
+class Base:
+    create_time = Column(Integer)
+    update_time = Column(Integer)
+class User(Base):
+    __tablename__ = &quot;users&quot;
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(50), unique=True, index=True)
+    email = Column(String(50), unique=True, index=True)
+</code></pre>
+<h3 id="定义函数建表"><a href="#定义函数建表" class="headerlink" title="定义函数建表"></a>定义函数建表</h3><pre><code class="language-python">async def init_db():
+    async with async_engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+</code></pre>
+<p>再搞一个启动时调用的函数：</p>
+<pre><code class="language-python">@app.on_event(&quot;startup&quot;)
+async def on_startup():
+    await init_db()
+</code></pre>
+<p>这样就可以在应用启动时自动创建数据库表了。</p>
+<p>总结一下，有三步：</p>
+<ol>
+<li>创建数据库引擎和会话</li>
+<li>定义模型类</li>
+<li>定义函数建表并在应用启动时调用</li>
+</ol>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ORM/" style="color: #00a596">ORM</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/25/FastAPI/ORM%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2026/04/25/FastAPI/%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">
         <h2 class="post-title">中间件和依赖注入</h2>
     </a>
@@ -436,7 +526,7 @@ async def read_item(item_id: int):
         
         <span class="tag">
             
-            <a href="/tags/DB/" style="color: #00bcd4">DB</a>
+            <a href="/tags/DB/" style="color: #03a9f4">DB</a>
         </span>
         
     </div>
@@ -572,12 +662,12 @@ def get_db():
         
         <span class="tag">
             
-            <a href="/tags/FastAPI/" style="color: #00a596">FastAPI</a>
+            <a href="/tags/FastAPI/" style="color: #ff7d73">FastAPI</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/DB/" style="color: #03a9f4">DB</a>
+            <a href="/tags/DB/" style="color: #00bcd4">DB</a>
         </span>
         
     </div>
@@ -683,7 +773,7 @@ def get_db():
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #00a596">回溯</a>
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ffa2c4">回溯</a>
         </span>
         
     </div>
@@ -738,12 +828,12 @@ def get_db():
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00bcd4">博客</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ff7d73">回溯</a>
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #03a9f4">回溯</a>
         </span>
         
     </div>
@@ -796,12 +886,12 @@ def get_db():
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00a596">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00bcd4">博客</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ffa2c4">回溯</a>
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #00a596">回溯</a>
         </span>
         
     </div>
@@ -888,65 +978,16 @@ public Binding seckillDeadLetterBinding() {
         
         <span class="tag">
             
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00bcd4">博客</a>
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ffa2c4">博客</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #ffa2c4">入门</a>
+            <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #00a596">入门</a>
         </span>
         
     </div>
     <a href="/2026/04/21/java%E9%A1%B9%E7%9B%AE/%E6%96%B0%E5%A2%9E%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/21/%E9%9D%A2%E7%BB%8F/%E6%80%A7%E6%A0%BC%E7%BC%BA%E7%82%B9/">
-        <h2 class="post-title">性格缺点</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E9%9D%A2%E7%BB%8F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                面经
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/21
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="回答模板"><a href="#回答模板" class="headerlink" title="回答模板"></a>回答模板</h2><p>我觉得自己有一个需要提升的地方，就是刚接触新任务时会偏谨慎，前期会想把细节考虑得比较完整。比如我之前做秒杀项目时，在下单链路改造上，我一开始会先花不少时间把 Redis 校验、MQ 异步下单和数据库落库之间的关系梳理清楚，再开始动手。这样虽然返工少，但前期启动会慢一点。后来我调整成先把主链路拆小，先做最小可运行版本，再逐步补细节，同时及时同步自己的阶段性理解。这样既保证了质量，也提高了推进效率。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #ff7d73">博客</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/21/%E9%9D%A2%E7%BB%8F/%E6%80%A7%E6%A0%BC%E7%BC%BA%E7%82%B9/" class="go-post">阅读全文</a>
 </div>
 
 

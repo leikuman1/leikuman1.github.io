@@ -542,6 +542,29 @@ body::-webkit-scrollbar-track {
     text-align: right;
     vertical-align: top;
 }
+.code-content .shell-command,
+.code-content .git-graph-branch {
+    color: #0550ae;
+    font-weight: 700;
+}
+.code-content .shell-option {
+    color: #953800;
+}
+.code-content .shell-argument {
+    color: #116329;
+}
+.code-content .shell-comment {
+    color: #6a737d;
+    font-style: italic;
+}
+.code-content .git-graph-commit {
+    color: #cf222e;
+    font-weight: 700;
+}
+.code-content .git-graph-edge {
+    color: #8250df;
+    font-weight: 700;
+}
 .icon {
     color: #5c6b72;
     margin-right: 5px;

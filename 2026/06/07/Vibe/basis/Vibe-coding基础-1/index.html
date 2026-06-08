@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>Vibe coding基础-1 | L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Vibe coding基础-1</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/6/7
+        </span>
+        
+        <span class="category">
+            <a href="/categories/Vibe-coding/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Vibe coding
+            </a>
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="任务目标"><a href="#任务目标" class="headerlink" title="任务目标"></a>任务目标</h2><p>跟随datawhale的Vibe coding教程完成一个个人数字分身.</p>
+<h2 id="Prompt基础-具体比抽象更有用"><a href="#Prompt基础-具体比抽象更有用" class="headerlink" title="Prompt基础:具体比抽象更有用"></a>Prompt基础:具体比抽象更有用</h2><p>从一个模板开始,填空完成prompt</p>
+<pre><code class="language-text">我想做一个个人主页，上面有一个数字分身聊天区。
+
+【关于我】
+- 名字：______
+- 一句话介绍：______
+- 我现在主要在做：______
+- 我的兴趣：______
+- 我一个比较有记忆点的特点：______
+
+【这个主页给谁看】
+- 主要访客：______
+
+【页面里至少要有】
+- 头像
+- 名字和一句话介绍
+- 一个简单的个人信息展示区
+- 一个可以提问的数字分身聊天区
+
+【数字分身需要知道】
+- 我的职业或身份：______
+- 我最近在做的事：______
+- 我擅长或关心的方向：______
+- 别人最可能问我的 3 个问题：______
+
+【风格要求】
+- 我希望整体感觉是：______
+- 我更偏好的颜色：______
+- 是否要适配手机：是
+- 其他要求：______
+
+请先帮我生成一个第一版原型。
+要求：
+1. 先保证结构清楚、能用
+2. 不要过度复杂
+3. 先做出一个可预览的版本
+</code></pre>
+<p>这里填写时注意,尽量不要使用形容词,而是使用具体的时间或动作来形容自己.<br>比如我是喜欢很多东西,可以写成具体的我喜欢表编程,音乐和美术.提示词越具体,ai越容易理解.<br>另外开始时记得开启计划模式(plan model)</p>
+<h2 id="做出第一版并微调"><a href="#做出第一版并微调" class="headerlink" title="做出第一版并微调"></a>做出第一版并微调</h2><p>把上面的prompt交给agent编程工具,让他给你做出第一版,此时大概率是不太符合我们的要求的,所以要进行微调.微调的流程一般是:看到产品-&gt;指出一个最明显问题-&gt;<br>写prompt让ai修改-&gt;再次预览-&gt;是否满意?满意就结束:否则继续循环</p>
+<h3 id="第一轮-修复明显错误"><a href="#第一轮-修复明显错误" class="headerlink" title="第一轮:修复明显错误"></a>第一轮:修复明显错误</h3><p>prompt可以按照这个模板写:</p>
+<pre><code class="language-text">先不要大改整个页面.
+先改一个最明显的问题:
+xxx
+
+这一轮只修改这个问题,不要修改整体风格和其他内容.
+</code></pre>
+<p>这里注意每轮最好只让ai专注于一个问题,不要一次性让ai修复太多问题.</p>
+<h3 id="第二轮-调整内容和风格"><a href="#第二轮-调整内容和风格" class="headerlink" title="第二轮:调整内容和风格"></a>第二轮:调整内容和风格</h3><p>这一轮开始优化产品,处理比如风格太花或太素,个人信息层次不清楚的问题.<br>prompt参考:</p>
+<pre><code class="language-text">现在结构已经基本对了。
+接下来我只想调整整体风格：
+- 让页面更简约、清爽
+- 主色调改成深蓝和白色
+- 不要增加新的复杂模块
+请只做风格层面的修改。
+</code></pre>
+<p>这里注意要把改动边界说清楚,比如请只做风格层面的修改.防止修一个bug,结果产生了好几个bug的概率.</p>
+<h3 id="第三轮-做小幅度细化"><a href="#第三轮-做小幅度细化" class="headerlink" title="第三轮:做小幅度细化"></a>第三轮:做小幅度细化</h3><p>这一轮就可以开始抠细节了,处理那些”不是问题,但修改后会更顺眼的细节”,比如按钮的圆角,面板之间的距离.</p>
+<pre><code class="language-text">页面整体已经接近我想要的效果了。
+现在请只做小幅细化：
+- 把聊天框的引导语改得更自然一点
+- 让头像和简介区的间距更舒服
+- 不要新增模块，也不要重做布局
+</code></pre>
+<p>总的来说,要注意两点:</p>
+<ol>
+<li>每次只让ai完成一个任务</li>
+<li>限制每次改动的范围</li>
+</ol>
+<h2 id="第一轮验收与优化"><a href="#第一轮验收与优化" class="headerlink" title="第一轮验收与优化"></a>第一轮验收与优化</h2><p>很多人会陷入一个死循环里:既然都已经做出来了,再加一点,再改一点…<br>最后第一章永远无法结束了,所以我们要明确验收标准.</p>
+<h3 id="尝试制订验收清单"><a href="#尝试制订验收清单" class="headerlink" title="尝试制订验收清单"></a>尝试制订验收清单</h3><p>页面能正常打开<br>我的名字和一句话介绍清楚显示<br>页面看起来已经像“我的个人主页”而不是完全空白模板<br>聊天入口存在，并且能完成基础提问<br>手机端至少可以正常浏览</p>
+<p>如果以上标准都可以通过,就可以开始第二轮开发了.第一轮的目标是先做出一个能用的版本,不要求完美,只要满足基本功能和结构就行了.</p>
+<h3 id="记录下一轮优化清单"><a href="#记录下一轮优化清单" class="headerlink" title="记录下一轮优化清单"></a>记录下一轮优化清单</h3><p>第一轮跑出来后,你一定可以注意到有些可以优化的地方,可以分为以下四类:</p>
+<ol>
+<li>界面问题:颜色不好看,排版不顺,ai味太重了之类的</li>
+<li>内容问题:自我介绍太空,联系信息不完整</li>
+<li>产品问题:回答太机械,没有接入真正的llm</li>
+<li>体验问题:用户不知道按什么按钮,链接鼠标移动上去没有反馈</li>
+</ol>
+<p>可以根据需要确定需求优先级,在后面的部分进行开发.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>用prompt明确任务目标,缩小工作范围</li>
+<li>在开始任务前使用计划模式</li>
+<li>每轮只让ai专注一个问题,同时明确任务边界</li>
+</ol>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

@@ -181,6 +181,60 @@
         
 
 <div class="post">
+    <a href="/2026/04/27/hot100/%E5%9B%9E%E6%BA%AF/%E4%BA%A7%E7%94%9F%E6%8B%AC%E5%8F%B7/">
+        <h2 class="post-title">产生括号</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Hot100/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Hot100
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/27
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>这里有个小技巧，把path的下标拆成left和right，添加括号时用l+r<br>取下标，又可以方便地维护左右括号的数量。<br>思想是先放左括号，如果左括号数量大于右括号就可以放右括号<br>递归，维护l和r，当r&#x3D;&#x3D;n时记录ans并返回，否则如果l&lt;n就添加左括号并递归下一层，递归结束后回溯，如果r&lt;l就添加右括号并递归下一层，递归结束后回溯。</p>
+<p>这里可以预先分配好path的长度，就不用手动回溯，直接覆盖就行了。</p>
+<h2 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h2><p>产生括号很容易想到回溯</p>
+<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><p>忘记回溯，导致结果不对</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间 O(4^n&#x2F;sqrt(n)) 生成的括号数量是卡特兰数，近似为O(4^n&#x2F;sqrt(n))<br>空间 O(n) path的长度为2n，递归栈深度也是2n</p>
+<h2 id="我的收获"><a href="#我的收获" class="headerlink" title="我的收获"></a>我的收获</h2><p>暂无</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #00a596">回溯</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/27/hot100/%E5%9B%9E%E6%BA%AF/%E4%BA%A7%E7%94%9F%E6%8B%AC%E5%8F%B7/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E5%BC%95%E5%85%A5CRUD/">
         <h2 class="post-title">引入CRUD</h2>
     </a>
@@ -278,12 +332,12 @@ async def get_session_crud(db: AsyncSession, skip: int = 0, limit: int = 10):
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #ffa2c4">头条项目</a>
+            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #ff7d73">头条项目</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/CRUD/" style="color: #00bcd4">CRUD</a>
+            <a href="/tags/CRUD/" style="color: #03a9f4">CRUD</a>
         </span>
         
     </div>
@@ -381,12 +435,12 @@ async def read_items(db: AsyncSession = Depends(get_db)):
         
         <span class="tag">
             
-            <a href="/tags/ORM/" style="color: #00a596">ORM</a>
+            <a href="/tags/ORM/" style="color: #00bcd4">ORM</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #03a9f4">头条项目</a>
+            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #ff7d73">头条项目</a>
         </span>
         
     </div>
@@ -446,7 +500,7 @@ async def get_categories():
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #ffa2c4">头条项目</a>
+            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #03a9f4">头条项目</a>
         </span>
         
     </div>
@@ -523,7 +577,7 @@ async def delete_item(item_id: int, db: AsyncSession = Depends(get_db)):
         
         <span class="tag">
             
-            <a href="/tags/SQLAlchemy/" style="color: #03a9f4">SQLAlchemy</a>
+            <a href="/tags/SQLAlchemy/" style="color: #00bcd4">SQLAlchemy</a>
         </span>
         
     </div>
@@ -596,7 +650,7 @@ async def read_items(db: AsyncSession = Depends(get_db), page: int = 0, page_siz
         
         <span class="tag">
             
-            <a href="/tags/SQLAlchemy/" style="color: #00bcd4">SQLAlchemy</a>
+            <a href="/tags/SQLAlchemy/" style="color: #00a596">SQLAlchemy</a>
         </span>
         
     </div>
@@ -675,7 +729,7 @@ async def read_items(db: AsyncSession = Depends(get_db)):
         
         <span class="tag">
             
-            <a href="/tags/ORM/" style="color: #00bcd4">ORM</a>
+            <a href="/tags/ORM/" style="color: #ffa2c4">ORM</a>
         </span>
         
     </div>
@@ -980,59 +1034,6 @@ async def read_item(item_id: int):
         
     </div>
     <a href="/2026/04/25/FastAPI/%E5%88%9D%E8%AF%95FastAPI/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/%E6%8E%A5%E5%8F%A3%E8%BF%9E%E6%8E%A5%E5%88%B0DB/">
-        <h2 class="post-title">接口连接到DB</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Python/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Python
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/24
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/FastAPI/" style="color: #03a9f4">FastAPI</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/DB/" style="color: #00bcd4">DB</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/%E6%8E%A5%E5%8F%A3%E8%BF%9E%E6%8E%A5%E5%88%B0DB/" class="go-post">阅读全文</a>
 </div>
 
 

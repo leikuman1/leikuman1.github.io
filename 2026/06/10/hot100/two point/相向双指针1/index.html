@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>接口连接到DB | L&#39;sBlog</title>
+    <title>相向双指针1 | L&#39;sBlog</title>
     <meta name="author" content="Yu" />
     <meta name="description" content="Nearer to death, nearer to rebirth." />
     <meta name="keywords" content="" />
@@ -156,52 +156,71 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>接口连接到DB</h1>
+        <h1>相向双指针1</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/4/24
+            2026/6/10
         </span>
         
         <span class="category">
-            <a href="/categories/Python/">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                Python
+                算法
             </a>
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/FastAPI/" style="color: #ffa2c4">
-                    FastAPI
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/DB/" style="color: #03a9f4">
-                    DB
-                </a>
-            </span>
-            
-        </span>
-        
     </div>
     
     <div class="content" v-pre>
-        
+        <h2 id="相向双指针思想"><a href="#相向双指针思想" class="headerlink" title="相向双指针思想"></a>相向双指针思想</h2><p>一般用于找组合问题,比如在一个数组中找那些元素相加等于target,可以组成三角形之类的.<br>方法:在数组有序的前提下,通过指针以O(1)的时间获取O(n)的信息,达到比枚举更优的时间复杂度.比如当l+r&gt;target时,可以判断[r,n-1]加l都大于target,故可以r–判断下一组,反之同理.</p>
+<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><pre><code class="language-C++">    class Solution {
+    public:
+        vector&lt;vector&lt;int&gt;&gt; ans;
+        vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums) {
+            sort(nums.begin(),nums.end());
+            int n=nums.size();
+            //outside loop
+            for(int i=0;i&lt;n-2;++i){
+                //inside two point
+                //nums[j]+nums[k]=-nums[i]
+                if(i&gt;0&amp;&amp;nums[i]==nums[i-1]){
+                    continue;
+                }
+                int tmp=-nums[i];
+                for(int j=i+1,k=n-1;j&lt;k;){
+                    if(nums[j]+nums[k]&gt;tmp){
+                        k--;
+                    } else if(nums[j]+nums[k]&lt;tmp){
+                        j++;
+                    } else {
+                        ans.push_back({nums[i],nums[j],nums[k]});
+                        while(j&lt;k&amp;&amp;nums[j]==nums[j+1]){
+                            j++;
+                        }
+                        while(k&gt;j&amp;&amp;nums[k]==nums[k-1]){
+                            k--;
+                        }
+                        j++;k--;
+                    }
+                }
+            }
+            return ans;
+        }
+    };
+</code></pre>
+<p><strong>注意这里循环最里面的else,即更新ans后的去重操作,其目的是去重,去掉加入ans集的nums[k],nums[j].比如当前j是1,后面是1,2,3,就要让j指向2.<br>以j为例子,可以先++再判断和前面的数是否相同,也可以先判断和后面的数是否相同,最后再++.</strong></p>
+<h2 id="相似题型"><a href="#相似题型" class="headerlink" title="相似题型"></a>相似题型</h2><p>2824 统计小于目标的下标对数目<br>没什么好说的,套模板改成小于就行,大于就k–,小于记录答案然后j++<br>就是合适后再修改变量试探,看能不能继续符合条件,这种思想非常重要.</p>
+<p>16 最接近的三数之和<br>套模板就行,枚举i,如果sum&gt;target就k–,否则j++,每轮都更新一遍ans</p>
+<p>18 四数之和<br>相向双指针只能维护两个,所以最外层枚举i,内一层枚举j,内二层枚举k1,k2<br>这里需要注意j的去重条件是j&gt;i+1&amp;&amp;nums[j]&#x3D;&#x3D;nums[j-1],代表除了刚进入循环的第一次,后面如果枚举的数和前一个相同就跳过,思想和i去重相同</p>
+<p>611 有效三角形个数<br>这里要转变思路,如果一开始就套模板外层枚举i,内层枚举j,k.就会发现<br>nums[i]+nums[j]&gt;nums[k]时,既可以k++,也可以j–<br>nums[i]+nums[j]&lt;nums[k]时,既可以k–,也可以j++<br>造成这种情况的根本原因是j和k不在等式的同一边,于是单调性就出了问题,以前遇到的问题,jk都在同一边,每种情况都只能调整一个变量,要么j增要么k-.<br>所以这里只能枚举k,ij当做双指针或使用同向双指针,即滑动窗口</p>
+
     </div>
     
     

@@ -181,6 +181,86 @@
         
 
 <div class="post">
+    <a href="/2026/06/10/hot100/two%20point/%E7%9B%B8%E5%90%91%E5%8F%8C%E6%8C%87%E9%92%881/">
+        <h2 class="post-title">相向双指针1</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/6/10
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="相向双指针思想"><a href="#相向双指针思想" class="headerlink" title="相向双指针思想"></a>相向双指针思想</h2><p>一般用于找组合问题,比如在一个数组中找那些元素相加等于target,可以组成三角形之类的.<br>方法:在数组有序的前提下,通过指针以O(1)的时间获取O(n)的信息,达到比枚举更优的时间复杂度.比如当l+r&gt;target时,可以判断[r,n-1]加l都大于target,故可以r–判断下一组,反之同理.</p>
+<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><pre><code class="language-C++">    class Solution {
+    public:
+        vector&lt;vector&lt;int&gt;&gt; ans;
+        vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums) {
+            sort(nums.begin(),nums.end());
+            int n=nums.size();
+            //outside loop
+            for(int i=0;i&lt;n-2;++i){
+                //inside two point
+                //nums[j]+nums[k]=-nums[i]
+                if(i&gt;0&amp;&amp;nums[i]==nums[i-1]){
+                    continue;
+                }
+                int tmp=-nums[i];
+                for(int j=i+1,k=n-1;j&lt;k;){
+                    if(nums[j]+nums[k]&gt;tmp){
+                        k--;
+                    } else if(nums[j]+nums[k]&lt;tmp){
+                        j++;
+                    } else {
+                        ans.push_back({nums[i],nums[j],nums[k]});
+                        while(j&lt;k&amp;&amp;nums[j]==nums[j+1]){
+                            j++;
+                        }
+                        while(k&gt;j&amp;&amp;nums[k]==nums[k-1]){
+                            k--;
+                        }
+                        j++;k--;
+                    }
+                }
+            }
+            return ans;
+        }
+    };
+</code></pre>
+<p><strong>注意这里循环最里面的else,即更新ans后的去重操作,其目的是去重,去掉加入ans集的nums[k],nums[j].比如当前j是1,后面是1,2,3,就要让j指向2.<br>以j为例子,可以先++再判断和前面的数是否相同,也可以先判断和后面的数是否相同,最后再++.</strong></p>
+<h2 id="相似题型"><a href="#相似题型" class="headerlink" title="相似题型"></a>相似题型</h2><p>2824 统计小于目标的下标对数目<br>没什么好说的,套模板改成小于就行,大于就k–,小于记录答案然后j++<br>就是合适后再修改变量试探,看能不能继续符合条件,这种思想非常重要.</p>
+<p>16 最接近的三数之和<br>套模板就行,枚举i,如果sum&gt;target就k–,否则j++,每轮都更新一遍ans</p>
+<p>18 四数之和<br>相向双指针只能维护两个,所以最外层枚举i,内一层枚举j,内二层枚举k1,k2<br>这里需要注意j的去重条件是j&gt;i+1&amp;&amp;nums[j]&#x3D;&#x3D;nums[j-1],代表除了刚进入循环的第一次,后面如果枚举的数和前一个相同就跳过,思想和i去重相同</p>
+<p>611 有效三角形个数<br>这里要转变思路,如果一开始就套模板外层枚举i,内层枚举j,k.就会发现<br>nums[i]+nums[j]&gt;nums[k]时,既可以k++,也可以j–<br>nums[i]+nums[j]&lt;nums[k]时,既可以k–,也可以j++<br>造成这种情况的根本原因是j和k不在等式的同一边,于是单调性就出了问题,以前遇到的问题,jk都在同一边,每种情况都只能调整一个变量,要么j增要么k-.<br>所以这里只能枚举k,ij当做双指针或使用同向双指针,即滑动窗口</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2026/06/10/hot100/two%20point/%E7%9B%B8%E5%90%91%E5%8F%8C%E6%8C%87%E9%92%881/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2026/06/08/Vibe-coding%E8%BF%9B%E9%98%B6%E5%89%8D%E7%AB%AF-1/">
         <h2 class="post-title">Vibe coding进阶前端-1</h2>
     </a>
@@ -421,22 +501,22 @@
         
         <span class="tag">
             
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #00bcd4">AI与大模型</a>
+            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ffa2c4">AI与大模型</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #ff7d73">金融</a>
+            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00bcd4">金融</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ffa2c4">政治</a>
+            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #00a596">政治</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #ff7d73">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00bcd4">科技</a>
         </span>
         
     </div>
@@ -706,22 +786,22 @@ xxx
         
         <span class="tag">
             
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #00a596">AI与大模型</a>
+            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ff7d73">AI与大模型</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00bcd4">金融</a>
+            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #ffa2c4">金融</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ffa2c4">政治</a>
+            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #00a596">政治</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #03a9f4">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #ff7d73">科技</a>
         </span>
         
     </div>
@@ -860,22 +940,22 @@ xxx
         
         <span class="tag">
             
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ffa2c4">AI与大模型</a>
+            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ff7d73">AI与大模型</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00bcd4">金融</a>
+            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #03a9f4">金融</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ffa2c4">政治</a>
+            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #00bcd4">政治</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #03a9f4">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #ffa2c4">科技</a>
         </span>
         
     </div>
@@ -1016,17 +1096,17 @@ xxx
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #03a9f4">金融</a>
+            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00bcd4">金融</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #00a596">政治</a>
+            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ffa2c4">政治</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00bcd4">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #03a9f4">科技</a>
         </span>
         
     </div>
@@ -1150,22 +1230,22 @@ xxx
         
         <span class="tag">
             
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #03a9f4">AI与大模型</a>
+            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #00a596">AI与大模型</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #ffa2c4">金融</a>
+            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00bcd4">金融</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #00bcd4">政治</a>
+            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ff7d73">政治</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #ff7d73">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00a596">科技</a>
         </span>
         
     </div>
@@ -1301,171 +1381,17 @@ xxx
         
         <span class="tag">
             
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ff7d73">AI与大模型</a>
+            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #03a9f4">AI与大模型</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00a596">金融</a>
+            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #ff7d73">金融</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ff7d73">政治</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00a596">科技</a>
-        </span>
-        
-    </div>
-    <a href="/2026/05/24/HotMessage/2026-05-24/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/05/23/HotMessage/2026-05-23/">
-        <h2 class="post-title">2026-05-23 每日热点</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/HotMessage/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                HotMessage
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/5/23
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="今日摘要"><a href="#今日摘要" class="headerlink" title="今日摘要"></a>今日摘要</h2><p>今天的主线仍然是 AI 基建扩张、地缘政治牵动市场，以及美国科技监管摇摆。Google I&#x2F;O 继续把 Gemini 推向搜索、开发工具和硬件入口，Anthropic 与 SpaceX 的算力合作则说明大模型竞争越来越像长期基础设施竞赛。金融市场方面，伊朗谈判、油价、美元和美债收益率互相牵动，风险资产虽仍偏强，但债券端压力明显。政治上，美国对伊朗、北约和古巴的政策动作都在放大盟友和市场的不确定性。科技行业的焦点集中在 Nvidia、TPU、Blackwell 和 AI 云算力供给。</p>
-<h2 id="AI-与大模型"><a href="#AI-与大模型" class="headerlink" title="AI 与大模型"></a>AI 与大模型</h2><h3 id="1-Google-I-O-2026-继续推进“agentic-Gemini”"><a href="#1-Google-I-O-2026-继续推进“agentic-Gemini”" class="headerlink" title="1. Google I&#x2F;O 2026 继续推进“agentic Gemini”"></a>1. Google I&#x2F;O 2026 继续推进“agentic Gemini”</h3><ul>
-<li>摘要：Google 在 I&#x2F;O 2026 汇总页中将 Gemini 扩展到搜索、开发工具、智能眼镜、YouTube、Google AI Studio 等产品和入口。</li>
-<li>重要性：这说明大模型竞争不再只是模型参数和榜单，而是向操作层、应用层和硬件入口全面铺开。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection/">Google Blog</a></li>
-</ul>
-<h3 id="2-Anthropic-扩大与-SpaceX-的-Colossus-算力合作"><a href="#2-Anthropic-扩大与-SpaceX-的-Colossus-算力合作" class="headerlink" title="2. Anthropic 扩大与 SpaceX 的 Colossus 算力合作"></a>2. Anthropic 扩大与 SpaceX 的 Colossus 算力合作</h3><ul>
-<li>摘要：Axios 报道称，Anthropic 扩大与 SpaceX 的算力合作，按月支付约 12.5 亿美元，获取 Colossus 超算基础设施至 2029 年。</li>
-<li>重要性：大模型公司的核心壁垒正在从模型本身延伸到算力锁定、长期供给和资本开支能力。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.axios.com/2026/05/21/ai-news-cycle-openai-anthropic-spacex">Axios</a></li>
-</ul>
-<h3 id="3-美国-AI-与网络安全行政令被搁置"><a href="#3-美国-AI-与网络安全行政令被搁置" class="headerlink" title="3. 美国 AI 与网络安全行政令被搁置"></a>3. 美国 AI 与网络安全行政令被搁置</h3><ul>
-<li>摘要：Axios 报道称，特朗普原计划签署的 AI 与网络安全行政令在科技盟友反对后被叫停，政府仍在讨论如何处理顶级模型访问和安全问题。</li>
-<li>重要性：AI 监管进入更明显的政治博弈期，模型发布、安全评估和政府访问权可能继续反复。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.axios.com/2026/05/22/ai-executive-order-cancelled-white-house">Axios</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection/">Google Blog</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.axios.com/2026/05/21/ai-news-cycle-openai-anthropic-spacex">Axios: Two hours that changed AI</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.axios.com/2026/05/22/ai-executive-order-cancelled-white-house">Axios: AI executive order</a></li>
-</ul>
-<h2 id="金融"><a href="#金融" class="headerlink" title="金融"></a>金融</h2><h3 id="1-全球股市上涨，美元接近六周高位"><a href="#1-全球股市上涨，美元接近六周高位" class="headerlink" title="1. 全球股市上涨，美元接近六周高位"></a>1. 全球股市上涨，美元接近六周高位</h3><ul>
-<li>摘要：Reuters 报道称，全球股市上涨，美元接近六周高位，油价也因美国与伊朗谈判不确定性而上行。</li>
-<li>重要性：伊朗局势仍在通过油价和通胀预期影响美元、美债和全球风险资产。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.marketscreener.com/news/stocks-climb-dollar-near-six-week-high-amid-iran-talks-uncertainty-ce7f5adfdd8bf32d">Reuters via MarketScreener</a></li>
-</ul>
-<h3 id="2-美债收益率上行继续压制股市估值"><a href="#2-美债收益率上行继续压制股市估值" class="headerlink" title="2. 美债收益率上行继续压制股市估值"></a>2. 美债收益率上行继续压制股市估值</h3><ul>
-<li>摘要：Reuters 报道称，美股在强劲财报季后可能面临波动，10 年期美债收益率触及 2025 年 1 月以来高位，30 年期收益率一度触及 2007 年以来高位。</li>
-<li>重要性：如果长端利率维持高位，科技股估值、企业融资成本和消费信贷都会承压。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.investing.com/news/economy-news/soaring-stocks-could-face-rocky-patch-as-earnings-wind-down-yields-perk-up-4706080">Reuters via Investing.com</a></li>
-</ul>
-<h3 id="3-中国整顿非法跨境证券活动"><a href="#3-中国整顿非法跨境证券活动" class="headerlink" title="3. 中国整顿非法跨境证券活动"></a>3. 中国整顿非法跨境证券活动</h3><ul>
-<li>摘要：Reuters 报道称，中国监管层宣布打击非法跨境证券业务，涉及富途、老虎、Longbridge 等平台，并限制相关客户新增投资。</li>
-<li>重要性：这会影响中概股流动性、境内资金出海渠道和互联网券商估值预期。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.marketscreener.com/news/china-to-crack-down-on-illegal-cross-border-securities-activities-ce7f5adfdd8afe21">Reuters via MarketScreener</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.marketscreener.com/news/stocks-climb-dollar-near-six-week-high-amid-iran-talks-uncertainty-ce7f5adfdd8bf32d">Reuters via MarketScreener: global markets</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.investing.com/news/economy-news/soaring-stocks-could-face-rocky-patch-as-earnings-wind-down-yields-perk-up-4706080">Reuters via Investing.com: yields and equities</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.marketscreener.com/news/china-to-crack-down-on-illegal-cross-border-securities-activities-ce7f5adfdd8afe21">Reuters via MarketScreener: China securities crackdown</a></li>
-</ul>
-<h2 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h2><h3 id="1-美国与伊朗谈判出现“轻微进展”"><a href="#1-美国与伊朗谈判出现“轻微进展”" class="headerlink" title="1. 美国与伊朗谈判出现“轻微进展”"></a>1. 美国与伊朗谈判出现“轻微进展”</h3><ul>
-<li>摘要：AP 报道称，Rubio 表示伊朗谈判有“轻微进展”，巴基斯坦军方高层赴德黑兰推动调停，但战争是否恢复仍不确定。</li>
-<li>重要性：该议题直接影响霍尔木兹海峡、油价、美国盟友关系和全球通胀预期。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://apnews.com/article/iran-us-rubio-talks-c4be639e938fa57533f28f9fd62fb43b">AP News</a></li>
-</ul>
-<h3 id="2-北约盟友对美国欧洲驻军表态感到困惑"><a href="#2-北约盟友对美国欧洲驻军表态感到困惑" class="headerlink" title="2. 北约盟友对美国欧洲驻军表态感到困惑"></a>2. 北约盟友对美国欧洲驻军表态感到困惑</h3><ul>
-<li>摘要：AP 报道称，特朗普一边谈论减少美国在欧洲军事存在，一边又宣布向波兰派出 5000 名美军，引发北约盟友和防务官员困惑。</li>
-<li>重要性：美国对欧洲安全承诺的稳定性仍是北约东翼防务和俄乌局势的重要变量。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://apnews.com/article/nato-trump-troops-europe-poland-confusion-5ee39c29238cdee76c1780233cb6fddc">AP News</a></li>
-</ul>
-<h3 id="3-美国对古巴施压升级"><a href="#3-美国对古巴施压升级" class="headerlink" title="3. 美国对古巴施压升级"></a>3. 美国对古巴施压升级</h3><ul>
-<li>摘要：AP 分析称，特朗普政府对古巴的策略越来越像此前对委内瑞拉的做法，包括能源封锁、军事存在、司法指控和干预威胁。</li>
-<li>重要性：拉美地缘政治风险升温，可能牵动美国国内政治、能源运输和地区外交关系。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://apnews.com/article/cuba-strategy-venezuela-trump-pressure-campaign-a7555abe7f38de0e94129ca6abc3afcf">AP News</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://apnews.com/article/iran-us-rubio-talks-c4be639e938fa57533f28f9fd62fb43b">AP News: Iran talks</a></li>
-<li><a target="_blank" rel="noopener" href="https://apnews.com/article/nato-trump-troops-europe-poland-confusion-5ee39c29238cdee76c1780233cb6fddc">AP News: NATO troops confusion</a></li>
-<li><a target="_blank" rel="noopener" href="https://apnews.com/article/cuba-strategy-venezuela-trump-pressure-campaign-a7555abe7f38de0e94129ca6abc3afcf">AP News: Cuba strategy</a></li>
-</ul>
-<h2 id="科技"><a href="#科技" class="headerlink" title="科技"></a>科技</h2><h3 id="1-Nvidia-称-2000-亿美元-CPU-市场预测包含中国"><a href="#1-Nvidia-称-2000-亿美元-CPU-市场预测包含中国" class="headerlink" title="1. Nvidia 称 2000 亿美元 CPU 市场预测包含中国"></a>1. Nvidia 称 2000 亿美元 CPU 市场预测包含中国</h3><ul>
-<li>摘要：Reuters 报道称，黄仁勋在台北表示，Nvidia 对 2000 亿美元 CPU 市场的预测包含中国，同时 H200 对华销售仍受审批和中方产业政策影响。</li>
-<li>重要性：AI 芯片竞争正在从 GPU 扩展到 CPU、系统级平台和中美技术管制之间的长期博弈。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.investing.com/news/stock-market-news/nvidia-says-its-forecast-for-200-billion-cpu-market-includes-china-4708031">Reuters via Investing.com</a></li>
-</ul>
-<h3 id="2-Lambda-获得-Hudson-River-Trading-的-Blackwell-云算力订单"><a href="#2-Lambda-获得-Hudson-River-Trading-的-Blackwell-云算力订单" class="headerlink" title="2. Lambda 获得 Hudson River Trading 的 Blackwell 云算力订单"></a>2. Lambda 获得 Hudson River Trading 的 Blackwell 云算力订单</h3><ul>
-<li>摘要：Reuters 报道称，Lambda 将向高频交易公司 Hudson River Trading 出租超过 1000 套 Nvidia 最新 Blackwell 系统。</li>
-<li>重要性：AI 芯片需求正在从模型公司外溢到量化交易、企业 AI 和高性能计算客户。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.investing.com/news/stock-market-news/lambda-wins-cloud-deal-with-hudson-river-trading-to-supply-access-to-nvidia-chips-4701550">Reuters via Investing.com</a></li>
-</ul>
-<h3 id="3-Google-与-Blackstone-推出-AI-云合资公司"><a href="#3-Google-与-Blackstone-推出-AI-云合资公司" class="headerlink" title="3. Google 与 Blackstone 推出 AI 云合资公司"></a>3. Google 与 Blackstone 推出 AI 云合资公司</h3><ul>
-<li>摘要：Reuters 报道称，Google 与 Blackstone 将成立 AI 云业务，Blackstone 初始投入 50 亿美元股权，计划在 2027 年上线 500 兆瓦数据中心容量，并提供 Google TPU 算力。</li>
-<li>重要性：AI 基建正在吸引金融资本深度参与，算力供应可能从传统云厂商扩展到新的资本密集型平台。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.marketscreener.com/news/google-blackstone-to-launch-ai-cloud-venture-to-meet-data-centre-demand-ce7f5adbd88bf32d">Reuters via MarketScreener</a></li>
-</ul>
-<h3 id="4-Nvidia-业绩展望继续高于预期"><a href="#4-Nvidia-业绩展望继续高于预期" class="headerlink" title="4. Nvidia 业绩展望继续高于预期"></a>4. Nvidia 业绩展望继续高于预期</h3><ul>
-<li>摘要：Reuters 报道称，Nvidia 给出的季度收入展望高于华尔街预期，并宣布 800 亿美元股票回购，同时强调 Vera CPU 等新数据中心芯片。</li>
-<li>重要性：Nvidia 仍是 AI 基建景气度的核心风向标，但大客户自研芯片也在形成长期竞争压力。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.investing.com/news/stock-market-news/nvidia-forecasts-quarterly-revenue-above-estimates-announces-80-billion-share-buyback-4702363">Reuters via Investing.com</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.investing.com/news/stock-market-news/nvidia-says-its-forecast-for-200-billion-cpu-market-includes-china-4708031">Reuters via Investing.com: Nvidia CPU market</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.investing.com/news/stock-market-news/lambda-wins-cloud-deal-with-hudson-river-trading-to-supply-access-to-nvidia-chips-4701550">Reuters via Investing.com: Lambda and HRT</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.marketscreener.com/news/google-blackstone-to-launch-ai-cloud-venture-to-meet-data-centre-demand-ce7f5adbd88bf32d">Reuters via MarketScreener: Google and Blackstone</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.investing.com/news/stock-market-news/nvidia-forecasts-quarterly-revenue-above-estimates-announces-80-billion-share-buyback-4702363">Reuters via Investing.com: Nvidia outlook</a></li>
-</ul>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #00bcd4">AI与大模型</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00a596">金融</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #00bcd4">政治</a>
+            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ffa2c4">政治</a>
         </span>
         
         <span class="tag">
@@ -1474,7 +1400,7 @@ xxx
         </span>
         
     </div>
-    <a href="/2026/05/23/HotMessage/2026-05-23/" class="go-post">阅读全文</a>
+    <a href="/2026/05/24/HotMessage/2026-05-24/" class="go-post">阅读全文</a>
 </div>
 
 

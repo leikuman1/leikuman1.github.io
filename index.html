@@ -181,6 +181,164 @@
         
 
 <div class="post">
+    <a href="/2026/06/11/Golang/Go%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">
+        <h2 class="post-title">Go并发编程</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Golang%E5%9F%BA%E7%A1%80/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Golang基础
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/6/11
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="概念解释"><a href="#概念解释" class="headerlink" title="概念解释"></a>概念解释</h2><ul>
+<li>系统调用:当程序需要创建或使用OS提供的对象时,一般需要os提供的系统调用才能实现,与此同时,系统调用让计算机从用户态切换到内核态再切换回来会造成一定的时间开销.</li>
+<li>进程,线程,协程:进程是操作系统资源分配的基本单位,线程是操作系统进行cpu调度的基本单位,而协程是运行在线程之上的,更轻量的用户态执行单元,通常由语言的runtime或框架调度.<br>进程 是一个正在运行的程序实例。每个进程有自己独立的地址空间、内存、文件描述符等资源，进程之间相互隔离，所以安全性和稳定性比较好。但进程创建、销毁和切换的成本比较高，进程间通信也相对复杂，比如要通过管道、消息队列、共享内存、Socket 等方式。</li>
+</ul>
+<p>线程 是进程内部的执行流。一个进程可以包含多个线程，多个线程共享进程的堆内存、全局变量、文件等资源，但每个线程有自己的栈、程序计数器和寄存器上下文。线程比进程更轻量，线程之间通信更方便，但是因为共享内存，所以需要考虑线程安全问题，比如锁、CAS、死锁、竞态条件等。</p>
+<p>协程 是比线程更轻量的执行单元，通常由程序语言的运行时调度，而不是直接由操作系统调度。协程运行在线程之上，创建和切换成本更低，适合大量高并发 I&#x2F;O 场景。比如 Go 里的 goroutine、Python 的 async&#x2F;await，都可以看作协程相关的实现。</p>
+<ul>
+<li>临界区:一段访问共享资源的代码区域。多个线程&#x2F;进程如果同时进入这段代码，可能会导致数据错误。</li>
+</ul>
+<h2 id="Go并发编程基础"><a href="#Go并发编程基础" class="headerlink" title="Go并发编程基础"></a>Go并发编程基础</h2><p>两个goroutine轮流打印奇偶数字</p>
+<p>这里channel是goroutine之间传递数据的管道,go推荐的并发思想是”不要通过共享内存来通信，而要通过通信来共享内存”.也就是尽量让goroutine之间用channel传递数据,而不是大家都去抢同一个变量.<br>channel分为无缓冲channel和有缓冲channel</p>
+<ol>
+<li><p>往无缓冲 channel 写数据，但没人接收，会阻塞，严重时会 deadlock。从无缓冲channel中接受数据,如果channel中没有,会一直阻塞</p>
+</li>
+<li><p>有缓冲channel在发送方发送数据没人接受时会先暂存到缓冲区,缓冲区满了就阻塞.接受方收不到数据也是一直阻塞<br>PS:除了chanel，go中还可以用sync包中的Mutex,RWMutex,atomic,map等进行通信,其中atomic是对单个变量的原子读写操作,Mutex相对于atomic,更适合对变量判断+修改的复合逻辑,相对于更适合生产-消费模型的channel,更适合保护临界区.<br>channel 适合“传递数据&#x2F;任务&#x2F;信号”,mutex 适合“保护共享数据”<br>传递所有权，用 channel；<br>共享同一份数据，用 mutex。</p>
+</li>
+<li><p>defer 会把函数调用延迟到当前函数结束前执行。</p>
+</li>
+<li><p>多个 defer 按后进先出的顺序执行，语义上类似栈。</p>
+</li>
+<li><p>defer 的参数在注册 defer 时就会求值。</p>
+</li>
+</ol>
+<p>sync.WaitGroup的作用是:等待一组goroutine执行完毕再退出,常用方法有<br>wg.Add(3)   &#x2F;&#x2F; 计数器 +3，表示有 3 个任务要等<br>wg.Done()   &#x2F;&#x2F; 计数器 -1，表示一个任务完成了<br>wg.Wait()   &#x2F;&#x2F; 阻塞等待，直到计数器变成 0<br>除了sync.wr,还可以使用以下方法实现等待一组goroutine完成</p>
+<ol>
+<li>用channel收集完成信号</li>
+<li>用errgroup,相当于加强版的WaitGroup,可以同时等待一组goroutine完成,还可以收集错误信息</li>
+</ol>
+<pre><code class="language-golang">    func main() {
+        oddChan := make(chan int)
+        evenChan := make(chan int)
+
+        var wg sync.WaitGroup
+        wg.Add(2)
+
+        go func() {
+            defer wg.Done()
+
+            for i := 1; i &lt;= 100; i += 2 {
+                &lt;-oddChan
+                fmt.Printf(&quot;odd: %v\n&quot;, i)
+                evenChan &lt;- i
+            }
+        }()
+
+        go func() {
+            defer wg.Done()
+
+            for i := 2; i &lt;= 100; i += 2 {
+                &lt;-evenChan
+                fmt.Printf(&quot;even: %v\n&quot;, i)
+                if i == 100 {
+                    return
+                }
+                oddChan &lt;- i
+            }
+        }()
+        oddChan &lt;- 1
+        wg.Wait()
+}
+</code></pre>
+<p>三个goroutine轮流打印数字<br>一开始可能这么写:</p>
+<pre><code class="language-golang">    func main() {
+        a := make(chan int)
+        b := make(chan int)
+        c := make(chan int)
+        var wg sync.WaitGroup
+
+        wg.Add(3)
+
+        go func() {
+            defer wg.Done()
+
+            for {
+                var tmp int
+                tmp = &lt;-a
+                println(tmp)
+                b &lt;- tmp + 1
+                if tmp == 97 {
+                    return
+                }
+            }
+        }()
+
+        go func() {
+            defer wg.Done()
+
+            for {
+                var tmp int
+                tmp = &lt;-b
+                println(tmp)
+                c &lt;- tmp + 1
+                if tmp == 98 {
+                    return
+                }
+            }
+        }()
+
+        go func() {
+            defer wg.Done()
+
+            for {
+                var tmp int
+                tmp = &lt;-c
+                println(tmp)
+                if tmp == 99 {
+                    return
+                }
+                a &lt;- tmp + 1
+            }
+        }()
+        a &lt;- 1
+        wg.Wait()
+    }
+</code></pre>
+<p>但是golang有select,专门用于一个 goroutine 同时等待多个 channel，哪个先准备好就执行哪个,相当于等待channel的switch.所以代码可以优化一下.<br>另外select既可以接受channel,也可以发送channel<br>PS:除了select,还可以用以下方法实现监听多个channel</p>
+<ol>
+<li>用一个结果channel统一收集信息</li>
+</ol>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2026/06/11/Golang/Go%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2026/06/10/hot100/two%20point/%E7%9B%B8%E5%90%91%E5%8F%8C%E6%8C%87%E9%92%881/">
         <h2 class="post-title">相向双指针1</h2>
     </a>
@@ -261,7 +419,7 @@
 </div>
 
 <div class="post">
-    <a href="/2026/06/08/Vibe-coding%E8%BF%9B%E9%98%B6%E5%89%8D%E7%AB%AF-1/">
+    <a href="/2026/06/08/Vibe/apex/Vibe-coding%E8%BF%9B%E9%98%B6%E5%89%8D%E7%AB%AF-1/">
         <h2 class="post-title">Vibe coding进阶前端-1</h2>
     </a>
     <div class="category-and-date">
@@ -287,7 +445,7 @@
         
         
     </div>
-    <a href="/2026/06/08/Vibe-coding%E8%BF%9B%E9%98%B6%E5%89%8D%E7%AB%AF-1/" class="go-post">阅读全文</a>
+    <a href="/2026/06/08/Vibe/apex/Vibe-coding%E8%BF%9B%E9%98%B6%E5%89%8D%E7%AB%AF-1/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -501,7 +659,7 @@
         
         <span class="tag">
             
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ffa2c4">AI与大模型</a>
+            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #03a9f4">AI与大模型</a>
         </span>
         
         <span class="tag">
@@ -511,12 +669,12 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #00a596">政治</a>
+            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ffa2c4">政治</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00bcd4">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00a596">科技</a>
         </span>
         
     </div>
@@ -796,12 +954,12 @@ xxx
         
         <span class="tag">
             
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #00a596">政治</a>
+            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ff7d73">政治</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #ff7d73">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #03a9f4">科技</a>
         </span>
         
     </div>
@@ -940,22 +1098,22 @@ xxx
         
         <span class="tag">
             
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ff7d73">AI与大模型</a>
+            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ffa2c4">AI与大模型</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #03a9f4">金融</a>
+            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #ff7d73">金融</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #00bcd4">政治</a>
+            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #03a9f4">政治</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #ffa2c4">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00a596">科技</a>
         </span>
         
     </div>
@@ -1101,12 +1259,12 @@ xxx
         
         <span class="tag">
             
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ffa2c4">政治</a>
+            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #03a9f4">政治</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #03a9f4">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #ffa2c4">科技</a>
         </span>
         
     </div>
@@ -1230,163 +1388,12 @@ xxx
         
         <span class="tag">
             
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #00a596">AI与大模型</a>
+            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ff7d73">AI与大模型</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00bcd4">金融</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ff7d73">政治</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00a596">科技</a>
-        </span>
-        
-    </div>
-    <a href="/2026/05/25/HotMessage/2026-05-25/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/05/24/HotMessage/2026-05-24/">
-        <h2 class="post-title">2026-05-24 每日热点</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/HotMessage/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                HotMessage
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/5/24
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="今日摘要"><a href="#今日摘要" class="headerlink" title="今日摘要"></a>今日摘要</h2><p>今天的热点主线很清晰：Google I&#x2F;O 2026 继续把 Gemini 推向搜索、应用和硬件入口，OpenAI 则把 Codex 与实时语音能力向企业与开发者场景继续下沉。金融层面，美国一边推动金融科技监管松绑，一边释放最新联储会议纪要，而 Nvidia 的财报再次成为 AI 资本开支与风险偏好的风向标。政治上，欧美与拉美关系升温、中美峰会后续安排继续发酵，政策与贸易正在重新绑定。科技行业则进一步显露出“AI 搜索 + AI 终端 + AI 基建”三线并进的格局。</p>
-<h2 id="AI-与大模型"><a href="#AI-与大模型" class="headerlink" title="AI 与大模型"></a>AI 与大模型</h2><h3 id="1-Google-I-O-2026-将-Gemini-推向更强的-agentic-形态"><a href="#1-Google-I-O-2026-将-Gemini-推向更强的-agentic-形态" class="headerlink" title="1. Google I&#x2F;O 2026 将 Gemini 推向更强的 agentic 形态"></a>1. Google I&#x2F;O 2026 将 Gemini 推向更强的 agentic 形态</h3><ul>
-<li>摘要：Google 在 I&#x2F;O 2026 汇总页与 Gemini 应用更新中集中发布 Gemini 3.5 Flash、Gemini Omni、Daily Brief 和 Gemini Spark，并表示 Gemini 月活已超过 9 亿。</li>
-<li>重要性：这说明头部模型竞争正在从单一模型能力转向“模型 + 代理 + 应用入口”的整套产品化能力。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://blog.google/innovation-and-ai/technology/ai/google-io-2026-all-our-announcements/">Google I&#x2F;O 2026 汇总</a> <a target="_blank" rel="noopener" href="https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app/">Gemini app 更新</a></li>
-</ul>
-<h3 id="2-OpenAI-发布新一代实时语音模型"><a href="#2-OpenAI-发布新一代实时语音模型" class="headerlink" title="2. OpenAI 发布新一代实时语音模型"></a>2. OpenAI 发布新一代实时语音模型</h3><ul>
-<li>摘要：OpenAI 于 2026 年 5 月 7 日推出 GPT-Realtime-2、GPT-Realtime-Translate 和 GPT-Realtime-Whisper，主打实时推理、翻译与转写。</li>
-<li>重要性：语音交互开始从“识别工具”升级为“可推理、可调用工具、可跨语言协作”的 AI 工作界面。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api/">OpenAI：Advancing voice intelligence with new models in the API</a></li>
-</ul>
-<h3 id="3-OpenAI-与-Dell-合作推进-Codex-进入混合与本地化环境"><a href="#3-OpenAI-与-Dell-合作推进-Codex-进入混合与本地化环境" class="headerlink" title="3. OpenAI 与 Dell 合作推进 Codex 进入混合与本地化环境"></a>3. OpenAI 与 Dell 合作推进 Codex 进入混合与本地化环境</h3><ul>
-<li>摘要：OpenAI 于 2026 年 5 月 18 日宣布与 Dell Technologies 合作，让 Codex 对接 Dell AI Data Platform 与 Dell AI Factory，面向混合部署和本地数据场景。</li>
-<li>重要性：企业采用 AI Agent 的关键障碍正在从“模型可用性”转向“数据驻留、治理与内网系统接入能力”。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/dell-codex-enterprise-partnership/">OpenAI 与 Dell Technologies 合作公告</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.google/innovation-and-ai/technology/ai/google-io-2026-all-our-announcements/">Google I&#x2F;O 2026 汇总</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app/">Gemini app 更新</a></li>
-<li><a target="_blank" rel="noopener" href="https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api/">OpenAI 实时语音模型公告</a></li>
-<li><a target="_blank" rel="noopener" href="https://openai.com/index/dell-codex-enterprise-partnership/">OpenAI 与 Dell 合作公告</a></li>
-</ul>
-<h2 id="金融"><a href="#金融" class="headerlink" title="金融"></a>金融</h2><h3 id="1-美国推动金融科技监管松绑并评估支付体系准入"><a href="#1-美国推动金融科技监管松绑并评估支付体系准入" class="headerlink" title="1. 美国推动金融科技监管松绑并评估支付体系准入"></a>1. 美国推动金融科技监管松绑并评估支付体系准入</h3><ul>
-<li>摘要：白宫 2026 年 5 月 19 日签署关于金融科技监管框架的行政令，要求联邦金融监管机构在 90 天内审查现有规则，并要求美联储评估非银金融科技公司获取联储支付账户与支付服务的法律与政策框架。</li>
-<li>重要性：这将影响美国数字金融、支付清算、加密与非银机构进入传统金融基础设施的速度和边界。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.whitehouse.gov/presidential-actions/2026/05/integrating-financial-technology-innovation-into-regulatory-frameworks/">白宫行政令</a> <a target="_blank" rel="noopener" href="https://www.whitehouse.gov/fact-sheets/2026/05/fact-sheet-president-donald-j-trump-integrates-financial-technology-innovation-into-regulatory-frameworks/">白宫事实清单</a></li>
-</ul>
-<h3 id="2-美联储公布-4-月-28-29-日-FOMC-会议纪要"><a href="#2-美联储公布-4-月-28-29-日-FOMC-会议纪要" class="headerlink" title="2. 美联储公布 4 月 28-29 日 FOMC 会议纪要"></a>2. 美联储公布 4 月 28-29 日 FOMC 会议纪要</h3><ul>
-<li>摘要：美联储于 2026 年 5 月 20 日按惯例发布 4 月底议息会议纪要，市场据此继续评估美国通胀、增长和年内政策路径。</li>
-<li>重要性：在长端利率和风险资产仍高度敏感的阶段，会议纪要仍是判断联储政策节奏的重要公开锚点。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260520a.htm">Federal Reserve：Minutes of the Federal Open Market Committee, April 28-29, 2026</a></li>
-</ul>
-<h3 id="3-Nvidia-财报再度强化-AI-资本开支叙事"><a href="#3-Nvidia-财报再度强化-AI-资本开支叙事" class="headerlink" title="3. Nvidia 财报再度强化 AI 资本开支叙事"></a>3. Nvidia 财报再度强化 AI 资本开支叙事</h3><ul>
-<li>摘要：Nvidia 于 2026 年 5 月 20 日公布 2027 财年一季度营收 816 亿美元、同比增长 85%，同时新增 800 亿美元回购授权，并给出下一季度约 910 亿美元营收指引。</li>
-<li>重要性：这不仅继续支撑 AI 基建估值，也强化了市场对算力投资周期尚未见顶的判断。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx">NVIDIA 2027 财年一季度财报</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.whitehouse.gov/presidential-actions/2026/05/integrating-financial-technology-innovation-into-regulatory-frameworks/">白宫金融科技行政令</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.whitehouse.gov/fact-sheets/2026/05/fact-sheet-president-donald-j-trump-integrates-financial-technology-innovation-into-regulatory-frameworks/">白宫金融科技事实清单</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260520a.htm">Federal Reserve 会议纪要公告</a></li>
-<li><a target="_blank" rel="noopener" href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx">NVIDIA 2027 财年一季度财报</a></li>
-</ul>
-<h2 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h2><h3 id="1-欧盟与墨西哥峰会发表联合声明并推进协议签署"><a href="#1-欧盟与墨西哥峰会发表联合声明并推进协议签署" class="headerlink" title="1. 欧盟与墨西哥峰会发表联合声明并推进协议签署"></a>1. 欧盟与墨西哥峰会发表联合声明并推进协议签署</h3><ul>
-<li>摘要：欧盟理事会 2026 年 5 月 22 日发布第八次欧盟-墨西哥峰会联合声明；根据此前日程，峰会安排了现代化全球协议（MGA）与临时贸易协议（ITA）签署环节。</li>
-<li>重要性：这反映出欧美以外的区域合作正在加速重组，贸易与地缘政治合作再次被绑定推进。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/05/22/joint-statement-of-the-8th-eu-mexico-summit-22-may-2026/">欧盟-墨西哥峰会联合声明</a> <a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/05/20/media-advisory-eu-mexico-summit-of-22-may-2026/">峰会议程说明</a></li>
-</ul>
-<h3 id="2-白宫公布中美峰会后续安排与贸易承诺"><a href="#2-白宫公布中美峰会后续安排与贸易承诺" class="headerlink" title="2. 白宫公布中美峰会后续安排与贸易承诺"></a>2. 白宫公布中美峰会后续安排与贸易承诺</h3><ul>
-<li>摘要：白宫 2026 年 5 月 17 日称，特朗普与习近平同意构建“战略稳定”的建设性关系，并设立美中贸易与投资委员会；白宫还称中国将于 2026 至 2028 年每年至少采购 170 亿美元美国农产品。</li>
-<li>重要性：这说明中美关系短期内继续以“降摩擦换稳定”的方式管理，但贸易、农业和制度化对话将成为主要抓手。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.whitehouse.gov/fact-sheets/2026/05/fact-sheet-president-donald-j-trump-secures-historic-deals-with-china-delivering-for-american-workers-farmers-and-industry/">白宫中美峰会事实清单</a></li>
-</ul>
-<h3 id="3-欧盟理事会主席对危地马拉完成首次历史性访问"><a href="#3-欧盟理事会主席对危地马拉完成首次历史性访问" class="headerlink" title="3. 欧盟理事会主席对危地马拉完成首次历史性访问"></a>3. 欧盟理事会主席对危地马拉完成首次历史性访问</h3><ul>
-<li>摘要：欧盟理事会称，António Costa 于 2026 年 5 月 20 日访问危地马拉，这是欧洲理事会主席首次访问该国，双方强调民主、人权、投资、网络安全及打击有组织犯罪与非法移民合作。</li>
-<li>重要性：欧盟正在更主动地把拉美民主治理、贸易与安全合作纳入其全球政治布局。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/european-council/president/news/2026/05/20/pec-costa-in-guatemala/">President Costa visits Guatemala</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/05/22/joint-statement-of-the-8th-eu-mexico-summit-22-may-2026/">欧盟-墨西哥峰会联合声明</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/05/20/media-advisory-eu-mexico-summit-of-22-may-2026/">欧盟-墨西哥峰会议程说明</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.whitehouse.gov/fact-sheets/2026/05/fact-sheet-president-donald-j-trump-secures-historic-deals-with-china-delivering-for-american-workers-farmers-and-industry/">白宫中美峰会事实清单</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/european-council/president/news/2026/05/20/pec-costa-in-guatemala/">President Costa visits Guatemala</a></li>
-</ul>
-<h2 id="科技"><a href="#科技" class="headerlink" title="科技"></a>科技</h2><h3 id="1-Google-预告-Gemini-智能眼镜将于今秋率先上市"><a href="#1-Google-预告-Gemini-智能眼镜将于今秋率先上市" class="headerlink" title="1. Google 预告 Gemini 智能眼镜将于今秋率先上市"></a>1. Google 预告 Gemini 智能眼镜将于今秋率先上市</h3><ul>
-<li>摘要：Google 在 I&#x2F;O 2026 公布与 Samsung、Gentle Monster、Warby Parker 合作的 Android XR 智能眼镜，首批音频眼镜计划于 2026 年秋季推出。</li>
-<li>重要性：AI 终端竞争正在从手机助手延伸到可穿戴入口，眼镜可能成为下一轮多模态交互的重要硬件形态。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://blog.google/products-and-platforms/platforms/android/android-xr-io-2026/">Google：Intelligent eyewear is coming this fall</a></li>
-</ul>
-<h3 id="2-Google-Search-迎来“25-年来最大升级”"><a href="#2-Google-Search-迎来“25-年来最大升级”" class="headerlink" title="2. Google Search 迎来“25 年来最大升级”"></a>2. Google Search 迎来“25 年来最大升级”</h3><ul>
-<li>摘要：Google 于 2026 年 5 月 19 日宣布，Search 的 AI Mode 默认升级到 Gemini 3.5 Flash，并上线新的 AI 驱动搜索框与 Search agents。</li>
-<li>重要性：搜索正在从“关键词检索”转向“代理式任务入口”，这会直接改变流量分发、内容消费和商业化结构。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://blog.google/products-and-platforms/products/search/search-io-2026/">Google Search’s I&#x2F;O 2026 updates: AI agents and more</a></li>
-</ul>
-<h3 id="3-Nvidia-将“AI-工厂”扩张定义为核心产业趋势"><a href="#3-Nvidia-将“AI-工厂”扩张定义为核心产业趋势" class="headerlink" title="3. Nvidia 将“AI 工厂”扩张定义为核心产业趋势"></a>3. Nvidia 将“AI 工厂”扩张定义为核心产业趋势</h3><ul>
-<li>摘要：Nvidia 在最新财报中表示 AI factories 的建设正在加速，同时披露 Vera CPU、Blackwell 推理优化软件与多项 agentic AI 平台进展，并给出不含中国数据中心计算收入的 910 亿美元下一季营收指引。</li>
-<li>重要性：这表明 AI 产业竞争的重心继续从单卡性能转向系统平台、推理效率和全球算力供应链。</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx">NVIDIA 2027 财年一季度财报</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.google/products-and-platforms/platforms/android/android-xr-io-2026/">Google 智能眼镜公告</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.google/products-and-platforms/products/search/search-io-2026/">Google Search AI 更新</a></li>
-<li><a target="_blank" rel="noopener" href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx">NVIDIA 2027 财年一季度财报</a></li>
-</ul>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #03a9f4">AI与大模型</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #ff7d73">金融</a>
+            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #03a9f4">金融</a>
         </span>
         
         <span class="tag">
@@ -1396,11 +1403,11 @@ xxx
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #03a9f4">科技</a>
+            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00bcd4">科技</a>
         </span>
         
     </div>
-    <a href="/2026/05/24/HotMessage/2026-05-24/" class="go-post">阅读全文</a>
+    <a href="/2026/05/25/HotMessage/2026-05-25/" class="go-post">阅读全文</a>
 </div>
 
 

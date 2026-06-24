@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>2026-06-16 每周热点 | L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>2026-06-16 每周热点</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/6/16
+        </span>
+        
+        <span class="category">
+            <a href="/categories/HotMessage/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                HotMessage
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ff7d73">
+                    AI与大模型
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00bcd4">
+                    金融
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ff7d73">
+                    政治
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #ffa2c4">
+                    科技
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="本周摘要"><a href="#本周摘要" class="headerlink" title="本周摘要"></a>本周摘要</h2><p>统计周期：2026-06-09 22:10:21 至 2026-06-16 22:10:21（Asia&#x2F;Shanghai）</p>
+<p>过去 7 天，AI 行业的重点不只是模型能力提升，也包括企业级落地、云端执行环境和高风险能力治理：OpenAI 扩大伙伴与云生态，Anthropic 则在发布 Fable&#x2F;Mythos 后快速暂停访问。金融市场继续被能源价格、通胀和政策利率牵动，美国 CPI&#x2F;PPI 与欧央行加息都显示价格压力没有消退，世界银行也下调了全球增长预期。政治方面，G7 埃维昂峰会、中东外交突破、欧盟对俄制裁和欧盟扩大进程同时推进，地缘议题与经济安全高度交织。科技行业的更新集中在 XR、移动开发工具链、系统测试版和安全更新，说明平台厂商正在把 AI 辅助开发、空间计算和基础安全维护纳入同一轮基础设施升级。</p>
+<h2 id="AI-与大模型"><a href="#AI-与大模型" class="headerlink" title="AI 与大模型"></a>AI 与大模型</h2><h3 id="1-Anthropic-发布-Claude-Fable-5-Mythos-5-后暂停访问"><a href="#1-Anthropic-发布-Claude-Fable-5-Mythos-5-后暂停访问" class="headerlink" title="1. Anthropic 发布 Claude Fable 5 &#x2F; Mythos 5 后暂停访问"></a>1. Anthropic 发布 Claude Fable 5 &#x2F; Mythos 5 后暂停访问</h3><ul>
+<li>摘要：Anthropic 于 2026 年 6 月 9 日发布 Claude Fable 5 和 Claude Mythos 5，称 Fable 5 是面向一般用户开放的 Mythos-class 模型；页面随后在 6 月 12 日更新，宣布暂停 Claude Fable 5 和 Claude Mythos 5 的访问并努力恢复。</li>
+<li>重要性：这显示前沿模型发布正在进入“能力、访问控制、安全阈值”同时受检验的阶段，尤其是网络安全、生物、化学等高风险能力会直接影响模型开放策略。</li>
+<li>时间：2026-06-09 &#x2F; 2026-06-12</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.anthropic.com/news/claude-fable-5-mythos-5">Anthropic：Claude Fable 5 and Claude Mythos 5</a>、<a target="_blank" rel="noopener" href="https://www.anthropic.com/news/fable-mythos-access">Anthropic：Statement on Claude Mythos 5 and Fable 5 access</a></li>
+</ul>
+<h3 id="2-OpenAI-推出-Partner-Network-并投入-1-5-亿美元支持生态"><a href="#2-OpenAI-推出-Partner-Network-并投入-1-5-亿美元支持生态" class="headerlink" title="2. OpenAI 推出 Partner Network 并投入 1.5 亿美元支持生态"></a>2. OpenAI 推出 Partner Network 并投入 1.5 亿美元支持生态</h3><ul>
+<li>摘要：OpenAI 于 2026 年 6 月 14 日宣布 OpenAI Partner Network，面向全球伙伴构建、销售和交付 AI 解决方案，并计划投入 1.5 亿美元支持生态，目标是在 2026 年底前培训和认证 30 万名顾问。</li>
+<li>重要性：前沿模型公司正在从直接卖模型转向“模型 + 咨询 + 系统集成 + 行业方案”的交付网络，这会影响企业 AI 项目的实施门槛和竞争格局。</li>
+<li>时间：2026-06-14</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/introducing-openai-partner-network/">OpenAI：Introducing the OpenAI Partner Network</a></li>
+</ul>
+<h3 id="3-OpenAI-宣布收购-Ona，强化-Codex-的持久云端执行能力"><a href="#3-OpenAI-宣布收购-Ona，强化-Codex-的持久云端执行能力" class="headerlink" title="3. OpenAI 宣布收购 Ona，强化 Codex 的持久云端执行能力"></a>3. OpenAI 宣布收购 Ona，强化 Codex 的持久云端执行能力</h3><ul>
+<li>摘要：OpenAI 于 2026 年 6 月 11 日宣布将收购 Ona，把其安全云执行与编排技术并入 Codex 生态，用于支持长时间运行的代理工作流和客户可控的云端环境。</li>
+<li>重要性：这意味着编码智能体的竞争正在从“模型会写代码”扩展到“能在受控环境里持续执行、测试、修复和审查”，企业级治理与基础设施能力会更关键。</li>
+<li>时间：2026-06-11</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/openai-to-acquire-ona/">OpenAI：OpenAI to acquire Ona</a></li>
+</ul>
+<h3 id="4-OpenAI-与-Oracle-打通-OCI-云承诺购买路径"><a href="#4-OpenAI-与-Oracle-打通-OCI-云承诺购买路径" class="headerlink" title="4. OpenAI 与 Oracle 打通 OCI 云承诺购买路径"></a>4. OpenAI 与 Oracle 打通 OCI 云承诺购买路径</h3><ul>
+<li>摘要：OpenAI 于 2026 年 6 月 10 日宣布，Oracle Cloud Infrastructure 客户将可在未来数周把合格的 Oracle Universal Credits 用于 OpenAI 模型和 Codex。</li>
+<li>重要性：大型企业往往受既有云采购、合规和预算流程约束，OpenAI 与 Oracle 的合作会降低企业在现有云承诺内采用前沿模型和 Codex 的摩擦。</li>
+<li>时间：2026-06-10</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/openai-on-oracle-cloud/">OpenAI：Access OpenAI models and Codex through your Oracle cloud commitment</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.anthropic.com/news/claude-fable-5-mythos-5">Anthropic：Claude Fable 5 and Claude Mythos 5</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.anthropic.com/news/fable-mythos-access">Anthropic：Statement on Claude Mythos 5 and Fable 5 access</a></li>
+<li><a target="_blank" rel="noopener" href="https://openai.com/index/introducing-openai-partner-network/">OpenAI：Introducing the OpenAI Partner Network</a></li>
+<li><a target="_blank" rel="noopener" href="https://openai.com/index/openai-to-acquire-ona/">OpenAI：OpenAI to acquire Ona</a></li>
+<li><a target="_blank" rel="noopener" href="https://openai.com/index/openai-on-oracle-cloud/">OpenAI：Access OpenAI models and Codex through your Oracle cloud commitment</a></li>
+</ul>
+<h2 id="金融"><a href="#金融" class="headerlink" title="金融"></a>金融</h2><h3 id="1-美国-5-月-CPI-与-PPI-均显示价格压力升温"><a href="#1-美国-5-月-CPI-与-PPI-均显示价格压力升温" class="headerlink" title="1. 美国 5 月 CPI 与 PPI 均显示价格压力升温"></a>1. 美国 5 月 CPI 与 PPI 均显示价格压力升温</h3><ul>
+<li>摘要：美国劳工统计局于 2026 年 6 月 10 日发布 5 月 CPI，CPI-U 环比上涨 0.5%、同比上涨 4.2%；6 月 11 日发布 5 月 PPI，最终需求价格环比上涨 1.1%、同比上涨 6.5%，能源和商品价格是关键推手。</li>
+<li>重要性：CPI 与 PPI 同步偏强会强化市场对通胀粘性和企业成本传导的担忧，也会影响美联储利率预期和风险资产估值。</li>
+<li>时间：2026-06-10 &#x2F; 2026-06-11</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.bls.gov/news.release/cpi.nr0.htm">BLS：Consumer Price Index Summary - May 2026</a>、<a target="_blank" rel="noopener" href="https://www.bls.gov/news.release/ppi.nr0.htm">BLS：Producer Price Indexes - May 2026</a></li>
+</ul>
+<h3 id="2-欧洲央行上调三大利率-25-个基点"><a href="#2-欧洲央行上调三大利率-25-个基点" class="headerlink" title="2. 欧洲央行上调三大利率 25 个基点"></a>2. 欧洲央行上调三大利率 25 个基点</h3><ul>
+<li>摘要：欧洲央行于 2026 年 6 月 11 日宣布上调三大利率 25 个基点，存款便利利率、主要再融资利率和边际贷款便利利率将分别升至 2.25%、2.40% 和 2.65%，自 6 月 17 日起生效。</li>
+<li>重要性：欧央行称中东战争推高通胀压力，并下调 2026 和 2027 年增长预期；这说明能源冲击正在重新塑造欧洲货币政策与增长前景。</li>
+<li>时间：2026-06-11</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260611~4d41bd5e83.en.html">ECB：Monetary policy decisions</a></li>
+</ul>
+<h3 id="3-世界银行下调-2026-年全球增长预期至-2-5"><a href="#3-世界银行下调-2026-年全球增长预期至-2-5" class="headerlink" title="3. 世界银行下调 2026 年全球增长预期至 2.5%"></a>3. 世界银行下调 2026 年全球增长预期至 2.5%</h3><ul>
+<li>摘要：世界银行 2026 年 6 月 11 日发布《Global Economic Prospects》6 月版，预计 2026 年全球经济增长放缓至 2.5%，并称相较 1 月预测，三分之二经济体的预测被下调。</li>
+<li>重要性：中东冲突、能源价格、融资成本和政策不确定性叠加，会让新兴市场和发展中经济体承受更大压力，也提高全球金融市场的下行风险。</li>
+<li>时间：2026-06-11</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.worldbank.org/en/news/press-release/2026/06/11/global-economic-prospects-june-2026-press-release">World Bank：Middle East Conflict Sends Global Growth to Lowest Rate Since Pandemic</a>、<a target="_blank" rel="noopener" href="https://www.worldbank.org/en/publication/global-economic-prospects">World Bank：Global Economic Prospects</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.bls.gov/news.release/cpi.nr0.htm">BLS：Consumer Price Index Summary - May 2026</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bls.gov/news.release/ppi.nr0.htm">BLS：Producer Price Indexes - May 2026</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260611~4d41bd5e83.en.html">ECB：Monetary policy decisions</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.worldbank.org/en/publication/global-economic-prospects">World Bank：Global Economic Prospects</a></li>
+</ul>
+<h2 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h2><h3 id="1-G7-埃维昂峰会开幕并欢迎美伊谅解备忘录"><a href="#1-G7-埃维昂峰会开幕并欢迎美伊谅解备忘录" class="headerlink" title="1. G7 埃维昂峰会开幕并欢迎美伊谅解备忘录"></a>1. G7 埃维昂峰会开幕并欢迎美伊谅解备忘录</h3><ul>
+<li>摘要：法国总统府信息显示，法国于 2026 年 6 月 15 日至 17 日在埃维昂主办 G7 峰会；同日多国领导人发表声明，欢迎美国与伊朗谅解备忘录，称其为恢复地区稳定和稳定全球经济的机会。</li>
+<li>重要性：G7 峰会与美伊外交进展同日进入议程，说明中东安全、能源价格和全球经济稳定仍是主要经济体协调的核心议题。</li>
+<li>时间：2026-06-15</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.elysee.fr/en/emmanuel-macron/2026/06/15/g7-summit-in-evian-day-one">Élysée：G7 Summit in Evian: Day One</a>、<a target="_blank" rel="noopener" href="https://www.elysee.fr/en/emmanuel-macron/2026/06/15/statement-by-leaders-on-the-memorandum-of-understanding-between-the-us-and-iran">Élysée：Statement by leaders on the memorandum of understanding between the US and Iran</a></li>
+</ul>
+<h3 id="2-欧盟新增对俄制裁，覆盖能源、军工和宣传网络"><a href="#2-欧盟新增对俄制裁，覆盖能源、军工和宣传网络" class="headerlink" title="2. 欧盟新增对俄制裁，覆盖能源、军工和宣传网络"></a>2. 欧盟新增对俄制裁，覆盖能源、军工和宣传网络</h3><ul>
+<li>摘要：欧盟理事会于 2026 年 6 月 15 日宣布新增对俄限制措施，涉及 34 名个人和 47 个实体，目标包括俄罗斯军工综合体、能源收入、影子船队生态、混合威胁和国家宣传网络。</li>
+<li>重要性：欧盟继续通过制裁压缩俄罗斯战争资源，同时把能源收入、混合攻击和信息战纳入同一套政策工具箱。</li>
+<li>时间：2026-06-15</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/06/15/russia-s-war-of-aggression-against-ukraine-new-eu-sanctions-target-energy-revenues-the-military-industrial-complex-propaganda-and-human-rights-violations/">Council of the EU：Russia’s war of aggression against Ukraine - new EU sanctions</a></li>
+</ul>
+<h3 id="3-欧盟与乌克兰开启首个入盟谈判集群"><a href="#3-欧盟与乌克兰开启首个入盟谈判集群" class="headerlink" title="3. 欧盟与乌克兰开启首个入盟谈判集群"></a>3. 欧盟与乌克兰开启首个入盟谈判集群</h3><ul>
+<li>摘要：欧盟理事会于 2026 年 6 月 15 日宣布，欧盟与乌克兰开启“基本原则”集群谈判，涵盖法治、基本权利、民主制度、公共行政改革和经济标准等议题。</li>
+<li>重要性：这是乌克兰入盟进程中的实质性节点，也显示欧盟在安全压力下继续推进扩大政策和制度整合。</li>
+<li>时间：2026-06-15 19:55</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/06/15/eu-and-ukraine-open-first-accession-negotiations-cluster/">Council of the EU：EU and Ukraine open first accession negotiations cluster</a></li>
+</ul>
+<h3 id="4-习近平同缅甸总统敏昂莱会谈"><a href="#4-习近平同缅甸总统敏昂莱会谈" class="headerlink" title="4. 习近平同缅甸总统敏昂莱会谈"></a>4. 习近平同缅甸总统敏昂莱会谈</h3><ul>
+<li>摘要：中国外交部消息称，2026 年 6 月 16 日上午，国家主席习近平在北京同来华进行国事访问的缅甸总统敏昂莱举行会谈；会谈后双方共同见证签署交通、民生等领域多项合作文件。</li>
+<li>重要性：中缅关系关系到中国西南周边稳定、边境安全、共建“一带一路”和打击跨境网赌电诈等议题，对中国读者具有直接区域关注度。</li>
+<li>时间：2026-06-16 14:02</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.mfa.gov.cn/zyxw/202606/t20260616_11946481.shtml">中华人民共和国外交部：习近平同缅甸总统敏昂莱会谈</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.elysee.fr/en/emmanuel-macron/2026/06/15/g7-summit-in-evian-day-one">Élysée：G7 Summit in Evian: Day One</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.elysee.fr/en/emmanuel-macron/2026/06/15/statement-by-leaders-on-the-memorandum-of-understanding-between-the-us-and-iran">Élysée：Statement by leaders on the memorandum of understanding between the US and Iran</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/06/15/russia-s-war-of-aggression-against-ukraine-new-eu-sanctions-target-energy-revenues-the-military-industrial-complex-propaganda-and-human-rights-violations/">Council of the EU：Russia’s war of aggression against Ukraine - new EU sanctions</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/06/15/eu-and-ukraine-open-first-accession-negotiations-cluster/">Council of the EU：EU and Ukraine open first accession negotiations cluster</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.mfa.gov.cn/zyxw/202606/t20260616_11946481.shtml">中华人民共和国外交部：习近平同缅甸总统敏昂莱会谈</a></li>
+</ul>
+<h2 id="科技"><a href="#科技" class="headerlink" title="科技"></a>科技</h2><h3 id="1-Android-XR-推出-Developer-Preview-4-并扩展引擎支持"><a href="#1-Android-XR-推出-Developer-Preview-4-并扩展引擎支持" class="headerlink" title="1. Android XR 推出 Developer Preview 4 并扩展引擎支持"></a>1. Android XR 推出 Developer Preview 4 并扩展引擎支持</h3><ul>
+<li>摘要：Android Developers Blog 于 2026 年 6 月 15 日介绍 Android XR 更新，Developer Preview 4 带来新的 SDK、模拟器和感知库能力，并宣布在既有 Unity 支持之外加入 Unreal Engine 与 Godot 支持。</li>
+<li>重要性：XR 平台正在从单一硬件展示转向开发工具、引擎生态和应用分发的完整链路，空间计算应用的开发门槛有望降低。</li>
+<li>时间：2026-06-15</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://android-developers.googleblog.com/2026/06/what-is-new-android-xr.html">Android Developers Blog：What’s New in Android XR</a></li>
+</ul>
+<h3 id="2-Android-CLI-1-0-稳定版发布，Antigravity-支持-Android-开发"><a href="#2-Android-CLI-1-0-稳定版发布，Antigravity-支持-Android-开发" class="headerlink" title="2. Android CLI 1.0 稳定版发布，Antigravity 支持 Android 开发"></a>2. Android CLI 1.0 稳定版发布，Antigravity 支持 Android 开发</h3><ul>
+<li>摘要：Android Developers Blog 于 2026 年 6 月 9 日总结 Android 开发效率更新，称 Android CLI 已稳定到 1.0，并且 Google Antigravity 正式支持 Android 开发与 Android resources bundle。</li>
+<li>重要性：移动开发工具正在围绕智能体重组，CLI、IDE、技能包和基准测试的组合会影响未来 Android 应用生成、调试和部署的工作流。</li>
+<li>时间：2026-06-09</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://android-developers.googleblog.com/2026/06/android-developer-productivity-updates.html">Android Developers Blog：Top 3 updates for Android developer productivity</a></li>
+</ul>
+<h3 id="3-Apple-发布多平台-26-6-beta-2-与-AirPods-beta"><a href="#3-Apple-发布多平台-26-6-beta-2-与-AirPods-beta" class="headerlink" title="3. Apple 发布多平台 26.6 beta 2 与 AirPods beta"></a>3. Apple 发布多平台 26.6 beta 2 与 AirPods beta</h3><ul>
+<li>摘要：Apple Developer Releases 页面显示，Apple 于 2026 年 6 月 15 日发布 iOS、iPadOS、macOS、tvOS、visionOS、watchOS 26.6 beta 2，并于 6 月 9 日发布 AirPods beta 9A292e。</li>
+<li>重要性：这轮测试版覆盖手机、平板、桌面、电视、头显、手表和耳机，开发者需要同步关注系统兼容、应用适配和硬件体验变化。</li>
+<li>时间：2026-06-15 &#x2F; 2026-06-09</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://developer.apple.com/news/releases/">Apple Developer：Releases</a></li>
+</ul>
+<h3 id="4-Microsoft-发布-6-月-Windows-安全更新"><a href="#4-Microsoft-发布-6-月-Windows-安全更新" class="headerlink" title="4. Microsoft 发布 6 月 Windows 安全更新"></a>4. Microsoft 发布 6 月 Windows 安全更新</h3><ul>
+<li>摘要：Microsoft Learn 的 Windows message center 显示，2026 年 6 月 Windows 安全更新已于 6 月 9 日 10:00 PT 面向所有受支持 Windows 版本发布，并建议用户及时安装；更新说明还提到本次更新扩展了用于自动接收新 Secure Boot 证书的高置信设备定位数据。</li>
+<li>重要性：月度安全更新仍是企业与个人端点防护的基本面，Secure Boot 和系统更新链路的变化尤其影响企业运维和合规。</li>
+<li>时间：2026-06-09 10:00 PT（2026-06-10 01:00 Asia&#x2F;Shanghai）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/release-health/windows-message-center">Microsoft Learn：Windows message center</a>、<a target="_blank" rel="noopener" href="https://msrc.microsoft.com/update-guide/releaseNote/2026-Jun">Microsoft Security Response Center：June 2026 release notes</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://android-developers.googleblog.com/2026/06/what-is-new-android-xr.html">Android Developers Blog：What’s New in Android XR</a></li>
+<li><a target="_blank" rel="noopener" href="https://android-developers.googleblog.com/2026/06/android-developer-productivity-updates.html">Android Developers Blog：Top 3 updates for Android developer productivity</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.apple.com/news/releases/">Apple Developer：Releases</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/release-health/windows-message-center">Microsoft Learn：Windows message center</a></li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <title>L&#39;sBlog</title>
     <meta name="author" content="Yu" />
-    <meta name="description" content="Nearer to death, nearer to rebirth." />
-    <meta name="keywords" content="" />
+    <meta name="description" content="记录后端开发、AI 应用、项目复盘与面试表达。" />
+    <meta name="keywords" content="后端,AI应用,RAG,Agent,FastAPI,Golang,Redis,RabbitMQ" />
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="icon" href="/images/site/avatar.svg" />
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -54,7 +54,7 @@
                 <div id="loading-circle">
                     <h2>LOADING</h2>
                     <p>加载过慢请开启缓存 浏览器默认开启</p>
-                    <img src="/images/loading.gif" />
+                    <img src="/images/site/loading.svg" />
                 </div>
             </div>
         </transition>
@@ -66,27 +66,27 @@
         
         <a href="/">
             <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Home</span>
+            <span>&ensp;首页</span>
         </a>
         
         <a href="/about">
             <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;About</span>
+            <span>&ensp;关于</span>
         </a>
         
         <a href="/archives">
             <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;Archives</span>
+            <span>&ensp;归档</span>
         </a>
         
         <a href="/categories">
             <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Categories</span>
+            <span>&ensp;分类</span>
         </a>
         
         <a href="/tags">
             <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;Tags</span>
+            <span>&ensp;标签</span>
         </a>
         
     </nav>
@@ -103,7 +103,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-house fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
                     </div>
                 </a>
                 
@@ -112,7 +112,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-id-card fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
                     </div>
                 </a>
                 
@@ -121,7 +121,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-box-archive fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
                     </div>
                 </a>
                 
@@ -130,7 +130,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-bookmark fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
                     </div>
                 </a>
                 
@@ -139,7 +139,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-tags fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
                     </div>
                 </a>
                 
@@ -156,7 +156,7 @@
     <div
         id="home-background"
         ref="homeBackground"
-        data-images="/images/background.jpg"
+        data-images="/images/site/background.svg"
     ></div>
     <div id="home-info" @click="homeClick">
         <span class="loop"></span>
@@ -166,8 +166,8 @@
         <span class="info">
             <div class="wrap">
                 <h1>L&#39;sBlog</h1>
-                <h3>yu</h3>
-                <h5>Nearer to death, nearer to rebirth.</h5>
+                <h3>后端工程与 AI 应用实践</h3>
+                <h5>记录后端开发、AI 应用、项目复盘与面试表达。</h5>
             </div>
         </span>
     </div>
@@ -181,17 +181,17 @@
         
 
 <div class="post">
-    <a href="/2026/06/21/HotMessage/2026-06-21-weekly/">
-        <h2 class="post-title">2026-06-21 每周热点</h2>
+    <a href="/2026/06/24/RAG/RAG-Agent%E5%BA%94%E7%94%A8%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%A4%8D%E7%9B%98/">
+        <h2 class="post-title">RAG/Agent 应用工程化复盘</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/HotMessage/">
+            <a href="/categories/AI%E5%BA%94%E7%94%A8/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                HotMessage
+                AI应用
             </a>
         </span>
         
@@ -199,7 +199,7 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/6/21
+            2026/6/24
         </span>
         
         
@@ -207,123 +207,7 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h2 id="本周摘要"><a href="#本周摘要" class="headerlink" title="本周摘要"></a>本周摘要</h2><p>统计周期：2026-06-14 20:04:42 至 2026-06-21 20:04:42（Asia&#x2F;Shanghai）</p>
-<p>本周 AI 进展集中在生命科学评测、医疗问答、部署前安全评估和机器人自主执行能力，行业竞争继续从通用能力转向真实工作流。美联储与英国央行均维持利率不变，但能源价格和中东局势令通胀风险继续偏高。政治方面，美国与伊朗签署第一阶段谅解备忘录，G7 和欧盟则分别推进关键矿产、数字治理、乌克兰支持与欧洲防务议程。技术生态中，智能体发现与互操作标准加速形成，中国和微软也发布了平台经济与操作系统更新安排。</p>
-<h2 id="AI-与大模型"><a href="#AI-与大模型" class="headerlink" title="AI 与大模型"></a>AI 与大模型</h2><h3 id="1-OpenAI-发布生命科学真实工作流评测集-LifeSciBench"><a href="#1-OpenAI-发布生命科学真实工作流评测集-LifeSciBench" class="headerlink" title="1. OpenAI 发布生命科学真实工作流评测集 LifeSciBench"></a>1. OpenAI 发布生命科学真实工作流评测集 LifeSciBench</h3><ul>
-<li>摘要：OpenAI 发布由生命科学专家编写和审核的 LifeSciBench，包含 750 项任务、1,062 个任务附件和 19,020 条评分标准，覆盖七类工作流与七个生物学领域。</li>
-<li>重要性：该评测把重点从知识问答转向证据处理、实验设计、转化风险和科研决策，有助于衡量 AI 是否真正具备参与药物研发和生命科学研究的能力。</li>
-<li>时间：2026-06-17</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/introducing-life-sci-bench/">OpenAI</a></li>
-</ul>
-<h3 id="2-OpenAI-提升-ChatGPT-健康信息能力"><a href="#2-OpenAI-提升-ChatGPT-健康信息能力" class="headerlink" title="2. OpenAI 提升 ChatGPT 健康信息能力"></a>2. OpenAI 提升 ChatGPT 健康信息能力</h3><ul>
-<li>摘要：OpenAI 表示 GPT-5.5 Instant 在紧急就医识别、上下文追问、不确定性说明和复杂健康信息解释方面取得改进，并向 ChatGPT 免费用户提供相关能力。</li>
-<li>重要性：健康咨询是高频且高风险的 AI 使用场景，更广泛的模型覆盖意味着安全评测、边界提示和医疗责任治理的重要性同步上升。</li>
-<li>时间：2026-06-18</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/improving-health-intelligence-in-chatgpt/">OpenAI</a></li>
-</ul>
-<h3 id="3-Anthropic-测试-Claude-自主完成机器人任务"><a href="#3-Anthropic-测试-Claude-自主完成机器人任务" class="headerlink" title="3. Anthropic 测试 Claude 自主完成机器人任务"></a>3. Anthropic 测试 Claude 自主完成机器人任务</h3><ul>
-<li>摘要：Anthropic 在 Project Fetch 第二阶段中测试 Claude Opus 4.7 操作四足机器人；在参试者完成的任务上，无人工协助的模型执行速度约为最快人类团队的 20 倍。</li>
-<li>重要性：结果显示前沿模型正在从提供建议转向自主控制实体设备，同时也提高了机器人安全、异常处置和人类监督机制的要求。</li>
-<li>时间：2026-06-18</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.anthropic.com/news/project-fetch-phase-two">Anthropic</a></li>
-</ul>
-<h3 id="4-OpenAI-提出用部署模拟评估模型风险"><a href="#4-OpenAI-提出用部署模拟评估模型风险" class="headerlink" title="4. OpenAI 提出用部署模拟评估模型风险"></a>4. OpenAI 提出用部署模拟评估模型风险</h3><ul>
-<li>摘要：OpenAI 发布 Deployment Simulation 方法，通过更真实的对话背景、工具调用轨迹和降低“被评测感知”等设计，在模型发布前估计不良行为。</li>
-<li>重要性：随着智能体进入长链路和工具调用场景，静态题库已难覆盖真实风险，部署模拟有望成为上线前安全评估的重要补充。</li>
-<li>时间：2026-06-16</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/deployment-simulation/">OpenAI</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://openai.com/news/">OpenAI</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.anthropic.com/news">Anthropic</a></li>
-</ul>
-<h2 id="金融"><a href="#金融" class="headerlink" title="金融"></a>金融</h2><h3 id="1-美联储维持联邦基金利率目标区间不变"><a href="#1-美联储维持联邦基金利率目标区间不变" class="headerlink" title="1. 美联储维持联邦基金利率目标区间不变"></a>1. 美联储维持联邦基金利率目标区间不变</h3><ul>
-<li>摘要：美联储以 12 比 0 的表决结果，将联邦基金利率目标区间维持在 3.50% 至 3.75%，并称经济活动稳健，但能源等供应冲击令通胀仍高于 2%目标。</li>
-<li>重要性：中东局势与能源价格继续影响美国通胀路径，市场对降息的预期受到压制，美元利率和全球资产定价仍面临较高不确定性。</li>
-<li>时间：2026-06-17 14:00（美国东部时间）</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm">美国联邦储备委员会</a></li>
-</ul>
-<h3 id="2-英国央行维持银行利率在-3-75"><a href="#2-英国央行维持银行利率在-3-75" class="headerlink" title="2. 英国央行维持银行利率在 3.75%"></a>2. 英国央行维持银行利率在 3.75%</h3><ul>
-<li>摘要：英国央行货币政策委员会以 7 比 2 决定维持利率在 3.75%，两名委员主张加息至 4%；英国 CPI 通胀已降至 2.8%，但能源冲击可能令年内通胀再次上升。</li>
-<li>重要性：投票分歧显示英国货币政策已在经济走弱和能源驱动的二次通胀风险之间形成明显拉扯。</li>
-<li>时间：2026-06-18</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/june-2026">英国央行</a></li>
-</ul>
-<h3 id="3-中国推出支持上海建设国际金融中心的新措施"><a href="#3-中国推出支持上海建设国际金融中心的新措施" class="headerlink" title="3. 中国推出支持上海建设国际金融中心的新措施"></a>3. 中国推出支持上海建设国际金融中心的新措施</h3><ul>
-<li>摘要：中国金融监管部门发布支持上海发展离岸金融、自由贸易离岸债券、再保险、航运金融、养老金融和数字金融监管等措施。</li>
-<li>重要性：相关安排有助于提升人民币资产全球配置能力，并进一步扩大跨境金融服务和制度型开放。</li>
-<li>时间：2026-06-17</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://english.www.gov.cn/news/202606/18/content_WS6a3343e0c6d00ca5f9a0bad8.html">中国政府网</a></li>
-</ul>
-<h3 id="4-美国-SEC-与-CFTC-推进衍生品监管口径协调"><a href="#4-美国-SEC-与-CFTC-推进衍生品监管口径协调" class="headerlink" title="4. 美国 SEC 与 CFTC 推进衍生品监管口径协调"></a>4. 美国 SEC 与 CFTC 推进衍生品监管口径协调</h3><ul>
-<li>摘要：SEC 与 CFTC 联合征求意见，拟进一步澄清掉期、证券型掉期、混合掉期、新型产品及两机构管辖边界等问题。</li>
-<li>重要性：统一监管定义可减少市场参与者的合规冲突，并直接影响事件合约、新型衍生品和跨市场交易的创新空间。</li>
-<li>时间：2026-06-18</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.sec.gov/newsroom/press-releases/2026-57-sec-cftc-seek-public-comment-further-clarify-harmonize-derivatives-product-definitions">美国证券交易委员会</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.federalreserve.gov/newsevents.htm">美国联邦储备委员会</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bankofengland.co.uk/news">英国央行</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.sec.gov/newsroom/press-releases">美国证券交易委员会</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.gov.cn/">中国政府网</a></li>
-</ul>
-<h2 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h2><h3 id="1-美国与伊朗签署第一阶段谅解备忘录"><a href="#1-美国与伊朗签署第一阶段谅解备忘录" class="headerlink" title="1. 美国与伊朗签署第一阶段谅解备忘录"></a>1. 美国与伊朗签署第一阶段谅解备忘录</h3><ul>
-<li>摘要：美国总统特朗普于法国签署伊朗问题谅解备忘录；中方随后确认美伊达成第一阶段谅解备忘录，并强调落实承诺及妥善处理霍尔木兹海峡通航问题。</li>
-<li>重要性：该协议为中东冲突降温和能源运输恢复提供政治窗口，但后续执行、地区安全安排及各方承诺仍是决定局势走向的关键。</li>
-<li>时间：2026-06-17 至 2026-06-18</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.whitehouse.gov/videos/president-trump-signs-iran-memorandum-of-understanding/">美国白宫</a>、<a target="_blank" rel="noopener" href="https://english.www.gov.cn/news/202606/18/content_WS6a334017c6d00ca5f9a0bad5.html">中国政府网</a></li>
-</ul>
-<h3 id="2-G7-埃维昂峰会形成多项联合成果"><a href="#2-G7-埃维昂峰会形成多项联合成果" class="headerlink" title="2. G7 埃维昂峰会形成多项联合成果"></a>2. G7 埃维昂峰会形成多项联合成果</h3><ul>
-<li>摘要：G7 领导人在埃维昂峰会发布地缘政治、关键矿产供应链、韧性增长、打击人口与毒品贩运以及未成年人数字空间安全等联合文件。</li>
-<li>重要性：峰会将经济安全、关键资源和数字治理进一步纳入主要发达经济体的协调框架，相关政策可能影响全球供应链和平台监管。</li>
-<li>时间：2026-06-17</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://g7evian.fr/">G7 埃维昂峰会官网</a></li>
-</ul>
-<h3 id="3-欧盟强化对乌支持并加速欧洲防务建设"><a href="#3-欧盟强化对乌支持并加速欧洲防务建设" class="headerlink" title="3. 欧盟强化对乌支持并加速欧洲防务建设"></a>3. 欧盟强化对乌支持并加速欧洲防务建设</h3><ul>
-<li>摘要：欧洲理事会重申支持乌克兰，欢迎其于 6 月 15 日开启入盟谈判“基础事项”集群，并计划在 6 月底前发放面向 2026 至 2027 年的 900 亿欧元贷款首笔资金；同时要求加快实现 2030 年欧洲防务准备目标。</li>
-<li>重要性：欧盟正在把乌克兰援助、扩员进程、军工产能和东翼防御整合为长期安全政策，欧洲财政与产业资源将进一步向防务倾斜。</li>
-<li>时间：2026-06-18 至 2026-06-19</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/06/18/european-council-conclusions-on-ukraine-and-on-european-defence-and-security/">欧洲理事会</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.whitehouse.gov/news/">美国白宫</a></li>
-<li><a target="_blank" rel="noopener" href="https://g7evian.fr/">G7 埃维昂峰会官网</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/">欧洲理事会</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.gov.cn/">中国政府网</a></li>
-</ul>
-<h2 id="科技"><a href="#科技" class="headerlink" title="科技"></a>科技</h2><h3 id="1-Google-发布智能体资源发现开放规范-ARD"><a href="#1-Google-发布智能体资源发现开放规范-ARD" class="headerlink" title="1. Google 发布智能体资源发现开放规范 ARD"></a>1. Google 发布智能体资源发现开放规范 ARD</h3><ul>
-<li>摘要：Google 与行业伙伴发布 Agentic Resource Discovery 开放规范，通过由机构域名托管的资源目录和联邦注册表，帮助智能体发现并验证工具、技能和其他智能体。</li>
-<li>重要性：ARD 试图补齐智能体互联网的“发现与信任”层，可与 MCP、A2A 和 OpenAPI 等连接协议协同，降低跨组织能力接入成本。</li>
-<li>时间：2026-06-17</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/">Google Developers Blog</a></li>
-</ul>
-<h3 id="2-Google-展示-A2A-智能体协作生态进展"><a href="#2-Google-展示-A2A-智能体协作生态进展" class="headerlink" title="2. Google 展示 A2A 智能体协作生态进展"></a>2. Google 展示 A2A 智能体协作生态进展</h3><ul>
-<li>摘要：在 A2A 协议发布一周年之际，Google 介绍其在生命科学、商业、数据流、DevOps 和电信等场景中的应用，强调智能体之间的安全协作与任务移交。</li>
-<li>重要性：智能体互操作正在从概念走向行业应用，协议标准将直接影响多智能体系统的模块化、隐私边界和平台兼容性。</li>
-<li>时间：2026-06-18</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://developers.googleblog.com/how-a2a-is-building-a-world-of-collaborative-agents/">Google Developers Blog</a></li>
-</ul>
-<h3 id="3-Microsoft-发布-Windows-11-26H2-准备指南"><a href="#3-Microsoft-发布-Windows-11-26H2-准备指南" class="headerlink" title="3. Microsoft 发布 Windows 11 26H2 准备指南"></a>3. Microsoft 发布 Windows 11 26H2 准备指南</h3><ul>
-<li>摘要：Microsoft 发布 Windows 11 版本 26H2 的组织准备说明，要求企业按既有服务、测试和分阶段部署路径规划下一次功能更新。</li>
-<li>重要性：新版本进入企业准备阶段后，硬件兼容、应用测试、安全基线和更新节奏将成为 IT 管理团队的重点工作。</li>
-<li>时间：2026-06-20</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/blog/windows-itpro-blog/get-ready-for-windows-11-version-26h2/4529367">Microsoft Windows IT Pro Blog</a></li>
-</ul>
-<h3 id="4-中国发布平台企业协同发展行动计划"><a href="#4-中国发布平台企业协同发展行动计划" class="headerlink" title="4. 中国发布平台企业协同发展行动计划"></a>4. 中国发布平台企业协同发展行动计划</h3><ul>
-<li>摘要：中国工业和信息化部等七部门发布 2026 至 2028 年行动计划，推动平台企业开放技术和数据、加强 AI 创新，并完善算法、流量治理和算法透明度。</li>
-<li>重要性：政策同时覆盖技术开放、平台治理和中小企业协同，可能影响互联网平台的数据接口、算法合规和产业生态建设。</li>
-<li>时间：2026-06-18</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://english.www.gov.cn/news/202606/19/content_WS6a34af71c6d00ca5f9a0bb20.html">中国政府网</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developers.googleblog.com/">Google Developers Blog</a></li>
-<li><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/category/windows/blog/windows-itpro-blog">Microsoft Windows IT Pro Blog</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.gov.cn/">中国政府网</a></li>
-</ul>
+            <p>从后端工程视角复盘 RAG 和 Agent 应用落地，重点说明数据链路、可控性、可观测性和面试表达。</p>
 
             
         </div>
@@ -338,100 +222,40 @@
         
         <span class="tag">
             
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ff7d73">AI与大模型</a>
+            <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color: #00bcd4">工程化</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #03a9f4">金融</a>
+            <a href="/tags/RAG/" style="color: #ff7d73">RAG</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #00bcd4">政治</a>
+            <a href="/tags/%E5%90%8E%E7%AB%AF/" style="color: #03a9f4">后端</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00a596">科技</a>
+            <a href="/tags/Agent/" style="color: #00a596">Agent</a>
         </span>
         
     </div>
-    <a href="/2026/06/21/HotMessage/2026-06-21-weekly/" class="go-post">阅读全文</a>
+    <a href="/2026/06/24/RAG/RAG-Agent%E5%BA%94%E7%94%A8%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%A4%8D%E7%9B%98/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
-    <a href="/2026/06/20/%E6%89%8B%E5%8A%A8%E5%88%80%E5%89%83%E9%A1%BB%E6%B3%A8%E6%84%8F%E7%82%B9/">
-        <h2 class="post-title">手动刀剃须注意点</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/6/20
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2026/06/20/%E6%89%8B%E5%8A%A8%E5%88%80%E5%89%83%E9%A1%BB%E6%B3%A8%E6%84%8F%E7%82%B9/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/06/20/feed%E6%B5%81%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%A7%88/">
-        <h2 class="post-title">项目概览</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/6/20
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2026/06/20/feed%E6%B5%81%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%A7%88/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/06/16/HotMessage/2026-06-16-weekly/">
-        <h2 class="post-title">2026-06-16 每周热点</h2>
+    <a href="/2026/06/24/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/%E9%A1%B9%E7%9B%AE%E6%80%BB%E8%A7%88%EF%BC%9A%E5%90%8E%E7%AB%AF%E4%B8%8EAI%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/">
+        <h2 class="post-title">项目总览：后端与 AI 应用实践</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/HotMessage/">
+            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                HotMessage
+                项目复盘
             </a>
         </span>
         
@@ -439,7 +263,7 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/6/16
+            2026/6/24
         </span>
         
         
@@ -447,128 +271,7 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h2 id="本周摘要"><a href="#本周摘要" class="headerlink" title="本周摘要"></a>本周摘要</h2><p>统计周期：2026-06-09 22:10:21 至 2026-06-16 22:10:21（Asia&#x2F;Shanghai）</p>
-<p>过去 7 天，AI 行业的重点不只是模型能力提升，也包括企业级落地、云端执行环境和高风险能力治理：OpenAI 扩大伙伴与云生态，Anthropic 则在发布 Fable&#x2F;Mythos 后快速暂停访问。金融市场继续被能源价格、通胀和政策利率牵动，美国 CPI&#x2F;PPI 与欧央行加息都显示价格压力没有消退，世界银行也下调了全球增长预期。政治方面，G7 埃维昂峰会、中东外交突破、欧盟对俄制裁和欧盟扩大进程同时推进，地缘议题与经济安全高度交织。科技行业的更新集中在 XR、移动开发工具链、系统测试版和安全更新，说明平台厂商正在把 AI 辅助开发、空间计算和基础安全维护纳入同一轮基础设施升级。</p>
-<h2 id="AI-与大模型"><a href="#AI-与大模型" class="headerlink" title="AI 与大模型"></a>AI 与大模型</h2><h3 id="1-Anthropic-发布-Claude-Fable-5-Mythos-5-后暂停访问"><a href="#1-Anthropic-发布-Claude-Fable-5-Mythos-5-后暂停访问" class="headerlink" title="1. Anthropic 发布 Claude Fable 5 &#x2F; Mythos 5 后暂停访问"></a>1. Anthropic 发布 Claude Fable 5 &#x2F; Mythos 5 后暂停访问</h3><ul>
-<li>摘要：Anthropic 于 2026 年 6 月 9 日发布 Claude Fable 5 和 Claude Mythos 5，称 Fable 5 是面向一般用户开放的 Mythos-class 模型；页面随后在 6 月 12 日更新，宣布暂停 Claude Fable 5 和 Claude Mythos 5 的访问并努力恢复。</li>
-<li>重要性：这显示前沿模型发布正在进入“能力、访问控制、安全阈值”同时受检验的阶段，尤其是网络安全、生物、化学等高风险能力会直接影响模型开放策略。</li>
-<li>时间：2026-06-09 &#x2F; 2026-06-12</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.anthropic.com/news/claude-fable-5-mythos-5">Anthropic：Claude Fable 5 and Claude Mythos 5</a>、<a target="_blank" rel="noopener" href="https://www.anthropic.com/news/fable-mythos-access">Anthropic：Statement on Claude Mythos 5 and Fable 5 access</a></li>
-</ul>
-<h3 id="2-OpenAI-推出-Partner-Network-并投入-1-5-亿美元支持生态"><a href="#2-OpenAI-推出-Partner-Network-并投入-1-5-亿美元支持生态" class="headerlink" title="2. OpenAI 推出 Partner Network 并投入 1.5 亿美元支持生态"></a>2. OpenAI 推出 Partner Network 并投入 1.5 亿美元支持生态</h3><ul>
-<li>摘要：OpenAI 于 2026 年 6 月 14 日宣布 OpenAI Partner Network，面向全球伙伴构建、销售和交付 AI 解决方案，并计划投入 1.5 亿美元支持生态，目标是在 2026 年底前培训和认证 30 万名顾问。</li>
-<li>重要性：前沿模型公司正在从直接卖模型转向“模型 + 咨询 + 系统集成 + 行业方案”的交付网络，这会影响企业 AI 项目的实施门槛和竞争格局。</li>
-<li>时间：2026-06-14</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/introducing-openai-partner-network/">OpenAI：Introducing the OpenAI Partner Network</a></li>
-</ul>
-<h3 id="3-OpenAI-宣布收购-Ona，强化-Codex-的持久云端执行能力"><a href="#3-OpenAI-宣布收购-Ona，强化-Codex-的持久云端执行能力" class="headerlink" title="3. OpenAI 宣布收购 Ona，强化 Codex 的持久云端执行能力"></a>3. OpenAI 宣布收购 Ona，强化 Codex 的持久云端执行能力</h3><ul>
-<li>摘要：OpenAI 于 2026 年 6 月 11 日宣布将收购 Ona，把其安全云执行与编排技术并入 Codex 生态，用于支持长时间运行的代理工作流和客户可控的云端环境。</li>
-<li>重要性：这意味着编码智能体的竞争正在从“模型会写代码”扩展到“能在受控环境里持续执行、测试、修复和审查”，企业级治理与基础设施能力会更关键。</li>
-<li>时间：2026-06-11</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/openai-to-acquire-ona/">OpenAI：OpenAI to acquire Ona</a></li>
-</ul>
-<h3 id="4-OpenAI-与-Oracle-打通-OCI-云承诺购买路径"><a href="#4-OpenAI-与-Oracle-打通-OCI-云承诺购买路径" class="headerlink" title="4. OpenAI 与 Oracle 打通 OCI 云承诺购买路径"></a>4. OpenAI 与 Oracle 打通 OCI 云承诺购买路径</h3><ul>
-<li>摘要：OpenAI 于 2026 年 6 月 10 日宣布，Oracle Cloud Infrastructure 客户将可在未来数周把合格的 Oracle Universal Credits 用于 OpenAI 模型和 Codex。</li>
-<li>重要性：大型企业往往受既有云采购、合规和预算流程约束，OpenAI 与 Oracle 的合作会降低企业在现有云承诺内采用前沿模型和 Codex 的摩擦。</li>
-<li>时间：2026-06-10</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/openai-on-oracle-cloud/">OpenAI：Access OpenAI models and Codex through your Oracle cloud commitment</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.anthropic.com/news/claude-fable-5-mythos-5">Anthropic：Claude Fable 5 and Claude Mythos 5</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.anthropic.com/news/fable-mythos-access">Anthropic：Statement on Claude Mythos 5 and Fable 5 access</a></li>
-<li><a target="_blank" rel="noopener" href="https://openai.com/index/introducing-openai-partner-network/">OpenAI：Introducing the OpenAI Partner Network</a></li>
-<li><a target="_blank" rel="noopener" href="https://openai.com/index/openai-to-acquire-ona/">OpenAI：OpenAI to acquire Ona</a></li>
-<li><a target="_blank" rel="noopener" href="https://openai.com/index/openai-on-oracle-cloud/">OpenAI：Access OpenAI models and Codex through your Oracle cloud commitment</a></li>
-</ul>
-<h2 id="金融"><a href="#金融" class="headerlink" title="金融"></a>金融</h2><h3 id="1-美国-5-月-CPI-与-PPI-均显示价格压力升温"><a href="#1-美国-5-月-CPI-与-PPI-均显示价格压力升温" class="headerlink" title="1. 美国 5 月 CPI 与 PPI 均显示价格压力升温"></a>1. 美国 5 月 CPI 与 PPI 均显示价格压力升温</h3><ul>
-<li>摘要：美国劳工统计局于 2026 年 6 月 10 日发布 5 月 CPI，CPI-U 环比上涨 0.5%、同比上涨 4.2%；6 月 11 日发布 5 月 PPI，最终需求价格环比上涨 1.1%、同比上涨 6.5%，能源和商品价格是关键推手。</li>
-<li>重要性：CPI 与 PPI 同步偏强会强化市场对通胀粘性和企业成本传导的担忧，也会影响美联储利率预期和风险资产估值。</li>
-<li>时间：2026-06-10 &#x2F; 2026-06-11</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.bls.gov/news.release/cpi.nr0.htm">BLS：Consumer Price Index Summary - May 2026</a>、<a target="_blank" rel="noopener" href="https://www.bls.gov/news.release/ppi.nr0.htm">BLS：Producer Price Indexes - May 2026</a></li>
-</ul>
-<h3 id="2-欧洲央行上调三大利率-25-个基点"><a href="#2-欧洲央行上调三大利率-25-个基点" class="headerlink" title="2. 欧洲央行上调三大利率 25 个基点"></a>2. 欧洲央行上调三大利率 25 个基点</h3><ul>
-<li>摘要：欧洲央行于 2026 年 6 月 11 日宣布上调三大利率 25 个基点，存款便利利率、主要再融资利率和边际贷款便利利率将分别升至 2.25%、2.40% 和 2.65%，自 6 月 17 日起生效。</li>
-<li>重要性：欧央行称中东战争推高通胀压力，并下调 2026 和 2027 年增长预期；这说明能源冲击正在重新塑造欧洲货币政策与增长前景。</li>
-<li>时间：2026-06-11</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260611~4d41bd5e83.en.html">ECB：Monetary policy decisions</a></li>
-</ul>
-<h3 id="3-世界银行下调-2026-年全球增长预期至-2-5"><a href="#3-世界银行下调-2026-年全球增长预期至-2-5" class="headerlink" title="3. 世界银行下调 2026 年全球增长预期至 2.5%"></a>3. 世界银行下调 2026 年全球增长预期至 2.5%</h3><ul>
-<li>摘要：世界银行 2026 年 6 月 11 日发布《Global Economic Prospects》6 月版，预计 2026 年全球经济增长放缓至 2.5%，并称相较 1 月预测，三分之二经济体的预测被下调。</li>
-<li>重要性：中东冲突、能源价格、融资成本和政策不确定性叠加，会让新兴市场和发展中经济体承受更大压力，也提高全球金融市场的下行风险。</li>
-<li>时间：2026-06-11</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.worldbank.org/en/news/press-release/2026/06/11/global-economic-prospects-june-2026-press-release">World Bank：Middle East Conflict Sends Global Growth to Lowest Rate Since Pandemic</a>、<a target="_blank" rel="noopener" href="https://www.worldbank.org/en/publication/global-economic-prospects">World Bank：Global Economic Prospects</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.bls.gov/news.release/cpi.nr0.htm">BLS：Consumer Price Index Summary - May 2026</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bls.gov/news.release/ppi.nr0.htm">BLS：Producer Price Indexes - May 2026</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260611~4d41bd5e83.en.html">ECB：Monetary policy decisions</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.worldbank.org/en/publication/global-economic-prospects">World Bank：Global Economic Prospects</a></li>
-</ul>
-<h2 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h2><h3 id="1-G7-埃维昂峰会开幕并欢迎美伊谅解备忘录"><a href="#1-G7-埃维昂峰会开幕并欢迎美伊谅解备忘录" class="headerlink" title="1. G7 埃维昂峰会开幕并欢迎美伊谅解备忘录"></a>1. G7 埃维昂峰会开幕并欢迎美伊谅解备忘录</h3><ul>
-<li>摘要：法国总统府信息显示，法国于 2026 年 6 月 15 日至 17 日在埃维昂主办 G7 峰会；同日多国领导人发表声明，欢迎美国与伊朗谅解备忘录，称其为恢复地区稳定和稳定全球经济的机会。</li>
-<li>重要性：G7 峰会与美伊外交进展同日进入议程，说明中东安全、能源价格和全球经济稳定仍是主要经济体协调的核心议题。</li>
-<li>时间：2026-06-15</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.elysee.fr/en/emmanuel-macron/2026/06/15/g7-summit-in-evian-day-one">Élysée：G7 Summit in Evian: Day One</a>、<a target="_blank" rel="noopener" href="https://www.elysee.fr/en/emmanuel-macron/2026/06/15/statement-by-leaders-on-the-memorandum-of-understanding-between-the-us-and-iran">Élysée：Statement by leaders on the memorandum of understanding between the US and Iran</a></li>
-</ul>
-<h3 id="2-欧盟新增对俄制裁，覆盖能源、军工和宣传网络"><a href="#2-欧盟新增对俄制裁，覆盖能源、军工和宣传网络" class="headerlink" title="2. 欧盟新增对俄制裁，覆盖能源、军工和宣传网络"></a>2. 欧盟新增对俄制裁，覆盖能源、军工和宣传网络</h3><ul>
-<li>摘要：欧盟理事会于 2026 年 6 月 15 日宣布新增对俄限制措施，涉及 34 名个人和 47 个实体，目标包括俄罗斯军工综合体、能源收入、影子船队生态、混合威胁和国家宣传网络。</li>
-<li>重要性：欧盟继续通过制裁压缩俄罗斯战争资源，同时把能源收入、混合攻击和信息战纳入同一套政策工具箱。</li>
-<li>时间：2026-06-15</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/06/15/russia-s-war-of-aggression-against-ukraine-new-eu-sanctions-target-energy-revenues-the-military-industrial-complex-propaganda-and-human-rights-violations/">Council of the EU：Russia’s war of aggression against Ukraine - new EU sanctions</a></li>
-</ul>
-<h3 id="3-欧盟与乌克兰开启首个入盟谈判集群"><a href="#3-欧盟与乌克兰开启首个入盟谈判集群" class="headerlink" title="3. 欧盟与乌克兰开启首个入盟谈判集群"></a>3. 欧盟与乌克兰开启首个入盟谈判集群</h3><ul>
-<li>摘要：欧盟理事会于 2026 年 6 月 15 日宣布，欧盟与乌克兰开启“基本原则”集群谈判，涵盖法治、基本权利、民主制度、公共行政改革和经济标准等议题。</li>
-<li>重要性：这是乌克兰入盟进程中的实质性节点，也显示欧盟在安全压力下继续推进扩大政策和制度整合。</li>
-<li>时间：2026-06-15 19:55</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/06/15/eu-and-ukraine-open-first-accession-negotiations-cluster/">Council of the EU：EU and Ukraine open first accession negotiations cluster</a></li>
-</ul>
-<h3 id="4-习近平同缅甸总统敏昂莱会谈"><a href="#4-习近平同缅甸总统敏昂莱会谈" class="headerlink" title="4. 习近平同缅甸总统敏昂莱会谈"></a>4. 习近平同缅甸总统敏昂莱会谈</h3><ul>
-<li>摘要：中国外交部消息称，2026 年 6 月 16 日上午，国家主席习近平在北京同来华进行国事访问的缅甸总统敏昂莱举行会谈；会谈后双方共同见证签署交通、民生等领域多项合作文件。</li>
-<li>重要性：中缅关系关系到中国西南周边稳定、边境安全、共建“一带一路”和打击跨境网赌电诈等议题，对中国读者具有直接区域关注度。</li>
-<li>时间：2026-06-16 14:02</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://www.mfa.gov.cn/zyxw/202606/t20260616_11946481.shtml">中华人民共和国外交部：习近平同缅甸总统敏昂莱会谈</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.elysee.fr/en/emmanuel-macron/2026/06/15/g7-summit-in-evian-day-one">Élysée：G7 Summit in Evian: Day One</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.elysee.fr/en/emmanuel-macron/2026/06/15/statement-by-leaders-on-the-memorandum-of-understanding-between-the-us-and-iran">Élysée：Statement by leaders on the memorandum of understanding between the US and Iran</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/06/15/russia-s-war-of-aggression-against-ukraine-new-eu-sanctions-target-energy-revenues-the-military-industrial-complex-propaganda-and-human-rights-violations/">Council of the EU：Russia’s war of aggression against Ukraine - new EU sanctions</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/06/15/eu-and-ukraine-open-first-accession-negotiations-cluster/">Council of the EU：EU and Ukraine open first accession negotiations cluster</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.mfa.gov.cn/zyxw/202606/t20260616_11946481.shtml">中华人民共和国外交部：习近平同缅甸总统敏昂莱会谈</a></li>
-</ul>
-<h2 id="科技"><a href="#科技" class="headerlink" title="科技"></a>科技</h2><h3 id="1-Android-XR-推出-Developer-Preview-4-并扩展引擎支持"><a href="#1-Android-XR-推出-Developer-Preview-4-并扩展引擎支持" class="headerlink" title="1. Android XR 推出 Developer Preview 4 并扩展引擎支持"></a>1. Android XR 推出 Developer Preview 4 并扩展引擎支持</h3><ul>
-<li>摘要：Android Developers Blog 于 2026 年 6 月 15 日介绍 Android XR 更新，Developer Preview 4 带来新的 SDK、模拟器和感知库能力，并宣布在既有 Unity 支持之外加入 Unreal Engine 与 Godot 支持。</li>
-<li>重要性：XR 平台正在从单一硬件展示转向开发工具、引擎生态和应用分发的完整链路，空间计算应用的开发门槛有望降低。</li>
-<li>时间：2026-06-15</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://android-developers.googleblog.com/2026/06/what-is-new-android-xr.html">Android Developers Blog：What’s New in Android XR</a></li>
-</ul>
-<h3 id="2-Android-CLI-1-0-稳定版发布，Antigravity-支持-Android-开发"><a href="#2-Android-CLI-1-0-稳定版发布，Antigravity-支持-Android-开发" class="headerlink" title="2. Android CLI 1.0 稳定版发布，Antigravity 支持 Android 开发"></a>2. Android CLI 1.0 稳定版发布，Antigravity 支持 Android 开发</h3><ul>
-<li>摘要：Android Developers Blog 于 2026 年 6 月 9 日总结 Android 开发效率更新，称 Android CLI 已稳定到 1.0，并且 Google Antigravity 正式支持 Android 开发与 Android resources bundle。</li>
-<li>重要性：移动开发工具正在围绕智能体重组，CLI、IDE、技能包和基准测试的组合会影响未来 Android 应用生成、调试和部署的工作流。</li>
-<li>时间：2026-06-09</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://android-developers.googleblog.com/2026/06/android-developer-productivity-updates.html">Android Developers Blog：Top 3 updates for Android developer productivity</a></li>
-</ul>
-<h3 id="3-Apple-发布多平台-26-6-beta-2-与-AirPods-beta"><a href="#3-Apple-发布多平台-26-6-beta-2-与-AirPods-beta" class="headerlink" title="3. Apple 发布多平台 26.6 beta 2 与 AirPods beta"></a>3. Apple 发布多平台 26.6 beta 2 与 AirPods beta</h3><ul>
-<li>摘要：Apple Developer Releases 页面显示，Apple 于 2026 年 6 月 15 日发布 iOS、iPadOS、macOS、tvOS、visionOS、watchOS 26.6 beta 2，并于 6 月 9 日发布 AirPods beta 9A292e。</li>
-<li>重要性：这轮测试版覆盖手机、平板、桌面、电视、头显、手表和耳机，开发者需要同步关注系统兼容、应用适配和硬件体验变化。</li>
-<li>时间：2026-06-15 &#x2F; 2026-06-09</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://developer.apple.com/news/releases/">Apple Developer：Releases</a></li>
-</ul>
-<h3 id="4-Microsoft-发布-6-月-Windows-安全更新"><a href="#4-Microsoft-发布-6-月-Windows-安全更新" class="headerlink" title="4. Microsoft 发布 6 月 Windows 安全更新"></a>4. Microsoft 发布 6 月 Windows 安全更新</h3><ul>
-<li>摘要：Microsoft Learn 的 Windows message center 显示，2026 年 6 月 Windows 安全更新已于 6 月 9 日 10:00 PT 面向所有受支持 Windows 版本发布，并建议用户及时安装；更新说明还提到本次更新扩展了用于自动接收新 Secure Boot 证书的高置信设备定位数据。</li>
-<li>重要性：月度安全更新仍是企业与个人端点防护的基本面，Secure Boot 和系统更新链路的变化尤其影响企业运维和合规。</li>
-<li>时间：2026-06-09 10:00 PT（2026-06-10 01:00 Asia&#x2F;Shanghai）</li>
-<li>信息来源：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/release-health/windows-message-center">Microsoft Learn：Windows message center</a>、<a target="_blank" rel="noopener" href="https://msrc.microsoft.com/update-guide/releaseNote/2026-Jun">Microsoft Security Response Center：June 2026 release notes</a></li>
-</ul>
-<p>本分类主要来源：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://android-developers.googleblog.com/2026/06/what-is-new-android-xr.html">Android Developers Blog：What’s New in Android XR</a></li>
-<li><a target="_blank" rel="noopener" href="https://android-developers.googleblog.com/2026/06/android-developer-productivity-updates.html">Android Developers Blog：Top 3 updates for Android developer productivity</a></li>
-<li><a target="_blank" rel="noopener" href="https://developer.apple.com/news/releases/">Apple Developer：Releases</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/release-health/windows-message-center">Microsoft Learn：Windows message center</a></li>
-</ul>
+            <p>面向面试官的项目总览，集中说明后端、AI 应用和工程化能力。</p>
 
             
         </div>
@@ -583,100 +286,35 @@
         
         <span class="tag">
             
-            <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #00bcd4">AI与大模型</a>
+            <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color: #ffa2c4">工程化</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00a596">金融</a>
+            <a href="/tags/%E5%90%8E%E7%AB%AF/" style="color: #00bcd4">后端</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #03a9f4">政治</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00bcd4">科技</a>
+            <a href="/tags/AI%E5%BA%94%E7%94%A8/" style="color: #ff7d73">AI应用</a>
         </span>
         
     </div>
-    <a href="/2026/06/16/HotMessage/2026-06-16-weekly/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/06/14/hot100/%E5%90%8C%E5%90%91%E5%8F%8C%E6%8C%87%E9%92%88-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
-        <h2 class="post-title">同向双指针-滑动窗口</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/6/14
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2026/06/14/hot100/%E5%90%8C%E5%90%91%E5%8F%8C%E6%8C%87%E9%92%88-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/06/12/hot100/two%20point/%E7%9B%B8%E5%90%91%E5%8F%8C%E6%8C%87%E9%92%882/">
-        <h2 class="post-title">相向双指针2</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/6/12
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2026/06/12/hot100/two%20point/%E7%9B%B8%E5%90%91%E5%8F%8C%E6%8C%87%E9%92%882/" class="go-post">阅读全文</a>
+    <a href="/2026/06/24/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/%E9%A1%B9%E7%9B%AE%E6%80%BB%E8%A7%88%EF%BC%9A%E5%90%8E%E7%AB%AF%E4%B8%8EAI%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
     <a href="/2026/06/11/Golang/Go%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">
-        <h2 class="post-title">Go并发编程</h2>
+        <h2 class="post-title">Go 并发编程：goroutine、channel 与同步控制</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/Golang%E5%9F%BA%E7%A1%80/">
+            <a href="/categories/%E5%90%8E%E7%AB%AF/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                Golang基础
+                后端
             </a>
         </span>
         
@@ -692,132 +330,43 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h2 id="概念解释"><a href="#概念解释" class="headerlink" title="概念解释"></a>概念解释</h2><ul>
-<li>系统调用:当程序需要创建或使用OS提供的对象时,一般需要os提供的系统调用才能实现,与此同时,系统调用让计算机从用户态切换到内核态再切换回来会造成一定的时间开销.</li>
-<li>进程,线程,协程:进程是操作系统资源分配的基本单位,线程是操作系统进行cpu调度的基本单位,而协程是运行在线程之上的,更轻量的用户态执行单元,通常由语言的runtime或框架调度.<br>进程 是一个正在运行的程序实例。每个进程有自己独立的地址空间、内存、文件描述符等资源，进程之间相互隔离，所以安全性和稳定性比较好。但进程创建、销毁和切换的成本比较高，进程间通信也相对复杂，比如要通过管道、消息队列、共享内存、Socket 等方式。</li>
-</ul>
-<p>线程 是进程内部的执行流。一个进程可以包含多个线程，多个线程共享进程的堆内存、全局变量、文件等资源，但每个线程有自己的栈、程序计数器和寄存器上下文。线程比进程更轻量，线程之间通信更方便，但是因为共享内存，所以需要考虑线程安全问题，比如锁、CAS、死锁、竞态条件等。</p>
-<p>协程 是比线程更轻量的执行单元，通常由程序语言的运行时调度，而不是直接由操作系统调度。协程运行在线程之上，创建和切换成本更低，适合大量高并发 I&#x2F;O 场景。比如 Go 里的 goroutine、Python 的 async&#x2F;await，都可以看作协程相关的实现。</p>
-<ul>
-<li>临界区:一段访问共享资源的代码区域。多个线程&#x2F;进程如果同时进入这段代码，可能会导致数据错误。</li>
-</ul>
-<h2 id="Go并发编程基础"><a href="#Go并发编程基础" class="headerlink" title="Go并发编程基础"></a>Go并发编程基础</h2><p>两个goroutine轮流打印奇偶数字</p>
-<p>这里channel是goroutine之间传递数据的管道,go推荐的并发思想是”不要通过共享内存来通信，而要通过通信来共享内存”.也就是尽量让goroutine之间用channel传递数据,而不是大家都去抢同一个变量.<br>channel分为无缓冲channel和有缓冲channel</p>
-<ol>
-<li><p>往无缓冲 channel 写数据，但没人接收，会阻塞，严重时会 deadlock。从无缓冲channel中接受数据,如果channel中没有,会一直阻塞</p>
-</li>
-<li><p>有缓冲channel在发送方发送数据没人接受时会先暂存到缓冲区,缓冲区满了就阻塞.接受方收不到数据也是一直阻塞<br>PS:除了chanel，go中还可以用sync包中的Mutex,RWMutex,atomic,map等进行通信,其中atomic是对单个变量的原子读写操作,Mutex相对于atomic,更适合对变量判断+修改的复合逻辑,相对于更适合生产-消费模型的channel,更适合保护临界区.<br>channel 适合“传递数据&#x2F;任务&#x2F;信号”,mutex 适合“保护共享数据”<br>传递所有权，用 channel；<br>共享同一份数据，用 mutex。</p>
-</li>
-<li><p>defer 会把函数调用延迟到当前函数结束前执行。</p>
-</li>
-<li><p>多个 defer 按后进先出的顺序执行，语义上类似栈。</p>
-</li>
-<li><p>defer 的参数在注册 defer 时就会求值。</p>
-</li>
-</ol>
-<p>sync.WaitGroup的作用是:等待一组goroutine执行完毕再退出,常用方法有<br>wg.Add(3)   &#x2F;&#x2F; 计数器 +3，表示有 3 个任务要等<br>wg.Done()   &#x2F;&#x2F; 计数器 -1，表示一个任务完成了<br>wg.Wait()   &#x2F;&#x2F; 阻塞等待，直到计数器变成 0<br>除了sync.wr,还可以使用以下方法实现等待一组goroutine完成</p>
-<ol>
-<li>用channel收集完成信号</li>
-<li>用errgroup,相当于加强版的WaitGroup,可以同时等待一组goroutine完成,还可以收集错误信息</li>
-</ol>
-<pre><code class="language-golang">    func main() {
-        oddChan := make(chan int)
-        evenChan := make(chan int)
-
-        var wg sync.WaitGroup
-        wg.Add(2)
-
-        go func() {
-            defer wg.Done()
-
-            for i := 1; i &lt;= 100; i += 2 {
-                &lt;-oddChan
-                fmt.Printf(&quot;odd: %v\n&quot;, i)
-                evenChan &lt;- i
-            }
-        }()
-
-        go func() {
-            defer wg.Done()
-
-            for i := 2; i &lt;= 100; i += 2 {
-                &lt;-evenChan
-                fmt.Printf(&quot;even: %v\n&quot;, i)
-                if i == 100 {
-                    return
-                }
-                oddChan &lt;- i
-            }
-        }()
-        oddChan &lt;- 1
-        wg.Wait()
-}
-</code></pre>
-<p>三个goroutine轮流打印数字<br>一开始可能这么写:</p>
-<pre><code class="language-golang">    func main() {
-        a := make(chan int)
-        b := make(chan int)
-        c := make(chan int)
-        var wg sync.WaitGroup
-
-        wg.Add(3)
-
-        go func() {
-            defer wg.Done()
-
-            for {
-                var tmp int
-                tmp = &lt;-a
-                println(tmp)
-                b &lt;- tmp + 1
-                if tmp == 97 {
-                    return
-                }
-            }
-        }()
-
-        go func() {
-            defer wg.Done()
-
-            for {
-                var tmp int
-                tmp = &lt;-b
-                println(tmp)
-                c &lt;- tmp + 1
-                if tmp == 98 {
-                    return
-                }
-            }
-        }()
-
-        go func() {
-            defer wg.Done()
-
-            for {
-                var tmp int
-                tmp = &lt;-c
-                println(tmp)
-                if tmp == 99 {
-                    return
-                }
-                a &lt;- tmp + 1
-            }
-        }()
-        a &lt;- 1
-        wg.Wait()
-    }
-</code></pre>
-<p>但是golang有select,专门用于一个 goroutine 同时等待多个 channel，哪个先准备好就执行哪个,相当于等待channel的switch.所以代码可以优化一下.<br>另外select既可以接受channel,也可以发送channel<br>PS:除了select,还可以用以下方法实现监听多个channel</p>
-<ol>
-<li>用一个结果channel统一收集信息</li>
-</ol>
+            <p>从面试和工程实践角度整理 Go 并发模型、channel、WaitGroup、Mutex 和常见阻塞问题。</p>
 
             
         </div>
     </div>
     <div class="post-tags">
         
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
         
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Go/" style="color: #00a596">Go</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%B9%B6%E5%8F%91/" style="color: #00bcd4">并发</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/goroutine/" style="color: #00a596">goroutine</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/channel/" style="color: #ffa2c4">channel</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color: #00a596">工程化</a>
+        </span>
         
     </div>
     <a href="/2026/06/11/Golang/Go%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="go-post">阅读全文</a>
@@ -825,7 +374,7 @@
 
 <div class="post">
     <a href="/2026/06/10/hot100/two%20point/%E7%9B%B8%E5%90%91%E5%8F%8C%E6%8C%87%E9%92%881/">
-        <h2 class="post-title">相向双指针1</h2>
+        <h2 class="post-title">相向双指针：有序数组中的组合判断</h2>
     </a>
     <div class="category-and-date">
         
@@ -850,87 +399,31 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h2 id="相向双指针思想"><a href="#相向双指针思想" class="headerlink" title="相向双指针思想"></a>相向双指针思想</h2><p>一般用于找组合问题,比如在一个数组中找那些元素相加等于target,可以组成三角形之类的.<br>方法:在数组有序的前提下,通过指针以O(1)的时间获取O(n)的信息,达到比枚举更优的时间复杂度.比如当l+r&gt;target时,可以判断[r,n-1]加l都大于target,故可以r–判断下一组,反之同理.</p>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><pre><code class="language-C++">    class Solution {
-    public:
-        vector&lt;vector&lt;int&gt;&gt; ans;
-        vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums) {
-            sort(nums.begin(),nums.end());
-            int n=nums.size();
-            //outside loop
-            for(int i=0;i&lt;n-2;++i){
-                //inside two point
-                //nums[j]+nums[k]=-nums[i]
-                if(i&gt;0&amp;&amp;nums[i]==nums[i-1]){
-                    continue;
-                }
-                int tmp=-nums[i];
-                for(int j=i+1,k=n-1;j&lt;k;){
-                    if(nums[j]+nums[k]&gt;tmp){
-                        k--;
-                    } else if(nums[j]+nums[k]&lt;tmp){
-                        j++;
-                    } else {
-                        ans.push_back({nums[i],nums[j],nums[k]});
-                        while(j&lt;k&amp;&amp;nums[j]==nums[j+1]){
-                            j++;
-                        }
-                        while(k&gt;j&amp;&amp;nums[k]==nums[k-1]){
-                            k--;
-                        }
-                        j++;k--;
-                    }
-                }
-            }
-            return ans;
-        }
-    };
-</code></pre>
-<p><strong>注意这里循环最里面的else,即更新ans后的去重操作,其目的是去重,去掉加入ans集的nums[k],nums[j].比如当前j是1,后面是1,2,3,就要让j指向2.<br>以j为例子,可以先++再判断和前面的数是否相同,也可以先判断和后面的数是否相同,最后再++.</strong></p>
-<h2 id="相似题型"><a href="#相似题型" class="headerlink" title="相似题型"></a>相似题型</h2><p>2824 统计小于目标的下标对数目<br>没什么好说的,套模板改成小于就行,大于就k–,小于记录答案然后j++<br>就是合适后再修改变量试探,看能不能继续符合条件,这种思想非常重要.</p>
-<p>16 最接近的三数之和<br>套模板就行,枚举i,如果sum&gt;target就k–,否则j++,每轮都更新一遍ans</p>
-<p>18 四数之和<br>相向双指针只能维护两个,所以最外层枚举i,内一层枚举j,内二层枚举k1,k2<br>这里需要注意j的去重条件是j&gt;i+1&amp;&amp;nums[j]&#x3D;&#x3D;nums[j-1],代表除了刚进入循环的第一次,后面如果枚举的数和前一个相同就跳过,思想和i去重相同</p>
-<p>611 有效三角形个数<br>这里要转变思路,如果一开始就套模板外层枚举i,内层枚举j,k.就会发现<br>nums[i]+nums[j]&gt;nums[k]时,既可以k++,也可以j–<br>nums[i]+nums[j]&lt;nums[k]时,既可以k–,也可以j++<br>造成这种情况的根本原因是j和k不在等式的同一边,于是单调性就出了问题,以前遇到的问题,jk都在同一边,每种情况都只能调整一个变量,要么j增要么k-.<br>所以这里只能枚举k,ij当做双指针或使用同向双指针,即滑动窗口</p>
+            <p>整理相向双指针在有序数组组合判断中的基本思路和模板。</p>
 
             
         </div>
     </div>
     <div class="post-tags">
         
-        
-        
-    </div>
-    <a href="/2026/06/10/hot100/two%20point/%E7%9B%B8%E5%90%91%E5%8F%8C%E6%8C%87%E9%92%881/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/06/08/Vibe/apex/Vibe-coding%E8%BF%9B%E9%98%B6%E5%89%8D%E7%AB%AF-1/">
-        <h2 class="post-title">Vibe coding进阶前端-1</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/6/8
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
         </span>
         
         
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            
-            
-        </div>
-    </div>
-    <div class="post-tags">
         
+        <span class="tag">
+            
+            <a href="/tags/Hot100/" style="color: #03a9f4">Hot100</a>
+        </span>
         
+        <span class="tag">
+            
+            <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="color: #ffa2c4">双指针</a>
+        </span>
         
     </div>
-    <a href="/2026/06/08/Vibe/apex/Vibe-coding%E8%BF%9B%E9%98%B6%E5%89%8D%E7%AB%AF-1/" class="go-post">阅读全文</a>
+    <a href="/2026/06/10/hot100/two%20point/%E7%9B%B8%E5%90%91%E5%8F%8C%E6%8C%87%E9%92%881/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -940,11 +433,11 @@
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/Vibe-coding/">
+            <a href="/categories/%E5%B7%A5%E7%A8%8B%E5%8C%96/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                Vibe coding
+                工程化
             </a>
         </span>
         
@@ -960,34 +453,366 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h2 id="三类高频提问"><a href="#三类高频提问" class="headerlink" title="三类高频提问"></a>三类高频提问</h2><p>完成了第一章的验收后，我们将要开启下一轮开发，在那之前要熟悉三类提问</p>
-<h3 id="理解类：这个项目在做什么"><a href="#理解类：这个项目在做什么" class="headerlink" title="理解类：这个项目在做什么"></a>理解类：这个项目在做什么</h3><pre><code class="language-text">请用人话解释这个项目目前的结构。
-告诉我主页入口、xxx功能相关代码、样式相关文件分别大概在哪。
-不要展开太深。
-</code></pre>
-<h3 id="定位类-我想修改功能x-相关代码在哪"><a href="#定位类-我想修改功能x-相关代码在哪" class="headerlink" title="定位类: 我想修改功能x,相关代码在哪"></a>定位类: 我想修改功能x,相关代码在哪</h3><pre><code class="language-text">我想修改首页首屏的一句话介绍和主按钮文案。
-请先告诉我这两处分别在哪个文件里，再给出修改建议。
-</code></pre>
-<h3 id="约束类-只改这一处-不要修改其他地方"><a href="#约束类-只改这一处-不要修改其他地方" class="headerlink" title="约束类: 只改这一处,不要修改其他地方"></a>约束类: 只改这一处,不要修改其他地方</h3><pre><code class="language-text">请只修改聊天框的引导语，不要改布局，不要新增模块，也不要调整配色。
-</code></pre>
-<p>现在我们要进行前端页面的修改,因为前端是用户最直接接触的层级,就像看人的第一印象一样,下面介绍三个最优先的修改</p>
-<h2 id="三个前端页面修改"><a href="#三个前端页面修改" class="headerlink" title="三个前端页面修改"></a>三个前端页面修改</h2><p>首先调整首页布局,明确页面主次关系,最重要的是你想要别人一打开页面,第一眼看到的是什么,哪些元素最重要,哪些元素可以稍微推后.</p>
-<pre><code class="language-text">请先优化首页首屏排版。
-目标是让名字、一句话介绍和主要按钮更有主次，聊天入口更容易被注意到。
-不要新增模块，先只调整布局、间距和元素优先级。
-</code></pre>
-<p>其次颜色和字体要统一,确定主色系,规定一系列这个色系相关的颜色并且按照关系分配给各级元素.<br>字体也要确定,标题的字体用什么,正文和辅助信息的字体用什么都区分开来,还要确保字体和首页主题契合,看着没有违和感.</p>
-<p>最后是区域和留白<br>很多新手容易忽略这一层，因为它不像按钮颜色那样显眼，但它对作品感影响很大。区块之间有没有呼吸感，信息是不是挤在一起，哪一段是主信息、哪一段是辅助信息，访客是不是一眼能扫出结构，这些都会决定页面是不是好读。很多时候，你不需要加新内容，只需要把已有内容重新拉开层次，页面就会立刻更像作品。</p>
+            <p>记录 AI 编程过程中理解类、修改类和验收类问题的提问方式。</p>
 
             
         </div>
     </div>
     <div class="post-tags">
         
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
         
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/AI%E8%BE%85%E5%8A%A9%E5%BC%80%E5%8F%91/" style="color: #00a596">AI辅助开发</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Prompt/" style="color: #ffa2c4">Prompt</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/VibeCoding/" style="color: #03a9f4">VibeCoding</a>
+        </span>
         
     </div>
     <a href="/2026/06/08/Vibe/basis/Vibe-coding%E5%9F%BA%E7%A1%80-2/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/06/07/Vibe/basis/Vibe-coding%E5%9F%BA%E7%A1%80-1/">
+        <h2 class="post-title">Vibe coding基础-1</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%B7%A5%E7%A8%8B%E5%8C%96/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                工程化
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>记录使用 AI 编程工具做个人数字分身原型时的提示词拆解和验收方法。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/AI%E8%BE%85%E5%8A%A9%E5%BC%80%E5%8F%91/" style="color: #ff7d73">AI辅助开发</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Prompt/" style="color: #03a9f4">Prompt</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/VibeCoding/" style="color: #00a596">VibeCoding</a>
+        </span>
+        
+    </div>
+    <a href="/2026/06/07/Vibe/basis/Vibe-coding%E5%9F%BA%E7%A1%80-1/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/05/21/Git/Git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/">
+        <h2 class="post-title">Git 基本操作详解：merge、rebase 与团队协作</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%B7%A5%E7%A8%8B%E5%8C%96/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                工程化
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/5/21
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>面向团队协作整理 Git pull、fetch、merge、rebase 的区别和使用边界。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Git/" style="color: #00bcd4">Git</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" style="color: #ffa2c4">团队协作</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/merge/" style="color: #03a9f4">merge</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/rebase/" style="color: #ffa2c4">rebase</a>
+        </span>
+        
+    </div>
+    <a href="/2026/05/21/Git/Git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/05/19/agent/agent%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F/">
+        <h2 class="post-title">Agent 设计范式：ReAct、Plan-and-Execute 与 Reflexion</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/AI%E5%BA%94%E7%94%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                AI应用
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/5/19
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>梳理常见 Agent 设计范式及其适用边界，强调生产环境中的可控性。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color: #00bcd4">工程化</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Agent/" style="color: #ff7d73">Agent</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/ReAct/" style="color: #00a596">ReAct</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Workflow/" style="color: #ff7d73">Workflow</a>
+        </span>
+        
+    </div>
+    <a href="/2026/05/19/agent/agent%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/05/17/agent/%E4%BB%80%E4%B9%88%E6%98%AFagent/">
+        <h2 class="post-title">什么是 Agent：从 LLM 到可控自动化系统</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/AI%E5%BA%94%E7%94%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                AI应用
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/5/17
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>解释 Agent、Workflow、Tool 的区别，并从后端工程视角说明 Agent 的可控性边界。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color: #ffa2c4">工程化</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Agent/" style="color: #03a9f4">Agent</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Workflow/" style="color: #ffa2c4">Workflow</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/LLM/" style="color: #03a9f4">LLM</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/MCP/" style="color: #00bcd4">MCP</a>
+        </span>
+        
+    </div>
+    <a href="/2026/05/17/agent/%E4%BB%80%E4%B9%88%E6%98%AFagent/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/29/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E5%A4%8D%E7%9B%98/">
+        <h2 class="post-title">高并发秒杀系统复盘</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                项目复盘
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/29
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>基于 Spring Boot、Redis、RabbitMQ 和 MySQL 的秒杀下单链路复盘，重点说明并发控制、削峰、幂等和补偿。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color: #00bcd4">工程化</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%90%8E%E7%AB%AF/" style="color: #ffa2c4">后端</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/RabbitMQ/" style="color: #00bcd4">RabbitMQ</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Redis/" style="color: #00a596">Redis</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" style="color: #ff7d73">高并发</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Lua/" style="color: #00a596">Lua</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/29/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E5%A4%8D%E7%9B%98/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -1006,7 +831,7 @@
     
     
     <span class="page-omit">...</span>
-    <a class="page-num" href="/page/5">5</a>
+    <a class="page-num" href="/page/4">4</a>
     
     
     <a class="page-num" href="/page/2/">
@@ -1021,11 +846,11 @@
         <div id="card-style">
     <div id="card-div">
         <div class="avatar">
-            <img src="/images/avatar.jpg" alt="avatar" />
+            <img src="/images/site/avatar.svg" alt="avatar" />
         </div>
         <div class="name">Yu</div>
         <div class="description">
-            <p>Description<br>…</p>
+            <p>后端工程 &#x2F; AI 应用 &#x2F; 项目复盘<br>记录能被面试官追问、也经得起复盘的技术细节。</p>
 
         </div>
         
@@ -1033,7 +858,7 @@
         <div class="friend-links">
             
             <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://github.com/leikuman1">github</a>
+                <a target="_blank" rel="noopener" href="https://github.com/leikuman1">GitHub</a>
             </div>
             
         </div>

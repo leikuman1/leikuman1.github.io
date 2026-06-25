@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="L'sBlog background">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="50%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#134e4a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="30%" r="45%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <g opacity="0.16" stroke="#e2e8f0" stroke-width="1">
+    <path d="M120 180h320M120 230h260M120 280h360"/>
+    <path d="M1040 560h360M1040 610h300M1040 660h240"/>
+    <path d="M260 650c120-150 250-170 390-60s270 80 410-70"/>
+  </g>
+  <g opacity="0.2" fill="#67e8f9">
+    <circle cx="480" cy="180" r="5"/>
+    <circle cx="900" cy="260" r="4"/>
+    <circle cx="1180" cy="420" r="6"/>
+    <circle cx="720" cy="640" r="4"/>
+  </g>
+</svg>

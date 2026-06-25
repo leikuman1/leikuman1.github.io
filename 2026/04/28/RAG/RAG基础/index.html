@@ -3,15 +3,15 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>RAG基础 | L&#39;sBlog</title>
+    <title>RAG 基础：从检索增强到可上线问答 | L&#39;sBlog</title>
     <meta name="author" content="Yu" />
-    <meta name="description" content="Nearer to death, nearer to rebirth." />
-    <meta name="keywords" content="" />
+    <meta name="description" content="记录后端开发、AI 应用、项目复盘与面试表达。" />
+    <meta name="keywords" content="后端,AI应用,RAG,Agent,FastAPI,Golang,Redis,RabbitMQ" />
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="icon" href="/images/site/avatar.svg" />
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -56,7 +56,7 @@
                 <div id="loading-circle">
                     <h2>LOADING</h2>
                     <p>加载过慢请开启缓存 浏览器默认开启</p>
-                    <img src="/images/loading.gif" />
+                    <img src="/images/site/loading.svg" />
                 </div>
             </div>
         </transition>
@@ -68,27 +68,27 @@
         
         <a href="/">
             <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Home</span>
+            <span>&ensp;首页</span>
         </a>
         
         <a href="/about">
             <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;About</span>
+            <span>&ensp;关于</span>
         </a>
         
         <a href="/archives">
             <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;Archives</span>
+            <span>&ensp;归档</span>
         </a>
         
         <a href="/categories">
             <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Categories</span>
+            <span>&ensp;分类</span>
         </a>
         
         <a href="/tags">
             <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;Tags</span>
+            <span>&ensp;标签</span>
         </a>
         
     </nav>
@@ -105,7 +105,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-house fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
                     </div>
                 </a>
                 
@@ -114,7 +114,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-id-card fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
                     </div>
                 </a>
                 
@@ -123,7 +123,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-box-archive fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
                     </div>
                 </a>
                 
@@ -132,7 +132,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-bookmark fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
                     </div>
                 </a>
                 
@@ -141,7 +141,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-tags fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
                     </div>
                 </a>
                 
@@ -156,7 +156,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>RAG基础</h1>
+        <h1>RAG 基础：从检索增强到可上线问答</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -167,64 +167,136 @@
         </span>
         
         <span class="category">
-            <a href="/categories/RAG/">
+            <a href="/categories/AI%E5%BA%94%E7%94%A8/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                RAG
+                AI应用
             </a>
         </span>
         
         
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/RAG/" style="color: #00bcd4">
+                    RAG
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Embedding/" style="color: #ff7d73">
+                    Embedding
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2/" style="color: #00a596">
+                    向量检索
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%90%8E%E7%AB%AF/" style="color: #ff7d73">
+                    后端
+                </a>
+            </span>
+            
+        </span>
+        
     </div>
     
     <div class="content" v-pre>
-        <h2 id="RAG是什么"><a href="#RAG是什么" class="headerlink" title="RAG是什么"></a>RAG是什么</h2><p>RAG（Retrieval-Augmented Generation）是一种结合了检索和生成的自然语言处理技术。</p>
-<h2 id="RAG的工作流程"><a href="#RAG的工作流程" class="headerlink" title="RAG的工作流程"></a>RAG的工作流程</h2><p>RAG主要干两件事情，离线建库和在线问答</p>
-<h3 id="离线建库-把资料变成可检索知识库"><a href="#离线建库-把资料变成可检索知识库" class="headerlink" title="离线建库: 把资料变成可检索知识库"></a>离线建库: 把资料变成可检索知识库</h3><p>原始文档<br>  ↓<br>文档清洗&#x2F;解析<br>  ↓<br>切分成 chunks<br>  ↓<br>生成向量 embeddings<br>  ↓<br>存入向量数据库&#x2F;检索索引</p>
-<p>常见步骤：</p>
-<p>收集数据<br>例如 PDF、网页、Word、数据库记录、内部文档、FAQ 等。</p>
-<p>解析和清洗<br>去掉无关内容，提取正文、标题、表格、元数据等。</p>
-<p>切分文本<br>把长文档切成较小片段，比如每段 300 到 1000 tokens。<br>切太大，检索不精准；切太小，上下文不完整。</p>
-<p>向量化<br>用 embedding 模型把每个文本片段转成向量。</p>
-<p>建立索引<br>把文本片段、向量、来源信息一起存到向量数据库，比如 FAISS、Milvus、 等。</p>
-<h3 id="在线问答：用户提问时检索相关资料塞入prompt再调用llm回答"><a href="#在线问答：用户提问时检索相关资料塞入prompt再调用llm回答" class="headerlink" title="在线问答：用户提问时检索相关资料塞入prompt再调用llm回答"></a>在线问答：用户提问时检索相关资料塞入prompt再调用llm回答</h3><p>用户问题<br>  ↓<br>问题向量化<br>  ↓<br>检索相关 chunks<br>  ↓<br>可选：重排序 rerank<br>  ↓<br>把检索结果塞进 prompt<br>  ↓<br>LLM 生成答案<br>  ↓<br>返回答案 + 引用来源</p>
-<p>常见步骤：</p>
-<p>用户输入问题</p>
-<p>对问题做 embedding<br>把问题也转成向量。</p>
-<p>相似度检索<br>在向量库里找最相近的文档片段。</p>
-<p>重排序<br>可选，用 reranker 模型把候选结果重新排序，提高相关性。</p>
-<p>构造 Prompt<br>把检索到的资料作为上下文，连同用户问题一起发给大模型。</p>
-<p>生成答案<br>大模型基于检索内容回答，而不是只靠自己记忆。</p>
-<p>返回引用<br>最好附上来源文档、页码、URL 或 chunk ID，方便用户验证。</p>
-<h2 id="RAG的作用"><a href="#RAG的作用" class="headerlink" title="RAG的作用"></a>RAG的作用</h2><p>RAG &#x3D; 先从知识库里找资料，再让大模型基于这些资料回答问题。<br>rag的核心价值是：让模型能使用外部知识、减少幻觉、支持私有数据、并且知识库可以持续更新。</p>
-<h2 id="向量与向量夹角的余弦"><a href="#向量与向量夹角的余弦" class="headerlink" title="向量与向量夹角的余弦"></a>向量与向量夹角的余弦</h2><p>上过高中应该都知道向量是什么，向量是有大小和方向的量，可以用来表示空间中的点、线、面等几何对象，也可以用来表示物理量如速度、力等。</p>
-<p>在rag里，向量可以理解为文本的语义坐标。比如两句话：</p>
-<p>苹果手机怎么截图？<br>iPhone 如何截屏？<br>字面不完全一样，但意思很接近。Embedding 模型会把它们转成一串数字，例如：</p>
-<p>[0.12, -0.03, 0.88, 0.41, …]<br>这串数字就是向量 embedding。真正的 embedding 通常有几百到几千维。</p>
-<h3 id="向量的基本概念"><a href="#向量的基本概念" class="headerlink" title="向量的基本概念"></a>向量的基本概念</h3><p>在 RAG 中，向量主要用于表示语义：</p>
-<p>文本 chunk → embedding 模型 → 向量<br>用户问题 → embedding 模型 → 向量<br>然后系统比较“问题向量”和“文档片段向量”之间的距离或相似度，找出最相关的内容。</p>
-<p>可以把向量想象成地图上的点：</p>
-<p>意思相近的文本 → 在向量空间里距离近<br>意思无关的文本 → 在向量空间里距离远<br>例如：</p>
-<p>“如何重置密码”<br>“忘记密码怎么办”<br>向量会比较接近。</p>
-<p>而：</p>
-<p>“如何重置密码”<br>“北京明天天气”<br>向量就会比较远。</p>
-<h2 id="余弦相似度"><a href="#余弦相似度" class="headerlink" title="余弦相似度"></a>余弦相似度</h2><p>余弦相似度用来衡量两个向量的“方向是否接近”。</p>
-<p>它不太关心向量有多长，更关心两个向量指向的方向是不是一致。</p>
-<p>公式是：</p>
-<p>cosine_similarity(A, B) &#x3D; (A · B) &#x2F; (||A|| × ||B||)<br>其中：</p>
-<p>A · B       表示两个向量的点积<br>||A||       表示向量 A 的长度<br>||B||       表示向量 B 的长度<br>结果通常在 -1 到 1 之间：</p>
-<p>1     表示方向完全相同，语义非常接近<br>0     表示基本无关<br>-1    表示方向完全相反</p>
-<p>这其实就是高中立体几何里向量夹角余弦公式，一般拿来求二面角或异面直线夹角<br>在很多文本 embedding 场景里，实际常见结果更多是 0 到 1 附近。</p>
-<p>举个二维小例子</p>
-<p>假设有两个向量：</p>
-<p>A &#x3D; [1, 2]<br>B &#x3D; [2, 4]<br>先算点积：</p>
-<p>A · B &#x3D; 1×2 + 2×4 &#x3D; 10<br>再算长度：</p>
-<p>||A|| &#x3D; sqrt(1² + 2²) &#x3D; sqrt(5)<br>||B|| &#x3D; sqrt(2² + 4²) &#x3D; sqrt(20)<br>代入公式：</p>
-<p>cos(A, B) &#x3D; 10 &#x2F; (sqrt(5) × sqrt(20))<br>          &#x3D; 10 &#x2F; 10<br>          &#x3D; 1<br>所以它们方向完全一致，相似度是 1。</p>
-<p>虽然 B 比 A 长，但他们是平行向量，方向一样，所以余弦相似度认为它们非常相似。<br>RAG 检索时大概是这样：</p>
-<p>用户问题：怎么修改登录密码？<br>  ↓<br>转成问题向量 Q<br>  ↓<br>拿 Q 和知识库中每个 chunk 的向量比较<br>  ↓<br>用余弦相似度排序<br>  ↓<br>取 top-k 个最相似的 chunk<br>  ↓<br>交给大模型生成答案</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>向量 &#x3D; 文本语义的数字表达<br>余弦相似度 &#x3D; 判断两个语义向量方向有多接近的方法<br>在 RAG 中，它们共同完成的事情是：把用户问题和知识库内容放到同一个语义空间里，然后找出最相关的资料。</p>
+        <h2 id="RAG-是什么"><a href="#RAG-是什么" class="headerlink" title="RAG 是什么"></a>RAG 是什么</h2><p>RAG（Retrieval-Augmented Generation，检索增强生成）是一种把“外部知识检索”和“大模型生成”结合起来的方案。</p>
+<p>简单说：先从知识库里找资料，再让大模型基于资料回答问题。</p>
+<p>它解决的核心问题是：</p>
+<ul>
+<li>大模型本身不知道企业私有数据。</li>
+<li>模型参数知识可能过期。</li>
+<li>直接让模型回答容易幻觉。</li>
+<li>用户需要知道答案来源，方便验证。</li>
+</ul>
+<p>RAG 的价值不是让模型“更聪明”，而是让模型能使用可更新、可追溯的外部知识。</p>
+<h2 id="核心流程"><a href="#核心流程" class="headerlink" title="核心流程"></a>核心流程</h2><p>RAG 主要分为离线建库和在线问答两部分。</p>
+<h3 id="离线建库"><a href="#离线建库" class="headerlink" title="离线建库"></a>离线建库</h3><pre><code class="language-text">原始文档
+  ↓
+解析和清洗
+  ↓
+文本切分
+  ↓
+生成 Embedding
+  ↓
+写入向量索引
+</code></pre>
+<p>常见输入包括 PDF、网页、Word、数据库记录、接口文档和 FAQ。工程上要先做清洗，去掉目录、页眉页脚、重复内容和无意义噪声。</p>
+<p>文本切分是关键步骤。切得太大，检索命中不精准；切得太小，上下文不完整。比较稳妥的方式是优先按标题、段落、列表和表格结构切分，再用 token 长度做兜底。</p>
+<h3 id="在线问答"><a href="#在线问答" class="headerlink" title="在线问答"></a>在线问答</h3><pre><code class="language-text">用户问题
+  ↓
+问题向量化
+  ↓
+检索 top-k 文档片段
+  ↓
+可选 rerank
+  ↓
+构造 Prompt
+  ↓
+LLM 生成答案
+  ↓
+返回答案 + 引用来源
+</code></pre>
+<p>这里最重要的是“答案必须能追溯来源”。如果只返回一段看起来正确的回答，却没有文档来源，用户很难判断可信度。</p>
+<h2 id="Embedding-和向量检索"><a href="#Embedding-和向量检索" class="headerlink" title="Embedding 和向量检索"></a>Embedding 和向量检索</h2><p>Embedding 可以理解为文本的语义坐标。</p>
+<p>例如：</p>
+<ul>
+<li>“苹果手机怎么截图？”</li>
+<li>“iPhone 如何截屏？”</li>
+</ul>
+<p>这两句话字面不同，但语义接近。Embedding 模型会把它们映射成距离较近的向量。</p>
+<p>检索时，系统把用户问题也转成向量，然后和知识库中的 chunk 向量计算相似度。常见指标是余弦相似度：</p>
+<pre><code class="language-text">cosine_similarity(A, B) = (A · B) / (||A|| × ||B||)
+</code></pre>
+<p>余弦相似度关注两个向量方向是否接近。方向越接近，通常表示语义越相似。</p>
+<h2 id="工程上容易踩坑的点"><a href="#工程上容易踩坑的点" class="headerlink" title="工程上容易踩坑的点"></a>工程上容易踩坑的点</h2><h3 id="1-检索不到不等于模型不会答"><a href="#1-检索不到不等于模型不会答" class="headerlink" title="1. 检索不到不等于模型不会答"></a>1. 检索不到不等于模型不会答</h3><p>如果 Prompt 没有限制，模型可能在检索结果不足时继续编答案。因此 Prompt 里要明确要求：上下文不足时说明无法确定。</p>
+<h3 id="2-top-k-不是越大越好"><a href="#2-top-k-不是越大越好" class="headerlink" title="2. top-k 不是越大越好"></a>2. top-k 不是越大越好</h3><p>top-k 太小可能漏掉关键资料，太大又会引入噪声，甚至挤占上下文窗口。实际需要根据文档质量和问题类型调参。</p>
+<h3 id="3-chunk-需要带元数据"><a href="#3-chunk-需要带元数据" class="headerlink" title="3. chunk 需要带元数据"></a>3. chunk 需要带元数据</h3><p>每个 chunk 至少应该保留：</p>
+<ul>
+<li>文档标题。</li>
+<li>来源 URL 或文件名。</li>
+<li>页码或段落位置。</li>
+<li>更新时间。</li>
+<li>权限信息。</li>
+</ul>
+<p>这些元数据决定了能否返回可靠引用，也决定了后续能否做权限过滤。</p>
+<h3 id="4-RAG-也需要评估集"><a href="#4-RAG-也需要评估集" class="headerlink" title="4. RAG 也需要评估集"></a>4. RAG 也需要评估集</h3><p>不能只凭主观感觉判断效果。至少要准备一批典型问题，检查：</p>
+<ul>
+<li>是否检索到正确资料。</li>
+<li>回答是否基于上下文。</li>
+<li>引用来源是否准确。</li>
+<li>改写问法后结果是否稳定。</li>
+<li>上下文不足时是否拒答。</li>
+</ul>
+<h2 id="面试表达"><a href="#面试表达" class="headerlink" title="面试表达"></a>面试表达</h2><p>可以这样概括：</p>
+<blockquote>
+<p>RAG 的核心是先把文档解析、清洗、切分并向量化，建立可检索知识库；用户提问时先检索相关 chunk，再把检索结果和问题一起放进 Prompt，让大模型基于上下文生成答案。工程上我会重点关注切分策略、检索相关性、引用来源、权限过滤和拒答机制，因为这些决定了 RAG 系统是否可信、可维护。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>RAG 不是简单的“向量数据库 + 大模型”。它是一条完整的数据链路：</p>
+<ul>
+<li>文档要干净。</li>
+<li>chunk 要合理。</li>
+<li>检索要相关。</li>
+<li>Prompt 要约束。</li>
+<li>答案要有来源。</li>
+<li>失败要能降级。</li>
+</ul>
+<p>这些才是 RAG 从 Demo 走向可用系统的关键。</p>
 
     </div>
     

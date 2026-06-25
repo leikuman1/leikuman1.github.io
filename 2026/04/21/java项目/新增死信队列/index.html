@@ -3,15 +3,15 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>RabbitMQ新增死信队列 | L&#39;sBlog</title>
+    <title>RabbitMQ 死信队列与补偿链路 | L&#39;sBlog</title>
     <meta name="author" content="Yu" />
-    <meta name="description" content="Nearer to death, nearer to rebirth." />
-    <meta name="keywords" content="" />
+    <meta name="description" content="记录后端开发、AI 应用、项目复盘与面试表达。" />
+    <meta name="keywords" content="后端,AI应用,RAG,Agent,FastAPI,Golang,Redis,RabbitMQ" />
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="icon" href="/images/site/avatar.svg" />
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -56,7 +56,7 @@
                 <div id="loading-circle">
                     <h2>LOADING</h2>
                     <p>加载过慢请开启缓存 浏览器默认开启</p>
-                    <img src="/images/loading.gif" />
+                    <img src="/images/site/loading.svg" />
                 </div>
             </div>
         </transition>
@@ -68,27 +68,27 @@
         
         <a href="/">
             <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Home</span>
+            <span>&ensp;首页</span>
         </a>
         
         <a href="/about">
             <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;About</span>
+            <span>&ensp;关于</span>
         </a>
         
         <a href="/archives">
             <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;Archives</span>
+            <span>&ensp;归档</span>
         </a>
         
         <a href="/categories">
             <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Categories</span>
+            <span>&ensp;分类</span>
         </a>
         
         <a href="/tags">
             <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;Tags</span>
+            <span>&ensp;标签</span>
         </a>
         
     </nav>
@@ -105,7 +105,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-house fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
                     </div>
                 </a>
                 
@@ -114,7 +114,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-id-card fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
                     </div>
                 </a>
                 
@@ -123,7 +123,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-box-archive fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
                     </div>
                 </a>
                 
@@ -132,7 +132,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-bookmark fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
                     </div>
                 </a>
                 
@@ -141,7 +141,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-tags fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
                     </div>
                 </a>
                 
@@ -156,7 +156,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>RabbitMQ新增死信队列</h1>
+        <h1>RabbitMQ 死信队列与补偿链路</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -167,11 +167,11 @@
         </span>
         
         <span class="category">
-            <a href="/categories/Java/">
+            <a href="/categories/%E5%90%8E%E7%AB%AF/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                Java
+                后端
             </a>
         </span>
         
@@ -184,15 +184,29 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00a596">
-                    博客
+                <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color: #03a9f4">
+                    工程化
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #ff7d73">
-                    入门
+                <a href="/tags/Java/" style="color: #ff7d73">
+                    Java
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/RabbitMQ/" style="color: #ffa2c4">
+                    RabbitMQ
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="color: #ff7d73">
+                    消息队列
                 </a>
             </span>
             
@@ -201,11 +215,24 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="添加一套常量"><a href="#添加一套常量" class="headerlink" title="添加一套常量"></a>添加一套常量</h2><pre><code class="language-java">public static final String SECKILL_DLX = &quot;seckill.order.dlx&quot;;
+        <h2 id="为什么需要死信队列"><a href="#为什么需要死信队列" class="headerlink" title="为什么需要死信队列"></a>为什么需要死信队列</h2><p>在秒杀下单链路中，入口通过 Redis 预扣库存后把消息发到 RabbitMQ，由消费者异步创建订单。如果消费者处理失败，不能简单丢弃消息，否则会出现：</p>
+<ul>
+<li>Redis 资格已预占，但数据库没有订单。</li>
+<li>用户无法再次下单。</li>
+<li>失败原因无法追踪。</li>
+<li>系统只能靠人工排查日志恢复。</li>
+</ul>
+<p>死信队列的作用不是“存放失败消息”这么简单，而是给失败消息提供一个可追踪、可补偿、可人工兜底的恢复入口。</p>
+<h2 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h2><h3 id="1-定义常量"><a href="#1-定义常量" class="headerlink" title="1. 定义常量"></a>1. 定义常量</h3><pre><code class="language-java">public static final String SECKILL_EXCHANGE = &quot;seckill.order.exchange&quot;;
+public static final String SECKILL_QUEUE = &quot;seckill.order.queue&quot;;
+public static final String SECKILL_ROUTING_KEY = &quot;seckill.order.create&quot;;
+
+public static final String SECKILL_DLX = &quot;seckill.order.dlx&quot;;
 public static final String SECKILL_DEAD_QUEUE = &quot;seckill.order.dead.queue&quot;;
 public static final String SECKILL_DEAD_ROUTING_KEY = &quot;seckill.order.dead&quot;;
 </code></pre>
-<h2 id="给业务队列添加死信参数"><a href="#给业务队列添加死信参数" class="headerlink" title="给业务队列添加死信参数"></a>给业务队列添加死信参数</h2><pre><code class="language-java">@Bean
+<p>命名要能表达业务含义，避免只叫 <code>queue1</code>、<code>deadQueue</code>。后续排查消息堆积时，清晰命名能明显降低定位成本。</p>
+<h3 id="2-给业务队列绑定死信交换机"><a href="#2-给业务队列绑定死信交换机" class="headerlink" title="2. 给业务队列绑定死信交换机"></a>2. 给业务队列绑定死信交换机</h3><pre><code class="language-java">@Bean
 public Queue seckillQueue() {
     return QueueBuilder.durable(SECKILL_QUEUE)
             .withArgument(&quot;x-dead-letter-exchange&quot;, SECKILL_DLX)
@@ -213,33 +240,105 @@ public Queue seckillQueue() {
             .build();
 }
 </code></pre>
-<p>这里重点是withArgument，前面的字符串是固定的,表示设置死信交换机和路由key</p>
-<h2 id="新增死信交换机Bean"><a href="#新增死信交换机Bean" class="headerlink" title="新增死信交换机Bean"></a>新增死信交换机Bean</h2><pre><code class="language-java">@Bean
+<p>这里的两个参数是 RabbitMQ 约定：</p>
+<ul>
+<li><code>x-dead-letter-exchange</code>：消息变成死信后转发到哪个交换机。</li>
+<li><code>x-dead-letter-routing-key</code>：死信转发时使用的 routing key。</li>
+</ul>
+<h3 id="3-新增死信交换机、队列和绑定关系"><a href="#3-新增死信交换机、队列和绑定关系" class="headerlink" title="3. 新增死信交换机、队列和绑定关系"></a>3. 新增死信交换机、队列和绑定关系</h3><pre><code class="language-java">@Bean
 public DirectExchange seckillDeadLetterExchange() {
     return new DirectExchange(SECKILL_DLX, true, false);
 }
-</code></pre>
-<p>第一个参数是交换机名字，第二个是持久化，第三个是自动删除</p>
-<h2 id="新增死信队列"><a href="#新增死信队列" class="headerlink" title="新增死信队列"></a>新增死信队列</h2><pre><code class="language-java">@Bean
+
+@Bean
 public Queue seckillDeadLetterQueue() {
     return QueueBuilder.durable(SECKILL_DEAD_QUEUE).build();
 }
-</code></pre>
-<p>用queuebuilder的durable方法构造一个消息队列</p>
-<h2 id="构造队列和交换机的绑定关系"><a href="#构造队列和交换机的绑定关系" class="headerlink" title="构造队列和交换机的绑定关系"></a>构造队列和交换机的绑定关系</h2><pre><code class="language-java">@Bean
+
+@Bean
 public Binding seckillDeadLetterBinding() {
     return BindingBuilder.bind(seckillDeadLetterQueue())
             .to(seckillDeadLetterExchange())
             .with(SECKILL_DEAD_ROUTING_KEY);
 }
 </code></pre>
-<p>用BindingBuilder的bind方法链式绑定队列到交换机并设置routing key</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这可以总结出RabbitMQ新增MQ的一般方法：</p>
-<ol>
-<li>设置三个常量，分别是交换机名称，队列名称和路由key</li>
-<li>设置交换机，队列和绑定关系的构造方法</li>
-</ol>
-<p>最后，如果我们在业务队列中重试一定次数后就channel.basicReject(msg.getMessageProperties().getDeliveryTag(), false)，消息就会被丢弃到死信队列中，我们就可以在死信队列中查看失败的消息并分析原因了。</p>
+<p>交换机和队列都应该持久化，避免 Broker 重启后基础设施丢失。</p>
+<h2 id="消费失败处理策略"><a href="#消费失败处理策略" class="headerlink" title="消费失败处理策略"></a>消费失败处理策略</h2><p>消费者不要无限重试，否则会造成消息反复入队、阻塞正常消息。更稳妥的做法是限制重试次数，并把最终失败的消息转入死信队列。</p>
+<pre><code class="language-java">try {
+    orderService.createOrder(message);
+    channel.basicAck(deliveryTag, false);
+} catch (RetryableException e) {
+    channel.basicNack(deliveryTag, false, true);
+} catch (Exception e) {
+    failureLogService.markPending(message, e);
+    channel.basicReject(deliveryTag, false);
+}
+</code></pre>
+<p>关键点：</p>
+<ul>
+<li>可重试异常可以 <code>basicNack(..., requeue=true)</code>。</li>
+<li>不可重试或超过次数后 <code>basicReject(..., requeue=false)</code>，让消息进入死信队列。</li>
+<li>进入死信前先落失败日志，确保消息具备业务维度的追踪记录。</li>
+</ul>
+<h2 id="死信补偿流程"><a href="#死信补偿流程" class="headerlink" title="死信补偿流程"></a>死信补偿流程</h2><p>死信消费者拿到消息后，不应该直接再次盲目下单，而是先检查系统当前状态。</p>
+<pre><code class="language-text">死信消息
+  ↓
+查询订单是否已存在
+  ├─ 已存在：标记 SUCCESS
+  ↓
+尝试补单
+  ├─ 成功：标记 RETRIED_SUCCESS
+  ↓
+回滚 Redis 预占
+  ├─ 成功：标记 ROLLED_BACK
+  ↓
+人工介入：标记 MANUAL_REVIEW
+</code></pre>
+<p>状态流转建议固定下来，便于后续做后台页面或运维脚本。</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>含义</th>
+<th>后续动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>PENDING</code></td>
+<td>消息失败，等待死信处理</td>
+<td>死信消费者接管</td>
+</tr>
+<tr>
+<td><code>SUCCESS</code></td>
+<td>订单实际已成功</td>
+<td>无需补偿</td>
+</tr>
+<tr>
+<td><code>RETRIED_SUCCESS</code></td>
+<td>补单成功</td>
+<td>关闭失败单</td>
+</tr>
+<tr>
+<td><code>ROLLED_BACK</code></td>
+<td>已释放 Redis 预占</td>
+<td>用户可重新尝试</td>
+</tr>
+<tr>
+<td><code>MANUAL_REVIEW</code></td>
+<td>自动恢复失败</td>
+<td>人工核查</td>
+</tr>
+</tbody></table>
+<h2 id="面试表达重点"><a href="#面试表达重点" class="headerlink" title="面试表达重点"></a>面试表达重点</h2><p>回答死信队列时，不要只背配置。更好的表达是：</p>
+<blockquote>
+<p>我在业务队列上绑定死信交换机，消费者失败后按异常类型决定是否重试。超过重试次数的消息会进入死信队列，死信消费者先检查订单是否已经成功，再尝试补单；补单失败则回滚 Redis 预占，最后仍失败就进入人工复核状态。这样失败消息不会静默丢失，并且能形成可追踪、可补偿、可兜底的闭环。</p>
+</blockquote>
+<h2 id="后续可增强点"><a href="#后续可增强点" class="headerlink" title="后续可增强点"></a>后续可增强点</h2><ul>
+<li>生产者 confirm，保证消息成功到达 Broker。</li>
+<li>本地消息表，处理“业务成功但消息发送失败”的场景。</li>
+<li>消费重试次数写入消息 header 或失败日志，避免无限重试。</li>
+<li>给死信积压配置告警，避免补偿链路失效后无人发现。</li>
+</ul>
 
     </div>
     

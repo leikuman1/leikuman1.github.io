@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <title>产生括号 | L&#39;sBlog</title>
     <meta name="author" content="Yu" />
-    <meta name="description" content="Nearer to death, nearer to rebirth." />
-    <meta name="keywords" content="" />
+    <meta name="description" content="记录后端开发、AI 应用、项目复盘与面试表达。" />
+    <meta name="keywords" content="后端,AI应用,RAG,Agent,FastAPI,Golang,Redis,RabbitMQ" />
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="icon" href="/images/site/avatar.svg" />
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -56,7 +56,7 @@
                 <div id="loading-circle">
                     <h2>LOADING</h2>
                     <p>加载过慢请开启缓存 浏览器默认开启</p>
-                    <img src="/images/loading.gif" />
+                    <img src="/images/site/loading.svg" />
                 </div>
             </div>
         </transition>
@@ -68,27 +68,27 @@
         
         <a href="/">
             <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Home</span>
+            <span>&ensp;首页</span>
         </a>
         
         <a href="/about">
             <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;About</span>
+            <span>&ensp;关于</span>
         </a>
         
         <a href="/archives">
             <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;Archives</span>
+            <span>&ensp;归档</span>
         </a>
         
         <a href="/categories">
             <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Categories</span>
+            <span>&ensp;分类</span>
         </a>
         
         <a href="/tags">
             <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;Tags</span>
+            <span>&ensp;标签</span>
         </a>
         
     </nav>
@@ -105,7 +105,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-house fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
                     </div>
                 </a>
                 
@@ -114,7 +114,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-id-card fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
                     </div>
                 </a>
                 
@@ -123,7 +123,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-box-archive fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
                     </div>
                 </a>
                 
@@ -132,7 +132,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-bookmark fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
                     </div>
                 </a>
                 
@@ -141,7 +141,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-tags fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
                     </div>
                 </a>
                 
@@ -167,11 +167,11 @@
         </span>
         
         <span class="category">
-            <a href="/categories/Hot100/">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                Hot100
+                算法
             </a>
         </span>
         
@@ -184,8 +184,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ffa2c4">
+                <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #03a9f4">
                     回溯
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Hot100/" style="color: #00bcd4">
+                    Hot100
                 </a>
             </span>
             

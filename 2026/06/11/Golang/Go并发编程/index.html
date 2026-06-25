@@ -3,15 +3,15 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Go并发编程 | L&#39;sBlog</title>
+    <title>Go 并发编程：goroutine、channel 与同步控制 | L&#39;sBlog</title>
     <meta name="author" content="Yu" />
-    <meta name="description" content="Nearer to death, nearer to rebirth." />
-    <meta name="keywords" content="" />
+    <meta name="description" content="记录后端开发、AI 应用、项目复盘与面试表达。" />
+    <meta name="keywords" content="后端,AI应用,RAG,Agent,FastAPI,Golang,Redis,RabbitMQ" />
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="icon" href="/images/site/avatar.svg" />
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -56,7 +56,7 @@
                 <div id="loading-circle">
                     <h2>LOADING</h2>
                     <p>加载过慢请开启缓存 浏览器默认开启</p>
-                    <img src="/images/loading.gif" />
+                    <img src="/images/site/loading.svg" />
                 </div>
             </div>
         </transition>
@@ -68,27 +68,27 @@
         
         <a href="/">
             <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Home</span>
+            <span>&ensp;首页</span>
         </a>
         
         <a href="/about">
             <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;About</span>
+            <span>&ensp;关于</span>
         </a>
         
         <a href="/archives">
             <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;Archives</span>
+            <span>&ensp;归档</span>
         </a>
         
         <a href="/categories">
             <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Categories</span>
+            <span>&ensp;分类</span>
         </a>
         
         <a href="/tags">
             <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;Tags</span>
+            <span>&ensp;标签</span>
         </a>
         
     </nav>
@@ -105,7 +105,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-house fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
                     </div>
                 </a>
                 
@@ -114,7 +114,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-id-card fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
                     </div>
                 </a>
                 
@@ -123,7 +123,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-box-archive fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
                     </div>
                 </a>
                 
@@ -132,7 +132,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-bookmark fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
                     </div>
                 </a>
                 
@@ -141,7 +141,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-tags fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
                     </div>
                 </a>
                 
@@ -156,7 +156,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>Go并发编程</h1>
+        <h1>Go 并发编程：goroutine、channel 与同步控制</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -167,137 +167,193 @@
         </span>
         
         <span class="category">
-            <a href="/categories/Golang%E5%9F%BA%E7%A1%80/">
+            <a href="/categories/%E5%90%8E%E7%AB%AF/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                Golang基础
+                后端
             </a>
         </span>
         
         
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/Go/" style="color: #ffa2c4">
+                    Go
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%B9%B6%E5%8F%91/" style="color: #00a596">
+                    并发
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/goroutine/" style="color: #03a9f4">
+                    goroutine
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/channel/" style="color: #00a596">
+                    channel
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color: #ff7d73">
+                    工程化
+                </a>
+            </span>
+            
+        </span>
+        
     </div>
     
     <div class="content" v-pre>
-        <h2 id="概念解释"><a href="#概念解释" class="headerlink" title="概念解释"></a>概念解释</h2><ul>
-<li>系统调用:当程序需要创建或使用OS提供的对象时,一般需要os提供的系统调用才能实现,与此同时,系统调用让计算机从用户态切换到内核态再切换回来会造成一定的时间开销.</li>
-<li>进程,线程,协程:进程是操作系统资源分配的基本单位,线程是操作系统进行cpu调度的基本单位,而协程是运行在线程之上的,更轻量的用户态执行单元,通常由语言的runtime或框架调度.<br>进程 是一个正在运行的程序实例。每个进程有自己独立的地址空间、内存、文件描述符等资源，进程之间相互隔离，所以安全性和稳定性比较好。但进程创建、销毁和切换的成本比较高，进程间通信也相对复杂，比如要通过管道、消息队列、共享内存、Socket 等方式。</li>
-</ul>
-<p>线程 是进程内部的执行流。一个进程可以包含多个线程，多个线程共享进程的堆内存、全局变量、文件等资源，但每个线程有自己的栈、程序计数器和寄存器上下文。线程比进程更轻量，线程之间通信更方便，但是因为共享内存，所以需要考虑线程安全问题，比如锁、CAS、死锁、竞态条件等。</p>
-<p>协程 是比线程更轻量的执行单元，通常由程序语言的运行时调度，而不是直接由操作系统调度。协程运行在线程之上，创建和切换成本更低，适合大量高并发 I&#x2F;O 场景。比如 Go 里的 goroutine、Python 的 async&#x2F;await，都可以看作协程相关的实现。</p>
+        <h2 id="进程、线程、协程"><a href="#进程、线程、协程" class="headerlink" title="进程、线程、协程"></a>进程、线程、协程</h2><p>理解 Go 并发前，先区分三个概念：</p>
 <ul>
-<li>临界区:一段访问共享资源的代码区域。多个线程&#x2F;进程如果同时进入这段代码，可能会导致数据错误。</li>
+<li>进程：操作系统资源分配的基本单位，有独立地址空间，隔离性强，但创建和切换成本高。</li>
+<li>线程：CPU 调度的基本单位，同一进程内线程共享内存，通信方便，但要处理竞态和锁。</li>
+<li>协程：运行在线程之上的轻量执行单元，由语言运行时调度，创建和切换成本更低。</li>
 </ul>
-<h2 id="Go并发编程基础"><a href="#Go并发编程基础" class="headerlink" title="Go并发编程基础"></a>Go并发编程基础</h2><p>两个goroutine轮流打印奇偶数字</p>
-<p>这里channel是goroutine之间传递数据的管道,go推荐的并发思想是”不要通过共享内存来通信，而要通过通信来共享内存”.也就是尽量让goroutine之间用channel传递数据,而不是大家都去抢同一个变量.<br>channel分为无缓冲channel和有缓冲channel</p>
-<ol>
-<li><p>往无缓冲 channel 写数据，但没人接收，会阻塞，严重时会 deadlock。从无缓冲channel中接受数据,如果channel中没有,会一直阻塞</p>
-</li>
-<li><p>有缓冲channel在发送方发送数据没人接受时会先暂存到缓冲区,缓冲区满了就阻塞.接受方收不到数据也是一直阻塞<br>PS:除了chanel，go中还可以用sync包中的Mutex,RWMutex,atomic,map等进行通信,其中atomic是对单个变量的原子读写操作,Mutex相对于atomic,更适合对变量判断+修改的复合逻辑,相对于更适合生产-消费模型的channel,更适合保护临界区.<br>channel 适合“传递数据&#x2F;任务&#x2F;信号”,mutex 适合“保护共享数据”<br>传递所有权，用 channel；<br>共享同一份数据，用 mutex。</p>
-</li>
-<li><p>defer 会把函数调用延迟到当前函数结束前执行。</p>
-</li>
-<li><p>多个 defer 按后进先出的顺序执行，语义上类似栈。</p>
-</li>
-<li><p>defer 的参数在注册 defer 时就会求值。</p>
-</li>
-</ol>
-<p>sync.WaitGroup的作用是:等待一组goroutine执行完毕再退出,常用方法有<br>wg.Add(3)   &#x2F;&#x2F; 计数器 +3，表示有 3 个任务要等<br>wg.Done()   &#x2F;&#x2F; 计数器 -1，表示一个任务完成了<br>wg.Wait()   &#x2F;&#x2F; 阻塞等待，直到计数器变成 0<br>除了sync.wr,还可以使用以下方法实现等待一组goroutine完成</p>
-<ol>
-<li>用channel收集完成信号</li>
-<li>用errgroup,相当于加强版的WaitGroup,可以同时等待一组goroutine完成,还可以收集错误信息</li>
-</ol>
-<pre><code class="language-golang">    func main() {
-        oddChan := make(chan int)
-        evenChan := make(chan int)
+<p>Go 的 goroutine 可以理解为由 Go runtime 调度的轻量协程。它适合大量 I&#x2F;O 并发场景，但不代表可以无节制创建。生产环境仍要考虑连接数、内存、限流和退出控制。</p>
+<h2 id="Go-并发模型"><a href="#Go-并发模型" class="headerlink" title="Go 并发模型"></a>Go 并发模型</h2><p>Go 常见并发思路是：</p>
+<blockquote>
+<p>不要通过共享内存来通信，而要通过通信来共享内存。</p>
+</blockquote>
+<p>这句话不是说不能用锁，而是鼓励优先用 channel 表达数据流和任务流；当多个 goroutine 必须访问同一份共享状态时，再用 <code>sync.Mutex</code>、<code>sync.RWMutex</code> 或 <code>atomic</code> 做保护。</p>
+<h2 id="channel-基础"><a href="#channel-基础" class="headerlink" title="channel 基础"></a>channel 基础</h2><p>channel 是 goroutine 之间传递数据的管道。</p>
+<pre><code class="language-go">ch := make(chan int)
+</code></pre>
+<p>无缓冲 channel：</p>
+<ul>
+<li>发送方发送时，如果没有接收方，会阻塞。</li>
+<li>接收方接收时，如果没有数据，也会阻塞。</li>
+<li>适合同步交接任务。</li>
+</ul>
+<p>有缓冲 channel：</p>
+<pre><code class="language-go">ch := make(chan int, 10)
+</code></pre>
+<ul>
+<li>缓冲区未满时发送不会阻塞。</li>
+<li>缓冲区为空时接收会阻塞。</li>
+<li>适合削峰和生产消费模型，但容量需要结合业务评估。</li>
+</ul>
+<h2 id="WaitGroup：等待一组-goroutine"><a href="#WaitGroup：等待一组-goroutine" class="headerlink" title="WaitGroup：等待一组 goroutine"></a>WaitGroup：等待一组 goroutine</h2><pre><code class="language-go">var wg sync.WaitGroup
 
-        var wg sync.WaitGroup
-        wg.Add(2)
+wg.Add(2)
 
+go func() {
+    defer wg.Done()
+    doTaskA()
+}()
+
+go func() {
+    defer wg.Done()
+    doTaskB()
+}()
+
+wg.Wait()
+</code></pre>
+<p>注意点：</p>
+<ul>
+<li><code>Add</code> 要在启动 goroutine 前调用。</li>
+<li>每个 goroutine 退出前要 <code>Done</code>，建议配合 <code>defer</code>。</li>
+<li><code>WaitGroup</code> 只负责等待，不负责收集错误；需要错误传播时可以用 <code>errgroup</code>。</li>
+</ul>
+<h2 id="Mutex-和-channel-怎么选"><a href="#Mutex-和-channel-怎么选" class="headerlink" title="Mutex 和 channel 怎么选"></a>Mutex 和 channel 怎么选</h2><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>更适合</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>传递任务、事件、信号</td>
+<td>channel</td>
+</tr>
+<tr>
+<td>保护共享 map、计数器、状态对象</td>
+<td>Mutex &#x2F; RWMutex</td>
+</tr>
+<tr>
+<td>单个数值的原子读写</td>
+<td>atomic</td>
+</tr>
+<tr>
+<td>多个 goroutine 执行并收集错误</td>
+<td>errgroup</td>
+</tr>
+</tbody></table>
+<p>简单判断：</p>
+<ul>
+<li>传递所有权，用 channel。</li>
+<li>共享同一份数据，用锁。</li>
+</ul>
+<h2 id="三个-goroutine-轮流打印数字"><a href="#三个-goroutine-轮流打印数字" class="headerlink" title="三个 goroutine 轮流打印数字"></a>三个 goroutine 轮流打印数字</h2><p>这个题考察的是 channel 协作和退出控制。</p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;sync&quot;
+)
+
+func main() {
+    chans := []chan int{
+        make(chan int),
+        make(chan int),
+        make(chan int),
+    }
+
+    var wg sync.WaitGroup
+    wg.Add(3)
+
+    for i := 0; i &lt; 3; i++ {
+        id := i
         go func() {
             defer wg.Done()
-
-            for i := 1; i &lt;= 100; i += 2 {
-                &lt;-oddChan
-                fmt.Printf(&quot;odd: %v\n&quot;, i)
-                evenChan &lt;- i
-            }
-        }()
-
-        go func() {
-            defer wg.Done()
-
-            for i := 2; i &lt;= 100; i += 2 {
-                &lt;-evenChan
-                fmt.Printf(&quot;even: %v\n&quot;, i)
-                if i == 100 {
+            for n := range chans[id] {
+                if n &gt; 100 {
+                    close(chans[(id+1)%3])
                     return
                 }
-                oddChan &lt;- i
+
+                fmt.Println(n)
+                chans[(id+1)%3] &lt;- n + 1
             }
         }()
-        oddChan &lt;- 1
-        wg.Wait()
+    }
+
+    chans[0] &lt;- 1
+    wg.Wait()
 }
 </code></pre>
-<p>三个goroutine轮流打印数字<br>一开始可能这么写:</p>
-<pre><code class="language-golang">    func main() {
-        a := make(chan int)
-        b := make(chan int)
-        c := make(chan int)
-        var wg sync.WaitGroup
-
-        wg.Add(3)
-
-        go func() {
-            defer wg.Done()
-
-            for {
-                var tmp int
-                tmp = &lt;-a
-                println(tmp)
-                b &lt;- tmp + 1
-                if tmp == 97 {
-                    return
-                }
-            }
-        }()
-
-        go func() {
-            defer wg.Done()
-
-            for {
-                var tmp int
-                tmp = &lt;-b
-                println(tmp)
-                c &lt;- tmp + 1
-                if tmp == 98 {
-                    return
-                }
-            }
-        }()
-
-        go func() {
-            defer wg.Done()
-
-            for {
-                var tmp int
-                tmp = &lt;-c
-                println(tmp)
-                if tmp == 99 {
-                    return
-                }
-                a &lt;- tmp + 1
-            }
-        }()
-        a &lt;- 1
-        wg.Wait()
-    }
-</code></pre>
-<p>但是golang有select,专门用于一个 goroutine 同时等待多个 channel，哪个先准备好就执行哪个,相当于等待channel的switch.所以代码可以优化一下.<br>另外select既可以接受channel,也可以发送channel<br>PS:除了select,还可以用以下方法实现监听多个channel</p>
-<ol>
-<li>用一个结果channel统一收集信息</li>
-</ol>
+<p>重点不在代码有多短，而是能说明：</p>
+<ul>
+<li>channel 负责把执行权传给下一个 goroutine。</li>
+<li>退出时必须关闭下一个 channel，否则可能造成阻塞。</li>
+<li><code>WaitGroup</code> 保证主 goroutine 等待所有任务结束。</li>
+</ul>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="1-goroutine-泄漏"><a href="#1-goroutine-泄漏" class="headerlink" title="1. goroutine 泄漏"></a>1. goroutine 泄漏</h3><p>如果 goroutine 一直阻塞在 channel、网络请求或锁上，且没有退出条件，就会泄漏。常见解决方式是使用 <code>context.Context</code> 控制取消。</p>
+<h3 id="2-deadlock"><a href="#2-deadlock" class="headerlink" title="2. deadlock"></a>2. deadlock</h3><p>无缓冲 channel 发送和接收必须配对。如果所有 goroutine 都在等别人，runtime 会报 deadlock。</p>
+<h3 id="3-defer-参数求值"><a href="#3-defer-参数求值" class="headerlink" title="3. defer 参数求值"></a>3. defer 参数求值</h3><p><code>defer</code> 的参数在注册时就会求值，多个 <code>defer</code> 按后进先出的顺序执行。</p>
+<h3 id="4-map-并发写"><a href="#4-map-并发写" class="headerlink" title="4. map 并发写"></a>4. map 并发写</h3><p>普通 map 不是并发安全的，并发读写需要加锁，或使用 <code>sync.Map</code>。</p>
+<h2 id="面试表达"><a href="#面试表达" class="headerlink" title="面试表达"></a>面试表达</h2><p>可以这样总结：</p>
+<blockquote>
+<p>Go 的并发核心是 goroutine 和 channel。channel 适合任务传递和信号同步，Mutex 适合保护共享状态。工程里我会特别关注 goroutine 的退出条件、channel 是否可能阻塞、WaitGroup 是否正确 Done、共享 map 是否加锁，以及是否需要用 context 做取消控制。</p>
+</blockquote>
 
     </div>
     

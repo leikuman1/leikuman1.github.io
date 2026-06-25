@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <title>L&#39;sBlog</title>
     <meta name="author" content="Yu" />
-    <meta name="description" content="Nearer to death, nearer to rebirth." />
-    <meta name="keywords" content="" />
+    <meta name="description" content="记录后端开发、AI 应用、项目复盘与面试表达。" />
+    <meta name="keywords" content="后端,AI应用,RAG,Agent,FastAPI,Golang,Redis,RabbitMQ" />
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="icon" href="/images/site/avatar.svg" />
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -54,7 +54,7 @@
                 <div id="loading-circle">
                     <h2>LOADING</h2>
                     <p>加载过慢请开启缓存 浏览器默认开启</p>
-                    <img src="/images/loading.gif" />
+                    <img src="/images/site/loading.svg" />
                 </div>
             </div>
         </transition>
@@ -66,27 +66,27 @@
         
         <a href="/">
             <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Home</span>
+            <span>&ensp;首页</span>
         </a>
         
         <a href="/about">
             <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;About</span>
+            <span>&ensp;关于</span>
         </a>
         
         <a href="/archives">
             <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;Archives</span>
+            <span>&ensp;归档</span>
         </a>
         
         <a href="/categories">
             <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Categories</span>
+            <span>&ensp;分类</span>
         </a>
         
         <a href="/tags">
             <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;Tags</span>
+            <span>&ensp;标签</span>
         </a>
         
     </nav>
@@ -103,7 +103,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-house fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
                     </div>
                 </a>
                 
@@ -112,7 +112,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-id-card fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
                     </div>
                 </a>
                 
@@ -121,7 +121,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-box-archive fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
                     </div>
                 </a>
                 
@@ -130,7 +130,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-bookmark fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
                     </div>
                 </a>
                 
@@ -139,7 +139,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-tags fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
                     </div>
                 </a>
                 
@@ -156,7 +156,7 @@
     <div
         id="home-background"
         ref="homeBackground"
-        data-images="/images/background.jpg"
+        data-images="/images/site/background.svg"
     ></div>
     <div id="home-info" @click="homeClick">
         <span class="loop"></span>
@@ -166,8 +166,8 @@
         <span class="info">
             <div class="wrap">
                 <h1>L&#39;sBlog</h1>
-                <h3>yu</h3>
-                <h5>Nearer to death, nearer to rebirth.</h5>
+                <h3>后端工程与 AI 应用实践</h3>
+                <h5>记录后端开发、AI 应用、项目复盘与面试表达。</h5>
             </div>
         </span>
     </div>
@@ -181,17 +181,17 @@
         
 
 <div class="post">
-    <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E7%BB%9F%E4%B8%80%E6%9E%84%E5%BB%BArouter/">
-        <h2 class="post-title">统一构建router</h2>
+    <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/">
+        <h2 class="post-title">前缀树</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/FastAPI/">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                FastAPI
+                算法
             </a>
         </span>
         
@@ -199,7 +199,7 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/4/25
+            2026/4/19
         </span>
         
         
@@ -207,18 +207,7 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h2 id="统一构建router"><a href="#统一构建router" class="headerlink" title="统一构建router"></a>统一构建router</h2><p>在FastAPI中，我们可以通过APIRouter来统一构建路由，这样可以将不同的路由分组，方便管理和维护。</p>
-<p>比如</p>
-<pre><code class="language-python">from fastapi import APIRouter
-router = APIRouter(prefix=&quot;/api/news&quot;, tags=[&quot;news&quot;])
-@router.get(&quot;/categories&quot;)
-async def get_categories():
-    return {&quot;msg&quot;: &quot;success&quot;}
-</code></pre>
-<p>这里前缀&#x2F;api&#x2F;news表示这个路由的公共前缀，tags&#x3D;[“news”]表示这个路由的标签，可以在文档中进行分类展示。<br>然后在主应用中引入这个router，如</p>
-<pre><code class="language-python">app.include_router(news.router)
-</code></pre>
-<p>这样就可以将这个router中的所有路由都包含到主应用中，并且自动添加前缀&#x2F;api&#x2F;news。</p>
+            <p>记录前缀树的节点结构、插入、查询和前缀判断。</p>
 
             
         </div>
@@ -233,787 +222,21 @@ async def get_categories():
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/" style="color: #00bcd4">头条项目</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/25/FastAPI/%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE/%E7%BB%9F%E4%B8%80%E6%9E%84%E5%BB%BArouter/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/25/FastAPI/SqlAIchemy%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9/">
-        <h2 class="post-title">SqlAIchemy的增删改</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/FastAPI/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                FastAPI
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h2><p>先新建一个DTO类来接收请求体参数：</p>
-<pre><code class="language-python">from pydantic import BaseModel
-class ItemCreate(BaseModel):
-    name: str
-    description: str
-    price: float
-</code></pre>
-<p>然后在路由函数中使用这个DTO类来接收请求体参数，并把它转换为ORM模型对象来进行数据库操作：</p>
-<pre><code class="language-python">@app.post(&quot;/items/&quot;)
-async def create_item(item: ItemCreate, db: AsyncSession = Depends(get_db)):
-    item_obj = Item(**item.dict())
-    db.add(item_obj)
-    await db.commit()
-    await db.refresh(item_obj)
-    return item_obj
-</code></pre>
-<p>这里的item: ItemCreate表示这个参数是一个请求体参数，FastAPI会自动将请求体中的JSON数据解析成一个ItemCreate对象，并传递给create_item函数。然后我们通过item.dict()方法将DTO对象转换为一个字典，再通过**操作符将字典解包成关键字参数来创建一个ORM模型对象item_obj。最后我们将这个对象添加到数据库会话中，提交事务，并刷新对象以获取数据库生成的ID等字段，最后返回这个对象。</p>
-<p>注意还要先定义好ORM模型类Item，并且在数据库中创建好对应的表。就是那个类定义里有__tablename__ &#x3D; “items”的那个类。</p>
-<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>先查再改</p>
-<pre><code class="language-python">@app.delete(&quot;/items/{item_id}&quot;)
-async def delete_item(item_id: int, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Item).where(Item.id == item_id))
-    item = result.scalar_one_or_none()
-    if item is None:
-        raise HTTPException(status_code=404, detail=&quot;Item not found&quot;)
-    await db.delete(item)
-    await db.commit()
-    return {&quot;message&quot;: &quot;Item deleted&quot;}
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/SQLAlchemy/" style="color: #ffa2c4">SQLAlchemy</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/25/FastAPI/SqlAIchemy%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/25/FastAPI/SqlAIchemy%E7%9A%84%E6%9F%A5/">
-        <h2 class="post-title">SqlAIchemy的查</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/FastAPI/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                FastAPI
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><p>先来看看简单的查询方式</p>
-<pre><code class="language-python">from sqlalchemy import select
-@app.get(&quot;/items/&quot;)
-async def read_items(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Item)).where(Item.name == &quot;item1&quot;)
-    items = result.scalars().all()
-    return items
-</code></pre>
-<p>这里可以总结一下查询的一般方式：await db.execute(select(模型).where(条件))，然后通过scalars()方法把结果转换为指定对象列表，最后通过all()方法获取所有结果。</p>
-<h3 id="模糊查询和多条件查询"><a href="#模糊查询和多条件查询" class="headerlink" title="模糊查询和多条件查询"></a>模糊查询和多条件查询</h3><pre><code class="language-python">@app.get(&quot;/items/&quot;)
-async def read_items(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Item).where(Item.name.like(&quot;%item%&quot;)|Item.price &gt; 10))
-    items = result.scalars().all()
-    return items
-</code></pre>
-<p>跟mysql里一样，like表示模糊查询，%表示任意字符，|表示或，&amp;表示且。</p>
-<h3 id="聚合和分页"><a href="#聚合和分页" class="headerlink" title="聚合和分页"></a>聚合和分页</h3><pre><code class="language-python">@app.get(&quot;/items/&quot;)
-async def read_items(db: AsyncSession = Depends(get_db), page: int = 0, page_size: int = 10):
-    result = await db.execute(select(func.count(Item.id)))
-    total = result.scalar()
-    skip = (page - 1) * page_size
-    result = await db.execute(select(Item).offset(skip).limit(page_size))
-    items = result.scalars().all()
-    return {&quot;total&quot;: total, &quot;items&quot;: items}
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/SQLAlchemy/" style="color: #00a596">SQLAlchemy</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/25/FastAPI/SqlAIchemy%E7%9A%84%E6%9F%A5/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/25/FastAPI/%E5%9C%A8%E8%B7%AF%E7%94%B1%E4%B8%AD%E4%BD%BF%E7%94%A8ORM/">
-        <h2 class="post-title">在路由中使用ORM</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/FastAPI/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                FastAPI
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="yield-and-await"><a href="#yield-and-await" class="headerlink" title="yield and await"></a>yield and await</h2><p>yield 是一个生成器函数的关键字，它可以暂停函数的执行，并返回一个值给调用者。当函数再次被调用时，它会从上次暂停的地方继续执行，而不是从头开始执行。可以用来惰性求值，慢慢处理大量数据，防止内存溢出。</p>
-<p>await 是一个异步函数的关键字，它可以暂停函数的执行，等待一个异步操作完成。当异步操作完成后，函数会继续执行，而不会阻塞其他代码的执行。可以用来处理IO密集型任务，提高程序的性能。<br>如果调用一个异步函数不使用await，那么这个函数会返回一个协程对象，而<br>函数结果不一定执行完成，所以在使用异步函数时，必须使用await来等待它的结果。</p>
-<p>**总结一下就是调用异步函数必须使用await来等待它的结果，而yield是生成器函数的关键字，可以暂停函数的执行，并返回一个值给调用者。</p>
-<h2 id="在路由中使用ORM"><a href="#在路由中使用ORM" class="headerlink" title="在路由中使用ORM"></a>在路由中使用ORM</h2><p>先创建一个会话工厂</p>
-<pre><code class="language-python">from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-DATABASE_URL = &quot;mysql+aiomysql://user:password@localhost/dbname&quot;
-engine = create_engine(DATABASE_URL)
-Async_SessionLocal = async_sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-async def get_db():
-    async with Async_SessionLocal() as session:
-        try:
-            yield session
-            await session.commit()
-        except Exception as e:
-            await session.rollback()
-            raise e
-        finally:
-            await session.close()
-</code></pre>
-<p>这个函数会创建一个数据库会话，并在使用完后自动提交事务或回滚事务，并关闭会话。</p>
-<p>在路由中使用这个函数来获取数据库会话：</p>
-<pre><code class="language-python">from fastapi import Depends
-@app.get(&quot;/items/&quot;)
-async def read_items(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Item))
-    items = result.scalars().all()
-    return items
-</code></pre>
-<p>这里的Depends(get_db)表示这个参数是一个依赖项，FastAPI会自动调用get_db函数来获取数据库会话，并将其作为参数传递给read_items函数。这样我们就可以在路由中使用ORM来操作数据库了。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/ORM/" style="color: #ffa2c4">ORM</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/25/FastAPI/%E5%9C%A8%E8%B7%AF%E7%94%B1%E4%B8%AD%E4%BD%BF%E7%94%A8ORM/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/25/FastAPI/ORM%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
-        <h2 class="post-title">ORM基本操作</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/FastAPI/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                FastAPI
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p>本项目使用SQLAlchemy作为ORM工具，安装依赖：</p>
-<pre><code class="language-txt">sqlalchemy[asyncio]
-aiomysql
-</code></pre>
-<h2 id="创建数据库模型"><a href="#创建数据库模型" class="headerlink" title="创建数据库模型"></a>创建数据库模型</h2><p>先创建异步数据库引擎和会话：</p>
-<pre><code class="language-python">from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker
-DATABASE_URL = &quot;mysql+aiomysql://user:password@localhost/dbname&quot;
-engine = create_async_engine(DATABASE_URL, 
-echo=True ##日志输出SQL语句
-pool_size=10, ##连接池大小
-max_overflow=20, ##连接池最大溢出数量
-)
-</code></pre>
-<h3 id="定义模型类"><a href="#定义模型类" class="headerlink" title="定义模型类"></a>定义模型类</h3><p>定义基类和模型类：</p>
-<pre><code class="language-python">from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
-class Base:
-    create_time = Column(Integer)
-    update_time = Column(Integer)
-class User(Base):
-    __tablename__ = &quot;users&quot;
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(50), unique=True, index=True)
-    email = Column(String(50), unique=True, index=True)
-</code></pre>
-<h3 id="定义函数建表"><a href="#定义函数建表" class="headerlink" title="定义函数建表"></a>定义函数建表</h3><pre><code class="language-python">async def init_db():
-    async with async_engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-</code></pre>
-<p>再搞一个启动时调用的函数：</p>
-<pre><code class="language-python">@app.on_event(&quot;startup&quot;)
-async def on_startup():
-    await init_db()
-</code></pre>
-<p>这样就可以在应用启动时自动创建数据库表了。</p>
-<p>总结一下，有三步：</p>
-<ol>
-<li>创建数据库引擎和会话</li>
-<li>定义模型类</li>
-<li>定义函数建表并在应用启动时调用</li>
-</ol>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/ORM/" style="color: #ffa2c4">ORM</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/25/FastAPI/ORM%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/25/FastAPI/%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">
-        <h2 class="post-title">中间件和依赖注入</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/FastAPI/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                FastAPI
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p>中间件是一个函数，它可以在请求被处理之前或之后执行一些操作。中间件可以用于处理跨域请求、日志记录、身份验证等。类似于Spring中的AOP思想。</p>
-<p>可以通过middleware装饰器来定义一个中间件函数，如：</p>
-<pre><code class="language-python">from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
-app = FastAPI()
-@app.middleware(&quot;http&quot;)
-async def add_process_time_header(request: Request, call_next):
-    response = await call_next(request)
-    response.headers[&quot;X-Process-Time&quot;] = &quot;0.1s&quot;
-    return response
-</code></pre>
-<p>这里的add_process_time_header函数是一个中间件函数，它在请求被处理之前执行，调用call_next(request)来继续处理请求，并在响应中添加一个自定义的头部X-Process-Time。</p>
-<p>这里还需要注意，如果有多个中间件，执行顺序是按照定义的顺序执行的。<br>而且执行方式类似于递归调用，先执行第一个中间件，调用call_next(request)来继续处理请求，进入下一个中间件，直到最后一个中间件处理完请求后返回响应，然后依次返回到上一个中间件，最后返回给客户端。<br>所以定义越早的中间件越先执行，定义越晚的中间件越后执行，但是返回响应的顺序是相反的，定义越早的中间件越后返回，定义越晚的中间件越先返回。</p>
-<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><p>依赖注入是一种设计模式，它允许我们将一个对象的依赖关系从对象本身中分离出来，使得代码更加模块化和可测试。在FastAPI中，依赖注入是通过Depends函数来实现的。说人话就是复用相同的代码。</p>
-<p>例如，我们有一个函数get_db()来获取数据库连接，我们可以将这个函数作为一个依赖注入到其他函数中，如：</p>
-<pre><code class="language-python">from fastapi import Depends
-def get_db():
-    db = &quot;数据库连接&quot;
-    try:
-        yield db
-    finally:
-        print(&quot;关闭数据库连接&quot;)
-@app.get(&quot;/items/&quot;)
-async def read_items(db: str = Depends(get_db)):
-    return {&quot;db&quot;: db}
-</code></pre>
-<p>这里的get_db函数是一个依赖函数，它返回一个数据库连接。在read_items函数中，我们使用Depends(get_db)来注入这个依赖，这样当我们调用read_items函数时，FastAPI会自动调用get_db函数来获取数据库连接，并将其作为参数传递给read_items函数。</p>
-<p>依赖注入的好处是可以将公共的代码抽离出来，避免重复代码，提高代码的可维护性和可测试性。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2026/04/25/FastAPI/%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/25/FastAPI/%E5%88%9D%E8%AF%95FastAPI/">
-        <h2 class="post-title">初试FastAPI</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/FastAPI/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                FastAPI
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>路由是url地址和函数之间的映射关系<br>新建python的FastAPI项目,在main.py中添加以下内容：</p>
-<pre><code class="language-python">from fastapi import FastAPI
-//创建FastAPI应用实例
-app = FastAPI()
-
-//定义一个根路由，返回一个简单的JSON响应
-//这里的@app.get(&quot;/&quot;)是一个装饰器，表示这个函数是处理GET请求的，并且路径是&quot;/&quot;，也就是根路径。当访问这个路径时，异步函数read_root会被调用，返回一个JSON对象{&quot;Hello&quot;: &quot;World&quot;}。
-@app.get(&quot;/&quot;)
-//相当于@RequestMapping(&quot;/&quot;)，默认是GET请求
-async def read_root():
-    return {&quot;Hello&quot;: &quot;World&quot;}
-</code></pre>
-<h2 id="路由参数"><a href="#路由参数" class="headerlink" title="路由参数"></a>路由参数</h2><p>路由参数分为三种：路径参数、查询参数、请求体参数</p>
-<ul>
-<li>路径参数：直接在路径中定义参数，是url的一部分，如</li>
-</ul>
-<pre><code class="language-python">@app.get(&quot;/items/{item_id}&quot;)
-async def read_item(item_id: int):
-    return {&quot;item_id&quot;: item_id}
-</code></pre>
-<p>另外，FastAPI还有Path注解可以对路径参数进行验证和设置默认值，如：</p>
-<pre><code class="language-python">@app.get(&quot;/items/{item_id}&quot;)
-async def read_item(item_id: int = Path(..., title=&quot;The ID of the item to get&quot;, ge=1)):
-    return {&quot;item_id&quot;: item_id}
-</code></pre>
-<p>这里的Path(…)表示这个参数是必填的，title是参数的描述，ge&#x3D;1表示这个参数必须大于等于1。</p>
-<ul>
-<li>查询参数：在url中以?key&#x3D;value的形式传递参数，如</li>
-</ul>
-<pre><code class="language-python">@app.get(&quot;/items/&quot;)
-async def read_items(
-    skip: int = query(0, title=&quot;Number of items to skip&quot;, ge=0),
-    limit: int = 10):
-    return {&quot;skip&quot;: skip, &quot;limit&quot;: limit}
-</code></pre>
-<p>这里的注解query(0, title&#x3D;”Number of items to skip”, ge&#x3D;0)表示这个参数是可选的，默认值是0，title是参数的描述，ge&#x3D;0表示这个参数必须大于等于0。</p>
-<ul>
-<li>请求体参数：通过请求体传递参数，通常是POST、PUT、PATCH等请求，如<br>根据HTTP协议，一个请求分为三部分：请求行、请求头、请求体。<br>请求行：包含请求方法（GET、POST等）、请求路径和HTTP版本。<br>请求头：包含一些元信息，如Content-Type、Authorization等。<br>请求体：包含实际的数据，如JSON、表单数据等。</li>
-</ul>
-<pre><code class="language-python">from pydantic import BaseModel
-class Item(BaseModel):
-    name: str
-    description: str = None
-
-@app.post(&quot;/items/&quot;)
-async def create_item(item: Item):
-    return item
-</code></pre>
-<p>这里的Item是一个Pydantic模型，定义了请求体的结构。当发送一个POST请求到&#x2F;items&#x2F;路径时，FastAPI会自动将请求体中的JSON数据解析成一个Item对象，并传递给create_item函数。</p>
-<p>同样的，FastAPI还有Body注解可以对请求体参数进行验证和设置默认值，如：</p>
-<pre><code class="language-python">@app.post(&quot;/items/&quot;)
-async def create_item(item: Item = Body(..., title=&quot;The item to create&quot;)):
-    return item
-</code></pre>
-<p>这里的Body(…)表示这个参数是必填的，title是参数的描述。</p>
-<p>另外，pydantic中还有Field注解可以对模型字段进行验证和设置默认值，如：</p>
-<pre><code class="language-python">class Item(BaseModel):
-    name: str = Field(..., title=&quot;The name of the item&quot;, max_length=100)
-    description: str = Field(None, title=&quot;The description of the item&quot;, max_length=255)
-</code></pre>
-<p>这里的Field(…)表示这个字段是必填的，title是字段的描述，max_length是字段的最大长度。</p>
-<h2 id="响应类型"><a href="#响应类型" class="headerlink" title="响应类型"></a>响应类型</h2><p>默认情况下，FastAPI会将返回的Python对象转换成JSON格式的响应，省去了手动序列化的步骤，而且支持多种响应类型，如JSON、HTML、文件等。</p>
-<p>指定响应类型的方法有两种：</p>
-<ul>
-<li>在装饰器中指定，如HTMLResponse、FileResponse等，如</li>
-</ul>
-<pre><code class="language-python">from fastapi.responses import HTMLResponse
-@app.get(&quot;/html/&quot;, response_class=HTMLResponse)
-async def get_html():
-    html_content = &quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello, World!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;
-    return HTMLResponse(content=html_content, status_code=200)
-</code></pre>
-<ul>
-<li>在函数中返回特定的响应对象，如JSONResponse、FileResponse等，如</li>
-</ul>
-<pre><code class="language-python">from fastapi.responses import fileResponse
-@app.get(&quot;/file/&quot;)
-async def get_file():
-    file_path = &quot;path/to/your/file.txt&quot;
-    return FileResponse(path=file_path, filename=&quot;file.txt&quot;, media_type=&quot;text/plain&quot;)
-</code></pre>
-<p>这里的FileResponse会将指定路径的文件作为响应返回，filename是下载时的文件名，media_type是文件的MIME类型。</p>
-<p>这两种方法各有优缺点，第一种方法更简洁，严格，适合简单的响应类型；第二种方法更灵活，适合需要自定义响应内容或状态码的情况。</p>
-<p>还有一种方法可以自定义响应类型，就是用基于Pydantic的模型来定义响应结构，如：</p>
-<pre><code class="language-python">from pydantic import BaseModel
-class ItemResponse(BaseModel):
-    name: str
-    description: str = None
-
-@app.get(&quot;/items/{item_id}&quot;, response_model=ItemResponse)
-async def read_item(item_id: int):
-    item = get_item_from_database(item_id)
-    return ItemResponse(name=item.name, description=item.description)
-</code></pre>
-<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>FastAPI提供了HTTPException类来处理HTTP异常，可以在路由函数中抛出这个异常来返回特定的错误响应，如：</p>
-<pre><code class="language-python">from fastapi import HTTPException
-@app.get(&quot;/items/{item_id}&quot;)
-async def read_item(item_id: int):
-    item = get_item_from_database(item_id)
-    if item is None:
-        raise HTTPException(status_code=404, detail=&quot;Item not found&quot;)
-    return item
-</code></pre>
-<p>这里的HTTPException(status_code&#x3D;404, detail&#x3D;”Item not found”)表示当item为None时，抛出一个404 Not Found的错误响应，detail是错误的详细信息.</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2026/04/25/FastAPI/%E5%88%9D%E8%AF%95FastAPI/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/%E6%8E%A5%E5%8F%A3%E8%BF%9E%E6%8E%A5%E5%88%B0DB/">
-        <h2 class="post-title">接口连接到DB</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Python/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Python
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/24
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/FastAPI/" style="color: #ff7d73">FastAPI</a>
+            <a href="/tags/Hot100/" style="color: #03a9f4">Hot100</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/DB/" style="color: #00a596">DB</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/%E6%8E%A5%E5%8F%A3%E8%BF%9E%E6%8E%A5%E5%88%B0DB/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/python%E9%93%BE%E6%8E%A5DB/">
-        <h2 class="post-title">python链接DB</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Python/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Python
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/24
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1.引入依赖"></a>1.引入依赖</h2><p>在requirements.txt中添加以下依赖：</p>
-<pre><code class="language-txt">pymysql
-sqlalchemy
-pydantic-settings
-</code></pre>
-<p>pymysql是一个纯Python的MySQL客户端库，sqlalchemy是一个ORM（对象关系映射）工具，pydantic-settings用于管理配置,可以通过环境变量或配置文件来设置数据库连接参数。</p>
-<p>这里多一嘴，和Java，C++相比，python是动态类型语言，灵活性更高，这是python的设计哲学之一，但是在开发大型项目中，动态类型容易导致类型错误，所有有了pydantic这样的库来提供类型检查和数据验证，pydantic-settings是pydantic的一个扩展，专门用于管理应用程序的配置，可以从环境变量、配置文件等多种来源加载配置.</p>
-<h2 id="2-配置数据库连接"><a href="#2-配置数据库连接" class="headerlink" title="2.配置数据库连接"></a>2.配置数据库连接</h2><p>现在项目根目录里新建一个.env文件，添加以下内容：</p>
-<pre><code class="language-env">DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=123456
-DB_NAME=restaurant
-</code></pre>
-<p>这些环境变量将用于配置数据库连接。</p>
-<p>再创建一个config.py文件，添加以下内容：</p>
-<pre><code class="language-python">from pydantic_settings import BaseSettings, SettingsConfigDict
-
-
-class Settings(BaseSettings):
-    db_host: str
-    db_port: int
-    db_user: str
-    db_password: str
-    db_name: str
-
-    model_config = SettingsConfigDict(
-        env_file=&quot;.env&quot;,
-        env_file_encoding=&quot;utf-8&quot;,
-        extra=&quot;ignore&quot;,
-    )
-
-    @property
-    def database_url(self) -&gt; str:
-        return (
-            f&quot;mysql+pymysql://{self.db_user}:{self.db_password}&quot;
-            f&quot;@{self.db_host}:{self.db_port}/{self.db_name}?charset=utf8mb4&quot;
-        )
-
-
-settings = Settings()
-</code></pre>
-<p>这个配置类会从.env文件中读取数据库连接参数，并提供一个database_url属性来生成数据库连接字符串。</p>
-<h2 id="3-创建数据库模型"><a href="#3-创建数据库模型" class="headerlink" title="3. 创建数据库模型"></a>3. 创建数据库模型</h2><p>在models&#x2F;下根据数据库表结构创建所需要的数据</p>
-<pre><code class="language-python">class Menu(Base):
-    __tablename__ = &quot;menus&quot;
-
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
-    category: Mapped[str] = mapped_column(String(50), nullable=False)
-    price: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False)
-    description: Mapped[str | None] = mapped_column(String(255), nullable=True)
-    status: Mapped[int] = mapped_column(nullable=False, default=1)
-    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
-    updated_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), onupdate=func.now(), nullable=False)
-</code></pre>
-<p>把表结构映射到具体的数据，有点像orm</p>
-<p>再在session.py中添加以下内容：</p>
-<pre><code class="language-python">from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
-
-from app.core.config import settings
-
-
-engine = create_engine(
-    settings.database_url,
-    echo=True,
-    pool_pre_ping=True,
-)
-
-SessionLocal = sessionmaker(
-    bind=engine,
-    autoflush=False,
-    autocommit=False,
-    expire_on_commit=False,
-)
-
-
-def get_db():
-    db: Session = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-</code></pre>
-<p>这个文件创建了一个数据库引擎，并定义了一个SessionLocal类来管理数据库会话。get_db函数是一个依赖项，可以在FastAPI的路由中使用，以便在请求期间获取数据库会话。</p>
-<h2 id="4-使用数据库"><a href="#4-使用数据库" class="headerlink" title="4. 使用数据库"></a>4. 使用数据库</h2><p>在FastAPI的路由中，我们可以使用get_db依赖项来获取数据库会话，并执行数据库操作.</p>
-<p>至此，我们已经成功地将FastAPI应用程序连接到MySQL数据库，并且可以使用SQLAlchemy进行数据库操作了。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/FastAPI/" style="color: #00a596">FastAPI</a>
+            <a href="/tags/Trie/" style="color: #00a596">Trie</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/DB/" style="color: #ffa2c4">DB</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
         </span>
         
     </div>
-    <a href="/2026/04/24/Python%E5%90%8E%E7%AB%AF/python%E9%93%BE%E6%8E%A5DB/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2026/04/24/hot100/%E5%9B%9E%E6%BA%AF/%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/">
-        <h2 class="post-title">组合总和</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Hot100/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Hot100
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/4/24
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>跟前三道题目一样，定义结果集，path，在递归过程中如果满足条件就<br>加入结果集，递归结束后恢复现场</p>
-<h2 id="触发点"><a href="#触发点" class="headerlink" title="触发点"></a>触发点</h2><p>找到所有满足条件的组合</p>
-<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><p>忘记递归中维护下标，导致出现重复答案，这题虽然一个数字可以选多次，但是也不需要每次都从头选，因为223和232是一个答案</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>O(n*2^n) n是数组长度，2^n是组合数量，每个组合需要O(n)的时间添加到结果集中<br>空间 O(n) path的长度为n，递归栈深度也是n</p>
-<h2 id="我的收获"><a href="#我的收获" class="headerlink" title="我的收获"></a>我的收获</h2><p>暂无</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="color: #ffa2c4">回溯</a>
-        </span>
-        
-    </div>
-    <a href="/2026/04/24/hot100/%E5%9B%9E%E6%BA%AF/%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/" class="go-post">阅读全文</a>
+    <a href="/2026/04/19/hot100/%E5%9B%BE%E8%AE%BA/Trie/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -1027,16 +250,8 @@ def get_db():
     
     <span class="current">4</span>
     
-    <a class="page-num" href="/page/5">
-        5
-    </a>
     
     
-    
-    
-    <a class="page-num" href="/page/5/">
-        <i class="fa-solid fa-caret-right fa-fw"></i>
-    </a>
     
 </div>
 
@@ -1046,11 +261,11 @@ def get_db():
         <div id="card-style">
     <div id="card-div">
         <div class="avatar">
-            <img src="/images/avatar.jpg" alt="avatar" />
+            <img src="/images/site/avatar.svg" alt="avatar" />
         </div>
         <div class="name">Yu</div>
         <div class="description">
-            <p>Description<br>…</p>
+            <p>后端工程 &#x2F; AI 应用 &#x2F; 项目复盘<br>记录能被面试官追问、也经得起复盘的技术细节。</p>
 
         </div>
         
@@ -1058,7 +273,7 @@ def get_db():
         <div class="friend-links">
             
             <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://github.com/leikuman1">github</a>
+                <a target="_blank" rel="noopener" href="https://github.com/leikuman1">GitHub</a>
             </div>
             
         </div>

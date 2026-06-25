@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>高并发秒杀系统复盘 | L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="记录后端开发、AI 应用、项目复盘与面试表达。" />
+    <meta name="keywords" content="后端,AI应用,RAG,Agent,FastAPI,Golang,Redis,RabbitMQ" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/site/avatar.svg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/site/loading.svg" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;首页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;归档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;分类</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>高并发秒杀系统复盘</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/29
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                项目复盘
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color: #03a9f4">
+                    工程化
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%90%8E%E7%AB%AF/" style="color: #00a596">
+                    后端
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/RabbitMQ/" style="color: #03a9f4">
+                    RabbitMQ
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Redis/" style="color: #ff7d73">
+                    Redis
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" style="color: #00a596">
+                    高并发
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Lua/" style="color: #03a9f4">
+                    Lua
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h2><p>这个项目模拟优惠券秒杀场景：大量用户在短时间内同时请求下单。核心挑战不是完成一个下单接口，而是让系统在高并发下仍然能保证：</p>
+<ul>
+<li>不超卖。</li>
+<li>同一用户不能重复下单。</li>
+<li>数据库写入压力可控。</li>
+<li>异步消息失败后有可追踪、可补偿、可兜底的恢复链路。</li>
+</ul>
+<p>我主要负责下单链路的设计和优化，重点围绕 Redis 原子校验、RabbitMQ 削峰、数据库幂等和死信补偿展开。</p>
+<h2 id="总体链路"><a href="#总体链路" class="headerlink" title="总体链路"></a>总体链路</h2><pre><code class="language-text">用户请求
+  ↓
+接口层限流与参数校验
+  ↓
+Redis + Lua 原子判断库存和一人一单
+  ↓
+发送下单消息到 RabbitMQ
+  ↓
+消费者异步创建订单
+  ↓
+MySQL 落库 + 唯一索引兜底
+  ↓
+失败消息进入死信/补偿链路
+</code></pre>
+<p>入口只做快速校验和资格预占，真正落库放到异步消费者中处理。这样可以把瞬时流量从数据库前移到 Redis 和 MQ，降低数据库被直接打穿的风险。</p>
+<h2 id="关键设计"><a href="#关键设计" class="headerlink" title="关键设计"></a>关键设计</h2><h3 id="1-Redis-Lua-做原子资格校验"><a href="#1-Redis-Lua-做原子资格校验" class="headerlink" title="1. Redis + Lua 做原子资格校验"></a>1. Redis + Lua 做原子资格校验</h3><p>Lua 脚本主要做四件事：</p>
+<ol>
+<li>根据 <code>voucherId</code> 组装库存 key 和已下单用户集合 key。</li>
+<li>读取库存，库存不足直接返回失败。</li>
+<li>判断当前用户是否已经抢过该券，已存在则返回重复下单。</li>
+<li>校验通过后扣减 Redis 库存，并把 <code>userId</code> 写入用户集合。</li>
+</ol>
+<p>这几步放到 Lua 中执行，是为了保证 Redis 内部操作的原子性，避免并发请求在“判断库存”和“扣减库存”之间穿插执行。</p>
+<p>需要说明边界：Redis 预扣只代表用户拿到了下单资格，不代表订单最终成功。最终成功仍以 MySQL 订单落库为准。</p>
+<h3 id="2-用户维度滑动窗口限流"><a href="#2-用户维度滑动窗口限流" class="headerlink" title="2. 用户维度滑动窗口限流"></a>2. 用户维度滑动窗口限流</h3><p>限流按用户维度做，而不是只做全局限流。原因是这个场景主要要拦截同一用户的重复点击、脚本刷接口和网络抖动导致的重复提交。</p>
+<p>如果只做全局限流，少数异常用户可能影响其他正常用户；用户维度限流更精准。</p>
+<p>实现上使用 Redis ZSet + Lua：</p>
+<ul>
+<li>score 使用请求时间戳。</li>
+<li>每次请求先清理窗口外数据。</li>
+<li>判断窗口内请求数是否超过阈值。</li>
+<li>写入本次请求记录，并给 key 设置略大于窗口的过期时间。</li>
+</ul>
+<p>这个方案有内存成本，但窗口很小、阈值低、过期及时，因此单用户 ZSet 数据量可控。</p>
+<h3 id="3-RabbitMQ-削峰与解耦"><a href="#3-RabbitMQ-削峰与解耦" class="headerlink" title="3. RabbitMQ 削峰与解耦"></a>3. RabbitMQ 削峰与解耦</h3><p>入口拿到资格后，不直接同步写数据库，而是投递下单消息。消费者异步执行数据库落库。</p>
+<p>这样做的收益：</p>
+<ul>
+<li>接口响应更快。</li>
+<li>数据库承受的是 MQ 平滑后的流量。</li>
+<li>下单逻辑可以独立扩展消费者数量。</li>
+</ul>
+<p>代价是系统从强同步变成最终一致，必须补充消息失败处理、订单幂等和 Redis 预占回滚。</p>
+<h3 id="4-数据库唯一索引兜底"><a href="#4-数据库唯一索引兜底" class="headerlink" title="4. 数据库唯一索引兜底"></a>4. 数据库唯一索引兜底</h3><p>Redis + Lua 解决入口并发，但数据库仍然要有最终兜底。例如对 <code>voucher_id + user_id</code> 建唯一索引，防止极端情况下重复订单落库。</p>
+<p>这是面试中需要强调的点：不能只依赖缓存层判断，数据库约束才是最终一致性的最后防线。</p>
+<h2 id="死信与补偿策略"><a href="#死信与补偿策略" class="headerlink" title="死信与补偿策略"></a>死信与补偿策略</h2><p>正常消费者第一次失败时，可以先 <code>NACK + requeue=true</code>，允许消息再消费一次。如果仍然失败，就记录一条 <code>PENDING</code> 状态的失败日志，然后 <code>basicReject(requeue=false)</code>，让消息进入死信队列。</p>
+<p>死信消费者处理逻辑：</p>
+<ol>
+<li>先查订单是否已经落库成功。</li>
+<li>如果已经成功，将失败日志标记为 <code>SUCCESS</code>。</li>
+<li>如果未成功，尝试重新执行补单逻辑。</li>
+<li>补单成功，标记为 <code>RETRIED_SUCCESS</code>。</li>
+<li>补单仍失败，回滚 Redis 预占库存和用户资格。</li>
+<li>回滚成功，标记为 <code>ROLLED_BACK</code>。</li>
+<li>回滚失败，标记为 <code>MANUAL_REVIEW</code>，交给人工处理。</li>
+</ol>
+<p>这条链路的核心目标是：失败消息不能静默丢失，必须可追踪、可恢复、可兜底。</p>
+<h2 id="面试官可能追问"><a href="#面试官可能追问" class="headerlink" title="面试官可能追问"></a>面试官可能追问</h2><h3 id="为什么不用-synchronized-或本地锁？"><a href="#为什么不用-synchronized-或本地锁？" class="headerlink" title="为什么不用 synchronized 或本地锁？"></a>为什么不用 synchronized 或本地锁？</h3><p>本地锁只能控制单 JVM 内部并发，多实例部署时无法保证全局互斥。秒杀资格判断涉及全局库存和用户资格，应该放到 Redis 这类集中式组件中处理。</p>
+<h3 id="Redis-扣了库存但数据库落库失败怎么办？"><a href="#Redis-扣了库存但数据库落库失败怎么办？" class="headerlink" title="Redis 扣了库存但数据库落库失败怎么办？"></a>Redis 扣了库存但数据库落库失败怎么办？</h3><p>这就是异步链路必须补偿的原因。失败后通过死信队列和补偿任务检查订单状态，如果无法补单成功，就回滚 Redis 预扣库存和用户资格，必要时进入人工复核。</p>
+<h3 id="MQ-会不会丢消息？"><a href="#MQ-会不会丢消息？" class="headerlink" title="MQ 会不会丢消息？"></a>MQ 会不会丢消息？</h3><p>需要从生产端确认、交换机和队列持久化、消费者 ACK、死信队列、失败日志几个层面保证。项目里重点做了消费者失败后的死信补偿；如果继续增强，可以补生产端 confirm 和消息表。</p>
+<h3 id="Lua-脚本能不能完全防超卖？"><a href="#Lua-脚本能不能完全防超卖？" class="headerlink" title="Lua 脚本能不能完全防超卖？"></a>Lua 脚本能不能完全防超卖？</h3><p>只能保证 Redis 内部资格预扣不超卖。最终订单是否超卖还需要数据库约束、消费者幂等和补偿逻辑共同保证。</p>
+<h2 id="项目收获"><a href="#项目收获" class="headerlink" title="项目收获"></a>项目收获</h2><p>这类项目的重点不是“用了哪些中间件”，而是能不能把并发、异步、幂等和一致性串成闭环。我的理解是：</p>
+<ul>
+<li>Redis 解决入口高并发判断。</li>
+<li>MQ 解决削峰和解耦。</li>
+<li>MySQL 解决最终数据约束。</li>
+<li>死信和补偿解决失败恢复。</li>
+<li>日志和状态机解决可观测与人工介入。</li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

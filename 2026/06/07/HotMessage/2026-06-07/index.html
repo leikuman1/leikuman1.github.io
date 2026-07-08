@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>2026-06-07 每日热点 | L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>2026-06-07 每日热点</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/6/7
+        </span>
+        
+        <span class="category">
+            <a href="/categories/HotMessage/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                HotMessage
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #03a9f4">
+                    AI与大模型
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00bcd4">
+                    金融
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #ff7d73">
+                    政治
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #03a9f4">
+                    科技
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="今日摘要"><a href="#今日摘要" class="headerlink" title="今日摘要"></a>今日摘要</h2><p>统计周期：2026-05-31 20:03:51 至 2026-06-07 20:03:51（Asia&#x2F;Shanghai）</p>
+<p>过去 7 天，AI 领域的主线继续从通用模型能力转向专业场景、网络安全和本地化部署：OpenAI 推进 GPT-Rosalind，Anthropic 扩大防御性安全项目，Google 发布可本地运行的 Gemma 4 12B。金融方面，美国就业数据、褐皮书和 SEC 战略草案共同指向一个主题：增长仍有韧性，但价格、监管框架与市场基础设施正在被重新评估。政治层面，美国把 AI、安全和海关执法纳入更强的行政执行框架，欧盟则继续围绕西巴尔干扩员和黎巴嫩安全投入资源。科技行业的重点集中在企业级智能体平台、远程算力工作流和边缘运行时，开发与部署链路正在被 AI 重新组织。</p>
+<h2 id="AI-与大模型"><a href="#AI-与大模型" class="headerlink" title="AI 与大模型"></a>AI 与大模型</h2><h3 id="1-OpenAI-更新-GPT-Rosalind-并发布生物防御行动方案"><a href="#1-OpenAI-更新-GPT-Rosalind-并发布生物防御行动方案" class="headerlink" title="1. OpenAI 更新 GPT-Rosalind 并发布生物防御行动方案"></a>1. OpenAI 更新 GPT-Rosalind 并发布生物防御行动方案</h3><ul>
+<li>摘要：OpenAI 于 2026 年 6 月 3 日宣布 GPT-Rosalind 新能力，面向生命科学研究增加药物化学、基因组学、实验工作流和 Codex 插件支持；6 月 4 日又发布 AI 驱动生物防御行动方案，强调在可信访问框架下支持公共卫生和生物安全。</li>
+<li>重要性：这表明前沿模型正在从通用问答进入高度专业、强监管和高风险的科研生产流程，模型能力、工具执行和访问治理将同时影响商业化与安全边界。</li>
+<li>时间：2026-06-03 &#x2F; 2026-06-04</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/">OpenAI：Introducing new capabilities to GPT-Rosalind</a>、<a target="_blank" rel="noopener" href="https://openai.com/index/biodefense-in-the-intelligence-age/">OpenAI：Biodefense in the Intelligence Age</a></li>
+</ul>
+<h3 id="2-Anthropic-扩大-Project-Glasswing-防御性网络安全项目"><a href="#2-Anthropic-扩大-Project-Glasswing-防御性网络安全项目" class="headerlink" title="2. Anthropic 扩大 Project Glasswing 防御性网络安全项目"></a>2. Anthropic 扩大 Project Glasswing 防御性网络安全项目</h3><ul>
+<li>摘要：Anthropic 于 2026 年 6 月 2 日宣布将 Project Glasswing 扩展至约 150 个新组织，覆盖 15 个以上国家，并重点纳入电力、水务、医疗、通信和硬件等关键基础设施相关方。</li>
+<li>重要性：AI 网络安全能力正在从模型展示进入受控部署阶段，关键问题从“能否发现漏洞”转向“如何验证、披露、修复并防止能力被滥用”。</li>
+<li>时间：2026-06-02</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.anthropic.com/news/expanding-project-glasswing">Anthropic：Expanding Project Glasswing</a></li>
+</ul>
+<h3 id="3-Anthropic-发布-AI-辅助网络攻击行为研究"><a href="#3-Anthropic-发布-AI-辅助网络攻击行为研究" class="headerlink" title="3. Anthropic 发布 AI 辅助网络攻击行为研究"></a>3. Anthropic 发布 AI 辅助网络攻击行为研究</h3><ul>
+<li>摘要：Anthropic 于 2026 年 6 月 3 日发布对 832 个恶意网络活动账号的分析，指出攻击者正把 AI 用于更复杂的攻击链后段，并认为 MITRE ATT&amp;CK 尚未充分覆盖智能体式编排等新型行为。</li>
+<li>重要性：这为安全团队提供了更具体的风险信号：AI 滥用不只是在生成钓鱼文本，而是可能成为侦察、横向移动、权限提升和工具调用的执行层。</li>
+<li>时间：2026-06-03</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack">Anthropic：What we learned mapping a year’s worth of AI-enabled cyber threats</a></li>
+</ul>
+<h3 id="4-Google-发布-Gemma-4-12B-开发者指南"><a href="#4-Google-发布-Gemma-4-12B-开发者指南" class="headerlink" title="4. Google 发布 Gemma 4 12B 开发者指南"></a>4. Google 发布 Gemma 4 12B 开发者指南</h3><ul>
+<li>摘要：Google Developers Blog 于 2026 年 6 月 3 日介绍 Gemma 4 12B，称其为中等规模、encoder-free 的多模态模型，可在约 16GB 显存或统一内存设备上本地运行，并支持图像、音频、视频理解和本地 API 服务。</li>
+<li>重要性：本地多模态模型继续降低边缘部署门槛，企业和个人开发者能在更少云依赖、更强数据控制的条件下构建智能体和多模态应用。</li>
+<li>时间：2026-06-03</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://developers.googleblog.com/gemma-4-12b-the-developer-guide/">Google Developers Blog：Gemma 4 12B: The Developer Guide</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/">OpenAI：Introducing new capabilities to GPT-Rosalind</a></li>
+<li><a target="_blank" rel="noopener" href="https://openai.com/index/biodefense-in-the-intelligence-age/">OpenAI：Biodefense in the Intelligence Age</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.anthropic.com/news/expanding-project-glasswing">Anthropic：Expanding Project Glasswing</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack">Anthropic：What we learned mapping a year’s worth of AI-enabled cyber threats</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.googleblog.com/gemma-4-12b-the-developer-guide/">Google Developers Blog：Gemma 4 12B: The Developer Guide</a></li>
+</ul>
+<h2 id="金融"><a href="#金融" class="headerlink" title="金融"></a>金融</h2><h3 id="1-美国-5-月非农就业增加-17-2-万"><a href="#1-美国-5-月非农就业增加-17-2-万" class="headerlink" title="1. 美国 5 月非农就业增加 17.2 万"></a>1. 美国 5 月非农就业增加 17.2 万</h3><ul>
+<li>摘要：美国劳工统计局于 2026 年 6 月 5 日发布 5 月就业报告，显示非农就业增加 172,000 人，失业率维持在 4.3%，休闲酒店、地方政府和医疗保健岗位增长，而金融活动就业减少。</li>
+<li>重要性：就业数据是美联储判断劳动力市场与通胀压力的重要输入，稳定失业率与温和工资增长会影响市场对 6 月 FOMC 会议和利率路径的定价。</li>
+<li>时间：2026-06-05</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.bls.gov/news.release/archives/empsit_06052026.htm">BLS：The Employment Situation - May 2026</a></li>
+</ul>
+<h3 id="2-美联储褐皮书显示美国经济温和扩张但价格压力上升"><a href="#2-美联储褐皮书显示美国经济温和扩张但价格压力上升" class="headerlink" title="2. 美联储褐皮书显示美国经济温和扩张但价格压力上升"></a>2. 美联储褐皮书显示美国经济温和扩张但价格压力上升</h3><ul>
+<li>摘要：美联储于 2026 年 6 月 3 日发布 5 月褐皮书，称 12 个辖区中 10 个经济活动小幅至温和增长，但消费者支出分化，能源相关成本推升价格压力，部分地区报告消费贷款和抵押贷款拖欠上升。</li>
+<li>重要性：褐皮书显示增长、通胀和信贷质量同时处于敏感区间，意味着货币政策讨论将继续在韧性增长与价格压力之间权衡。</li>
+<li>时间：2026-06-03</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.federalreserve.gov/monetarypolicy/beigebook202605-summary.htm">Federal Reserve：Beige Book - May 2026</a></li>
+</ul>
+<h3 id="3-SEC-发布-2026-2030-战略计划草案"><a href="#3-SEC-发布-2026-2030-战略计划草案" class="headerlink" title="3. SEC 发布 2026-2030 战略计划草案"></a>3. SEC 发布 2026-2030 战略计划草案</h3><ul>
+<li>摘要：美国证券交易委员会于 2026 年 6 月 2 日发布战略计划草案征求意见，提出重新聚焦投资者保护、公平有序高效市场和资本形成，并明确提到数字资产、分布式账本、AI、EDGAR 等市场监管和技术基础设施议题。</li>
+<li>重要性：这会影响未来数年美国资本市场监管重心，尤其是数字资产、披露制度、执法边界和监管科技的制度化方向。</li>
+<li>时间：2026-06-02</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.sec.gov/newsroom/press-releases/2026-51-sec-publishes-draft-strategic-plan-public-comment">SEC：SEC Publishes Draft Strategic Plan for Public Comment</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.bls.gov/news.release/archives/empsit_06052026.htm">BLS：The Employment Situation - May 2026</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.federalreserve.gov/monetarypolicy/beigebook202605-summary.htm">Federal Reserve：Beige Book - May 2026</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.sec.gov/newsroom/press-releases/2026-51-sec-publishes-draft-strategic-plan-public-comment">SEC：SEC Publishes Draft Strategic Plan for Public Comment</a></li>
+</ul>
+<h2 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h2><h3 id="1-白宫发布推进高级-AI-创新与安全的行政令"><a href="#1-白宫发布推进高级-AI-创新与安全的行政令" class="headerlink" title="1. 白宫发布推进高级 AI 创新与安全的行政令"></a>1. 白宫发布推进高级 AI 创新与安全的行政令</h3><ul>
+<li>摘要：白宫于 2026 年 6 月 2 日发布行政令，要求联邦部门围绕高级 AI、网络防御、关键基础设施和国家安全系统形成更协调的部署与治理安排。</li>
+<li>重要性：AI 已从产业政策进入国家安全和行政执行框架，后续政府采购、关键基础设施防护和企业合规要求都可能受到影响。</li>
+<li>时间：2026-06-02</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/">The White House：Promoting Advanced Artificial Intelligence Innovation and Security</a></li>
+</ul>
+<h3 id="2-白宫签署加强海关执法的行政令"><a href="#2-白宫签署加强海关执法的行政令" class="headerlink" title="2. 白宫签署加强海关执法的行政令"></a>2. 白宫签署加强海关执法的行政令</h3><ul>
+<li>摘要：白宫于 2026 年 6 月 3 日发布说明称，总统签署行政令，要求 DHS 和 CBP 加强进口商资质、担保、披露和认证要求，以打击关税规避和供应链违规。</li>
+<li>重要性：这会影响跨境贸易、低值包裹、电商供应链和进口合规成本，也是美国贸易执法从关税政策向执行链条延伸的信号。</li>
+<li>时间：2026-06-03</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.whitehouse.gov/fact-sheets/2026/06/fact-sheet-president-donald-j-trump-strengthens-customs-enforcement/">The White House：President Donald J. Trump Strengthens Customs Enforcement</a></li>
+</ul>
+<h3 id="3-欧盟强调西巴尔干扩员进程"><a href="#3-欧盟强调西巴尔干扩员进程" class="headerlink" title="3. 欧盟强调西巴尔干扩员进程"></a>3. 欧盟强调西巴尔干扩员进程</h3><ul>
+<li>摘要：欧洲理事会主席 António Costa 于 2026 年 6 月 5 日结束西巴尔干访问并共同主持欧盟-西巴尔干峰会，表示欧盟对西巴尔干扩员承诺真实存在，并提到黑山、阿尔巴尼亚、塞尔维亚等进展与改革要求。</li>
+<li>重要性：西巴尔干扩员是欧盟地缘政治和制度吸引力的重要抓手，也关系到欧洲安全、区域稳定和欧盟未来成员结构。</li>
+<li>时间：2026-06-05</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/06/05/remarks-by-president-antonio-costa-at-the-opening-of-the-eu-western-balkans-summit-of-5-june-2026/">Consilium：Remarks by President António Costa at the opening of the EU-Western Balkans Summit</a></li>
+</ul>
+<h3 id="4-欧盟通过-1-亿欧元对黎巴嫩武装部队支持措施"><a href="#4-欧盟通过-1-亿欧元对黎巴嫩武装部队支持措施" class="headerlink" title="4. 欧盟通过 1 亿欧元对黎巴嫩武装部队支持措施"></a>4. 欧盟通过 1 亿欧元对黎巴嫩武装部队支持措施</h3><ul>
+<li>摘要：欧盟理事会于 2026 年 6 月 4 日通过欧洲和平基金下第四项对黎巴嫩武装部队的双边援助措施，使相关支持总额达到 1.82 亿欧元，用于增强黎巴嫩领土管控、态势感知、海上安全和关键军事设施防护能力。</li>
+<li>重要性：在以黎停火脆弱和地区冲突外溢风险仍高的背景下，欧盟试图通过支持国家机构来稳定黎巴嫩安全秩序并削弱非国家武装影响。</li>
+<li>时间：2026-06-04</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/06/04/european-peace-facility-council-adopts-eur-100-million-assistance-measure-in-support-of-the-lebanese-armed-forces/">Consilium：European Peace Facility support for the Lebanese Armed Forces</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/">The White House：Promoting Advanced Artificial Intelligence Innovation and Security</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.whitehouse.gov/fact-sheets/2026/06/fact-sheet-president-donald-j-trump-strengthens-customs-enforcement/">The White House：President Donald J. Trump Strengthens Customs Enforcement</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/06/05/remarks-by-president-antonio-costa-at-the-opening-of-the-eu-western-balkans-summit-of-5-june-2026/">Consilium：Remarks by President António Costa at the opening of the EU-Western Balkans Summit</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/06/04/european-peace-facility-council-adopts-eur-100-million-assistance-measure-in-support-of-the-lebanese-armed-forces/">Consilium：European Peace Facility support for the Lebanese Armed Forces</a></li>
+</ul>
+<h2 id="科技"><a href="#科技" class="headerlink" title="科技"></a>科技</h2><h3 id="1-Microsoft-Build-2026-强调企业智能体系统"><a href="#1-Microsoft-Build-2026-强调企业智能体系统" class="headerlink" title="1. Microsoft Build 2026 强调企业智能体系统"></a>1. Microsoft Build 2026 强调企业智能体系统</h3><ul>
+<li>摘要：Microsoft 于 2026 年 6 月 2 日发布 Build 2026 重点内容，宣布 Work IQ APIs、Web IQ、Microsoft Scout、MAI-Thinking-1、MAI-Image-2.5、Agent 365、ASSERT 和 Agent Control Specification 等企业级智能体与治理组件。</li>
+<li>重要性：大型科技平台正在把 AI 从单点助手包装成带身份、上下文、策略、评测和安全控制的企业操作系统级能力。</li>
+<li>时间：2026-06-02</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://blogs.microsoft.com/blog/2026/06/02/microsoft-build-2026-be-yourself-at-work/">Microsoft：Microsoft Build 2026: Be yourself at work</a></li>
+</ul>
+<h3 id="2-Google-发布-Colab-CLI"><a href="#2-Google-发布-Colab-CLI" class="headerlink" title="2. Google 发布 Colab CLI"></a>2. Google 发布 Colab CLI</h3><ul>
+<li>摘要：Google Developers Blog 于 2026 年 6 月 5 日宣布 Google Colab CLI，允许开发者和 AI 智能体从本地终端请求远程 GPU&#x2F;TPU、运行 Python 脚本、下载产物并进入交互式远程环境。</li>
+<li>重要性：云端算力正在变成可由智能体直接调用的开发工具，这会降低机器学习实验、微调和批处理工作流的操作门槛。</li>
+<li>时间：2026-06-05</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://developers.googleblog.com/introducing-the-google-colab-cli/">Google Developers Blog：Introducing the Google Colab CLI</a></li>
+</ul>
+<h3 id="3-Wasmer-借助-Codex-构建边缘-Node-js-运行时"><a href="#3-Wasmer-借助-Codex-构建边缘-Node-js-运行时" class="headerlink" title="3. Wasmer 借助 Codex 构建边缘 Node.js 运行时"></a>3. Wasmer 借助 Codex 构建边缘 Node.js 运行时</h3><ul>
+<li>摘要：OpenAI 于 2026 年 6 月 3 日发布案例称，Wasmer 团队使用 Codex 在两周内构建 Edge.js，使 Node.js 工作负载可在 WebAssembly 沙箱和边缘层运行，目标是支持 JavaScript 应用、MCP 和智能体场景。</li>
+<li>重要性：WebAssembly、边缘计算和 AI 编程智能体正在汇合，复杂基础设施项目的实现周期可能被显著压缩，但验证、调试和安全审查会变得更关键。</li>
+<li>时间：2026-06-03</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/wasmer/">OpenAI：How Wasmer used Codex to build a Node.js runtime for the edge</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blogs.microsoft.com/blog/2026/06/02/microsoft-build-2026-be-yourself-at-work/">Microsoft：Microsoft Build 2026: Be yourself at work</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.googleblog.com/introducing-the-google-colab-cli/">Google Developers Blog：Introducing the Google Colab CLI</a></li>
+<li><a target="_blank" rel="noopener" href="https://openai.com/index/wasmer/">OpenAI：How Wasmer used Codex to build a Node.js runtime for the edge</a></li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>2026-06-28 每周热点 | L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>2026-06-28 每周热点</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/6/28
+        </span>
+        
+        <span class="category">
+            <a href="/categories/HotMessage/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                HotMessage
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #ff7d73">
+                    AI与大模型
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00bcd4">
+                    金融
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #03a9f4">
+                    政治
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00a596">
+                    科技
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="本周摘要"><a href="#本周摘要" class="headerlink" title="本周摘要"></a>本周摘要</h2><p>统计周期：2026-06-21 20:03:26 至 2026-06-28 20:03:26（Asia&#x2F;Shanghai）</p>
+<p>本周 AI 与大模型的主线是更强模型、更多代理化工作流和更垂直的算力平台同时推进，OpenAI、Anthropic 均把发布重点放在模型能力与安全治理的平衡上。宏观与金融方面，美国消费、GDP、银行压力测试和中美欧监管协调继续影响市场预期，中国工业企业利润数据也显示制造业利润修复仍是观察重点。政治方向，美国发布国家韧性战略并继续围绕北约、维和和地区安全议题展开政策动作。科技方向，量子、后量子密码、操作系统开发链路和数据中心基础设施成为本周较高信号的更新。</p>
+<h2 id="AI-与大模型"><a href="#AI-与大模型" class="headerlink" title="AI 与大模型"></a>AI 与大模型</h2><h3 id="1-OpenAI-开始-GPT-5-6-Sol-有限预览"><a href="#1-OpenAI-开始-GPT-5-6-Sol-有限预览" class="headerlink" title="1. OpenAI 开始 GPT-5.6 Sol 有限预览"></a>1. OpenAI 开始 GPT-5.6 Sol 有限预览</h3><ul>
+<li>摘要：OpenAI 发布 GPT-5.6 系列预览，包含 Sol、Terra、Luna 三个层级，先向可信合作伙伴开放 API 与 Codex 使用，并配套系统卡披露安全评估。</li>
+<li>重要性：这是前沿模型发布从单纯能力升级转向“能力、分层访问、安全评估、政府沟通”同步推进的典型案例。</li>
+<li>时间：2026-06-26（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/previewing-gpt-5-6-sol/">OpenAI 发布说明</a>、<a target="_blank" rel="noopener" href="https://deploymentsafety.openai.com/gpt-5-6-preview">GPT-5.6 Preview System Card</a></li>
+</ul>
+<h3 id="2-OpenAI-与-Broadcom-推出面向-LLM-推理的-Jalapeno-芯片"><a href="#2-OpenAI-与-Broadcom-推出面向-LLM-推理的-Jalapeno-芯片" class="headerlink" title="2. OpenAI 与 Broadcom 推出面向 LLM 推理的 Jalapeño 芯片"></a>2. OpenAI 与 Broadcom 推出面向 LLM 推理的 Jalapeño 芯片</h3><ul>
+<li>摘要：OpenAI 与 Broadcom 公布 Jalapeño 推理加速器，称其从设计到量产用时 9 个月，将按多代平台和数据中心合作伙伴进行吉瓦级部署。</li>
+<li>重要性：大模型公司继续向芯片和基础设施纵深整合，推理成本、能效和供应链控制将成为模型竞争的关键变量。</li>
+<li>时间：2026-06-24（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/openai-broadcom-jalapeno-inference-chip/">OpenAI 官方公告</a></li>
+</ul>
+<h3 id="3-Anthropic-发布-Claude-Tag，把-Claude-接入-Slack-团队协作"><a href="#3-Anthropic-发布-Claude-Tag，把-Claude-接入-Slack-团队协作" class="headerlink" title="3. Anthropic 发布 Claude Tag，把 Claude 接入 Slack 团队协作"></a>3. Anthropic 发布 Claude Tag，把 Claude 接入 Slack 团队协作</h3><ul>
+<li>摘要：Anthropic 推出 Claude Tag，允许企业和团队用户在 Slack 频道中 @Claude 分派任务、读取授权上下文并计划后续工作。</li>
+<li>重要性：团队协作场景正在从“个人助手”转向“频道内可被委派的代理”，AI 工具的组织嵌入程度进一步提高。</li>
+<li>时间：2026-06-23（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.anthropic.com/news/introducing-claude-tag">Anthropic 官方公告</a></li>
+</ul>
+<h3 id="4-OpenAI-发布关于代理改变工作的经济研究"><a href="#4-OpenAI-发布关于代理改变工作的经济研究" class="headerlink" title="4. OpenAI 发布关于代理改变工作的经济研究"></a>4. OpenAI 发布关于代理改变工作的经济研究</h3><ul>
+<li>摘要：OpenAI 发布经济研究文章，强调代理式 AI 将知识工作从短交互推进到可委派的长周期任务，并以 Codex 在组织内部的使用变化作为观察对象。</li>
+<li>重要性：这类研究为企业评估代理工具的投入产出、组织流程重构和岗位影响提供了新的参考框架。</li>
+<li>时间：2026-06-25（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/how-agents-are-transforming-work/">OpenAI 研究文章</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openai.com/news/">OpenAI News</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.anthropic.com/news">Anthropic Newsroom</a></li>
+</ul>
+<h2 id="金融"><a href="#金融" class="headerlink" title="金融"></a>金融</h2><h3 id="1-中国-1—5-月规模以上工业企业利润同比增长-18-8"><a href="#1-中国-1—5-月规模以上工业企业利润同比增长-18-8" class="headerlink" title="1. 中国 1—5 月规模以上工业企业利润同比增长 18.8%"></a>1. 中国 1—5 月规模以上工业企业利润同比增长 18.8%</h3><ul>
+<li>摘要：国家统计局公布，2026 年 1—5 月全国规模以上工业企业实现利润总额 31439.6 亿元，同比增长 18.8%，其中制造业利润增长 20.0%。</li>
+<li>重要性：工业利润是观察中国企业盈利修复、制造业景气度和政策传导效果的重要指标。</li>
+<li>时间：2026-06-27 09:30（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.stats.gov.cn/sj/zxfb/202606/t20260627_1964019.html">国家统计局数据发布</a></li>
+</ul>
+<h3 id="2-美联储年度压力测试显示大型银行能承受严重衰退情景"><a href="#2-美联储年度压力测试显示大型银行能承受严重衰退情景" class="headerlink" title="2. 美联储年度压力测试显示大型银行能承受严重衰退情景"></a>2. 美联储年度压力测试显示大型银行能承受严重衰退情景</h3><ul>
+<li>摘要：美联储称大型银行在本年度压力测试中可承受超过 7080 亿美元的假设贷款损失，资本率总体下降 1.6 个百分点但仍高于最低要求。</li>
+<li>重要性：压力测试结果影响市场对美国银行体系韧性、信贷供给和监管资本要求的判断。</li>
+<li>时间：2026-06-24 16:00 EDT（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260624a.htm">Federal Reserve 官方新闻稿</a></li>
+</ul>
+<h3 id="3-美国-5-月-PCE-与一季度-GDP-修订同时强化通胀观察"><a href="#3-美国-5-月-PCE-与一季度-GDP-修订同时强化通胀观察" class="headerlink" title="3. 美国 5 月 PCE 与一季度 GDP 修订同时强化通胀观察"></a>3. 美国 5 月 PCE 与一季度 GDP 修订同时强化通胀观察</h3><ul>
+<li>摘要：BEA 公布 5 月 PCE 价格指数环比上涨 0.4%、核心 PCE 环比上涨 0.3%；同日公布的一季度 GDP 第三次估算为年化增长 2.1%。</li>
+<li>重要性：增长韧性与价格压力并存，会影响市场对美联储政策路径和资产定价的预期。</li>
+<li>时间：2026-06-25（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.bea.gov/news/2026/personal-income-and-outlays-may-2026">BEA 5 月个人收入与支出</a>、<a target="_blank" rel="noopener" href="https://www.bea.gov/news/2026/gdp-third-estimate-industries-corporate-profits-state-gdp-and-state-personal-income-1st">BEA 一季度 GDP 第三次估算</a></li>
+</ul>
+<h3 id="4-SEC-与-CFTC-就投资组合保证金框架协调征求意见"><a href="#4-SEC-与-CFTC-就投资组合保证金框架协调征求意见" class="headerlink" title="4. SEC 与 CFTC 就投资组合保证金框架协调征求意见"></a>4. SEC 与 CFTC 就投资组合保证金框架协调征求意见</h3><ul>
+<li>摘要：SEC 与 CFTC 联合征求公众意见，研究证券、期货、掉期等市场的投资组合保证金框架协调问题，意见期为联邦公报发布后 60 天。</li>
+<li>重要性：跨监管框架的保证金协调可能影响清算、流动性、客户保护和衍生品市场效率。</li>
+<li>时间：2026-06-26（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.sec.gov/newsroom/press-releases/2026-59-sec-cftc-seek-public-comment-harmonization-portfolio-margining-frameworks">SEC 官方新闻稿</a></li>
+</ul>
+<h3 id="5-BIS-年度经济报告警示全球经济压力点"><a href="#5-BIS-年度经济报告警示全球经济压力点" class="headerlink" title="5. BIS 年度经济报告警示全球经济压力点"></a>5. BIS 年度经济报告警示全球经济压力点</h3><ul>
+<li>摘要：国际清算银行在 2026 年年度经济报告中指出，金融体系脆弱性、公共财政压力和供应冲击仍对全球增长构成风险，并强调价格稳定和金融稳定。</li>
+<li>重要性：BIS 报告通常影响央行、监管者和市场对全球金融周期、财政金融联动风险的讨论。</li>
+<li>时间：2026-06-28（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.bis.org/publ/arpdf/ar2026e.htm">BIS 年度经济报告</a>、<a target="_blank" rel="noopener" href="https://www.bis.org/press/p260628.htm">BIS 新闻稿</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.stats.gov.cn/">国家统计局</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.federalreserve.gov/">Federal Reserve</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bea.gov/">U.S. Bureau of Economic Analysis</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.sec.gov/">SEC</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bis.org/">BIS</a></li>
+</ul>
+<h2 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h2><h3 id="1-白宫发布“America-First-Resilience-Strategy”"><a href="#1-白宫发布“America-First-Resilience-Strategy”" class="headerlink" title="1. 白宫发布“America First Resilience Strategy”"></a>1. 白宫发布“America First Resilience Strategy”</h3><ul>
+<li>摘要：白宫发布总统国家韧性战略，围绕国家安全、经济、公共健康安全和基础设施可靠性提出风险优先、系统现代化、联邦主义分责和治理简化等方向。</li>
+<li>重要性：该战略把供应链、基础设施、危机响应和国家安全纳入同一政策框架，可能影响后续美国联邦和州地方职责分工。</li>
+<li>时间：2026-06-23（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.whitehouse.gov/releases/2026/06/white-house-unveils-president-trumps-america-first-resilience-strategy/">白宫发布稿</a>、<a target="_blank" rel="noopener" href="https://www.whitehouse.gov/wp-content/uploads/2026/06/2026-National-Resilience-Strategy-1.pdf">2026 National Resilience Strategy</a></li>
+</ul>
+<h3 id="2-美国总统会见北约秘书长，安卡拉峰会进入会前协调期"><a href="#2-美国总统会见北约秘书长，安卡拉峰会进入会前协调期" class="headerlink" title="2. 美国总统会见北约秘书长，安卡拉峰会进入会前协调期"></a>2. 美国总统会见北约秘书长，安卡拉峰会进入会前协调期</h3><ul>
+<li>摘要：白宫发布总统与北约秘书长 Mark Rutte 会面视频；北约官网同步更新称下一次峰会将于 2026 年 7 月 7—8 日在土耳其安卡拉举行。</li>
+<li>重要性：北约峰会前的美欧防务沟通将影响成员国军费、能力建设和欧洲安全议程。</li>
+<li>时间：2026-06-24（白宫会面发布时间）；2026-06-22（北约峰会页面更新时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.whitehouse.gov/videos/president-trump-participates-in-a-meeting-with-the-secretary-general-of-nato-3/">白宫视频</a>、<a target="_blank" rel="noopener" href="https://www.nato.int/en/what-we-do/introduction-to-nato/nato-summits">NATO 峰会说明</a></li>
+</ul>
+<h3 id="3-联合国安理会通过第-2823-号决议，推动追究袭击维和人员责任"><a href="#3-联合国安理会通过第-2823-号决议，推动追究袭击维和人员责任" class="headerlink" title="3. 联合国安理会通过第 2823 号决议，推动追究袭击维和人员责任"></a>3. 联合国安理会通过第 2823 号决议，推动追究袭击维和人员责任</h3><ul>
+<li>摘要：联合国安理会一致通过第 2823（2026）号决议，围绕针对联合国维和人员犯罪的问责进行制度化推进。</li>
+<li>重要性：维和人员安全和问责机制关系到联合国维和行动的授权可信度、人员派遣意愿和冲突地区任务执行。</li>
+<li>时间：2026-06-23（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://press.un.org/en/2026/sc16395.doc.htm">UN Meetings Coverage</a></li>
+</ul>
+<h3 id="4-安理会延长联合国脱离接触观察员部队授权"><a href="#4-安理会延长联合国脱离接触观察员部队授权" class="headerlink" title="4. 安理会延长联合国脱离接触观察员部队授权"></a>4. 安理会延长联合国脱离接触观察员部队授权</h3><ul>
+<li>摘要：联合国安理会延长联合国脱离接触观察员部队（UNDOF）授权至 2026 年 12 月 31 日，继续维持以色列和叙利亚之间停火监督安排。</li>
+<li>重要性：中东局势仍具不确定性，UNDOF 授权延长有助于维持戈兰高地一线最低限度的多边监督机制。</li>
+<li>时间：2026-06-25（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://press.un.org/en/2026/sc16398.doc.htm">UN Meetings Coverage</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.whitehouse.gov/news/">The White House</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.nato.int/">NATO</a></li>
+<li><a target="_blank" rel="noopener" href="https://press.un.org/en">UN Meetings Coverage</a></li>
+</ul>
+<h2 id="科技"><a href="#科技" class="headerlink" title="科技"></a>科技</h2><h3 id="1-美国签署量子创新行政令"><a href="#1-美国签署量子创新行政令" class="headerlink" title="1. 美国签署量子创新行政令"></a>1. 美国签署量子创新行政令</h3><ul>
+<li>摘要：白宫发布事实清单称，总统签署量子创新行政令，要求更新国家量子战略，推动量子计算、量子传感和量子网络能力建设。</li>
+<li>重要性：量子技术被进一步纳入国家安全和产业竞争框架，可能带动科研、制造和政府采购方向变化。</li>
+<li>时间：2026-06-22（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.whitehouse.gov/fact-sheets/2026/06/fact-sheet-president-donald-j-trump-ushers-in-the-next-frontier-of-quantum-innovation/">白宫事实清单</a></li>
+</ul>
+<h3 id="2-美国推进后量子密码迁移执行安排"><a href="#2-美国推进后量子密码迁移执行安排" class="headerlink" title="2. 美国推进后量子密码迁移执行安排"></a>2. 美国推进后量子密码迁移执行安排</h3><ul>
+<li>摘要：白宫和 OMB 更新后量子密码相关执行安排，OMB 备忘录 M-26-15 标题为“Execution of the Migration to Post-Quantum Cryptography”，日期为 2026 年 6 月 24 日。</li>
+<li>重要性：后量子密码迁移将影响政府、关键基础设施和供应商的软件资产盘点、密码资产替换和合规节奏。</li>
+<li>时间：2026-06-24（OMB 备忘录日期）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.whitehouse.gov/fact-sheets/2026/06/fact-sheet-president-donald-j-trump-secures-the-nation-against-advanced-cryptographic-attacks/">白宫密码安全事实清单</a>、<a target="_blank" rel="noopener" href="https://www.whitehouse.gov/omb/information-resources/guidance/memoranda/">OMB Memoranda 列表</a></li>
+</ul>
+<h3 id="3-Apple-发布-Xcode-26-6，并推进-iOS-iPadOS-macOS-27-beta-2"><a href="#3-Apple-发布-Xcode-26-6，并推进-iOS-iPadOS-macOS-27-beta-2" class="headerlink" title="3. Apple 发布 Xcode 26.6，并推进 iOS&#x2F;iPadOS&#x2F;macOS 27 beta 2"></a>3. Apple 发布 Xcode 26.6，并推进 iOS&#x2F;iPadOS&#x2F;macOS 27 beta 2</h3><ul>
+<li>摘要：Apple Developer Releases 显示，Xcode 26.6 于 2026 年 6 月 25 日发布，Xcode 27 beta 2 与 iOS、iPadOS、macOS、tvOS、visionOS 27 beta 2 于 6 月 22 日发布。</li>
+<li>重要性：开发工具链和新系统 beta 的节奏决定了应用兼容性测试、SDK 适配和平台新能力上线窗口。</li>
+<li>时间：2026-06-22 至 2026-06-25（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://developer.apple.com/news/releases/">Apple Developer Releases</a></li>
+</ul>
+<h3 id="4-Microsoft-发布-6-月-26-日-Windows-Insider-新构建"><a href="#4-Microsoft-发布-6-月-26-日-Windows-Insider-新构建" class="headerlink" title="4. Microsoft 发布 6 月 26 日 Windows Insider 新构建"></a>4. Microsoft 发布 6 月 26 日 Windows Insider 新构建</h3><ul>
+<li>摘要：Windows Blog 显示，Microsoft 于 2026 年 6 月 26 日发布新的 Windows Insider 构建，并提到 WIP 改进与 Experimental 版本 26H2。</li>
+<li>重要性：Windows Insider 节奏是企业和开发者提前验证系统兼容性、设备驱动和新功能变化的重要入口。</li>
+<li>时间：2026-06-26（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://blogs.windows.com/windows-insider/2026/06/26/announcing-new-builds-for-26-june-2026-retail-launch-of-new-wip-improvements/">Windows Blog</a></li>
+</ul>
+<h3 id="5-Microsoft-介绍数据中心节水基础设施实践"><a href="#5-Microsoft-介绍数据中心节水基础设施实践" class="headerlink" title="5. Microsoft 介绍数据中心节水基础设施实践"></a>5. Microsoft 介绍数据中心节水基础设施实践</h3><ul>
+<li>摘要：Microsoft 官方博客介绍其在数据中心扩张中降低用水强度的长期实践，由云运营和数据中心工程负责人署名发布。</li>
+<li>重要性：AI 和云计算扩张加大能源、水资源和选址压力，基础设施可持续性成为大型科技公司竞争与监管关注点。</li>
+<li>时间：2026-06-24（原始发布时间）</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://blogs.microsoft.com/blog/2026/06/24/inside-microsofts-two-decade-push-to-cut-water-intensity-while-scaling-for-growth/">Microsoft 官方博客</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.whitehouse.gov/news/">The White House</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.apple.com/news/releases/">Apple Developer</a></li>
+<li><a target="_blank" rel="noopener" href="https://blogs.windows.com/">Windows Blog</a></li>
+<li><a target="_blank" rel="noopener" href="https://blogs.microsoft.com/">Microsoft Official Blog</a></li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

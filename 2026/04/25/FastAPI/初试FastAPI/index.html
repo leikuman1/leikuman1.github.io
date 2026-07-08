@@ -3,15 +3,15 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>初试 FastAPI：接口设计、校验与异常处理 | L&#39;sBlog</title>
+    <title>初试FastAPI | L&#39;sBlog</title>
     <meta name="author" content="Yu" />
-    <meta name="description" content="记录后端开发、AI 应用、项目复盘与面试表达。" />
-    <meta name="keywords" content="后端,AI应用,RAG,Agent,FastAPI,Golang,Redis,RabbitMQ" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <link rel="icon" href="/images/site/avatar.svg" />
+    <link rel="icon" href="/images/avatar.jpg" />
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -56,7 +56,7 @@
                 <div id="loading-circle">
                     <h2>LOADING</h2>
                     <p>加载过慢请开启缓存 浏览器默认开启</p>
-                    <img src="/images/site/loading.svg" />
+                    <img src="/images/loading.gif" />
                 </div>
             </div>
         </transition>
@@ -68,27 +68,27 @@
         
         <a href="/">
             <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;首页</span>
+            <span>&ensp;Home</span>
         </a>
         
         <a href="/about">
             <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;关于</span>
+            <span>&ensp;About</span>
         </a>
         
         <a href="/archives">
             <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;归档</span>
+            <span>&ensp;Archives</span>
         </a>
         
         <a href="/categories">
             <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;分类</span>
+            <span>&ensp;Categories</span>
         </a>
         
         <a href="/tags">
             <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;标签</span>
+            <span>&ensp;Tags</span>
         </a>
         
     </nav>
@@ -105,7 +105,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-house fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
                     </div>
                 </a>
                 
@@ -114,7 +114,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-id-card fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
                     </div>
                 </a>
                 
@@ -123,7 +123,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-box-archive fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
                     </div>
                 </a>
                 
@@ -132,7 +132,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-bookmark fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
                     </div>
                 </a>
                 
@@ -141,7 +141,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-tags fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
                     </div>
                 </a>
                 
@@ -156,7 +156,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>初试 FastAPI：接口设计、校验与异常处理</h1>
+        <h1>初试FastAPI</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -167,157 +167,122 @@
         </span>
         
         <span class="category">
-            <a href="/categories/%E5%90%8E%E7%AB%AF/">
+            <a href="/categories/FastAPI/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                后端
+                FastAPI
             </a>
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/FastAPI/" style="color: #ffa2c4">
-                    FastAPI
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Python/" style="color: #00bcd4">
-                    Python
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/API%E8%AE%BE%E8%AE%A1/" style="color: #03a9f4">
-                    API设计
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Pydantic/" style="color: #00a596">
-                    Pydantic
-                </a>
-            </span>
-            
-        </span>
-        
     </div>
     
     <div class="content" v-pre>
-        <h2 id="FastAPI-适合做什么"><a href="#FastAPI-适合做什么" class="headerlink" title="FastAPI 适合做什么"></a>FastAPI 适合做什么</h2><p>FastAPI 适合快速构建 Python Web API，特点是：</p>
-<ul>
-<li>基于类型注解做参数解析和校验。</li>
-<li>使用 Pydantic 定义请求和响应模型。</li>
-<li>自动生成 OpenAPI 文档。</li>
-<li>原生支持 async，适合 I&#x2F;O 密集型接口。</li>
-</ul>
-<p>在 AI 应用或后端管理服务中，FastAPI 很适合做 RAG 服务、模型调用网关、内部工具 API 和轻量管理后台。</p>
-<h2 id="基础路由"><a href="#基础路由" class="headerlink" title="基础路由"></a>基础路由</h2><pre><code class="language-python">from fastapi import FastAPI
+        <h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>路由是url地址和函数之间的映射关系<br>新建python的FastAPI项目,在main.py中添加以下内容：</p>
+<pre><code class="language-python">from fastapi import FastAPI
+//创建FastAPI应用实例
+app = FastAPI()
 
-app = FastAPI(title=&quot;Demo API&quot;)
-
-
+//定义一个根路由，返回一个简单的JSON响应
+//这里的@app.get(&quot;/&quot;)是一个装饰器，表示这个函数是处理GET请求的，并且路径是&quot;/&quot;，也就是根路径。当访问这个路径时，异步函数read_root会被调用，返回一个JSON对象{&quot;Hello&quot;: &quot;World&quot;}。
 @app.get(&quot;/&quot;)
-async def read_root() -&gt; dict[str, str]:
-    return {&quot;message&quot;: &quot;Hello, FastAPI&quot;}
+//相当于@RequestMapping(&quot;/&quot;)，默认是GET请求
+async def read_root():
+    return {&quot;Hello&quot;: &quot;World&quot;}
 </code></pre>
-<p><code>@app.get(&quot;/&quot;)</code> 把 HTTP GET 请求映射到函数。函数返回的 Python 对象会自动序列化为 JSON。</p>
-<h2 id="参数类型"><a href="#参数类型" class="headerlink" title="参数类型"></a>参数类型</h2><h3 id="路径参数"><a href="#路径参数" class="headerlink" title="路径参数"></a>路径参数</h3><pre><code class="language-python">from fastapi import Path
-
-
-@app.get(&quot;/items/{item_id}&quot;)
-async def read_item(
-    item_id: int = Path(..., ge=1, description=&quot;商品 ID&quot;),
-) -&gt; dict[str, int]:
+<h2 id="路由参数"><a href="#路由参数" class="headerlink" title="路由参数"></a>路由参数</h2><p>路由参数分为三种：路径参数、查询参数、请求体参数</p>
+<ul>
+<li>路径参数：直接在路径中定义参数，是url的一部分，如</li>
+</ul>
+<pre><code class="language-python">@app.get(&quot;/items/{item_id}&quot;)
+async def read_item(item_id: int):
     return {&quot;item_id&quot;: item_id}
 </code></pre>
-<p>路径参数是 URL 的一部分，例如 <code>/items/100</code>。类型写成 <code>int</code> 后，FastAPI 会自动做类型转换和校验。</p>
-<h3 id="查询参数"><a href="#查询参数" class="headerlink" title="查询参数"></a>查询参数</h3><pre><code class="language-python">from fastapi import Query
-
-
-@app.get(&quot;/items&quot;)
-async def list_items(
-    skip: int = Query(0, ge=0),
-    limit: int = Query(20, ge=1, le=100),
-) -&gt; dict[str, int]:
+<p>另外，FastAPI还有Path注解可以对路径参数进行验证和设置默认值，如：</p>
+<pre><code class="language-python">@app.get(&quot;/items/{item_id}&quot;)
+async def read_item(item_id: int = Path(..., title=&quot;The ID of the item to get&quot;, ge=1)):
+    return {&quot;item_id&quot;: item_id}
+</code></pre>
+<p>这里的Path(…)表示这个参数是必填的，title是参数的描述，ge&#x3D;1表示这个参数必须大于等于1。</p>
+<ul>
+<li>查询参数：在url中以?key&#x3D;value的形式传递参数，如</li>
+</ul>
+<pre><code class="language-python">@app.get(&quot;/items/&quot;)
+async def read_items(
+    skip: int = query(0, title=&quot;Number of items to skip&quot;, ge=0),
+    limit: int = 10):
     return {&quot;skip&quot;: skip, &quot;limit&quot;: limit}
 </code></pre>
-<p>查询参数适合分页、筛选和排序。对 <code>limit</code> 设置上限是必要的，否则容易被大请求拖慢服务。</p>
-<h3 id="请求体参数"><a href="#请求体参数" class="headerlink" title="请求体参数"></a>请求体参数</h3><pre><code class="language-python">from pydantic import BaseModel, Field
+<p>这里的注解query(0, title&#x3D;”Number of items to skip”, ge&#x3D;0)表示这个参数是可选的，默认值是0，title是参数的描述，ge&#x3D;0表示这个参数必须大于等于0。</p>
+<ul>
+<li>请求体参数：通过请求体传递参数，通常是POST、PUT、PATCH等请求，如<br>根据HTTP协议，一个请求分为三部分：请求行、请求头、请求体。<br>请求行：包含请求方法（GET、POST等）、请求路径和HTTP版本。<br>请求头：包含一些元信息，如Content-Type、Authorization等。<br>请求体：包含实际的数据，如JSON、表单数据等。</li>
+</ul>
+<pre><code class="language-python">from pydantic import BaseModel
+class Item(BaseModel):
+    name: str
+    description: str = None
 
-
-class ItemCreate(BaseModel):
-    name: str = Field(..., max_length=100)
-    description: str | None = Field(default=None, max_length=255)
-
-
-@app.post(&quot;/items&quot;)
-async def create_item(item: ItemCreate) -&gt; ItemCreate:
+@app.post(&quot;/items/&quot;)
+async def create_item(item: Item):
     return item
 </code></pre>
-<p>请求体使用 Pydantic 模型定义，字段校验会自动执行。校验失败时，FastAPI 默认返回 422。</p>
-<h2 id="响应模型"><a href="#响应模型" class="headerlink" title="响应模型"></a>响应模型</h2><p>接口不要直接把数据库对象原样返回，应该定义响应模型，控制输出字段。</p>
-<pre><code class="language-python">class ItemResponse(BaseModel):
-    id: int
-    name: str
-    description: str | None = None
-
-
-@app.get(&quot;/items/{item_id}&quot;, response_model=ItemResponse)
-async def get_item(item_id: int) -&gt; ItemResponse:
-    item = await item_service.get_by_id(item_id)
-    return ItemResponse.model_validate(item)
+<p>这里的Item是一个Pydantic模型，定义了请求体的结构。当发送一个POST请求到&#x2F;items&#x2F;路径时，FastAPI会自动将请求体中的JSON数据解析成一个Item对象，并传递给create_item函数。</p>
+<p>同样的，FastAPI还有Body注解可以对请求体参数进行验证和设置默认值，如：</p>
+<pre><code class="language-python">@app.post(&quot;/items/&quot;)
+async def create_item(item: Item = Body(..., title=&quot;The item to create&quot;)):
+    return item
 </code></pre>
-<p>这样可以避免把内部字段、敏感字段或无关字段暴露给前端。</p>
-<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>业务不存在时，不要返回 <code>None</code> 或空对象，应该返回明确的 HTTP 状态码。</p>
-<pre><code class="language-python">from fastapi import HTTPException, status
-
-
-@app.get(&quot;/items/{item_id}&quot;, response_model=ItemResponse)
-async def get_item(item_id: int) -&gt; ItemResponse:
-    item = await item_service.get_by_id(item_id)
-    if item is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=&quot;Item not found&quot;,
-        )
-    return ItemResponse.model_validate(item)
+<p>这里的Body(…)表示这个参数是必填的，title是参数的描述。</p>
+<p>另外，pydantic中还有Field注解可以对模型字段进行验证和设置默认值，如：</p>
+<pre><code class="language-python">class Item(BaseModel):
+    name: str = Field(..., title=&quot;The name of the item&quot;, max_length=100)
+    description: str = Field(None, title=&quot;The description of the item&quot;, max_length=255)
 </code></pre>
-<p>异常处理的目标是让调用方能明确知道失败原因，而不是猜测接口含义。</p>
-<h2 id="项目结构建议"><a href="#项目结构建议" class="headerlink" title="项目结构建议"></a>项目结构建议</h2><p>小项目可以从单文件开始，但一旦接口变多，就应该拆分职责：</p>
-<pre><code class="language-text">app/
-  main.py
-  routers/
-    items.py
-  schemas/
-    item.py
-  services/
-    item_service.py
-  repositories/
-    item_repository.py
-</code></pre>
-<p>职责划分：</p>
+<p>这里的Field(…)表示这个字段是必填的，title是字段的描述，max_length是字段的最大长度。</p>
+<h2 id="响应类型"><a href="#响应类型" class="headerlink" title="响应类型"></a>响应类型</h2><p>默认情况下，FastAPI会将返回的Python对象转换成JSON格式的响应，省去了手动序列化的步骤，而且支持多种响应类型，如JSON、HTML、文件等。</p>
+<p>指定响应类型的方法有两种：</p>
 <ul>
-<li><code>routers</code>：只处理 HTTP 入参、出参和状态码。</li>
-<li><code>schemas</code>：定义请求和响应结构。</li>
-<li><code>services</code>：承载业务逻辑。</li>
-<li><code>repositories</code>：封装数据库访问。</li>
+<li>在装饰器中指定，如HTMLResponse、FileResponse等，如</li>
 </ul>
-<h2 id="面试表达"><a href="#面试表达" class="headerlink" title="面试表达"></a>面试表达</h2><p>可以这样说：</p>
-<blockquote>
-<p>我使用 FastAPI 时会把路由层控制得比较薄，主要做参数校验、响应模型和异常状态码；业务逻辑放到 service，数据库访问放到 repository。这样接口层清晰，测试也更容易做。FastAPI 的优势是类型注解和 Pydantic 能把很多校验前置，适合快速搭建 AI 应用或内部管理 API。</p>
-</blockquote>
+<pre><code class="language-python">from fastapi.responses import HTMLResponse
+@app.get(&quot;/html/&quot;, response_class=HTMLResponse)
+async def get_html():
+    html_content = &quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello, World!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;
+    return HTMLResponse(content=html_content, status_code=200)
+</code></pre>
+<ul>
+<li>在函数中返回特定的响应对象，如JSONResponse、FileResponse等，如</li>
+</ul>
+<pre><code class="language-python">from fastapi.responses import fileResponse
+@app.get(&quot;/file/&quot;)
+async def get_file():
+    file_path = &quot;path/to/your/file.txt&quot;
+    return FileResponse(path=file_path, filename=&quot;file.txt&quot;, media_type=&quot;text/plain&quot;)
+</code></pre>
+<p>这里的FileResponse会将指定路径的文件作为响应返回，filename是下载时的文件名，media_type是文件的MIME类型。</p>
+<p>这两种方法各有优缺点，第一种方法更简洁，严格，适合简单的响应类型；第二种方法更灵活，适合需要自定义响应内容或状态码的情况。</p>
+<p>还有一种方法可以自定义响应类型，就是用基于Pydantic的模型来定义响应结构，如：</p>
+<pre><code class="language-python">from pydantic import BaseModel
+class ItemResponse(BaseModel):
+    name: str
+    description: str = None
+
+@app.get(&quot;/items/{item_id}&quot;, response_model=ItemResponse)
+async def read_item(item_id: int):
+    item = get_item_from_database(item_id)
+    return ItemResponse(name=item.name, description=item.description)
+</code></pre>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>FastAPI提供了HTTPException类来处理HTTP异常，可以在路由函数中抛出这个异常来返回特定的错误响应，如：</p>
+<pre><code class="language-python">from fastapi import HTTPException
+@app.get(&quot;/items/{item_id}&quot;)
+async def read_item(item_id: int):
+    item = get_item_from_database(item_id)
+    if item is None:
+        raise HTTPException(status_code=404, detail=&quot;Item not found&quot;)
+    return item
+</code></pre>
+<p>这里的HTTPException(status_code&#x3D;404, detail&#x3D;”Item not found”)表示当item为None时，抛出一个404 Not Found的错误响应，detail是错误的详细信息.</p>
 
     </div>
     

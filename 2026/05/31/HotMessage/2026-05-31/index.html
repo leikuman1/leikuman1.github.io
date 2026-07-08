@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>2026-05-31 每日热点 | L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>2026-05-31 每日热点</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/5/31
+        </span>
+        
+        <span class="category">
+            <a href="/categories/HotMessage/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                HotMessage
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #00bcd4">
+                    AI与大模型
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #ffa2c4">
+                    金融
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #03a9f4">
+                    政治
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #00bcd4">
+                    科技
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="今日摘要"><a href="#今日摘要" class="headerlink" title="今日摘要"></a>今日摘要</h2><p>统计周期：2026-05-24 20:07:02 至 2026-05-31 20:07:02（Asia&#x2F;Shanghai）</p>
+<p>过去 7 天里，AI 热点继续从单纯的模型发布转向“能力升级 + 高风险场景部署 + 安全治理”并进。金融层面，美国通胀读数、欧洲央行纪要和超大额 AI 融资一起影响了市场对利率路径与 AI 资本开支周期的判断。政治上，欧盟在科学外交、东欧安全和扩员议程上同步推进，显示科技、地缘与制度议题正在进一步耦合。科技领域则更明显地朝“工程化落地”演进，从开发工具链到平台治理和多系统测试节奏都在加快。</p>
+<h2 id="AI-与大模型"><a href="#AI-与大模型" class="headerlink" title="AI 与大模型"></a>AI 与大模型</h2><h3 id="1-Anthropic-发布-Claude-Opus-4-8"><a href="#1-Anthropic-发布-Claude-Opus-4-8" class="headerlink" title="1. Anthropic 发布 Claude Opus 4.8"></a>1. Anthropic 发布 Claude Opus 4.8</h3><ul>
+<li>摘要：Anthropic 于 2026 年 5 月 28 日发布 Claude Opus 4.8，称新版本在编码、代理式任务和专业知识工作上较 Opus 4.7 继续增强，并同步上线 effort control、Claude Code 的 dynamic workflows 以及更便宜的 fast mode。</li>
+<li>重要性：这说明头部模型竞争已从“跑分”转向长任务稳定性、代理执行和开发工作流集成，企业更关心模型能否持续完成复杂任务。</li>
+<li>时间：2026-05-28</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.anthropic.com/news/claude-opus-4-8?trk=article-ssr-frontend-pulse_little-text-block">Anthropic：Introducing Claude Opus 4.8</a></li>
+</ul>
+<h3 id="2-OpenAI-发布-2026-年选举信息与安全防护方案"><a href="#2-OpenAI-发布-2026-年选举信息与安全防护方案" class="headerlink" title="2. OpenAI 发布 2026 年选举信息与安全防护方案"></a>2. OpenAI 发布 2026 年选举信息与安全防护方案</h3><ul>
+<li>摘要：OpenAI 于 2026 年 5 月 27 日发布选举保障方案，提出在美国和巴西接入美联社实时计票数据、在美国与 Democracy Works 合作提供投票与登记信息，并继续加强 AI 生成内容透明度和选举滥用执法。</li>
+<li>重要性：这表明大模型平台正在把可信信息分发、生成内容溯源和滥用治理做成产品级能力，选举季将继续检验 AI 平台治理成熟度。</li>
+<li>时间：2026-05-27</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/election-safeguards-2026/">OpenAI：Election information and safeguards in 2026</a></li>
+</ul>
+<h3 id="3-OpenAI-启动-Rosalind-Biodefense-计划"><a href="#3-OpenAI-启动-Rosalind-Biodefense-计划" class="headerlink" title="3. OpenAI 启动 Rosalind Biodefense 计划"></a>3. OpenAI 启动 Rosalind Biodefense 计划</h3><ul>
+<li>摘要：OpenAI 于 2026 年 5 月 29 日宣布推出 Rosalind Biodefense，并扩大 GPT-Rosalind 的可信访问范围，面向部分美国政府和盟友机构支持生物防御、疫情准备、诊断与医学对策开发。</li>
+<li>重要性：前沿模型开始更系统地进入公共卫生和生物安全场景，AI 的受控开放与专用部署正在成为新的能力落地方向。</li>
+<li>时间：2026-05-29</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://openai.com/index/strengthening-societal-resilience-with-rosalind-biodefense/">OpenAI：Strengthening societal resilience with Rosalind Biodefense</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.anthropic.com/news/claude-opus-4-8?trk=article-ssr-frontend-pulse_little-text-block">Anthropic：Introducing Claude Opus 4.8</a></li>
+<li><a target="_blank" rel="noopener" href="https://openai.com/index/election-safeguards-2026/">OpenAI：Election information and safeguards in 2026</a></li>
+<li><a target="_blank" rel="noopener" href="https://openai.com/index/strengthening-societal-resilience-with-rosalind-biodefense/">OpenAI：Strengthening societal resilience with Rosalind Biodefense</a></li>
+</ul>
+<h2 id="金融"><a href="#金融" class="headerlink" title="金融"></a>金融</h2><h3 id="1-美国-4-月-PCE-环比回升"><a href="#1-美国-4-月-PCE-环比回升" class="headerlink" title="1. 美国 4 月 PCE 环比回升"></a>1. 美国 4 月 PCE 环比回升</h3><ul>
+<li>摘要：美国经济分析局于 2026 年 5 月 28 日发布 4 月个人收入与支出数据，显示 PCE 物价指数环比上涨 0.4%，核心 PCE 环比上涨 0.2%，同比分别上涨 3.8% 和 3.3%。</li>
+<li>重要性：PCE 是美联储最核心的通胀观测指标之一，这组数据直接影响市场对年内利率路径、实际消费韧性和风险资产估值的判断。</li>
+<li>时间：2026-05-28</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.bea.gov/news/2026/personal-income-and-outlays-april-2026">BEA：Personal Income and Outlays, April 2026</a></li>
+</ul>
+<h3 id="2-欧洲央行纪要提示能源冲击仍在抬升通胀不确定性"><a href="#2-欧洲央行纪要提示能源冲击仍在抬升通胀不确定性" class="headerlink" title="2. 欧洲央行纪要提示能源冲击仍在抬升通胀不确定性"></a>2. 欧洲央行纪要提示能源冲击仍在抬升通胀不确定性</h3><ul>
+<li>摘要：欧洲央行于 2026 年 5 月 28 日公布 4 月 29 至 30 日货币政策会议纪要，指出中东冲突继续推高能源价格并加剧金融市场波动，通胀与增长前景仍受外部冲击牵引。</li>
+<li>重要性：这意味着欧元区政策路径仍要在增长放缓与通胀粘性之间平衡，欧洲利率和汇率预期短期内仍将保持高敏感度。</li>
+<li>时间：2026-05-28</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.ecb.europa.eu/press/accounts/2026/html/ecb.mg260528~a93230dc4b.en.html">ECB：Meeting of 29-30 April 2026</a></li>
+</ul>
+<h3 id="3-Anthropic-完成-Series-H-融资"><a href="#3-Anthropic-完成-Series-H-融资" class="headerlink" title="3. Anthropic 完成 Series H 融资"></a>3. Anthropic 完成 Series H 融资</h3><ul>
+<li>摘要：Anthropic 于 2026 年 5 月 28 日宣布完成 650 亿美元 Series H 融资，投后估值达 9650 亿美元，并表示资金将用于安全与可解释性研究、扩充算力以及扩展 Claude 相关产品与合作。</li>
+<li>重要性：超大额融资继续强化“头部模型公司需要巨额资本与算力支撑”的行业现实，也会进一步推高市场对 AI 基础设施和商业化兑现速度的关注。</li>
+<li>时间：2026-05-28</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.anthropic.com/news/series-h?s=33">Anthropic：Anthropic raises $65B in Series H funding at $965B post-money valuation</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.bea.gov/news/2026/personal-income-and-outlays-april-2026">BEA：Personal Income and Outlays, April 2026</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ecb.europa.eu/press/accounts/2026/html/ecb.mg260528~a93230dc4b.en.html">ECB：Meeting of 29-30 April 2026</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.anthropic.com/news/series-h?s=33">Anthropic：Anthropic raises $65B in Series H funding at $965B post-money valuation</a></li>
+</ul>
+<h2 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h2><h3 id="1-欧盟通过科学外交新框架"><a href="#1-欧盟通过科学外交新框架" class="headerlink" title="1. 欧盟通过科学外交新框架"></a>1. 欧盟通过科学外交新框架</h3><ul>
+<li>摘要：欧盟理事会于 2026 年 5 月 29 日通过新的科学外交框架建议，提出把科研合作更明确地服务于欧盟外交目标、竞争力与安全议程，并点名人工智能、量子等领域的风险评估与机会利用。</li>
+<li>重要性：科技合作正在被正式纳入地缘政治工具箱，未来 AI、量子、科研开放与安全审查之间的政策耦合会进一步增强。</li>
+<li>时间：2026-05-29</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/05/29/council-defines-a-new-framework-for-science-diplomacy/">Consilium：Council defines a new framework for science diplomacy</a></li>
+</ul>
+<h3 id="2-欧盟就俄罗斯无人机侵入成员国领空作出公开谴责"><a href="#2-欧盟就俄罗斯无人机侵入成员国领空作出公开谴责" class="headerlink" title="2. 欧盟就俄罗斯无人机侵入成员国领空作出公开谴责"></a>2. 欧盟就俄罗斯无人机侵入成员国领空作出公开谴责</h3><ul>
+<li>摘要：欧盟于 2026 年 5 月 29 日发表声明，谴责一架参与夜间袭击乌克兰、携带爆炸物的俄罗斯无人机坠入罗马尼亚加拉茨居民楼，并表示将继续强化东翼防务与边境保护。</li>
+<li>重要性：这说明乌克兰战事对欧盟成员国本土安全外溢风险仍在上升，欧洲防务与制裁议题短期内难以降温。</li>
+<li>时间：2026-05-29</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/05/29/statement-by-the-high-representative-on-behalf-of-the-eu-on-the-reckless-violation-of-the-eu-s-airspace-by-russia/">Consilium：Statement by the High Representative on behalf of the EU on the reckless violation of the EU’s airspace by Russia</a></li>
+</ul>
+<h3 id="3-欧盟与阿尔巴尼亚入盟谈判进入新阶段"><a href="#3-欧盟与阿尔巴尼亚入盟谈判进入新阶段" class="headerlink" title="3. 欧盟与阿尔巴尼亚入盟谈判进入新阶段"></a>3. 欧盟与阿尔巴尼亚入盟谈判进入新阶段</h3><ul>
+<li>摘要：欧盟理事会于 2026 年 5 月 26 日举行第八次阿尔巴尼亚入盟会议，确认阿尔巴尼亚已完成“基础集群”临时基准，并为司法、基本权利、公共行政改革和经济标准等领域设定结项基准。</li>
+<li>重要性：西巴尔干扩员仍是欧洲政治重组的重要抓手，入盟进展不仅影响地区治理，也关系到欧盟对周边的制度吸引力与地缘布局。</li>
+<li>时间：2026-05-26</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/meetings/international-ministerial-meetings/2026/05/26/">Consilium：8th Accession Conference with Albania, 26 May 2026</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/05/29/council-defines-a-new-framework-for-science-diplomacy/">Consilium：Council defines a new framework for science diplomacy</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/press/press-releases/2026/05/29/statement-by-the-high-representative-on-behalf-of-the-eu-on-the-reckless-violation-of-the-eu-s-airspace-by-russia/">Consilium：Statement by the High Representative on behalf of the EU on the reckless violation of the EU’s airspace by Russia</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.consilium.europa.eu/en/meetings/international-ministerial-meetings/2026/05/26/">Consilium：8th Accession Conference with Albania, 26 May 2026</a></li>
+</ul>
+<h2 id="科技"><a href="#科技" class="headerlink" title="科技"></a>科技</h2><h3 id="1-Visual-Studio-五月更新强化-AI-规划式开发"><a href="#1-Visual-Studio-五月更新强化-AI-规划式开发" class="headerlink" title="1. Visual Studio 五月更新强化 AI 规划式开发"></a>1. Visual Studio 五月更新强化 AI 规划式开发</h3><ul>
+<li>摘要：Microsoft 于 2026 年 5 月 26 日发布 Visual Studio 五月更新，引入 Plan agent、技能管理面板和上下文窗口占用可视化，并同步更新 MSVC Build Tools。</li>
+<li>重要性：开发工具链正在把 AI 从“代码补全”推进到“先规划、再实现、再审阅”的工程化工作流，软件开发过程会继续被重塑。</li>
+<li>时间：2026-05-26</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://devblogs.microsoft.com/visualstudio/visual-studio-may-update-plan-review-refine/">Visual Studio Blog：Visual Studio May Update – Plan, Review, Refine</a></li>
+</ul>
+<h3 id="2-Microsoft-扩大对-AI-生成私密影像滥用的治理措施"><a href="#2-Microsoft-扩大对-AI-生成私密影像滥用的治理措施" class="headerlink" title="2. Microsoft 扩大对 AI 生成私密影像滥用的治理措施"></a>2. Microsoft 扩大对 AI 生成私密影像滥用的治理措施</h3><ul>
+<li>摘要：Microsoft 于 2026 年 5 月 27 日宣布扩展 StopNCII.org 哈希能力在 Teams Free、OneDrive 和 Xbox 等消费服务中的使用，并强调对真实与合成私密影像伤害采取一致治理。</li>
+<li>重要性：随着生成式图像能力普及，平台治理正从事后删除转向跨平台指纹识别、自动拦截与标准化申诉流程。</li>
+<li>时间：2026-05-27</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://blogs.microsoft.com/on-the-issues/2026/05/27/strengthening-our-approach-to-tackling-non-consensual-intimate-imagery/">Microsoft On the Issues：Strengthening our approach to tackling non-consensual intimate imagery</a></li>
+</ul>
+<h3 id="3-Apple-同步更新开发测试链路"><a href="#3-Apple-同步更新开发测试链路" class="headerlink" title="3. Apple 同步更新开发测试链路"></a>3. Apple 同步更新开发测试链路</h3><ul>
+<li>摘要：Apple Developer 页面显示，Apple 于 2026 年 5 月 26 日上线 iOS 26.6 beta、iPadOS 26.6 beta、macOS 26.6 beta、tvOS 26.6 beta、visionOS 26.6 beta 与 watchOS 26.6 beta，并在 5 月 29 日更新 TestFlight 4.2.1。</li>
+<li>重要性：这反映 Apple 继续维持多平台并行迭代节奏，开发者需要更早同步适配测试环境、分发链路与跨端版本兼容性。</li>
+<li>时间：2026-05-26 &#x2F; 2026-05-29</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://developer.apple.com/news/releases/">Apple Developer：Releases</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://devblogs.microsoft.com/visualstudio/visual-studio-may-update-plan-review-refine/">Visual Studio Blog：Visual Studio May Update – Plan, Review, Refine</a></li>
+<li><a target="_blank" rel="noopener" href="https://blogs.microsoft.com/on-the-issues/2026/05/27/strengthening-our-approach-to-tackling-non-consensual-intimate-imagery/">Microsoft On the Issues：Strengthening our approach to tackling non-consensual intimate imagery</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.apple.com/news/releases/">Apple Developer：Releases</a></li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

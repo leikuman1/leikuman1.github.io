@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>2026-05-23 每日热点 | L&#39;sBlog</title>
+    <meta name="author" content="Yu" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>L&#39;SBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;L&#39;SBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>2026-05-23 每日热点</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/5/23
+        </span>
+        
+        <span class="category">
+            <a href="/categories/HotMessage/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                HotMessage
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="color: #00a596">
+                    AI与大模型
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E9%87%91%E8%9E%8D/" style="color: #00bcd4">
+                    金融
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%94%BF%E6%B2%BB/" style="color: #00a596">
+                    政治
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E7%A7%91%E6%8A%80/" style="color: #ffa2c4">
+                    科技
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="今日摘要"><a href="#今日摘要" class="headerlink" title="今日摘要"></a>今日摘要</h2><p>今天的主线仍然是 AI 基建扩张、地缘政治牵动市场，以及美国科技监管摇摆。Google I&#x2F;O 继续把 Gemini 推向搜索、开发工具和硬件入口，Anthropic 与 SpaceX 的算力合作则说明大模型竞争越来越像长期基础设施竞赛。金融市场方面，伊朗谈判、油价、美元和美债收益率互相牵动，风险资产虽仍偏强，但债券端压力明显。政治上，美国对伊朗、北约和古巴的政策动作都在放大盟友和市场的不确定性。科技行业的焦点集中在 Nvidia、TPU、Blackwell 和 AI 云算力供给。</p>
+<h2 id="AI-与大模型"><a href="#AI-与大模型" class="headerlink" title="AI 与大模型"></a>AI 与大模型</h2><h3 id="1-Google-I-O-2026-继续推进“agentic-Gemini”"><a href="#1-Google-I-O-2026-继续推进“agentic-Gemini”" class="headerlink" title="1. Google I&#x2F;O 2026 继续推进“agentic Gemini”"></a>1. Google I&#x2F;O 2026 继续推进“agentic Gemini”</h3><ul>
+<li>摘要：Google 在 I&#x2F;O 2026 汇总页中将 Gemini 扩展到搜索、开发工具、智能眼镜、YouTube、Google AI Studio 等产品和入口。</li>
+<li>重要性：这说明大模型竞争不再只是模型参数和榜单，而是向操作层、应用层和硬件入口全面铺开。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection/">Google Blog</a></li>
+</ul>
+<h3 id="2-Anthropic-扩大与-SpaceX-的-Colossus-算力合作"><a href="#2-Anthropic-扩大与-SpaceX-的-Colossus-算力合作" class="headerlink" title="2. Anthropic 扩大与 SpaceX 的 Colossus 算力合作"></a>2. Anthropic 扩大与 SpaceX 的 Colossus 算力合作</h3><ul>
+<li>摘要：Axios 报道称，Anthropic 扩大与 SpaceX 的算力合作，按月支付约 12.5 亿美元，获取 Colossus 超算基础设施至 2029 年。</li>
+<li>重要性：大模型公司的核心壁垒正在从模型本身延伸到算力锁定、长期供给和资本开支能力。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.axios.com/2026/05/21/ai-news-cycle-openai-anthropic-spacex">Axios</a></li>
+</ul>
+<h3 id="3-美国-AI-与网络安全行政令被搁置"><a href="#3-美国-AI-与网络安全行政令被搁置" class="headerlink" title="3. 美国 AI 与网络安全行政令被搁置"></a>3. 美国 AI 与网络安全行政令被搁置</h3><ul>
+<li>摘要：Axios 报道称，特朗普原计划签署的 AI 与网络安全行政令在科技盟友反对后被叫停，政府仍在讨论如何处理顶级模型访问和安全问题。</li>
+<li>重要性：AI 监管进入更明显的政治博弈期，模型发布、安全评估和政府访问权可能继续反复。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.axios.com/2026/05/22/ai-executive-order-cancelled-white-house">Axios</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection/">Google Blog</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.axios.com/2026/05/21/ai-news-cycle-openai-anthropic-spacex">Axios: Two hours that changed AI</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.axios.com/2026/05/22/ai-executive-order-cancelled-white-house">Axios: AI executive order</a></li>
+</ul>
+<h2 id="金融"><a href="#金融" class="headerlink" title="金融"></a>金融</h2><h3 id="1-全球股市上涨，美元接近六周高位"><a href="#1-全球股市上涨，美元接近六周高位" class="headerlink" title="1. 全球股市上涨，美元接近六周高位"></a>1. 全球股市上涨，美元接近六周高位</h3><ul>
+<li>摘要：Reuters 报道称，全球股市上涨，美元接近六周高位，油价也因美国与伊朗谈判不确定性而上行。</li>
+<li>重要性：伊朗局势仍在通过油价和通胀预期影响美元、美债和全球风险资产。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.marketscreener.com/news/stocks-climb-dollar-near-six-week-high-amid-iran-talks-uncertainty-ce7f5adfdd8bf32d">Reuters via MarketScreener</a></li>
+</ul>
+<h3 id="2-美债收益率上行继续压制股市估值"><a href="#2-美债收益率上行继续压制股市估值" class="headerlink" title="2. 美债收益率上行继续压制股市估值"></a>2. 美债收益率上行继续压制股市估值</h3><ul>
+<li>摘要：Reuters 报道称，美股在强劲财报季后可能面临波动，10 年期美债收益率触及 2025 年 1 月以来高位，30 年期收益率一度触及 2007 年以来高位。</li>
+<li>重要性：如果长端利率维持高位，科技股估值、企业融资成本和消费信贷都会承压。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.investing.com/news/economy-news/soaring-stocks-could-face-rocky-patch-as-earnings-wind-down-yields-perk-up-4706080">Reuters via Investing.com</a></li>
+</ul>
+<h3 id="3-中国整顿非法跨境证券活动"><a href="#3-中国整顿非法跨境证券活动" class="headerlink" title="3. 中国整顿非法跨境证券活动"></a>3. 中国整顿非法跨境证券活动</h3><ul>
+<li>摘要：Reuters 报道称，中国监管层宣布打击非法跨境证券业务，涉及富途、老虎、Longbridge 等平台，并限制相关客户新增投资。</li>
+<li>重要性：这会影响中概股流动性、境内资金出海渠道和互联网券商估值预期。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.marketscreener.com/news/china-to-crack-down-on-illegal-cross-border-securities-activities-ce7f5adfdd8afe21">Reuters via MarketScreener</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.marketscreener.com/news/stocks-climb-dollar-near-six-week-high-amid-iran-talks-uncertainty-ce7f5adfdd8bf32d">Reuters via MarketScreener: global markets</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.investing.com/news/economy-news/soaring-stocks-could-face-rocky-patch-as-earnings-wind-down-yields-perk-up-4706080">Reuters via Investing.com: yields and equities</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.marketscreener.com/news/china-to-crack-down-on-illegal-cross-border-securities-activities-ce7f5adfdd8afe21">Reuters via MarketScreener: China securities crackdown</a></li>
+</ul>
+<h2 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h2><h3 id="1-美国与伊朗谈判出现“轻微进展”"><a href="#1-美国与伊朗谈判出现“轻微进展”" class="headerlink" title="1. 美国与伊朗谈判出现“轻微进展”"></a>1. 美国与伊朗谈判出现“轻微进展”</h3><ul>
+<li>摘要：AP 报道称，Rubio 表示伊朗谈判有“轻微进展”，巴基斯坦军方高层赴德黑兰推动调停，但战争是否恢复仍不确定。</li>
+<li>重要性：该议题直接影响霍尔木兹海峡、油价、美国盟友关系和全球通胀预期。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://apnews.com/article/iran-us-rubio-talks-c4be639e938fa57533f28f9fd62fb43b">AP News</a></li>
+</ul>
+<h3 id="2-北约盟友对美国欧洲驻军表态感到困惑"><a href="#2-北约盟友对美国欧洲驻军表态感到困惑" class="headerlink" title="2. 北约盟友对美国欧洲驻军表态感到困惑"></a>2. 北约盟友对美国欧洲驻军表态感到困惑</h3><ul>
+<li>摘要：AP 报道称，特朗普一边谈论减少美国在欧洲军事存在，一边又宣布向波兰派出 5000 名美军，引发北约盟友和防务官员困惑。</li>
+<li>重要性：美国对欧洲安全承诺的稳定性仍是北约东翼防务和俄乌局势的重要变量。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://apnews.com/article/nato-trump-troops-europe-poland-confusion-5ee39c29238cdee76c1780233cb6fddc">AP News</a></li>
+</ul>
+<h3 id="3-美国对古巴施压升级"><a href="#3-美国对古巴施压升级" class="headerlink" title="3. 美国对古巴施压升级"></a>3. 美国对古巴施压升级</h3><ul>
+<li>摘要：AP 分析称，特朗普政府对古巴的策略越来越像此前对委内瑞拉的做法，包括能源封锁、军事存在、司法指控和干预威胁。</li>
+<li>重要性：拉美地缘政治风险升温，可能牵动美国国内政治、能源运输和地区外交关系。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://apnews.com/article/cuba-strategy-venezuela-trump-pressure-campaign-a7555abe7f38de0e94129ca6abc3afcf">AP News</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://apnews.com/article/iran-us-rubio-talks-c4be639e938fa57533f28f9fd62fb43b">AP News: Iran talks</a></li>
+<li><a target="_blank" rel="noopener" href="https://apnews.com/article/nato-trump-troops-europe-poland-confusion-5ee39c29238cdee76c1780233cb6fddc">AP News: NATO troops confusion</a></li>
+<li><a target="_blank" rel="noopener" href="https://apnews.com/article/cuba-strategy-venezuela-trump-pressure-campaign-a7555abe7f38de0e94129ca6abc3afcf">AP News: Cuba strategy</a></li>
+</ul>
+<h2 id="科技"><a href="#科技" class="headerlink" title="科技"></a>科技</h2><h3 id="1-Nvidia-称-2000-亿美元-CPU-市场预测包含中国"><a href="#1-Nvidia-称-2000-亿美元-CPU-市场预测包含中国" class="headerlink" title="1. Nvidia 称 2000 亿美元 CPU 市场预测包含中国"></a>1. Nvidia 称 2000 亿美元 CPU 市场预测包含中国</h3><ul>
+<li>摘要：Reuters 报道称，黄仁勋在台北表示，Nvidia 对 2000 亿美元 CPU 市场的预测包含中国，同时 H200 对华销售仍受审批和中方产业政策影响。</li>
+<li>重要性：AI 芯片竞争正在从 GPU 扩展到 CPU、系统级平台和中美技术管制之间的长期博弈。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.investing.com/news/stock-market-news/nvidia-says-its-forecast-for-200-billion-cpu-market-includes-china-4708031">Reuters via Investing.com</a></li>
+</ul>
+<h3 id="2-Lambda-获得-Hudson-River-Trading-的-Blackwell-云算力订单"><a href="#2-Lambda-获得-Hudson-River-Trading-的-Blackwell-云算力订单" class="headerlink" title="2. Lambda 获得 Hudson River Trading 的 Blackwell 云算力订单"></a>2. Lambda 获得 Hudson River Trading 的 Blackwell 云算力订单</h3><ul>
+<li>摘要：Reuters 报道称，Lambda 将向高频交易公司 Hudson River Trading 出租超过 1000 套 Nvidia 最新 Blackwell 系统。</li>
+<li>重要性：AI 芯片需求正在从模型公司外溢到量化交易、企业 AI 和高性能计算客户。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.investing.com/news/stock-market-news/lambda-wins-cloud-deal-with-hudson-river-trading-to-supply-access-to-nvidia-chips-4701550">Reuters via Investing.com</a></li>
+</ul>
+<h3 id="3-Google-与-Blackstone-推出-AI-云合资公司"><a href="#3-Google-与-Blackstone-推出-AI-云合资公司" class="headerlink" title="3. Google 与 Blackstone 推出 AI 云合资公司"></a>3. Google 与 Blackstone 推出 AI 云合资公司</h3><ul>
+<li>摘要：Reuters 报道称，Google 与 Blackstone 将成立 AI 云业务，Blackstone 初始投入 50 亿美元股权，计划在 2027 年上线 500 兆瓦数据中心容量，并提供 Google TPU 算力。</li>
+<li>重要性：AI 基建正在吸引金融资本深度参与，算力供应可能从传统云厂商扩展到新的资本密集型平台。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.marketscreener.com/news/google-blackstone-to-launch-ai-cloud-venture-to-meet-data-centre-demand-ce7f5adbd88bf32d">Reuters via MarketScreener</a></li>
+</ul>
+<h3 id="4-Nvidia-业绩展望继续高于预期"><a href="#4-Nvidia-业绩展望继续高于预期" class="headerlink" title="4. Nvidia 业绩展望继续高于预期"></a>4. Nvidia 业绩展望继续高于预期</h3><ul>
+<li>摘要：Reuters 报道称，Nvidia 给出的季度收入展望高于华尔街预期，并宣布 800 亿美元股票回购，同时强调 Vera CPU 等新数据中心芯片。</li>
+<li>重要性：Nvidia 仍是 AI 基建景气度的核心风向标，但大客户自研芯片也在形成长期竞争压力。</li>
+<li>信息来源：<a target="_blank" rel="noopener" href="https://www.investing.com/news/stock-market-news/nvidia-forecasts-quarterly-revenue-above-estimates-announces-80-billion-share-buyback-4702363">Reuters via Investing.com</a></li>
+</ul>
+<p>本分类主要来源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.investing.com/news/stock-market-news/nvidia-says-its-forecast-for-200-billion-cpu-market-includes-china-4708031">Reuters via Investing.com: Nvidia CPU market</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.investing.com/news/stock-market-news/lambda-wins-cloud-deal-with-hudson-river-trading-to-supply-access-to-nvidia-chips-4701550">Reuters via Investing.com: Lambda and HRT</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.marketscreener.com/news/google-blackstone-to-launch-ai-cloud-venture-to-meet-data-centre-demand-ce7f5adbd88bf32d">Reuters via MarketScreener: Google and Blackstone</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.investing.com/news/stock-market-news/nvidia-forecasts-quarterly-revenue-above-estimates-announces-80-billion-share-buyback-4702363">Reuters via Investing.com: Nvidia outlook</a></li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 L&#39;sBlog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yu
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

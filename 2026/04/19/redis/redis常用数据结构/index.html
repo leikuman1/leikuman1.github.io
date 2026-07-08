@@ -3,15 +3,15 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Redis 常用数据结构与后端场景 | L&#39;sBlog</title>
+    <title>常用数据结构和操作函数 | L&#39;sBlog</title>
     <meta name="author" content="Yu" />
-    <meta name="description" content="记录后端开发、AI 应用、项目复盘与面试表达。" />
-    <meta name="keywords" content="后端,AI应用,RAG,Agent,FastAPI,Golang,Redis,RabbitMQ" />
+    <meta name="description" content="Nearer to death, nearer to rebirth." />
+    <meta name="keywords" content="" />
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <link rel="icon" href="/images/site/avatar.svg" />
+    <link rel="icon" href="/images/avatar.jpg" />
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -56,7 +56,7 @@
                 <div id="loading-circle">
                     <h2>LOADING</h2>
                     <p>加载过慢请开启缓存 浏览器默认开启</p>
-                    <img src="/images/site/loading.svg" />
+                    <img src="/images/loading.gif" />
                 </div>
             </div>
         </transition>
@@ -68,27 +68,27 @@
         
         <a href="/">
             <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;首页</span>
+            <span>&ensp;Home</span>
         </a>
         
         <a href="/about">
             <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;关于</span>
+            <span>&ensp;About</span>
         </a>
         
         <a href="/archives">
             <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;归档</span>
+            <span>&ensp;Archives</span>
         </a>
         
         <a href="/categories">
             <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;分类</span>
+            <span>&ensp;Categories</span>
         </a>
         
         <a href="/tags">
             <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;标签</span>
+            <span>&ensp;Tags</span>
         </a>
         
     </nav>
@@ -105,7 +105,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-house fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
                     </div>
                 </a>
                 
@@ -114,7 +114,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-id-card fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
                     </div>
                 </a>
                 
@@ -123,7 +123,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-box-archive fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
                     </div>
                 </a>
                 
@@ -132,7 +132,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-bookmark fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
                     </div>
                 </a>
                 
@@ -141,7 +141,7 @@
                         <div style="min-width: 20px; max-width: 50px; width: 10%">
                             <i class="fa-solid fa-tags fa-fw"></i>
                         </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
                     </div>
                 </a>
                 
@@ -156,7 +156,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>Redis 常用数据结构与后端场景</h1>
+        <h1>常用数据结构和操作函数</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -167,11 +167,11 @@
         </span>
         
         <span class="category">
-            <a href="/categories/%E5%90%8E%E7%AB%AF/">
+            <a href="/categories/Redis/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                后端
+                Redis
             </a>
         </span>
         
@@ -184,29 +184,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/Redis/" style="color: #ff7d73">
-                    Redis
+                <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="color: #00a596">
+                    博客
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/%E7%BC%93%E5%AD%98/" style="color: #00bcd4">
-                    缓存
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #ffa2c4">
-                    数据结构
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" style="color: #00a596">
-                    高并发
+                <a href="/tags/%E5%85%A5%E9%97%A8/" style="color: #00bcd4">
+                    入门
                 </a>
             </span>
             
@@ -215,82 +201,114 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="Redis-在后端中的定位"><a href="#Redis-在后端中的定位" class="headerlink" title="Redis 在后端中的定位"></a>Redis 在后端中的定位</h2><p>Redis 常用于缓存、计数、限流、分布式锁、排行榜、会话和消息队列等场景。它的优势是内存访问快、数据结构丰富、命令原子性强。</p>
-<p>但 Redis 不是数据库的简单替代品。涉及最终一致性、事务、复杂查询和强约束时，仍然要以数据库为准。</p>
-<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>String 是最常用的数据结构，适合保存简单值。</p>
-<p>典型场景：</p>
-<ul>
-<li>缓存对象 JSON。</li>
-<li>计数器。</li>
-<li>分布式锁 value。</li>
-<li>验证码。</li>
-</ul>
+        <h2 id="1-String"><a href="#1-String" class="headerlink" title="1. String"></a>1. String</h2><p>最常用，适合存字符串、数字、JSON。</p>
 <p>常用命令：</p>
-<pre><code class="language-bash">SET user:1 &#39;{&quot;name&quot;:&quot;Tom&quot;}&#39; EX 300
-GET user:1
-INCR article:1:view_count
-SET lock:order:1 uuid NX EX 10
-</code></pre>
-<p>注意点：</p>
 <ul>
-<li>缓存对象要设置过期时间。</li>
-<li>分布式锁释放时要校验 value，避免误删别人的锁。</li>
-<li>大 value 会影响网络传输和内存管理，不适合无限塞 JSON。</li>
+<li><code>SET key value</code>：设置值</li>
+<li><code>GET key</code>：取值</li>
+<li><code>MSET k1 v1 k2 v2</code>：一次设置多个值</li>
+<li><code>MGET k1 k2</code>：一次取多个值</li>
+<li><code>INCR key</code>：数字加 1</li>
+<li><code>DECR key</code>：数字减 1</li>
+<li><code>SETEX key seconds value</code>：设置值并加过期时间</li>
+<li><code>SETNX key value</code>：key 不存在才设置，常用于加锁</li>
 </ul>
-<h2 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h2><p>Hash 适合保存对象字段。</p>
-<pre><code class="language-bash">HSET user:1 name Tom age 18
-HGET user:1 name
-HGETALL user:1
-</code></pre>
-<p>适用场景：</p>
+<hr>
+<h2 id="2-Hash"><a href="#2-Hash" class="headerlink" title="2. Hash"></a>2. Hash</h2><p>适合存对象、字段集合。</p>
+<p>常用命令：</p>
 <ul>
-<li>用户信息。</li>
-<li>商品基础信息。</li>
-<li>需要局部更新字段的对象。</li>
+<li><code>HSET key field value</code>：设置字段值</li>
+<li><code>HGET key field</code>：取某个字段值</li>
+<li><code>HMGET key f1 f2</code>：取多个字段值</li>
+<li><code>HGETALL key</code>：取全部字段和值</li>
+<li><code>HDEL key field</code>：删除字段</li>
+<li><code>HINCRBY key field n</code>：字段数字加 n</li>
 </ul>
-<p>Hash 的优势是可以单独更新字段，不需要整体序列化和反序列化。但对象层级复杂时，直接使用 JSON String 可能更简单。</p>
-<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p>List 是有序链表，适合队列、时间线和简单消息缓冲。</p>
-<pre><code class="language-bash">LPUSH queue:task task1
-RPOP queue:task
-</code></pre>
-<p>如果是可靠消息队列，不建议只靠 Redis List 自己实现。业务可靠性要求高时，应优先选择 RabbitMQ、Kafka 等专用 MQ。</p>
-<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p>Set 是无序去重集合。</p>
-<p>典型场景：</p>
+<hr>
+<h2 id="3-List"><a href="#3-List" class="headerlink" title="3. List"></a>3. List</h2><p>双端列表，适合队列、消息流。</p>
+<p>常用命令：</p>
 <ul>
-<li>用户标签。</li>
-<li>点赞去重。</li>
-<li>黑名单。</li>
-<li>共同关注。</li>
+<li><code>LPUSH key v1 v2</code>：从左边放入</li>
+<li><code>RPUSH key v1 v2</code>：从右边放入</li>
+<li><code>LPOP key</code>：从左边取出</li>
+<li><code>RPOP key</code>：从右边取出</li>
+<li><code>LRANGE key start end</code>：查看一段数据</li>
+<li><code>LLEN key</code>：看长度</li>
 </ul>
-<pre><code class="language-bash">SADD article:1:likes user1
-SISMEMBER article:1:likes user1
-SCARD article:1:likes
-SINTER user:1:follows user:2:follows
-</code></pre>
-<p>Set 适合表达“是否存在”和“集合关系”。</p>
-<h2 id="ZSet"><a href="#ZSet" class="headerlink" title="ZSet"></a>ZSet</h2><p>ZSet 是带分数的有序集合。</p>
-<p>典型场景：</p>
+<hr>
+<h2 id="4-Set"><a href="#4-Set" class="headerlink" title="4. Set"></a>4. Set</h2><p>无序、元素唯一，适合去重。</p>
+<p>常用命令：</p>
 <ul>
-<li>排行榜。</li>
-<li>延迟任务。</li>
-<li>滑动窗口限流。</li>
-<li>按时间排序的数据。</li>
+<li><code>SADD key v1 v2</code>：添加元素</li>
+<li><code>SREM key v1</code>：删除元素</li>
+<li><code>SMEMBERS key</code>：查看全部元素</li>
+<li><code>SISMEMBER key v</code>：判断元素在不在</li>
+<li><code>SCARD key</code>：看元素个数</li>
+<li><code>SINTER k1 k2</code>：求交集</li>
+<li><code>SUNION k1 k2</code>：求并集</li>
 </ul>
-<pre><code class="language-bash">ZADD rank:score 100 user1
-ZREVRANGE rank:score 0 9 WITHSCORES
-ZREMRANGEBYSCORE rate:user:1 0 1710000000000
-</code></pre>
-<p>在秒杀限流中，可以用时间戳作为 score，先删除窗口外请求，再统计窗口内请求数。</p>
-<h2 id="Bitmap-与-HyperLogLog"><a href="#Bitmap-与-HyperLogLog" class="headerlink" title="Bitmap 与 HyperLogLog"></a>Bitmap 与 HyperLogLog</h2><p>Bitmap 适合大量布尔状态，例如签到、是否活跃。</p>
-<p>HyperLogLog 适合统计 UV 这类基数，优点是省内存，缺点是有误差。</p>
-<h2 id="工程注意点"><a href="#工程注意点" class="headerlink" title="工程注意点"></a>工程注意点</h2><h3 id="1-缓存穿透"><a href="#1-缓存穿透" class="headerlink" title="1. 缓存穿透"></a>1. 缓存穿透</h3><p>查询不存在的数据，导致请求一直打到数据库。可以缓存空值，或使用布隆过滤器。</p>
-<h3 id="2-缓存击穿"><a href="#2-缓存击穿" class="headerlink" title="2. 缓存击穿"></a>2. 缓存击穿</h3><p>热点 key 过期后，大量请求同时打到数据库。可以使用互斥锁、逻辑过期或提前刷新。</p>
-<h3 id="3-缓存雪崩"><a href="#3-缓存雪崩" class="headerlink" title="3. 缓存雪崩"></a>3. 缓存雪崩</h3><p>大量 key 同时过期或 Redis 故障。可以给过期时间加随机值，或做降级和限流。</p>
-<h3 id="4-数据一致性"><a href="#4-数据一致性" class="headerlink" title="4. 数据一致性"></a>4. 数据一致性</h3><p>常见策略是先更新数据库，再删除缓存。极端一致性要求高时，需要结合消息队列、binlog 或延迟双删等方案。</p>
-<h2 id="面试表达"><a href="#面试表达" class="headerlink" title="面试表达"></a>面试表达</h2><p>可以这样说：</p>
-<blockquote>
-<p>Redis 的价值不只是快，而是数据结构丰富。String 适合缓存和计数，Hash 适合对象字段，Set 适合去重和集合关系，ZSet 适合排行榜和滑动窗口。工程上我会重点考虑过期时间、缓存穿透&#x2F;击穿&#x2F;雪崩、热 key、数据一致性和内存占用。</p>
-</blockquote>
+<hr>
+<h2 id="5-ZSet"><a href="#5-ZSet" class="headerlink" title="5. ZSet"></a>5. ZSet</h2><p>有序集合，带分数，适合排行榜。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>ZADD key score value</code>：添加元素和分数</li>
+<li><code>ZREM key value</code>：删除元素</li>
+<li><code>ZRANGE key 0 -1</code>：按分数从小到大查看</li>
+<li><code>ZREVRANGE key 0 -1</code>：按分数从大到小查看</li>
+<li><code>ZSCORE key value</code>：看元素分数</li>
+<li><code>ZRANK key value</code>：看正序排名</li>
+<li><code>ZINCRBY key n value</code>：分数加 n</li>
+</ul>
+<hr>
+<h2 id="6-Bitmap"><a href="#6-Bitmap" class="headerlink" title="6. Bitmap"></a>6. Bitmap</h2><p>按位存储，适合签到、活跃统计。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>SETBIT key offset 1</code>：设置某一位</li>
+<li><code>GETBIT key offset</code>：查看某一位</li>
+<li><code>BITCOUNT key</code>：统计 1 的个数</li>
+<li><code>BITOP op dest k1 k2</code>：做位运算</li>
+</ul>
+<hr>
+<h2 id="7-HyperLogLog"><a href="#7-HyperLogLog" class="headerlink" title="7. HyperLogLog"></a>7. HyperLogLog</h2><p>适合做去重计数、UV 统计。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>PFADD key v1 v2</code>：添加数据</li>
+<li><code>PFCOUNT key</code>：统计数量</li>
+<li><code>PFMERGE newKey k1 k2</code>：合并统计</li>
+</ul>
+<hr>
+<h2 id="8-Stream"><a href="#8-Stream" class="headerlink" title="8. Stream"></a>8. Stream</h2><p>消息流，适合消息队列、消费组。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>XADD key * field value</code>：添加消息</li>
+<li><code>XRANGE key - +</code>：查看消息范围</li>
+<li><code>XREAD STREAMS key id</code>：读取消息</li>
+<li><code>XGROUP CREATE key group 0</code>：创建消费组</li>
+<li><code>XREADGROUP GROUP g c STREAMS key &gt;</code>：按消费组读消息</li>
+<li><code>XACK key group id</code>：确认消息已消费</li>
+</ul>
+<hr>
+<h2 id="通用命令"><a href="#通用命令" class="headerlink" title="通用命令"></a>通用命令</h2><p>几乎所有类型都会用到。</p>
+<p>常用命令：</p>
+<ul>
+<li><code>DEL key</code>：删除 key</li>
+<li><code>EXPIRE key seconds</code>：设置过期时间</li>
+<li><code>TTL key</code>：查看剩余过期时间</li>
+<li><code>EXISTS key</code>：判断 key 是否存在</li>
+<li><code>TYPE key</code>：查看 key 的类型</li>
+<li><code>SCAN 0</code>：分页查 key</li>
+</ul>
+<hr>
+<h2 id="一句话速记"><a href="#一句话速记" class="headerlink" title="一句话速记"></a>一句话速记</h2><ul>
+<li><code>String</code>：值</li>
+<li><code>Hash</code>：对象</li>
+<li><code>List</code>：队列</li>
+<li><code>Set</code>：去重集合</li>
+<li><code>ZSet</code>：排行榜</li>
+<li><code>Bitmap</code>：位统计</li>
+<li><code>HyperLogLog</code>：基数统计</li>
+<li><code>Stream</code>：消息队列</li>
+</ul>
 
     </div>
     
